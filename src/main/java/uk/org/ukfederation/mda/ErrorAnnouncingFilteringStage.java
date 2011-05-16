@@ -25,18 +25,18 @@ import net.shibboleth.metadata.ErrorStatusInfo;
 import net.shibboleth.metadata.MetadataInfo;
 import net.shibboleth.metadata.WarningStatusInfo;
 import net.shibboleth.metadata.dom.DomMetadata;
-import net.shibboleth.metadata.pipeline.BaseStage.MetadataFilteringStrategy;
+import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ErrorAnnouncingFilteringStrategy implements MetadataFilteringStrategy<DomMetadata> {
+public class ErrorAnnouncingFilteringStage extends BaseStage<DomMetadata> {
 	
     /** Class logger. */
-    private final Logger log = LoggerFactory.getLogger(ErrorAnnouncingFilteringStrategy.class);
+    private final Logger log = LoggerFactory.getLogger(ErrorAnnouncingFilteringStage.class);
 
-	public void filterMetadata(Collection<DomMetadata> metadataCollection) {
+	public void doExecute(Collection<DomMetadata> metadataCollection) {
 		Iterator<DomMetadata> metadataIterator = metadataCollection.iterator();
 		while (metadataIterator.hasNext()) {
 			DomMetadata metadata = metadataIterator.next();
@@ -73,6 +73,6 @@ public class ErrorAnnouncingFilteringStrategy implements MetadataFilteringStrate
 		// **TODO** should throw an exception under certain parameterised circumstances
 	}
 	
-	public ErrorAnnouncingFilteringStrategy() {
+	public ErrorAnnouncingFilteringStage() {
 	}
 }

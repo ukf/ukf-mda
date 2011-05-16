@@ -28,15 +28,15 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import net.shibboleth.metadata.dom.DomMetadata;
-import net.shibboleth.metadata.pipeline.BaseStage.MetadataFilteringStrategy;
+import net.shibboleth.metadata.pipeline.BaseStage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XPathFilteringStrategy implements MetadataFilteringStrategy<DomMetadata> {
+public class XPathFilteringStage extends BaseStage<DomMetadata> {
 	
     /** Class logger. */
-    private final Logger log = LoggerFactory.getLogger(XPathFilteringStrategy.class);
+    private final Logger log = LoggerFactory.getLogger(XPathFilteringStage.class);
 
 	private static class SimpleNamespaceContext implements NamespaceContext {
 		
@@ -63,7 +63,7 @@ public class XPathFilteringStrategy implements MetadataFilteringStrategy<DomMeta
 	private final String xpathExpression;
 	private final NamespaceContext namespaceContext;
 	
-	public void filterMetadata(Collection<DomMetadata> metadataCollection) {
+	public void doExecute(Collection<DomMetadata> metadataCollection) {
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();
 		if (namespaceContext != null) {
@@ -94,12 +94,12 @@ public class XPathFilteringStrategy implements MetadataFilteringStrategy<DomMeta
 		}
 	}
 	
-	public XPathFilteringStrategy(String expression, NamespaceContext context) {
+	public XPathFilteringStage(String expression, NamespaceContext context) {
 		xpathExpression = expression;
 		namespaceContext = context;
 	}
 	
-	public XPathFilteringStrategy(String expression, Map<String, String> prefixMappings) {
+	public XPathFilteringStage(String expression, Map<String, String> prefixMappings) {
 		this(expression, new SimpleNamespaceContext(prefixMappings));
 	}
 }

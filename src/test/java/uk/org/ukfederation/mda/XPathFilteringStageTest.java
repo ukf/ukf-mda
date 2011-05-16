@@ -26,18 +26,18 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
-/** {@link XPathFilteringStrategy} unit test. */
-public class XPathFilteringStrategyTest extends BaseDomTest {
+/** {@link XPathFilteringStage} unit test. */
+public class XPathFilteringStageTest extends BaseDomTest {
 
 	@Test
-	public void testStrategy() throws Exception {
+	public void testExecute() throws Exception {
 		// Construct a map containing required namespace prefix definitions
 		Map<String, String> prefixMappings = new HashMap<String, String>();
 		prefixMappings.put("ukfedlabel", "http://ukfederation.org.uk/2006/11/label");
 		
 		// Construct the strategy object
-		XPathFilteringStrategy strategy =
-			new XPathFilteringStrategy("//ukfedlabel:DeletedEntity", prefixMappings);
+		XPathFilteringStage strategy =
+			new XPathFilteringStage("//ukfedlabel:DeletedEntity", prefixMappings);
 		
 		// Construct the input metadata
 		ArrayList<DomMetadata> metadataCollection = new ArrayList<DomMetadata>();
@@ -47,7 +47,7 @@ public class XPathFilteringStrategyTest extends BaseDomTest {
 		Assert.assertEquals(metadataCollection.size(), 3);
 		
 		// Filter the metadata collection
-		strategy.filterMetadata(metadataCollection);
+		strategy.doExecute(metadataCollection);
 		Assert.assertEquals(metadataCollection.size(), 1);
 		Element element = metadataCollection.get(0).getMetadata();
 		String id = element.getAttribute("id");

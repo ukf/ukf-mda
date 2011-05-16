@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>uk.org.ukfederation</groupId>
     <artifactId>ukf-mda</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.6-SNAPSHOT</version>
     <name>UK federation aggregator beans</name>
     <description>Collection of beans supporting metadata aggregation for the UK federation, based on the Shibboleth metadata aggregator framework.</description>
 
@@ -38,7 +38,7 @@
         <dependency>
           <groupId>net.shibboleth.metadata</groupId>
           <artifactId>aggregator-pipeline</artifactId>
-          <version>0.5-SNAPSHOT</version>
+          <version>0.6-SNAPSHOT</version>
           <scope>compile</scope>
         </dependency>
         

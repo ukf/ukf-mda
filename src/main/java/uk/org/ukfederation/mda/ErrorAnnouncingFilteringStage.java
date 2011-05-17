@@ -20,34 +20,34 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import net.shibboleth.metadata.EntityIdInfo;
-import net.shibboleth.metadata.ErrorStatusInfo;
-import net.shibboleth.metadata.MetadataInfo;
-import net.shibboleth.metadata.WarningStatusInfo;
-import net.shibboleth.metadata.dom.DomMetadata;
+import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.ItemId;
+import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.metadata.WarningStatus;
+import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ErrorAnnouncingFilteringStage extends BaseStage<DomMetadata> {
+public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
 	
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(ErrorAnnouncingFilteringStage.class);
 
-	public void doExecute(Collection<DomMetadata> metadataCollection) {
-		Iterator<DomMetadata> metadataIterator = metadataCollection.iterator();
+	public void doExecute(Collection<DomElementItem> metadataCollection) {
+		Iterator<DomElementItem> metadataIterator = metadataCollection.iterator();
 		while (metadataIterator.hasNext()) {
-			DomMetadata metadata = metadataIterator.next();
-			ClassToInstanceMultiMap<MetadataInfo> info = metadata.getMetadataInfo();
-			List<ErrorStatusInfo> errors = info.get(ErrorStatusInfo.class);
+			DomElementItem metadata = metadataIterator.next();
+			ClassToInstanceMultiMap<ItemMetadata> info = metadata.getItemMetadata();
+			List<ErrorStatus> errors = info.get(ErrorStatus.class);
 			if (errors.size() > 0) {
 				// Establish a name for this element
-				List<EntityIdInfo> entityId = info.get(EntityIdInfo.class);
+				List<ItemId> entityId = info.get(ItemId.class);
 				String name;
 				if (entityId.size() > 0) {
-					name = entityId.get(0).getEntityId();
+					name = entityId.get(0).getId();
 				} else {
 					name = "element";
 				}
@@ -55,13 +55,13 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomMetadata> {
 				
 				// Mention any status items that were previously warnings on this element
 				if (log.isWarnEnabled()) {
-					for (WarningStatusInfo warning: info.get(WarningStatusInfo.class)) {
+					for (WarningStatus warning: info.get(WarningStatus.class)) {
 						log.warn("{}: {}", new Object[]{warning.getComponentId(), warning.getStatusMessage()});
 					}
 				}
 				
 				// Mention the errors on this element, which are the reason we are removing it
-				for (ErrorStatusInfo error: errors) {
+				for (ErrorStatus error: errors) {
 					log.error("{}: {}", new Object[]{error.getComponentId(), error.getStatusMessage()});
 				}
 				

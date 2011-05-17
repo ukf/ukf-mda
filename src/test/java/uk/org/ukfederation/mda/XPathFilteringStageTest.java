@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.shibboleth.metadata.dom.DomMetadata;
+import net.shibboleth.metadata.dom.DomElementItem;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -40,16 +40,16 @@ public class XPathFilteringStageTest extends BaseDomTest {
 			new XPathFilteringStage("//ukfedlabel:DeletedEntity", prefixMappings);
 		
 		// Construct the input metadata
-		ArrayList<DomMetadata> metadataCollection = new ArrayList<DomMetadata>();
-        metadataCollection.add(new DomMetadata(readXmlData("xpathInput1.xml")));
-        metadataCollection.add(new DomMetadata(readXmlData("xpathInput2.xml")));
-        metadataCollection.add(new DomMetadata(readXmlData("xpathInput3.xml")));
+		ArrayList<DomElementItem> metadataCollection = new ArrayList<DomElementItem>();
+        metadataCollection.add(new DomElementItem(readXmlData("xpathInput1.xml")));
+        metadataCollection.add(new DomElementItem(readXmlData("xpathInput2.xml")));
+        metadataCollection.add(new DomElementItem(readXmlData("xpathInput3.xml")));
 		Assert.assertEquals(metadataCollection.size(), 3);
 		
 		// Filter the metadata collection
 		strategy.doExecute(metadataCollection);
 		Assert.assertEquals(metadataCollection.size(), 1);
-		Element element = metadataCollection.get(0).getMetadata();
+		Element element = metadataCollection.get(0).unwrap();
 		String id = element.getAttribute("id");
 		Assert.assertEquals(id, "entity2");
 	}

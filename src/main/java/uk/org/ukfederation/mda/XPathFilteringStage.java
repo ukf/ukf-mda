@@ -27,13 +27,13 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import net.shibboleth.metadata.dom.DomMetadata;
+import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.pipeline.BaseStage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XPathFilteringStage extends BaseStage<DomMetadata> {
+public class XPathFilteringStage extends BaseStage<DomElementItem> {
 	
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(XPathFilteringStage.class);
@@ -63,7 +63,7 @@ public class XPathFilteringStage extends BaseStage<DomMetadata> {
 	private final String xpathExpression;
 	private final NamespaceContext namespaceContext;
 	
-	public void doExecute(Collection<DomMetadata> metadataCollection) {
+	public void doExecute(Collection<DomElementItem> metadataCollection) {
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();
 		if (namespaceContext != null) {
@@ -78,18 +78,18 @@ public class XPathFilteringStage extends BaseStage<DomMetadata> {
 			return;
 		}
 		
-		Iterator<DomMetadata> metadataIterator = metadataCollection.iterator();
-		while (metadataIterator.hasNext()) {
-			DomMetadata metadata = metadataIterator.next();
+		Iterator<DomElementItem> iterator = metadataCollection.iterator();
+		while (iterator.hasNext()) {
+			DomElementItem item = iterator.next();
 			try {
-				Boolean filterThis = (Boolean)compiledExpression.evaluate(metadata.getMetadata(), XPathConstants.BOOLEAN);
+				Boolean filterThis = (Boolean)compiledExpression.evaluate(item.unwrap(), XPathConstants.BOOLEAN);
 				if (filterThis) {
-					log.info("removing metadata matching XPath condition");
-					metadataIterator.remove();
+					log.info("removing item matching XPath condition");
+					iterator.remove();
 				}
 			} catch (XPathExpressionException e) {
-				log.error("removing metadata due to XPath expression error", e);
-				metadataIterator.remove();
+				log.error("removing item due to XPath expression error", e);
+				iterator.remove();
 			}
 		}
 	}

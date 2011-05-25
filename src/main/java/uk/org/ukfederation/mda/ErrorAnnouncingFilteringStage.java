@@ -56,13 +56,13 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
 				// Mention any status items that were previously warnings on this element
 				if (log.isWarnEnabled()) {
 					for (WarningStatus warning: info.get(WarningStatus.class)) {
-						log.warn("{}: {}", new Object[]{warning.getComponentId(), warning.getStatusMessage()});
+						log.warn("   {}: {}", new Object[]{warning.getComponentId(), warning.getStatusMessage()});
 					}
 				}
 				
 				// Mention the errors on this element, which are the reason we are removing it
 				for (ErrorStatus error: errors) {
-					log.error("{}: {}", new Object[]{error.getComponentId(), error.getStatusMessage()});
+					log.error("   {}: {}", new Object[]{error.getComponentId(), error.getStatusMessage()});
 				}
 				
 				// remove the element

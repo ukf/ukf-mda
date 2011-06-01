@@ -12,6 +12,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <xerces.groupId>org.apache.xerces</xerces.groupId>
         <xerces.version>2.9.1</xerces.version>
+        <spring.groupId>org.springframework</spring.groupId>
+        <spring.version>3.0.5.RELEASE</spring.version>
     </properties>
 
     <repositories>
@@ -49,6 +51,19 @@
             <artifactId>jcip-annotations</artifactId>
             <version>1.0</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${spring.groupId}</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Runtime dependencies -->

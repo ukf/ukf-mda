@@ -40,16 +40,50 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(ErrorAnnouncingFilteringStage.class);
 
-    /** {@inheritDoc} */
-    public void doExecute(Collection<DomElementItem> metadataCollection) {
-        Iterator<DomElementItem> metadataIterator = metadataCollection.iterator();
-        while (metadataIterator.hasNext()) {
-            DomElementItem metadata = metadataIterator.next();
-            ClassToInstanceMultiMap<ItemMetadata> info = metadata.getItemMetadata();
-            List<ErrorStatus> errors = info.get(ErrorStatus.class);
+    /**
+     * Whether the stage should throw an exception if errors are encountered.
+     * Default value: {@value}.
+     */
+    private boolean terminating;
+    
+    /**
+     * Gets whether the stage should throw an exception if errors are encountered.
+     * 
+     * @return whether the stage should throw an exception if errors are encountered.
+     */
+    public boolean isTerminating() {
+        return terminating;
+    }
+
+    /**
+     * Sets whether the stage should throw an exception if errors are encountered.
+     *  
+     * @param terminate whether the stage should throw an exception if errors are encountered.
+     */
+    public void setTerminating(boolean terminate) {
+        this.terminating = terminate;
+    }
+
+    /**
+     * Performs the stage processing on the given {@link DomElementItem} collection.
+     * 
+     * @param collection collection of {@link DomElementItem}s to process.
+     *  
+     * @throws TerminationException if errors are encountered and the stage has been set to
+     *                              terminate on errors.
+     */
+    public void doExecute(Collection<DomElementItem> collection) throws TerminationException {
+        int errorsEncountered = 0;
+        Iterator<DomElementItem> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            DomElementItem item = iterator.next();
+            ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+            List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
             if (errors.size() > 0) {
+                errorsEncountered++;
+                
                 // Establish a name for this element
-                List<ItemId> entityId = info.get(ItemId.class);
+                List<ItemId> entityId = metadata.get(ItemId.class);
                 String name;
                 if (entityId.size() > 0) {
                     name = entityId.get(0).getId();
@@ -60,7 +94,7 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
 
                 // Mention any status items that were previously warnings on this element
                 if (log.isWarnEnabled()) {
-                    for (WarningStatus warning : info.get(WarningStatus.class)) {
+                    for (WarningStatus warning : metadata.get(WarningStatus.class)) {
                         log.warn("   {}: {}", new Object[] {warning.getComponentId(), warning.getStatusMessage()});
                     }
                 }
@@ -71,11 +105,18 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
                 }
 
                 // remove the element
-                metadataIterator.remove();
+                iterator.remove();
             }
         }
+        
+        /*
+         * If there have been errors and the stage has been set to terminate on
+         * errors, throw an exception now.
+         */
+        if (errorsEncountered>0 && isTerminating()) {
+            throw new TerminationException("errors encountered; terminating");
+        }
 
-        // **TODO** should throw an exception under certain parameterised circumstances
     }
 
 }

@@ -83,9 +83,12 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
                 errorsEncountered++;
                 
                 // Establish a name for this element
+                List<UKId> ukId = metadata.get(UKId.class);
                 List<ItemId> entityId = metadata.get(ItemId.class);
                 String name;
-                if (entityId.size() > 0) {
+                if (ukId.size() > 0) {
+                    name = ukId.get(0).getId();
+                } else if (entityId.size() > 0) {
                     name = entityId.get(0).getId();
                 } else {
                     name = "element";

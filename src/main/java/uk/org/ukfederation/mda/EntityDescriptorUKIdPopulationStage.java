@@ -17,7 +17,7 @@
 package uk.org.ukfederation.mda;
 
 import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.MetadataHelper;
+import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseIteratingStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 
@@ -34,7 +34,7 @@ public class EntityDescriptorUKIdPopulationStage extends BaseIteratingStage<DomE
     protected boolean doExecute(DomElementItem item) throws StageProcessingException {
         Element metadataElement = item.unwrap();
 
-        if (MetadataHelper.isEntityDescriptor(metadataElement)) {
+        if (SamlMetadataSupport.isEntityDescriptor(metadataElement)) {
             String id = AttributeSupport.getAttributeValue(metadataElement, null, "ID");
             if (id != null) {
                 item.getItemMetadata().put(new UKId(id));

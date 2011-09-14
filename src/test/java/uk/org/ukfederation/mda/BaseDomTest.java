@@ -35,7 +35,7 @@ import org.w3c.dom.Node;
 public abstract class BaseDomTest {
 
     /** Initialized parser pool used to parser data. */
-    private BasicParserPool parserPool;
+    protected BasicParserPool parserPool;
 
     /**
      * Setup test class. Creates and initializes the parser pool. Set BouncyCastle as a JCE provider.

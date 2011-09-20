@@ -21,9 +21,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
+
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.EntitiesDescriptorAssemblerStage.ItemOrderingStrategy;
+import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 
 /**
  * Implements an ordering strategy for UK federation aggregates.
@@ -45,14 +49,14 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
      */
     private static class OrderableItem implements Comparable<OrderableItem> {
         
+        /** Number of fields we are capable of comparing. */
+        private static final int NFIELDS = 4;
+        
         /** The wrapped {@link DomElementItem}. */
         private final DomElementItem item;
         
-        /** The {@link UKId} for the wrapped item, if it has one. */
-        private final UKId ukid;
-        
-        /** The {@link ItemId} for the wrapped item, if it has one. */
-        private final ItemId itemid;
+        /** Array of field values. */
+        private final String[] fields = new String[NFIELDS];
         
         /**
          * Constructor.
@@ -62,52 +66,64 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         public OrderableItem(DomElementItem domItem) {
             item = domItem;
 
+            Element docElement = domItem.unwrap();
+            if (SamlMetadataSupport.isEntitiesDescriptor(docElement)) {
+                // EntitiesDescriptors come before everything else
+                fields[0] = "yes";
+                
+                // Named EntitiesDescriptors come before unnamed, in order of name
+                Attr nameAttr = docElement.getAttributeNode("Name");
+                if (nameAttr != null) {
+                    fields[1] = nameAttr.getTextContent();
+                }
+            }
+            
             List<UKId> ukids = item.getItemMetadata().get(UKId.class);
             if (ukids.size() != 0) {
-                ukid = ukids.get(0);
-            } else {
-                ukid = null;
+                fields[2] = ukids.get(0).getId();
             }
 
             List<ItemId> itemids = item.getItemMetadata().get(ItemId.class);
             if (itemids.size() != 0) {
-                itemid = itemids.get(0);
-            } else {
-                itemid = null;
+                fields[3] = itemids.get(0).getId();
             }
         }
 
+        /**
+         * Compare a single field.
+         * 
+         * @param sThis value of the field in this object
+         * @param sThat value of the field in the other object
+         * @return comparison value
+         */
+        private int compareField(final String sThis, final String sThat) {
+            if (sThis != null) {
+                if (sThat != null) {
+                    // both have this field; direct comparison
+                    return sThis.compareTo(sThat);
+                } else {
+                    // we have this field, other does not: we should order first
+                    return -1;
+                }
+            } else if (sThat != null) {
+                // we do not have this field, other does: we should order last
+                return 1;
+            } else {
+                // neither has this field
+                return 0;
+            }
+        }
+        
         /** {@inheritDoc} */
         public int compareTo(OrderableItem o) {
+            for (int fno = 0; fno < NFIELDS; fno++) {
+                int compared = compareField(fields[fno], o.fields[fno]);
+                if (compared != 0) {
+                    return compared;
+                }
+            }
 
-            // Compare on the basis of UKId, if present
-            if (ukid != null) {
-                if (o.ukid != null) {
-                    return ukid.compareTo(o.ukid);
-                } else {
-                    // we have UKId, other does not: we should order first
-                    return -1;
-                }
-            } else if (o.ukid != null) {
-                // we do not have UKId, other does: we should order last
-                return 1;
-            }
-            
-            // Neither has a UKId, second level of comparison will be on ItemId
-            if (itemid != null) {
-                if (o.itemid != null) {
-                    return itemid.compareTo(o.itemid);
-                } else {
-                    // we have ItemId, other does not: we should order first
-                    return -1;
-                }
-            } else if (o.itemid != null) {
-                // we do not have ItemId, other does: we should order last
-                return 1;
-            }
-            
-            // If neither has either UKId or ItemId, there's nothing to choose
-            // between them
+            // nothing to choose between them
             return 0;
         }
         

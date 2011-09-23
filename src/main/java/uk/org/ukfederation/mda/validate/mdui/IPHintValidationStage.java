@@ -31,6 +31,27 @@ import uk.org.ukfederation.mda.validate.BaseValidationStage;
 @ThreadSafe
 public class IPHintValidationStage extends BaseValidationStage {
 
+    /** Whether to check that the CIDR notation describes a network. Defaults to true. */
+    private boolean checkingNetworks = true;
+    
+    /**
+     * Gets whether the stage is checking for network addresses only.
+     * 
+     * @return whether the stage is checking for network addresses only
+     */
+    public boolean isCheckingNetworks() {
+        return checkingNetworks;
+    }
+
+    /**
+     * Sets whether the stage is checking for network addresses only.
+     * 
+     * @param check whether to check for network addresses only
+     */
+    public void setCheckingNetworks(boolean check) {
+        this.checkingNetworks = check;
+    }
+
     /** {@inheritDoc} */
     protected void validateItem(final DomElementItem item, final Element docElement) {
         NodeList ipHints = docElement.getElementsByTagNameNS(MduiConstants.MDUI_NS, "IPHint");
@@ -38,7 +59,13 @@ public class IPHintValidationStage extends BaseValidationStage {
             Element ipHint = (Element)ipHints.item(index);
             String hint = ipHint.getTextContent();
             try {
-                IPRange.parseCIDRBlock(hint);
+                IPRange range = IPRange.parseCIDRBlock(hint);
+                if (checkingNetworks) {
+                    if (range.getHostAddress() != null) {
+                        addError(item, ipHint, "invalid IPHint '" + hint +
+                                ": CIDR notation represents a host, not a network");
+                    }
+                }
             } catch (IllegalArgumentException e) {
                 addError(item, ipHint, "invalid IPHint '" + hint + "': " + e.getMessage());
             }

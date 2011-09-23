@@ -38,4 +38,44 @@ public class IPHintValidationStageTest extends BaseDomTest {
         Assert.assertTrue(error.getStatusMessage().contains("193.72.192/26"));
     }
 
+    @Test
+    public void hostAddress() throws Exception {
+        Element doc = readXmlData("ipHintValidation2.xml");
+        DomElementItem item = new DomElementItem(doc);
+        List<DomElementItem> items = new ArrayList<DomElementItem>();
+        items.add(item);
+        
+        IPHintValidationStage stage = new IPHintValidationStage();
+        stage.setId("test");
+        stage.setCheckingNetworks(true);
+        stage.initialize();
+        
+        stage.execute(items);
+        
+        ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+        List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
+        Assert.assertEquals(errors.size(), 1);
+        
+        ErrorStatus error = errors.get(0);
+        Assert.assertTrue(error.getStatusMessage().contains("82.68.124.32/3"));
+    }
+
+    @Test
+    public void ignoreHostAddress() throws Exception {
+        Element doc = readXmlData("ipHintValidation2.xml");
+        DomElementItem item = new DomElementItem(doc);
+        List<DomElementItem> items = new ArrayList<DomElementItem>();
+        items.add(item);
+        
+        IPHintValidationStage stage = new IPHintValidationStage();
+        stage.setId("test");
+        stage.setCheckingNetworks(false);
+        stage.initialize();
+        
+        stage.execute(items);
+        
+        ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+        List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
+        Assert.assertEquals(errors.size(), 0);
+    }
 }

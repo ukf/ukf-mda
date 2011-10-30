@@ -21,7 +21,6 @@ import java.util.Collection;
 
 import net.shibboleth.metadata.dom.DomElementItem;
 
-import org.opensaml.util.xml.BasicParserPool;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;

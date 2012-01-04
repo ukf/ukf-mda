@@ -21,8 +21,8 @@ import java.util.List;
 
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
-import org.opensaml.util.xml.XMLParserException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;

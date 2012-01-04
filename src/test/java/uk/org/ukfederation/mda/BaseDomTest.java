@@ -20,13 +20,15 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.security.Security;
 
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.primitive.StringSupport;
+import net.shibboleth.utilities.java.support.xml.BasicParserPool;
+import net.shibboleth.utilities.java.support.xml.ParserPool;
+import net.shibboleth.utilities.java.support.xml.SerializeSupport;
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
+
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.opensaml.util.Assert;
-import org.opensaml.util.StringSupport;
-import org.opensaml.util.xml.BasicParserPool;
-import org.opensaml.util.xml.ParserPool;
-import org.opensaml.util.xml.SerializeSupport;
-import org.opensaml.util.xml.XMLParserException;
 import org.testng.annotations.BeforeClass;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -40,10 +42,10 @@ public abstract class BaseDomTest {
     /**
      * Setup test class. Creates and initializes the parser pool. Set BouncyCastle as a JCE provider.
      * 
-     * @throws XMLParserException thrown if there is a problem initializing the parser pool
+     * @throws ComponentInitializationException if there is a problem initializing the parser pool
      */
     @BeforeClass
-    public void setUp() throws XMLParserException {
+    public void setUp() throws ComponentInitializationException {
         parserPool = new BasicParserPool();
         parserPool.initialize();
 

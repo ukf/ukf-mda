@@ -23,8 +23,8 @@ import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.xml.ElementSupport;
 
-import org.opensaml.util.xml.ElementSupport;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

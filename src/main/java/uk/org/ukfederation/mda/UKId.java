@@ -18,10 +18,10 @@ package uk.org.ukfederation.mda;
 
 import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
-import org.opensaml.util.Assert;
-import org.opensaml.util.ObjectSupport;
-import org.opensaml.util.StringSupport;
+import com.google.common.base.Objects;
 
 /** Carries the fragment ID for an item of UK federation registered metadata. */
 @ThreadSafe
@@ -70,7 +70,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
         }
 
         UKId other = (UKId) obj;
-        return ObjectSupport.equals(id, other.id);
+        return Objects.equal(id, other.id);
     }
 
     /** {@inheritDoc} */

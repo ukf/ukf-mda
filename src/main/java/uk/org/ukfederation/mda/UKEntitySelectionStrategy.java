@@ -16,14 +16,15 @@
 
 package uk.org.ukfederation.mda;
 
-import net.shibboleth.metadata.ItemSelectionStrategy;
+import com.google.common.base.Predicate;
+
 import net.shibboleth.metadata.dom.DomElementItem;
 
 /** An implementation of {@link ItemSelectionStrategy} that selects entities with {@link UKId}s. */
-public class UKEntitySelectionStrategy implements ItemSelectionStrategy<DomElementItem> {
+public class UKEntitySelectionStrategy implements Predicate<DomElementItem> {
 
     /** {@inheritDoc} */
-    public boolean isSelectedItem(DomElementItem item) {
+    public boolean apply(DomElementItem item) {
         return item.getItemMetadata().containsKey(UKId.class);
     }
 

@@ -18,8 +18,8 @@ package uk.org.ukfederation.mda.validate.mdui;
 
 import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.utilities.java.support.net.IPRange;
 
-import org.opensaml.util.net.IPRange;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 

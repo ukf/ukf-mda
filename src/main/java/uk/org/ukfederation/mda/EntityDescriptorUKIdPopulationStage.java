@@ -30,10 +30,11 @@ import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.ComponentInitializationException;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.xml.AttributeSupport;
 
-import org.opensaml.util.StringSupport;
-import org.opensaml.util.xml.AttributeSupport;
 import org.w3c.dom.Element;
+
+import com.google.common.base.Strings;
 
 /**
  * A stage which, for each EntityDescriptor collection element, adds a {@link UKId}, with the entity's ID, to
@@ -62,7 +63,7 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<DomElementIte
                metadata.put(new ErrorStatus(getId(), "item was not an EntityDescriptor"));
            } else {
                String id = AttributeSupport.getAttributeValue(element, null, "ID");
-               String eid = StringSupport.nullToEmpty(AttributeSupport.getAttributeValue(element, null, "entityID"));
+               String eid = Strings.nullToEmpty(AttributeSupport.getAttributeValue(element, null, "entityID"));
                if (id == null) {
                    metadata.put(new ErrorStatus(getId(), "EntityDescriptor " + eid + " did not have an ID attribute"));
                } else if (!pattern.matcher(id).matches()) {

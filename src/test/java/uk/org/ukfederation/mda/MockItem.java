@@ -23,7 +23,7 @@ import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
 import net.shibboleth.metadata.util.ItemMetadataSupport;
 
-import org.opensaml.util.ObjectSupport;
+import com.google.common.base.Objects;
 
 /** A mock implementation of {@link Item}. */
 public class MockItem extends AbstractItem<String> {
@@ -79,7 +79,7 @@ public class MockItem extends AbstractItem<String> {
 
         if (obj instanceof MockItem) {
             MockItem other = (MockItem) obj;
-            return ObjectSupport.equals(unwrap(), other.unwrap());
+            return Objects.equal(unwrap(), other.unwrap());
         }
         return false;
     }

@@ -18,9 +18,11 @@ package uk.org.ukfederation.mda;
 
 import com.google.common.base.Predicate;
 
+import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.dom.DomElementItem;
 
 /** An implementation of {@link Predicate} that selects entities with {@link UKId}s. */
+@ThreadSafe
 public class UKEntitySelectionStrategy implements Predicate<DomElementItem> {
 
     /** {@inheritDoc} */

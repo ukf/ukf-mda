@@ -16,11 +16,13 @@
 
 package uk.org.ukfederation.mda;
 
+import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 
 /**
  * An exception to be thrown to cause command-line aggregator execution to terminate.
  */
+@ThreadSafe
 public class TerminationException extends StageProcessingException {
 
     /** Serial version UID. */

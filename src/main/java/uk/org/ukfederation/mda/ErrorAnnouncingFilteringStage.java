@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.ItemMetadata;
@@ -35,6 +36,7 @@ import org.slf4j.LoggerFactory;
  * A stage implementation which announces errors and any attached warnings in elements
  * to the logging system, then removes the associated items.
  */
+@ThreadSafe
 public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
 
     /** Class logger. */

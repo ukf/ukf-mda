@@ -24,6 +24,7 @@ import java.util.List;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
+import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.EntitiesDescriptorAssemblerStage.ItemOrderingStrategy;
@@ -41,6 +42,7 @@ import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
  * for {@link ItemId}.  Items with neither {@link UKId} or {@link ItemId} come
  * last in the ordering.
  */
+@ThreadSafe
 public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
     
     /**

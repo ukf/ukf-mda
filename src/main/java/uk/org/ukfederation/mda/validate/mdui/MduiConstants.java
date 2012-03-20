@@ -16,7 +16,10 @@
 
 package uk.org.ukfederation.mda.validate.mdui;
 
+import net.jcip.annotations.ThreadSafe;
+
 /** Constants related to the MDUI specification. */
+@ThreadSafe
 public final class MduiConstants {
 
     /** MDUI namespace. */

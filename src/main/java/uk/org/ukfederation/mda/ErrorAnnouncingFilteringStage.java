@@ -42,7 +42,7 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
 
     /**
      * Whether the stage should throw an exception if errors are encountered.
-     * Default value: {@code false}.
+     * Default value: <code>false</code>.
      */
     private boolean terminating;
     

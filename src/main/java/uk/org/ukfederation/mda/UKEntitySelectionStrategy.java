@@ -20,7 +20,7 @@ import com.google.common.base.Predicate;
 
 import net.shibboleth.metadata.dom.DomElementItem;
 
-/** An implementation of {@link ItemSelectionStrategy} that selects entities with {@link UKId}s. */
+/** An implementation of {@link Predicate} that selects entities with {@link UKId}s. */
 public class UKEntitySelectionStrategy implements Predicate<DomElementItem> {
 
     /** {@inheritDoc} */

@@ -39,8 +39,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
      * @param ukid The UK federation fragment ID for the entity, never null
      */
     public UKId(final String ukid) {
-        id = StringSupport.trimOrNull(ukid);
-        Assert.isNotNull(id, "UK ID may not be null or empty");
+        id = Assert.isNotNull(StringSupport.trimOrNull(ukid), "UK ID may not be null or empty");
     }
 
     /**

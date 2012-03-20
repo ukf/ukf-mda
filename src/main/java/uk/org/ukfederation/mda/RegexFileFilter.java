@@ -52,7 +52,7 @@ public class RegexFileFilter implements FileFilter {
      * 
      * @param pathname {@link File} to match against the regular expression.
      * 
-     * @return {@code true} iff {@link #pathname} matches the regular expression.
+     * @return {@code true} iff {@code pathname} matches the regular expression.
      */
     public boolean accept(File pathname) {
         return pattern.matcher(pathname.getName()).matches();

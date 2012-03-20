@@ -28,19 +28,21 @@ public class UKIdTest {
         UKId info = new UKId(" test ");
         assert "test".equals(info.getId());
 
+        info = null;
         try {
             info = new UKId("");
-            throw new AssertionError();
-        } catch (IllegalArgumentException e) {
+        } catch (AssertionError e) {
             // expected this
         }
+        Assert.assertNull(info);
 
         try {
             info = new UKId(null);
             throw new AssertionError();
-        } catch (IllegalArgumentException e) {
+        } catch (AssertionError e) {
             // expected this
         }
+        Assert.assertNull(info);
     }
     
     /**

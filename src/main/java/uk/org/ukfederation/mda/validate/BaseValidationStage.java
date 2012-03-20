@@ -60,11 +60,11 @@ public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
      * @param error     error text
      */
     protected void addError(final DomElementItem item, final Element element, final String error) {
-        ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+        final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         String prefix = "";
         if (SamlMetadataSupport.isEntitiesDescriptor(element)) {
-            Element entity = ancestorEntity(element);
-            Attr id = entity.getAttributeNode("ID");
+            final Element entity = ancestorEntity(element);
+            final Attr id = entity.getAttributeNode("ID");
             if (id != null) {
                 prefix = id.getTextContent() + ": ";
             } else {

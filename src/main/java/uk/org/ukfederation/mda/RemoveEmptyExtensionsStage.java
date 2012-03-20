@@ -49,15 +49,15 @@ public class RemoveEmptyExtensionsStage extends BaseStage<DomElementItem> {
     /** {@inheritDoc} */
     protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
         for (DomElementItem item : items) {
-            Element element = item.unwrap();
+            final Element element = item.unwrap();
             
             // List all the Extensions elements in this document in document order
-            NodeList extensionList = element.getElementsByTagNameNS(SamlMetadataSupport.MD_NS, "Extensions");
+            final NodeList extensionList = element.getElementsByTagNameNS(SamlMetadataSupport.MD_NS, "Extensions");
             
             // Process in reverse order so that Extensions inside Extensions are
             // handled correctly.
             for (int eIndex = extensionList.getLength()-1; eIndex >= 0; eIndex--) {
-                Element extensions = (Element) extensionList.item(eIndex);
+                final Element extensions = (Element) extensionList.item(eIndex);
                 if (!hasChildElements(extensions)) {
                     extensions.getParentNode().removeChild(extensions);
                 }

@@ -36,12 +36,12 @@ public class MockItem extends AbstractItem<String> {
      * 
      * @param str data held by this item
      */
-    public MockItem(String str) {
+    public MockItem(final String str) {
         setData(str);
     }
 
     /** {@inheritDoc} */
-    public void setData(String data) {
+    public void setData(final String data) {
         super.setData(data);
     }
 
@@ -50,14 +50,14 @@ public class MockItem extends AbstractItem<String> {
      * 
      * @param info metadata for this Item
      */
-    public void setMetadataInfo(ClassToInstanceMultiMap<ItemMetadata> info) {
+    public void setMetadataInfo(final ClassToInstanceMultiMap<ItemMetadata> info) {
         getItemMetadata().clear();
         getItemMetadata().putAll(info);
     }
 
     /** {@inheritDoc} */
     public Item<String> copy() {
-        MockItem clone = new MockItem(new String(unwrap()));
+        final MockItem clone = new MockItem(new String(unwrap()));
         ItemMetadataSupport.addToAll(clone, getItemMetadata().values().toArray(new ItemMetadata[] {}));
         return clone;
     }
@@ -68,7 +68,7 @@ public class MockItem extends AbstractItem<String> {
     }
 
     /** {@inheritDoc} */
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj == null) {
             return false;
         }
@@ -78,7 +78,7 @@ public class MockItem extends AbstractItem<String> {
         }
 
         if (obj instanceof MockItem) {
-            MockItem other = (MockItem) obj;
+            final MockItem other = (MockItem) obj;
             return Objects.equal(unwrap(), other.unwrap());
         }
         return false;

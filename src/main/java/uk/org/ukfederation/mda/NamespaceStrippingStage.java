@@ -81,7 +81,7 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
      * @param item {@link DomElementItem} to process.
      */
     private void processItem(final DomElementItem item) {
-        Element element = item.unwrap();
+        final Element element = item.unwrap();
 
         /*
          * We can't, by definition, remove the document element from a DomElementItem, so fail quickly if the document
@@ -110,13 +110,13 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
          * associated with an element is "live", we need to collect the attributes
          * we want to remove and do that at the end.
          */
-        NamedNodeMap attributes = element.getAttributes();
-        List<Attr> removeTarget = new ArrayList<Attr>();
-        List<Attr> removePrefix = new ArrayList<Attr>();
+        final NamedNodeMap attributes = element.getAttributes();
+        final List<Attr> removeTarget = new ArrayList<Attr>();
+        final List<Attr> removePrefix = new ArrayList<Attr>();
         for (int aIndex = 0; aIndex < attributes.getLength(); aIndex++) {
-            Attr attribute = (Attr) attributes.item(aIndex);
-            String attrNamespace = attribute.getNamespaceURI();
-            String attrLocalName = attribute.getLocalName();
+            final Attr attribute = (Attr) attributes.item(aIndex);
+            final String attrNamespace = attribute.getNamespaceURI();
+            final String attrLocalName = attribute.getLocalName();
             log.debug("checking attribute {{}}:{}", attrNamespace, attrLocalName);
             if (namespace.equals(attrNamespace)) {
                 // remove attribute in target namespace
@@ -165,9 +165,9 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
         /*
          * Recursively process the DOM below this element.
          */
-        NodeList children = element.getChildNodes();
+        final NodeList children = element.getChildNodes();
         for (int eIndex = 0; eIndex < children.getLength(); eIndex++) {
-            Node child = children.item(eIndex);
+            final Node child = children.item(eIndex);
             if (child instanceof Element) {
                 processElement((Element) child, depth+1);
             }

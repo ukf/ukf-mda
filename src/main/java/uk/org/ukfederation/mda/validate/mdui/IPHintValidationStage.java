@@ -48,18 +48,18 @@ public class IPHintValidationStage extends BaseValidationStage {
      * 
      * @param check whether to check for network addresses only
      */
-    public void setCheckingNetworks(boolean check) {
+    public void setCheckingNetworks(final boolean check) {
         this.checkingNetworks = check;
     }
 
     /** {@inheritDoc} */
     protected void validateItem(final DomElementItem item, final Element docElement) {
-        NodeList ipHints = docElement.getElementsByTagNameNS(MduiConstants.MDUI_NS, "IPHint");
+        final NodeList ipHints = docElement.getElementsByTagNameNS(MduiConstants.MDUI_NS, "IPHint");
         for (int index = 0; index < ipHints.getLength(); index++) {
-            Element ipHint = (Element)ipHints.item(index);
-            String hint = ipHint.getTextContent();
+            final Element ipHint = (Element)ipHints.item(index);
+            final String hint = ipHint.getTextContent();
             try {
-                IPRange range = IPRange.parseCIDRBlock(hint);
+                final IPRange range = IPRange.parseCIDRBlock(hint);
                 if (checkingNetworks) {
                     if (range.getHostAddress() != null) {
                         addError(item, ipHint, "invalid IPHint '" + hint +

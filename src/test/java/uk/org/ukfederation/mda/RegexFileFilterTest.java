@@ -29,7 +29,7 @@ public class RegexFileFilterTest {
      */
     @Test
     public void testAccept() {
-        RegexFileFilter a = new RegexFileFilter("uk\\d{6}\\.xml");
+        final RegexFileFilter a = new RegexFileFilter("uk\\d{6}\\.xml");
         Assert.assertTrue(a.accept(new File("uk123456.xml")));
         Assert.assertTrue(a.accept(new File("foo/uk123456.xml")));
         Assert.assertFalse(a.accept(new File("imported.xml")));

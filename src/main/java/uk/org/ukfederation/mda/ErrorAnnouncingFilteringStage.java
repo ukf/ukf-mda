@@ -60,7 +60,7 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
      *  
      * @param terminate whether the stage should throw an exception if errors are encountered.
      */
-    public void setTerminating(boolean terminate) {
+    public void setTerminating(final boolean terminate) {
         this.terminating = terminate;
     }
 
@@ -72,19 +72,19 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
      * @throws TerminationException if errors are encountered and the stage has been set to
      *                              terminate on errors.
      */
-    public void doExecute(Collection<DomElementItem> collection) throws TerminationException {
+    public void doExecute(final Collection<DomElementItem> collection) throws TerminationException {
         int errorsEncountered = 0;
-        Iterator<DomElementItem> iterator = collection.iterator();
+        final Iterator<DomElementItem> iterator = collection.iterator();
         while (iterator.hasNext()) {
-            DomElementItem item = iterator.next();
-            ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
-            List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
+            final DomElementItem item = iterator.next();
+            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+            final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
             if (errors.size() > 0) {
                 errorsEncountered++;
                 
                 // Establish a name for this element
-                List<UKId> ukId = metadata.get(UKId.class);
-                List<ItemId> entityId = metadata.get(ItemId.class);
+                final List<UKId> ukId = metadata.get(UKId.class);
+                final List<ItemId> entityId = metadata.get(ItemId.class);
                 String name;
                 if (ukId.size() > 0) {
                     name = ukId.get(0).getId();

@@ -55,7 +55,7 @@ public class ElementStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @param namespace namespace of the element to strip
      */
-    public void setElementNamespace(String namespace) {
+    public void setElementNamespace(final String namespace) {
         elementNamespace = namespace;
     }
 
@@ -73,21 +73,21 @@ public class ElementStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @param name the name of the element to strip
      */
-    public void setElementName(String name) {
+    public void setElementName(final String name) {
         elementName = name;
     }
 
     /** {@inheritDoc} */
     protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
         for (DomElementItem item : items) {
-            Element docElement = item.unwrap();
+            final Element docElement = item.unwrap();
 
             // List all the matching descendant elements in this document in document order
             // Note that this list will never include the document element itself
             NodeList nodeList = docElement.getElementsByTagNameNS(elementNamespace, elementName);
 
             // Copy these into a list, because a NodeList can change length at any time
-            int nNodes = nodeList.getLength();
+            final int nNodes = nodeList.getLength();
             List<Element> elements = new ArrayList<Element>(nNodes);
             for (int eIndex = 0; eIndex < nNodes; eIndex++) {
                 elements.add((Element) nodeList.item(eIndex));

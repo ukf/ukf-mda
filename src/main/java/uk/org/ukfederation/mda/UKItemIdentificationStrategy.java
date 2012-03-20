@@ -29,8 +29,8 @@ import net.shibboleth.metadata.Item;
 public class UKItemIdentificationStrategy extends FirstItemIdItemIdentificationStrategy {
 
     /** {@inheritDoc} */
-    public String getItemIdentifier(Item<?> item) {
-        List<UKId> itemIds = item.getItemMetadata().get(UKId.class);
+    public String getItemIdentifier(final Item<?> item) {
+        final List<UKId> itemIds = item.getItemMetadata().get(UKId.class);
         if (itemIds != null && !itemIds.isEmpty()) {
             return itemIds.get(0).getId();
         } else {

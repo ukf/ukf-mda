@@ -71,7 +71,7 @@ public abstract class BaseDomTest {
      * 
      * @throws XMLParserException thrown if the file does not exists or there is a problem parsing it
      */
-    public Element readXmlData(String path) throws XMLParserException {
+    public Element readXmlData(final String path) throws XMLParserException {
         String trimmedPath = StringSupport.trimOrNull(path);
         Assert.isNotNull(trimmedPath, "Path may not be null or empty");
 
@@ -79,7 +79,7 @@ public abstract class BaseDomTest {
             trimmedPath = "/data/" + trimmedPath;
         }
 
-        InputStream input = BaseDomTest.class.getResourceAsStream(trimmedPath);
+        final InputStream input = BaseDomTest.class.getResourceAsStream(trimmedPath);
         if (input == null) {
             throw new XMLParserException(trimmedPath + " does not exist or is not readable");
         }
@@ -97,7 +97,7 @@ public abstract class BaseDomTest {
      * 
      * @throws XMLParserException thrown if there is a problem serializing and re-parsing the nodes
      */
-    public void assertXmlEqual(Node expected, Node actual) throws XMLParserException {
+    public void assertXmlEqual(final Node expected, final Node actual) throws XMLParserException {
         Assert.isNotNull(actual, "Actual Node may not be null");
         String serializedForm = SerializeSupport.nodeToString(expected);
         Element deserializedExpected = parserPool.parse(new StringReader(serializedForm)).getDocumentElement();

@@ -57,7 +57,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
     }
 
     /** {@inheritDoc} */
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -73,7 +73,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
     }
 
     /** {@inheritDoc} */
-    public int compareTo(UKId other) {
+    public int compareTo(final UKId other) {
         return getId().compareTo(other.getId());
     }
     

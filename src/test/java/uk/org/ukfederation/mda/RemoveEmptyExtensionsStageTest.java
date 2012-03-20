@@ -12,29 +12,29 @@ public class RemoveEmptyExtensionsStageTest extends BaseDomTest {
 
     @Test
     public void doExecute() throws Exception {
-        Element doc = readXmlData("emptyExtensionsIn.xml");
-        DomElementItem item = new DomElementItem(doc);
-        List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final Element doc = readXmlData("emptyExtensionsIn.xml");
+        final DomElementItem item = new DomElementItem(doc);
+        final List<DomElementItem> items = new ArrayList<DomElementItem>();
         items.add(item);
         
-        NamespaceStrippingStage removeMdui = new NamespaceStrippingStage();
+        final NamespaceStrippingStage removeMdui = new NamespaceStrippingStage();
         removeMdui.setId("removeMdui");
         removeMdui.setNamespace("urn:oasis:names:tc:SAML:metadata:ui");
         removeMdui.initialize();
         removeMdui.execute(items);
         
-        NamespaceStrippingStage removeUk = new NamespaceStrippingStage();
+        final NamespaceStrippingStage removeUk = new NamespaceStrippingStage();
         removeUk.setId("removeUk");
         removeUk.setNamespace("http://ukfederation.org.uk/2006/11/label");
         removeUk.initialize();
         removeUk.execute(items);
         
-        RemoveEmptyExtensionsStage stage = new RemoveEmptyExtensionsStage();
+        final RemoveEmptyExtensionsStage stage = new RemoveEmptyExtensionsStage();
         stage.setId("emptyExtensionsTest");
         stage.initialize();
         stage.execute(items);
         
-        Element out = readXmlData("emptyExtensionsOut.xml");
+        final Element out = readXmlData("emptyExtensionsOut.xml");
         assertXmlEqual(out, item.unwrap());
     }
 }

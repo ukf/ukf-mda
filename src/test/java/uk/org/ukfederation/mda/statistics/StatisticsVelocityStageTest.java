@@ -37,16 +37,16 @@ public class StatisticsVelocityStageTest extends BaseDomTest {
      */
     @Test
     public void testHello() throws Exception {
-        StatisticsVelocityStage stage = new StatisticsVelocityStage();
+        final StatisticsVelocityStage stage = new StatisticsVelocityStage();
         stage.setId("test");
         stage.setTemplateName("/templates/hello.vm");
         stage.setParserPool(parserPool);
         stage.initialize();
 
-        Collection<DomElementItem> items = new ArrayList<DomElementItem>();
+        final Collection<DomElementItem> items = new ArrayList<DomElementItem>();
         stage.execute(items);
         Assert.assertEquals(items.size(), 1);
-        Element e = items.iterator().next().unwrap();
+        final Element e = items.iterator().next().unwrap();
         Assert.assertEquals("hello", e.getLocalName());
     }
 }

@@ -25,24 +25,22 @@ public class UKIdTest {
     /** Basic tests. */
     @Test
     public void test() {
-        UKId info = new UKId(" test ");
+        final UKId info = new UKId(" test ");
         assert "test".equals(info.getId());
 
-        info = null;
         try {
-            info = new UKId("");
+            new UKId("");
+            Assert.fail();
         } catch (AssertionError e) {
             // expected this
         }
-        Assert.assertNull(info);
 
         try {
-            info = new UKId(null);
-            throw new AssertionError();
+            new UKId(null);
+            Assert.fail();
         } catch (AssertionError e) {
             // expected this
         }
-        Assert.assertNull(info);
     }
     
     /**
@@ -50,9 +48,9 @@ public class UKIdTest {
      */
     @Test
     public void testCompareTo() {
-        UKId one = new UKId("one");
-        UKId two = new UKId("two");
-        UKId twoAgain = new UKId("two");
+        final UKId one = new UKId("one");
+        final UKId two = new UKId("two");
+        final UKId twoAgain = new UKId("two");
         
         Assert.assertTrue(two.compareTo(two) == 0);
         Assert.assertTrue(two.compareTo(twoAgain) == 0);
@@ -67,8 +65,8 @@ public class UKIdTest {
      */
     @Test
     public void testHashCode() {
-        UKId one = new UKId("one");
-        UKId two = new UKId("two");
+        final UKId one = new UKId("one");
+        final UKId two = new UKId("two");
         Assert.assertFalse(one.hashCode() == two.hashCode());
     }
 

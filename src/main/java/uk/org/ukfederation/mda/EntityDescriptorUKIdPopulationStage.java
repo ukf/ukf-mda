@@ -49,21 +49,21 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<DomElementIte
     private Pattern pattern;
 
     /** {@inheritDoc} */
-    protected void doExecute(Collection<DomElementItem> items) throws StageProcessingException {
+    protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
 
         // ID values that we have already seen (they must be unique)
-        Set<String> ids = new HashSet<String>(items.size());
+        final Set<String> ids = new HashSet<String>(items.size());
         
         for (DomElementItem item : items) {
-           Element element = item.unwrap();
-           ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+           final Element element = item.unwrap();
+           final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            
            if (!SamlMetadataSupport.isEntityDescriptor(element)) {
                // all items must be EntityDescriptor elements
                metadata.put(new ErrorStatus(getId(), "item was not an EntityDescriptor"));
            } else {
-               String id = AttributeSupport.getAttributeValue(element, null, "ID");
-               String eid = Strings.nullToEmpty(AttributeSupport.getAttributeValue(element, null, "entityID"));
+               final String id = AttributeSupport.getAttributeValue(element, null, "ID");
+               final String eid = Strings.nullToEmpty(AttributeSupport.getAttributeValue(element, null, "entityID"));
                if (id == null) {
                    metadata.put(new ErrorStatus(getId(), "EntityDescriptor " + eid + " did not have an ID attribute"));
                } else if (!pattern.matcher(id).matches()) {

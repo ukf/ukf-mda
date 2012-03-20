@@ -41,7 +41,7 @@ public class RegexFileFilter implements FileFilter {
      * 
      * @param regex Regular expression to match file names against.
      */
-    public RegexFileFilter(String regex) {
+    public RegexFileFilter(final String regex) {
         pattern = Pattern.compile(regex);
     }
 
@@ -54,7 +54,7 @@ public class RegexFileFilter implements FileFilter {
      * 
      * @return <code>true</code> iff <code>pathname</code> matches the regular expression.
      */
-    public boolean accept(File pathname) {
+    public boolean accept(final File pathname) {
         return pattern.matcher(pathname.getName()).matches();
     }
 

@@ -24,7 +24,7 @@ import net.shibboleth.metadata.dom.DomElementItem;
 public class UKEntitySelectionStrategy implements Predicate<DomElementItem> {
 
     /** {@inheritDoc} */
-    public boolean apply(DomElementItem item) {
+    public boolean apply(final DomElementItem item) {
         return item.getItemMetadata().containsKey(UKId.class);
     }
 

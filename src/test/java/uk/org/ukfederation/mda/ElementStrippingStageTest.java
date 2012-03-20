@@ -12,12 +12,12 @@ public class ElementStrippingStageTest extends BaseDomTest {
 
     @Test
     public void doExecute() throws Exception {
-        Element doc = readXmlData("elementStripIn.xml");
-        DomElementItem item = new DomElementItem(doc);
-        List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final Element doc = readXmlData("elementStripIn.xml");
+        final DomElementItem item = new DomElementItem(doc);
+        final List<DomElementItem> items = new ArrayList<DomElementItem>();
         items.add(item);
         
-        ElementStrippingStage stage = new ElementStrippingStage();
+        final ElementStrippingStage stage = new ElementStrippingStage();
         stage.setId("stripTest");
         stage.setElementNamespace("urn:namespace:beta");
         stage.setElementName("StripMe");
@@ -25,7 +25,7 @@ public class ElementStrippingStageTest extends BaseDomTest {
         
         stage.execute(items);
         
-        Element out = readXmlData("elementStripOut.xml");
+        final Element out = readXmlData("elementStripOut.xml");
         assertXmlEqual(out, item.unwrap());
     }
 }

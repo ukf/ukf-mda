@@ -89,15 +89,15 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
      * 
      * @param name the name of the template to invoke.
      */
-    public synchronized void setTemplateName(String name) {
+    public synchronized void setTemplateName(final String name) {
         templateName = name;
     }
 
 
     /** {@inheritDoc} */
-    public void doExecute(Collection<DomElementItem> collection) throws StageProcessingException {
+    public void doExecute(final Collection<DomElementItem> collection) throws StageProcessingException {
         
-        VelocityEngine ve = new VelocityEngine();
+        final VelocityEngine ve = new VelocityEngine();
         ve.setProperty("resource.loader", "class");
         ve.setProperty("class.resource.loader.description",
                 "Velocity Classpath Resource Loader");
@@ -105,7 +105,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
                 "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         ve.init();
 
-        VelocityContext context = new VelocityContext();
+        final VelocityContext context = new VelocityContext();
         context.put("name", new String("Velocity"));
 
         final Set<DomElementItem> entities = new HashSet<DomElementItem>(collection.size());
@@ -117,14 +117,14 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
         }
         context.put("entities", entities);
         
-        StringWriter w = new StringWriter();
+        final StringWriter w = new StringWriter();
         log.debug("merging template " + templateName);
         ve.mergeTemplate(templateName, Velocity.ENCODING_DEFAULT, context, w);
         log.debug("resulting string is " + w.toString());
         
         log.debug("parsing to DOM document");
         try {
-            Document doc = parserPool.parse(new StringReader(w.toString()));
+            final Document doc = parserPool.parse(new StringReader(w.toString()));
             collection.clear();
             collection.add(new DomElementItem(doc));
         } catch (XMLParserException e) {

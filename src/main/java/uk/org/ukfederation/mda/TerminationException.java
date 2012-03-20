@@ -35,7 +35,7 @@ public class TerminationException extends StageProcessingException {
      * 
      * @param message exception message
      */
-    public TerminationException(String message) {
+    public TerminationException(final String message) {
         super(message);
     }
 
@@ -44,7 +44,7 @@ public class TerminationException extends StageProcessingException {
      * 
      * @param wrappedException exception to be wrapped by this one
      */
-    public TerminationException(Exception wrappedException) {
+    public TerminationException(final Exception wrappedException) {
         super(wrappedException);
     }
 
@@ -54,7 +54,7 @@ public class TerminationException extends StageProcessingException {
      * @param message exception message
      * @param wrappedException exception to be wrapped by this one
      */
-    public TerminationException(String message, Exception wrappedException) {
+    public TerminationException(final String message, final Exception wrappedException) {
         super(message, wrappedException);
     }
 

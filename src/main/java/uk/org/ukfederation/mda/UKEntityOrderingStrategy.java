@@ -138,10 +138,10 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
     }
 
     /** {@inheritDoc} */
-    public List<DomElementItem> order(Collection<DomElementItem> items) {
+    public List<DomElementItem> order(final Collection<DomElementItem> items) {
         
         // Construct an orderable list wrapping the original items.
-        List<OrderableItem> orderableList = new ArrayList<OrderableItem>(items.size());
+        final List<OrderableItem> orderableList = new ArrayList<OrderableItem>(items.size());
         for (DomElementItem item : items) {
             orderableList.add(new OrderableItem(item));
         }
@@ -150,7 +150,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         Collections.sort(orderableList);
         
         // extract the result into a new collection
-        List<DomElementItem> results = new ArrayList<DomElementItem>(items.size());
+        final List<DomElementItem> results = new ArrayList<DomElementItem>(items.size());
         for (OrderableItem result : orderableList) {
             results.add(result.unwrap());
         }

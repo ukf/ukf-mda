@@ -20,7 +20,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.ItemMetadata;
@@ -28,6 +30,8 @@ import net.shibboleth.metadata.WarningStatus;
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +67,9 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
      * @param terminate whether the stage should throw an exception if errors are encountered.
      */
     public void setTerminating(final boolean terminate) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
         this.terminating = terminate;
     }
 
@@ -74,7 +81,8 @@ public class ErrorAnnouncingFilteringStage extends BaseStage<DomElementItem> {
      * @throws TerminationException if errors are encountered and the stage has been set to
      *                              terminate on errors.
      */
-    public void doExecute(final Collection<DomElementItem> collection) throws TerminationException {
+    public void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> collection)
+            throws TerminationException {
         int errorsEncountered = 0;
         final Iterator<DomElementItem> iterator = collection.iterator();
         while (iterator.hasNext()) {

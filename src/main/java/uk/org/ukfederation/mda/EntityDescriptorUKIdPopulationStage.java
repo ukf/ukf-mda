@@ -21,7 +21,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DomElementItem;
@@ -29,6 +31,7 @@ import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.AttributeSupport;
 
@@ -49,7 +52,8 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<DomElementIte
     private Pattern pattern;
 
     /** {@inheritDoc} */
-    protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+            throws StageProcessingException {
 
         // ID values that we have already seen (they must be unique)
         final Set<String> ids = new HashSet<String>(items.size());
@@ -80,6 +84,13 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<DomElementIte
         }
     }
     
+    /** {@inheritDoc} */
+    protected void doDestroy() {
+        pattern = null;
+
+        super.doDestroy();
+    }
+
     /** {@inheritDoc} */
     protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();

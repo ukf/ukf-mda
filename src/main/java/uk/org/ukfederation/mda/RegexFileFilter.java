@@ -20,7 +20,12 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.regex.Pattern;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
+import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
+import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
 /**
  * A {@link FileFilter} implementation that selects files on the basis of a regular expression match against the file
@@ -41,8 +46,10 @@ public class RegexFileFilter implements FileFilter {
      * 
      * @param regex Regular expression to match file names against.
      */
-    public RegexFileFilter(final String regex) {
-        pattern = Pattern.compile(regex);
+    public RegexFileFilter(@Nonnull @NotEmpty final String regex) {
+        
+        pattern = Pattern.compile(Assert.isNotNull(StringSupport.trimOrNull(regex),
+                "regex pattern argument may not be null or empty"));
     }
 
     /**
@@ -54,7 +61,8 @@ public class RegexFileFilter implements FileFilter {
      * 
      * @return <code>true</code> iff <code>pathname</code> matches the regular expression.
      */
-    public boolean accept(final File pathname) {
+    public boolean accept(@Nonnull final File pathname) {
+        assert pathname != null;
         return pattern.matcher(pathname.getName()).matches();
     }
 

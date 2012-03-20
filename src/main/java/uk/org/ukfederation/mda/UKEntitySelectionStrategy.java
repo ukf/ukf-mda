@@ -16,9 +16,11 @@
 
 package uk.org.ukfederation.mda;
 
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import com.google.common.base.Predicate;
 
-import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.dom.DomElementItem;
 
 /** An implementation of {@link Predicate} that selects entities with {@link UKId}s. */
@@ -26,7 +28,7 @@ import net.shibboleth.metadata.dom.DomElementItem;
 public class UKEntitySelectionStrategy implements Predicate<DomElementItem> {
 
     /** {@inheritDoc} */
-    public boolean apply(final DomElementItem item) {
+    public boolean apply(@Nonnull final DomElementItem item) {
         return item.getItemMetadata().containsKey(UKId.class);
     }
 

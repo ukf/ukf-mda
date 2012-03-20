@@ -16,7 +16,9 @@
 
 package uk.org.ukfederation.mda;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 
 /**
@@ -37,7 +39,7 @@ public class TerminationException extends StageProcessingException {
      * 
      * @param message exception message
      */
-    public TerminationException(final String message) {
+    public TerminationException(@Nonnull final String message) {
         super(message);
     }
 
@@ -46,7 +48,7 @@ public class TerminationException extends StageProcessingException {
      * 
      * @param wrappedException exception to be wrapped by this one
      */
-    public TerminationException(final Exception wrappedException) {
+    public TerminationException(@Nonnull final Exception wrappedException) {
         super(wrappedException);
     }
 
@@ -56,7 +58,7 @@ public class TerminationException extends StageProcessingException {
      * @param message exception message
      * @param wrappedException exception to be wrapped by this one
      */
-    public TerminationException(final String message, final Exception wrappedException) {
+    public TerminationException(@Nonnull final String message, @Nonnull final Exception wrappedException) {
         super(message, wrappedException);
     }
 

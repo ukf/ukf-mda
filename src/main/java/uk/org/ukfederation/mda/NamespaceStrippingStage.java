@@ -20,16 +20,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.XMLConstants;
 
-import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +65,7 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @return namespace URI
      */
-    public String getNamespace() {
+    @Nullable public String getNamespace() {
         return namespace;
     }
 
@@ -67,12 +74,12 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @param ns namespace URI as a string
      */
-    public void setNamespace(final String ns) {
-        if (isInitialized()) {
-            return;
-        }
+    public void setNamespace(@Nonnull @NotEmpty final String ns) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
 
-        namespace = ns;
+        namespace = Assert.isNotNull(StringSupport.trimOrNull(ns),
+                "target namespace can not be null or empty");
     }
 
     /**
@@ -80,7 +87,8 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @param item {@link DomElementItem} to process.
      */
-    private void processItem(final DomElementItem item) {
+    private void processItem(@Nonnull final DomElementItem item) {
+        assert item != null;
         final Element element = item.unwrap();
 
         /*
@@ -104,7 +112,9 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @param element the {@link Element} to process
      */
-    private void processAttributes(final Element element) {
+    private void processAttributes(@Nonnull final Element element) {
+        assert element != null;
+        
         /*
          * Process the attributes on this element.  Because the NamedNodeMap
          * associated with an element is "live", we need to collect the attributes
@@ -149,8 +159,8 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
      * @param element element to process
      * @param depth processing depth, starting with 0 for the document element.
      */
-    private void processElement(final Element element, final int depth) {
-        
+    private void processElement(@Nonnull final Element element, final int depth) {
+        assert element != null;
         log.debug("{}: element {}", depth, element.getLocalName());
 
         /*
@@ -181,10 +191,18 @@ public class NamespaceStrippingStage extends BaseStage<DomElementItem> {
     }
 
     /** {@inheritDoc} */
-    protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+            throws StageProcessingException {
         for (DomElementItem item : items) {
             processItem(item);
         }
+    }
+
+    /** {@inheritDoc} */
+    protected void doDestroy() {
+        namespace = null;
+
+        super.doDestroy();
     }
 
     /** {@inheritDoc} */

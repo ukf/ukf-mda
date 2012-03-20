@@ -18,11 +18,14 @@ package uk.org.ukfederation.mda;
 
 import java.util.Collection;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 import net.shibboleth.utilities.java.support.xml.ElementSupport;
 
 import org.w3c.dom.Element;
@@ -41,13 +44,15 @@ public class RemoveEmptyExtensionsStage extends BaseStage<DomElementItem> {
      * @param element Element to check for child elements.
      * @return true if and only if the Element has child elements.
      */
-    private boolean hasChildElements(final Element element) {
+    private boolean hasChildElements(@Nonnull final Element element) {
+        assert element != null;
         Node firstChild = ElementSupport.getFirstChildElement(element);
         return firstChild != null;
     }
     
     /** {@inheritDoc} */
-    protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+            throws StageProcessingException {
         for (DomElementItem item : items) {
             final Element element = item.unwrap();
             

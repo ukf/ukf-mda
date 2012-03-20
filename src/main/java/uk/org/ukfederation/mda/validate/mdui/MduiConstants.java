@@ -16,7 +16,7 @@
 
 package uk.org.ukfederation.mda.validate.mdui;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 
 /** Constants related to the MDUI specification. */
 @ThreadSafe

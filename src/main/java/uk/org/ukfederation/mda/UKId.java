@@ -16,8 +16,11 @@
 
 package uk.org.ukfederation.mda;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
 import net.shibboleth.utilities.java.support.logic.Assert;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
@@ -38,7 +41,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
      * 
      * @param ukid The UK federation fragment ID for the entity, never null
      */
-    public UKId(final String ukid) {
+    public UKId(@Nonnull @NotEmpty final String ukid) {
         id = Assert.isNotNull(StringSupport.trimOrNull(ukid), "UK ID may not be null or empty");
     }
 
@@ -47,7 +50,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
      * 
      * @return unique identifier for the data carried by the Item
      */
-    public String getId() {
+    @Nonnull public String getId() {
         return id;
     }
 

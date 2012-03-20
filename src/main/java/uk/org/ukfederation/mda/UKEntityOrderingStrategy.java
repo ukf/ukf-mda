@@ -21,14 +21,18 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
-import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.EntitiesDescriptorAssemblerStage.ItemOrderingStrategy;
 import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 
 /**
  * Implements an ordering strategy for UK federation aggregates.
@@ -65,27 +69,27 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
          * 
          * @param domItem the {@link DomElementItem} to wrap.
          */
-        public OrderableItem(DomElementItem domItem) {
+        public OrderableItem(@Nonnull DomElementItem domItem) {
             item = domItem;
 
-            Element docElement = domItem.unwrap();
+            final Element docElement = domItem.unwrap();
             if (SamlMetadataSupport.isEntitiesDescriptor(docElement)) {
                 // EntitiesDescriptors come before everything else
                 fields[0] = "yes";
                 
                 // Named EntitiesDescriptors come before unnamed, in order of name
-                Attr nameAttr = docElement.getAttributeNode("Name");
+                final Attr nameAttr = docElement.getAttributeNode("Name");
                 if (nameAttr != null) {
                     fields[1] = nameAttr.getTextContent();
                 }
             }
             
-            List<UKId> ukids = item.getItemMetadata().get(UKId.class);
+            final List<UKId> ukids = item.getItemMetadata().get(UKId.class);
             if (ukids.size() != 0) {
                 fields[2] = ukids.get(0).getId();
             }
 
-            List<ItemId> itemids = item.getItemMetadata().get(ItemId.class);
+            final List<ItemId> itemids = item.getItemMetadata().get(ItemId.class);
             if (itemids.size() != 0) {
                 fields[3] = itemids.get(0).getId();
             }
@@ -98,7 +102,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
          * @param sThat value of the field in the other object
          * @return comparison value
          */
-        private int compareField(final String sThis, final String sThat) {
+        private int compareField(@Nullable final String sThis, @Nullable final String sThat) {
             if (sThis != null) {
                 if (sThat != null) {
                     // both have this field; direct comparison
@@ -117,7 +121,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         }
         
         /** {@inheritDoc} */
-        public int compareTo(OrderableItem o) {
+        public int compareTo(@Nonnull OrderableItem o) {
             for (int fno = 0; fno < NFIELDS; fno++) {
                 int compared = compareField(fields[fno], o.fields[fno]);
                 if (compared != 0) {
@@ -140,7 +144,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
     }
 
     /** {@inheritDoc} */
-    public List<DomElementItem> order(final Collection<DomElementItem> items) {
+    public List<DomElementItem> order(@Nonnull @NonnullElements final Collection<DomElementItem> items) {
         
         // Construct an orderable list wrapping the original items.
         final List<OrderableItem> orderableList = new ArrayList<OrderableItem>(items.size());

@@ -20,11 +20,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -46,7 +54,7 @@ public class ElementStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @return namespace of the element to strip
      */
-    public String getElementNamespace() {
+    @Nullable public String getElementNamespace() {
         return elementNamespace;
     }
 
@@ -55,8 +63,12 @@ public class ElementStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @param namespace namespace of the element to strip
      */
-    public void setElementNamespace(final String namespace) {
-        elementNamespace = namespace;
+    public void setElementNamespace(@Nonnull @NotEmpty final String namespace) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
+        elementNamespace = Assert.isNotNull(StringSupport.trimOrNull(namespace),
+                "target namespace can not be null or empty");
     }
 
     /**
@@ -64,7 +76,7 @@ public class ElementStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @return the name of the element to strip
      */
-    public String getElementName() {
+    @Nullable public String getElementName() {
         return elementName;
     }
 
@@ -73,12 +85,17 @@ public class ElementStrippingStage extends BaseStage<DomElementItem> {
      * 
      * @param name the name of the element to strip
      */
-    public void setElementName(final String name) {
-        elementName = name;
+    public void setElementName(@Nonnull @NotEmpty final String name) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
+        elementName = Assert.isNotNull(StringSupport.trimOrNull(name),
+                "target element name can not be null or empty");
     }
 
     /** {@inheritDoc} */
-    protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+            throws StageProcessingException {
         for (DomElementItem item : items) {
             final Element docElement = item.unwrap();
 
@@ -98,6 +115,14 @@ public class ElementStrippingStage extends BaseStage<DomElementItem> {
                 element.getParentNode().removeChild(element);
             }
         }
+    }
+
+    /** {@inheritDoc} */
+    protected void doDestroy() {
+        elementNamespace = null;
+        elementName = null;
+
+        super.doDestroy();
     }
 
     /** {@inheritDoc} */

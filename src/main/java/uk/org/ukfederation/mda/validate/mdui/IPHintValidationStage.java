@@ -16,8 +16,11 @@
 
 package uk.org.ukfederation.mda.validate.mdui;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.net.IPRange;
 
 import org.w3c.dom.Element;
@@ -49,11 +52,16 @@ public class IPHintValidationStage extends BaseValidationStage {
      * @param check whether to check for network addresses only
      */
     public void setCheckingNetworks(final boolean check) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
         this.checkingNetworks = check;
     }
 
     /** {@inheritDoc} */
-    protected void validateItem(final DomElementItem item, final Element docElement) {
+    protected void validateItem(@Nonnull final DomElementItem item, @Nonnull final Element docElement) {
+        assert item != null;
+        assert docElement != null;
         final NodeList ipHints = docElement.getElementsByTagNameNS(MduiConstants.MDUI_NS, "IPHint");
         for (int index = 0; index < ipHints.getLength(); index++) {
             final Element ipHint = (Element)ipHints.item(index);

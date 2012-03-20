@@ -18,7 +18,9 @@ package uk.org.ukfederation.mda;
 
 import java.util.List;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.FirstItemIdItemIdentificationStrategy;
 import net.shibboleth.metadata.Item;
 
@@ -29,7 +31,8 @@ import net.shibboleth.metadata.Item;
 public class UKItemIdentificationStrategy extends FirstItemIdItemIdentificationStrategy {
 
     /** {@inheritDoc} */
-    public String getItemIdentifier(final Item<?> item) {
+    public String getItemIdentifier(@Nonnull final Item<?> item) {
+        assert item != null;
         final List<UKId> itemIds = item.getItemMetadata().get(UKId.class);
         if (itemIds != null && !itemIds.isEmpty()) {
             return itemIds.get(0).getId();

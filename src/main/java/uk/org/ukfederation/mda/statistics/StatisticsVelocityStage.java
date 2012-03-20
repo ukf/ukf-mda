@@ -22,12 +22,19 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.primitive.StringSupport;
 import net.shibboleth.utilities.java.support.xml.ParserPool;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
@@ -59,7 +66,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
      * 
      * @return pool of DOM parsers used to parse XML to DOM
      */
-    public ParserPool getParserPool() {
+    @Nullable public ParserPool getParserPool() {
         return parserPool;
     }
 
@@ -68,11 +75,11 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
      * 
      * @param pool pool of DOM parsers used to parse XML to DOM
      */
-    public synchronized void setParserPool(final ParserPool pool) {
-        if (isInitialized()) {
-            return;
-        }
-        parserPool = pool;
+    public synchronized void setParserPool(@Nonnull final ParserPool pool) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
+        parserPool = Assert.isNotNull(pool, "parser pool may not be null");
     }
 
     /**
@@ -80,7 +87,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
      * 
      * @return the name of the template to invoke.
      */
-    public String getTemplateName() {
+    @Nullable public String getTemplateName() {
         return templateName;
     }
 
@@ -89,8 +96,12 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
      * 
      * @param name the name of the template to invoke.
      */
-    public synchronized void setTemplateName(final String name) {
-        templateName = name;
+    public synchronized void setTemplateName(@Nonnull @NotEmpty final String name) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
+        templateName = Assert.isNotNull(StringSupport.trimOrNull(name),
+                "template name may not be null or empty");
     }
 
 
@@ -138,13 +149,11 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
         super.doInitialize();
         
         if (parserPool == null) {
-            throw new ComponentInitializationException("Unable to initialize " + getId() +
-                    ", parserPool may not be null");
+            throw new ComponentInitializationException("parser pool may not be null");
         }
 
         if (templateName == null) {
-            throw new ComponentInitializationException("Unable to initialize " + getId() +
-                    ", templateName must be specified");
+            throw new ComponentInitializationException("template name may not be null or empty");
         }
         
     }

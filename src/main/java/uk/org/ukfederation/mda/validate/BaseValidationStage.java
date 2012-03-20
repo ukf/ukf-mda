@@ -18,10 +18,12 @@ package uk.org.ukfederation.mda.validate;
 
 import java.util.Collection;
 
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
-import net.jcip.annotations.ThreadSafe;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DomElementItem;
@@ -29,6 +31,7 @@ import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 
 /** Base class for validation stages. */
 @ThreadSafe
@@ -41,7 +44,8 @@ public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
      * @param element {@link Element} to locate the ancestor Entity of.
      * @return ancestor EntityDescriptor {@link Element}, or null.
      */
-    protected Element ancestorEntity(final Element element) {
+    protected Element ancestorEntity(@Nonnull final Element element) {
+        assert element != null;
         for (Element e = element; e != null; e = (Element) e.getParentNode()) {
             if (SamlMetadataSupport.isEntityDescriptor(e)) {
                 return e;
@@ -59,7 +63,11 @@ public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
      * @param element   {@link Element} the error reflects
      * @param error     error text
      */
-    protected void addError(final DomElementItem item, final Element element, final String error) {
+    protected void addError(@Nonnull final DomElementItem item, @Nonnull final Element element,
+            @Nonnull final String error) {
+        assert item != null;
+        assert element != null;
+        assert error != null;
         final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         String prefix = "";
         if (SamlMetadataSupport.isEntitiesDescriptor(element)) {
@@ -85,7 +93,8 @@ public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
     protected abstract void validateItem(DomElementItem item, Element docElement);
     
     /** {@inheritDoc} */
-    protected void doExecute(final Collection<DomElementItem> items) throws StageProcessingException {
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+            throws StageProcessingException {
         for (DomElementItem item : items) {
             validateItem(item, item.unwrap());
         }

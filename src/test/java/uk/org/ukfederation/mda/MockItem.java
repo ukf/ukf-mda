@@ -57,8 +57,8 @@ public class MockItem extends AbstractItem<String> {
 
     /** {@inheritDoc} */
     public Item<String> copy() {
-        final MockItem clone = new MockItem(new String(unwrap()));
-        ItemMetadataSupport.addToAll(clone, getItemMetadata().values().toArray(new ItemMetadata[] {}));
+        MockItem clone = new MockItem(new String(unwrap()));
+        ItemMetadataSupport.addAll(clone, getItemMetadata().values());
         return clone;
     }
 

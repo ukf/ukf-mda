@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
-import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
 /**
@@ -48,7 +48,7 @@ public class RegexFileFilter implements FileFilter {
      */
     public RegexFileFilter(@Nonnull @NotEmpty final String regex) {
         
-        pattern = Pattern.compile(Assert.isNotNull(StringSupport.trimOrNull(regex),
+        pattern = Pattern.compile(Constraint.isNotNull(StringSupport.trimOrNull(regex),
                 "regex pattern argument may not be null or empty"));
     }
 

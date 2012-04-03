@@ -16,6 +16,8 @@
 
 package uk.org.ukfederation.mda;
 
+import net.shibboleth.utilities.java.support.logic.ConstraintViolationException;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,14 +33,14 @@ public class UKIdTest {
         try {
             new UKId("");
             Assert.fail();
-        } catch (AssertionError e) {
+        } catch (ConstraintViolationException e) {
             // expected this
         }
 
         try {
             new UKId(null);
             Assert.fail();
-        } catch (AssertionError e) {
+        } catch (ConstraintViolationException e) {
             // expected this
         }
     }

@@ -21,7 +21,7 @@ import java.io.StringReader;
 import java.security.Security;
 
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
-import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
 import net.shibboleth.utilities.java.support.xml.BasicParserPool;
 import net.shibboleth.utilities.java.support.xml.ParserPool;
@@ -73,7 +73,7 @@ public abstract class BaseDomTest {
      */
     public Element readXmlData(final String path) throws XMLParserException {
         String trimmedPath = StringSupport.trimOrNull(path);
-        Assert.isNotNull(trimmedPath, "Path may not be null or empty");
+        Constraint.isNotNull(trimmedPath, "Path may not be null or empty");
 
         if (!trimmedPath.startsWith("/")) {
             trimmedPath = "/data/" + trimmedPath;
@@ -98,11 +98,11 @@ public abstract class BaseDomTest {
      * @throws XMLParserException thrown if there is a problem serializing and re-parsing the nodes
      */
     public void assertXmlEqual(final Node expected, final Node actual) throws XMLParserException {
-        Assert.isNotNull(actual, "Actual Node may not be null");
+        Constraint.isNotNull(actual, "Actual Node may not be null");
         String serializedForm = SerializeSupport.nodeToString(expected);
         Element deserializedExpected = parserPool.parse(new StringReader(serializedForm)).getDocumentElement();
 
-        Assert.isNotNull(expected, "Expected Node may not be null");
+        Constraint.isNotNull(expected, "Expected Node may not be null");
         serializedForm = SerializeSupport.nodeToString(actual);
         Element deserializedActual = parserPool.parse(new StringReader(serializedForm)).getDocumentElement();
 

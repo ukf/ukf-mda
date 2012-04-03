@@ -21,7 +21,7 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
-import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
 import com.google.common.base.Objects;
@@ -42,7 +42,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
      * @param ukid The UK federation fragment ID for the entity, never null
      */
     public UKId(@Nonnull @NotEmpty final String ukid) {
-        id = Assert.isNotNull(StringSupport.trimOrNull(ukid), "UK ID may not be null or empty");
+        id = Constraint.isNotNull(StringSupport.trimOrNull(ukid), "UK ID may not be null or empty");
     }
 
     /**

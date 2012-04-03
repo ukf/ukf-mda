@@ -33,7 +33,7 @@ import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
-import net.shibboleth.utilities.java.support.logic.Assert;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
 import net.shibboleth.utilities.java.support.xml.ParserPool;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
@@ -79,7 +79,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
         ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
         ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
 
-        parserPool = Assert.isNotNull(pool, "parser pool may not be null");
+        parserPool = Constraint.isNotNull(pool, "parser pool may not be null");
     }
 
     /**
@@ -100,7 +100,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
         ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
         ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
 
-        templateName = Assert.isNotNull(StringSupport.trimOrNull(name),
+        templateName = Constraint.isNotNull(StringSupport.trimOrNull(name),
                 "template name may not be null or empty");
     }
 

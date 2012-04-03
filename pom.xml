@@ -6,12 +6,12 @@
     <parent>
         <groupId>net.shibboleth</groupId>
         <artifactId>parent</artifactId>
-        <version>TRUNK-SNAPSHOT</version>
+        <version>4</version>
     </parent>
 
     <groupId>uk.org.ukfederation</groupId>
     <artifactId>ukf-mda</artifactId>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>0.7.0</version>
     
     <name>UK federation aggregator beans</name>
     <description>
@@ -30,13 +30,13 @@
         <dependency>
             <groupId>net.shibboleth.metadata</groupId>
             <artifactId>aggregator-pipeline</artifactId>
-            <version>0.7.0-SNAPSHOT</version>
+            <version>0.7.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.shibboleth.utilities</groupId>
             <artifactId>java-support</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>

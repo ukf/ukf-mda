@@ -71,7 +71,7 @@ public class IPHintValidationStage extends BaseValidationStage {
                 if (checkingNetworks) {
                     if (range.getHostAddress() != null) {
                         addError(item, ipHint, "invalid IPHint '" + hint +
-                                ": CIDR notation represents a host, not a network");
+                                "': CIDR notation represents a host, not a network");
                     }
                 }
             } catch (IllegalArgumentException e) {

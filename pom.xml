@@ -20,7 +20,8 @@
     </description>
 
     <properties>
-        <!-- none of our own -->
+        <checkstyle.version>2.10</checkstyle.version>
+        <checkstyle.configLocation>checkstyle.xml</checkstyle.configLocation>
     </properties>
 
     <repositories>
@@ -162,6 +163,18 @@
                 </executions>
             </plugin>
 
+            <!--
+                Checkstyle configuration for checkstyle:* goals called directly
+                from the command line.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <configLocation>${checkstyle.configLocation}</configLocation>
+                </configuration>
+            </plugin>
+
         </plugins>
         
         <pluginManagement>
@@ -196,6 +209,19 @@
         </pluginManagement>
 
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.version}</version>
+                <configuration>
+                    <configLocation>${checkstyle.configLocation}</configLocation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <developers>
         <developer>

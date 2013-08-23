@@ -19,7 +19,14 @@ package uk.org.ukfederation.mda;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.security.Security;
+import java.util.List;
 
+import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
+import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
@@ -109,4 +116,33 @@ public abstract class BaseDomTest {
         org.testng.Assert.assertTrue(deserializedExpected.isEqualNode(deserializedActual),
                 "Actual Node does not equal expected Node");
     }
+
+    protected int countErrors(final DomElementItem item) {
+        final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+        final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
+        return errors.size();
+    }
+    
+    protected void populateIdentifiers(List<DomElementItem> items) throws ComponentInitializationException, StageProcessingException {
+        final EntityDescriptorItemIdPopulationStage stage1 = new EntityDescriptorItemIdPopulationStage();
+        stage1.setId("setid");
+        stage1.initialize();
+        stage1.execute(items);
+    }
+
+    protected void populateUKIdentifiers(List<DomElementItem> items) throws ComponentInitializationException, StageProcessingException {
+        final EntityDescriptorUKIdPopulationStage stage2 = new EntityDescriptorUKIdPopulationStage();
+        stage2.setId("ukid");
+        stage2.initialize();
+        stage2.execute(items);
+    }
+
+    protected void displayErrors(DomElementItem item) {
+        final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+        final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
+        for (ErrorStatus e: errors) {
+            System.out.println("Error seen " + e.getComponentId() + " " + e.getStatusMessage());
+        }
+    }
+    
 }

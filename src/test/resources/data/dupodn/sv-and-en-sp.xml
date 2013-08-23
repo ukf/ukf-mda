@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:EntityDescriptor entityID="https://sp1.example.org/shibboleth"
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi"
+    xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SPSSODescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+        protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+        <Extensions>
+            <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+                <mdui:DisplayName xml:lang="en">Example Organization</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="sv">Example Organization</mdui:DisplayName>
+            </mdui:UIInfo>
+        </Extensions>
+        <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+            Location="https://sp1.example.org/Shibboleth.sso/whatever"/>
+    </SPSSODescriptor>
+    <Organization xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+        <OrganizationName xml:lang="en">STUDENTS</OrganizationName>
+        <OrganizationDisplayName xml:lang="sv">Example Organization</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="en">Example Organization</OrganizationDisplayName>
+        <OrganizationURL xml:lang="en">http://www.bth.se</OrganizationURL>
+    </Organization>
+</md:EntityDescriptor>

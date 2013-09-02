@@ -18,15 +18,15 @@ package uk.org.ukfederation.mda.validate.mdui;
 
 import javax.annotation.concurrent.ThreadSafe;
 
-/** Constants related to the MDUI specification. */
+/** Helper class for dealing with MDUI metadata. */
 @ThreadSafe
-public final class MDUIConstants {
+public final class MDUISupport {
 
     /** MDUI namespace. */
     public static final String MDUI_NS = "urn:oasis:names:tc:SAML:metadata:ui";
 
     /** Constructor. */
-    private MDUIConstants() {
+    private MDUISupport() {
     }
 
 }

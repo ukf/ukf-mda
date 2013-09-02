@@ -17,6 +17,7 @@
 package uk.org.ukfederation.mda.validate.mdrpi;
 
 import javax.annotation.concurrent.ThreadSafe;
+import javax.xml.namespace.QName;
 
 /** Helper class for dealing with MDRPI metadata. */
 @ThreadSafe
@@ -25,6 +26,9 @@ public final class MDRPISupport {
     /** MDRPI namespace. */
     public static final String MDRPI_NS = "urn:oasis:names:tc:SAML:metadata:rpi";
 
+    /** mdrpi:RegistrationInfo element. */
+    public static final QName MDRPI_REGISTRATION_INFO = new QName(MDRPI_NS, "RegistrationInfo");
+    
     /** Constructor. */
     private MDRPISupport() {
     }

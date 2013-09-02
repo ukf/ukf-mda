@@ -62,7 +62,7 @@ public class IPHintValidationStage extends BaseValidationStage {
     protected void validateItem(@Nonnull final DomElementItem item, @Nonnull final Element docElement) {
         assert item != null;
         assert docElement != null;
-        final NodeList ipHints = docElement.getElementsByTagNameNS(MduiConstants.MDUI_NS, "IPHint");
+        final NodeList ipHints = docElement.getElementsByTagNameNS(MDUIConstants.MDUI_NS, "IPHint");
         for (int index = 0; index < ipHints.getLength(); index++) {
             final Element ipHint = (Element)ipHints.item(index);
             final String hint = ipHint.getTextContent();

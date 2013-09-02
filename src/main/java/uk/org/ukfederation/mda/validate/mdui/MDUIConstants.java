@@ -20,13 +20,13 @@ import javax.annotation.concurrent.ThreadSafe;
 
 /** Constants related to the MDUI specification. */
 @ThreadSafe
-public final class MduiConstants {
+public final class MDUIConstants {
 
     /** MDUI namespace. */
     public static final String MDUI_NS = "urn:oasis:names:tc:SAML:metadata:ui";
 
     /** Constructor. */
-    private MduiConstants() {
+    private MDUIConstants() {
     }
 
 }

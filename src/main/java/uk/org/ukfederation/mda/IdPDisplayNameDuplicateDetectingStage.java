@@ -42,7 +42,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import uk.org.ukfederation.mda.validate.mdui.MduiConstants;
+import uk.org.ukfederation.mda.validate.mdui.MDUIConstants;
 
 /**
  * A stage which, for each <code>EntityDescriptor</code> collection element representing an identity provider,
@@ -56,7 +56,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DomElementI
     private static final QName MD_IDP_SSO_DESCRIPTOR = new QName(SamlMetadataSupport.MD_NS, "IDPSSODescriptor");
     
     /** {@link QName} representing an <code>mdui:DisplayName</code>. */
-    private static final QName MDUI_DISPLAY_NAME = new QName(MduiConstants.MDUI_NS, "DisplayName");
+    private static final QName MDUI_DISPLAY_NAME = new QName(MDUIConstants.MDUI_NS, "DisplayName");
     
     /** {@link QName} representing a SAML metadata <code>OrganizationDisplayName</code>. */
     private static final QName MD_ORG_DISPLAY_NAME = new QName(SamlMetadataSupport.MD_NS, "OrganizationDisplayName");

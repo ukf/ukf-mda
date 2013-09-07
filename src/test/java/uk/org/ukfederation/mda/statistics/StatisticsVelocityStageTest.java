@@ -43,7 +43,7 @@ public class StatisticsVelocityStageTest extends BaseDomTest {
         stage.setParserPool(parserPool);
         stage.initialize();
 
-        final Collection<DomElementItem> items = new ArrayList<DomElementItem>();
+        final Collection<DomElementItem> items = new ArrayList<>();
         stage.execute(items);
         Assert.assertEquals(items.size(), 1);
         final Element e = items.iterator().next().unwrap();

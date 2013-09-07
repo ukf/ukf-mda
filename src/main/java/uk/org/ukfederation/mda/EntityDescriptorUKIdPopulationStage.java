@@ -56,7 +56,7 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<DomElementIte
             throws StageProcessingException {
 
         // ID values that we have already seen (they must be unique)
-        final Set<String> ids = new HashSet<String>(items.size());
+        final Set<String> ids = new HashSet<>(items.size());
         
         for (DomElementItem item : items) {
            final Element element = item.unwrap();

@@ -38,7 +38,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
     public void noClashWithSelfODN1() throws Exception {
         final DomElementItem item = makeItem("sv-and-en-1");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
@@ -60,7 +60,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
     public void noClashWithSelfODN2() throws Exception {
         final DomElementItem item = makeItem("sv-and-en-2");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
@@ -78,7 +78,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
         final DomElementItem item2 = makeItem("sv-and-en-2");
         final DomElementItem dup   = makeItem("sv-and-en-sp");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -99,7 +99,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
         final DomElementItem item2 = makeItem("sv-and-en-2");
         final DomElementItem dup   = makeItem("dup-mdui");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -120,7 +120,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
         final DomElementItem item2 = makeItem("sv-and-en-2");
         final DomElementItem dup   = makeItem("dup-odn");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -146,7 +146,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
         final DomElementItem item2 = makeItem("sv-and-en-2");
         final DomElementItem dup   = makeItem("dup-whitespace");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -172,7 +172,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
         final DomElementItem item2 = makeItem("sv-and-en-2");
         final DomElementItem dup   = makeItem("dup-case");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -199,7 +199,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
         final DomElementItem item2 = makeItem("sv-and-en-2");
         final DomElementItem dup   = makeItem("dup-both");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -228,7 +228,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
         final DomElementItem dupB  = makeItem("dup-odn");
         final DomElementItem dupC  = makeItem("dup-both");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dupA);

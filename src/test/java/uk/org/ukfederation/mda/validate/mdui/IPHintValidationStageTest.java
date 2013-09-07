@@ -21,7 +21,7 @@ public class IPHintValidationStageTest extends BaseDomTest {
     public void missingComponent() throws Exception {
         final Element doc = readXmlData("ipHintValidation1.xml");
         final DomElementItem item = new DomElementItem(doc);
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final IPHintValidationStage stage = new IPHintValidationStage();
@@ -42,7 +42,7 @@ public class IPHintValidationStageTest extends BaseDomTest {
     public void hostAddress() throws Exception {
         final Element doc = readXmlData("ipHintValidation2.xml");
         final DomElementItem item = new DomElementItem(doc);
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final IPHintValidationStage stage = new IPHintValidationStage();
@@ -64,7 +64,7 @@ public class IPHintValidationStageTest extends BaseDomTest {
     public void ignoreHostAddress() throws Exception {
         final Element doc = readXmlData("ipHintValidation2.xml");
         final DomElementItem item = new DomElementItem(doc);
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final IPHintValidationStage stage = new IPHintValidationStage();

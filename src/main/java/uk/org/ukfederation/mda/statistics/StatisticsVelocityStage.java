@@ -119,7 +119,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
         final VelocityContext context = new VelocityContext();
         context.put("name", new String("Velocity"));
 
-        final Set<DomElementItem> entities = new HashSet<DomElementItem>(collection.size());
+        final Set<DomElementItem> entities = new HashSet<>(collection.size());
         
         for (DomElementItem item : collection) {
             if (SamlMetadataSupport.isEntityDescriptor(item.unwrap())) {

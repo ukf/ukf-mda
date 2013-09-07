@@ -66,7 +66,7 @@ public class UKEntityOrderingStrategyTest extends BaseDomTest {
         // nothing at all on i5
         
         // Make a collection containing those items in an arbitrary order
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(i4);
         items.add(i3);
         items.add(i1);

@@ -32,7 +32,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
     }
     
     private void performExtractions(DomElementItem item) throws Exception {
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage1 = new RegistrationAuthorityPopulationStage();
@@ -107,7 +107,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
     @Test
     public void ignoredAuthority() throws Exception {
         final UKItemIdentificationStrategy strat = makeStrat();
-        final Set<String> auths = new HashSet<String>();
+        final Set<String> auths = new HashSet<>();
         auths.add("http://ukfederation.org.uk");
         strat.setIgnoredAuthorities(auths);
         
@@ -125,7 +125,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
     @Test
     public void mappedAuthority() throws Exception {
         final UKItemIdentificationStrategy strat = makeStrat();
-        final Map<String, String> nameMap = new HashMap<String, String>();
+        final Map<String, String> nameMap = new HashMap<>();
         nameMap.put("http://ukfederation.org.uk", "UKf");
         strat.setDisplayNames(nameMap);
         

@@ -123,7 +123,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DomElementI
      */
     @Nonnull private Set<String> extractDisplayNames(@Nonnull final Element element) {
         assert element != null;
-        final Set<String> displayNames = new HashSet<String>();
+        final Set<String> displayNames = new HashSet<>();
         collectNames(element, MDUI_DISPLAY_NAME, displayNames);
         collectNames(element, MD_ORG_DISPLAY_NAME, displayNames);
         return displayNames;
@@ -166,12 +166,12 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DomElementI
         /*
          * Record of the items corresponding to the first entity seen with each display name.
          */
-        final Map<String, DomElementItem> ids = new HashMap<String, DomElementItem>(items.size());
+        final Map<String, DomElementItem> ids = new HashMap<>(items.size());
         
         /*
          * Remember which entities we have already marked with errors.
          */
-        final Set<DomElementItem> markedItems = new HashSet<DomElementItem>();
+        final Set<DomElementItem> markedItems = new HashSet<>();
         
         /*
          * How we turn items into names for display.

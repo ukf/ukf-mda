@@ -36,7 +36,7 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
     public void populatePresent() throws Exception {
         final DomElementItem item = makeItem("present");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();
@@ -57,7 +57,7 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
     public void populateAbsent() throws Exception  {
         final DomElementItem item = makeItem("absent");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();
@@ -76,7 +76,7 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
     public void populateNoExtensions() throws Exception  {
         final DomElementItem item = makeItem("noext");
         
-        final List<DomElementItem> items = new ArrayList<DomElementItem>();
+        final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();

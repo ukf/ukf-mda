@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.7.4 ##
+
+* Move to Java 7.
+
 ## Version 0.7.3 ##
 
 * Implemented a `RegistrationAuthority` item metadata object, wrapping a `String` representing the `registrationAuthority` attribute of the `mdrpi:RegistrationInfo` element from the MDRPI specification.

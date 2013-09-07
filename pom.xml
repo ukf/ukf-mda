@@ -11,7 +11,7 @@
 
     <groupId>uk.org.ukfederation</groupId>
     <artifactId>ukf-mda</artifactId>
-    <version>0.7.3</version>
+    <version>0.7.4-SNAPSHOT</version>
     
     <name>UK federation aggregator beans</name>
     <description>

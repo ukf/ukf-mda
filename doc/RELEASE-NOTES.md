@@ -2,7 +2,7 @@
 
 ## Version 0.7.4 ##
 
-* Move to Java 7.
+* Move to Java 7.  Take advantage of Java 7 type inference.
 
 ## Version 0.7.3 ##
 

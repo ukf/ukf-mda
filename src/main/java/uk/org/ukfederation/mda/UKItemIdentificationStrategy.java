@@ -16,6 +16,7 @@
 
 package uk.org.ukfederation.mda;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class UKItemIdentificationStrategy extends FirstItemIdItemIdentificationS
      * 
      * @return {@link Set} of authority names.
      */
-    @Nonnull public Set<String> getIgnoredAuthorities() {
+    @Nonnull public Collection<String> getIgnoredAuthorities() {
         return ignoredAuthorities;
     }
 
@@ -71,7 +72,7 @@ public class UKItemIdentificationStrategy extends FirstItemIdItemIdentificationS
      * 
      * @param authorities {@link Set} of authority names to ignore.
      */
-    public void setIgnoredAuthorities(@Nullable final Set<String> authorities) {
+    public void setIgnoredAuthorities(@Nullable final Collection<String> authorities) {
         if (authorities == null || authorities.isEmpty()) {
             ignoredAuthorities = Collections.emptySet();
         } else {

@@ -4,6 +4,7 @@
 
 * Move to Java 7.  Take advantage of Java 7 type inference.
 * Introduce an initial DOM visitor framework on which to base new types of stage.
+* \[Issue #1\]: Use `Collection` instead of `Set` in API for ignored registrars in UK naming strategy.
 
 ## Version 0.7.3 ##
 

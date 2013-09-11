@@ -3,6 +3,7 @@
 ## Version 0.7.4 ##
 
 * Move to Java 7.  Take advantage of Java 7 type inference.
+* Introduce an initial DOM visitor framework on which to base new types of stage.
 
 ## Version 0.7.3 ##
 

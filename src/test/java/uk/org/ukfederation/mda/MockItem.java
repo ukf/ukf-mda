@@ -20,8 +20,8 @@ package uk.org.ukfederation.mda;
 import net.shibboleth.metadata.AbstractItem;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
 import net.shibboleth.metadata.util.ItemMetadataSupport;
+import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 
 import com.google.common.base.Objects;
 

@@ -14,7 +14,7 @@ import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
-import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;

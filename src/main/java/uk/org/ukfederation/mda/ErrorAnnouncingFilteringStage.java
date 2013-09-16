@@ -29,8 +29,8 @@ import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.WarningStatus;
 import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.pipeline.BaseStage;
-import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 
 import org.slf4j.Logger;

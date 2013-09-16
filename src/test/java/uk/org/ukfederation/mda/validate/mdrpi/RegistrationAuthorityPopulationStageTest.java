@@ -7,7 +7,7 @@ import java.util.List;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 

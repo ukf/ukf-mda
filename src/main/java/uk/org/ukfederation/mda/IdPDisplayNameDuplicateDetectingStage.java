@@ -33,8 +33,8 @@ import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.metadata.util.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

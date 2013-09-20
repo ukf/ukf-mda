@@ -18,7 +18,7 @@ package uk.org.ukfederation.mda.dom;
 
 /**
  * Stage to trim leading and trailing whitespace from the text content of named elements
- * within a {@link DomElementItem}.
+ * within a {@link net.shibboleth.metadata.dom.DomElementItem}.
  */
 public class ElementWhitespaceTrimmingStage extends AbstractElementVisitingStage {
 

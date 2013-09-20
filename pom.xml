@@ -18,9 +18,9 @@
         Collection of beans supporting metadata aggregation for the UK federation,
         based on the Shibboleth metadata aggregator framework.
     </description>
+    <url>https://github.com/ukf/ukf-mda</url>
 
     <properties>
-        <checkstyle.version>2.10</checkstyle.version>
         <checkstyle.configLocation>checkstyle.xml</checkstyle.configLocation>
     </properties>
 
@@ -222,6 +222,12 @@
         </plugins>
     </reporting>
 
+    <scm>
+        <connection>scm:git:https://github.com/ukf/ukf-mda.git</connection>
+        <developerConnection>scm:git:ssh:git@github.com:ukf/ukf-mda.git</developerConnection>
+        <url>https://github.com/ukf/ukf-mda</url>
+    </scm>
+    
     <developers>
         <developer>
             <id>iay</id>

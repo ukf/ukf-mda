@@ -153,11 +153,7 @@ public abstract class BaseDomTest {
         Constraint.isNotNull(trimmedPath, "Path may not be null or empty");
 
         if (!trimmedPath.startsWith("/")) {
-            if (testingClass != null) {
-                trimmedPath = classRelativeResource(trimmedPath);
-            } else {
-                trimmedPath = "/data/" + trimmedPath;
-            }
+            trimmedPath = classRelativeResource(trimmedPath);
         }
 
         final InputStream input = BaseDomTest.class.getResourceAsStream(trimmedPath);

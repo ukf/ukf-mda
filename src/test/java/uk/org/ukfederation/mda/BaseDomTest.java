@@ -140,7 +140,7 @@ public abstract class BaseDomTest {
 
     /**
      * Reads in an XML file, parses it, and returns the document element. If the given path is relative (i.e., does not
-     * start with a '/') it is assumed to be relative to /data.
+     * start with a '/') it is assumed to be relative to the class, or to /data if the class has not been set.
      * 
      * @param path classpath path to the data file, never null
      * 

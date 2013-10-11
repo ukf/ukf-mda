@@ -5,7 +5,8 @@
 * Move to Java 7.  Take advantage of Java 7 type inference.
 * Introduce an initial DOM visitor framework on which to base new types of stage.
 * \[Issue #1\]: Use `Collection` instead of `Set` in API for ignored registrars in UK naming strategy.
-* \[Isssue #4\]: implement `ElementWhitespaceTrimmingStage`.
+* \[Issue #4\]: implement `ElementWhitespaceTrimmingStage`.
+* \[Issue #6\]: reorganize test data.
 
 ## Version 0.7.3 ##
 

@@ -18,6 +18,7 @@ import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -25,6 +26,11 @@ import uk.org.ukfederation.mda.validate.mdrpi.RegistrationAuthorityPopulationSta
 
 public class UKItemIdentificationStrategyTest extends BaseDomTest {
 
+    @BeforeClass
+    private void init() {
+        setTestingClass(UKItemIdentificationStrategy.class);
+    }
+    
     private UKItemIdentificationStrategy makeStrat() {
         final UKItemIdentificationStrategy strat = new UKItemIdentificationStrategy();
         strat.setNoItemIdIdentifier("mu");
@@ -52,8 +58,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
     }
     
     private DomElementItem makeItem(final String which) throws XMLParserException {
-        final String fileName = "ukidstrat/" + which + ".xml";
-        final Element doc = readXmlData(fileName);
+        final Element doc = readXmlData(classRelativeResource(which + ".xml"));
         return new DomElementItem(doc);
     }
     

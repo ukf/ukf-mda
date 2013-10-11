@@ -22,6 +22,7 @@ import java.util.Collection;
 import net.shibboleth.metadata.dom.DomElementItem;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -29,6 +30,11 @@ import uk.org.ukfederation.mda.BaseDomTest;
 
 /** Unit tests for the StatisticsVelocityStage class. */
 public class StatisticsVelocityStageTest extends BaseDomTest {
+
+    @BeforeClass
+    private void init() {
+        setTestingClass(StatisticsVelocityStage.class);
+    }
 
     /**
      * Simple "hello, world" test.
@@ -39,7 +45,7 @@ public class StatisticsVelocityStageTest extends BaseDomTest {
     public void testHello() throws Exception {
         final StatisticsVelocityStage stage = new StatisticsVelocityStage();
         stage.setId("test");
-        stage.setTemplateName("/templates/hello.vm");
+        stage.setTemplateName(classRelativeResource("hello.vm"));
         stage.setParserPool(parserPool);
         stage.initialize();
 

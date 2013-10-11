@@ -12,12 +12,18 @@ import net.shibboleth.utilities.java.support.component.ComponentInitializationEx
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
 import uk.org.ukfederation.mda.BaseDomTest;
 
 public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
+
+    @BeforeClass
+    private void init() {
+        setTestingClass(RegistrationAuthorityPopulationStage.class);
+    }
 
     private RegistrationAuthorityPopulationStage makeStage() throws ComponentInitializationException {
         final RegistrationAuthorityPopulationStage stage = new RegistrationAuthorityPopulationStage();
@@ -27,8 +33,7 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
     }
     
     private DomElementItem makeItem(final String which) throws XMLParserException {
-        final String fileName = "regpop/" + which + ".xml";
-        final Element doc = readXmlData(fileName);
+        final Element doc = readXmlData(classRelativeResource(which + ".xml"));
         return new DomElementItem(doc);
     }
     

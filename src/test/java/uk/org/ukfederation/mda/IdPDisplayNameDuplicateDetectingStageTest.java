@@ -11,10 +11,16 @@ import net.shibboleth.utilities.java.support.component.ComponentInitializationEx
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
 public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
+
+    @BeforeClass
+    private void init() {
+        setTestingClass(IdPDisplayNameDuplicateDetectingStage.class);
+    }
 
     private IdPDisplayNameDuplicateDetectingStage makeStage() throws ComponentInitializationException {
         final IdPDisplayNameDuplicateDetectingStage stage = new IdPDisplayNameDuplicateDetectingStage();
@@ -24,8 +30,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
     }
     
     private DomElementItem makeItem(final String which) throws XMLParserException {
-        final String fileName = "dupodn/" + which + ".xml";
-        final Element doc = readXmlData(fileName);
+        final Element doc = readXmlData(classRelativeResource(which + ".xml"));
         return new DomElementItem(doc);
     }
     

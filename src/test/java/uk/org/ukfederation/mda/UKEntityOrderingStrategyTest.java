@@ -24,11 +24,17 @@ import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
 /** Unit tests for the {@link UKEntityOrderingStrategy} class. */
 public class UKEntityOrderingStrategyTest extends BaseDomTest {
+    
+    @BeforeClass
+    private void init() {
+        setTestingClass(UKEntityOrderingStrategy.class);
+    }
 
     /**
      * Test the ordering strategy.
@@ -42,9 +48,9 @@ public class UKEntityOrderingStrategyTest extends BaseDomTest {
         
         // Create some items in the order they will end up
         
-        final DomElementItem i00 = new DomElementItem(readXmlData("entsDescNamed.xml"));
+        final DomElementItem i00 = new DomElementItem(readXmlData("named.xml"));
         
-        final DomElementItem i01 = new DomElementItem(readXmlData("entsDescUnnamed.xml"));
+        final DomElementItem i01 = new DomElementItem(readXmlData("unnamed.xml"));
         
         final DomElementItem i0 = new DomElementItem(trivialDoc);
         i0.getItemMetadata().put(new UKId("uk000000"));

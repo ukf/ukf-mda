@@ -10,6 +10,7 @@ import net.shibboleth.metadata.dom.DomElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -17,9 +18,14 @@ import uk.org.ukfederation.mda.BaseDomTest;
 
 public class IPHintValidationStageTest extends BaseDomTest {
 
+    @BeforeClass
+    private void init() {
+        setTestingClass(IPHintValidationStage.class);
+    }
+    
     @Test
     public void missingComponent() throws Exception {
-        final Element doc = readXmlData("ipHintValidation1.xml");
+        final Element doc = readXmlData("1.xml");
         final DomElementItem item = new DomElementItem(doc);
         final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
@@ -40,7 +46,7 @@ public class IPHintValidationStageTest extends BaseDomTest {
 
     @Test
     public void hostAddress() throws Exception {
-        final Element doc = readXmlData("ipHintValidation2.xml");
+        final Element doc = readXmlData("2.xml");
         final DomElementItem item = new DomElementItem(doc);
         final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
@@ -62,7 +68,7 @@ public class IPHintValidationStageTest extends BaseDomTest {
 
     @Test
     public void ignoreHostAddress() throws Exception {
-        final Element doc = readXmlData("ipHintValidation2.xml");
+        final Element doc = readXmlData("2.xml");
         final DomElementItem item = new DomElementItem(doc);
         final List<DomElementItem> items = new ArrayList<>();
         items.add(item);

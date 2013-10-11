@@ -13,6 +13,7 @@ import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -21,25 +22,26 @@ import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
 
 public class ElementWhitespaceTrimmingStageTest extends BaseDomTest {
     
+    @BeforeClass
+    private void init() {
+        setTestingClass(ElementWhitespaceTrimmingStage.class);
+    }
+    
     private ElementWhitespaceTrimmingStage makeStage() throws ComponentInitializationException {
         final ElementWhitespaceTrimmingStage stage = new ElementWhitespaceTrimmingStage();
         stage.setId("test");
         return stage; 
     }
     
-    private String relativeFilename(final String which) {
-        return "/uk/org/ukfederation/mda/dom/" + which + ".xml";
-    }
-    
     private DomElementItem makeItem(final String which) throws XMLParserException {
-        final Element doc = readXmlData(relativeFilename(which));
+        final Element doc = readXmlData(classRelativeResource(which));
         return new DomElementItem(doc);
     }
     
     @Test
     public void simpleTest() throws Exception {
-        final DomElementItem item = makeItem("ElementWhitespaceTrimmingStage-1-in");
-        final Element expected = readXmlData(relativeFilename("ElementWhitespaceTrimmingStage-1-out"));
+        final DomElementItem item = makeItem("1-in.xml");
+        final Element expected = readXmlData(classRelativeResource("1-out.xml"));
         
         final List<DomElementItem> items = new ArrayList<>();
         items.add(item);
@@ -59,8 +61,8 @@ public class ElementWhitespaceTrimmingStageTest extends BaseDomTest {
     
     @Test
     public void testSingleton() throws Exception {
-        final DomElementItem item = makeItem("ElementWhitespaceTrimmingStage-2-in");
-        final Element expected = readXmlData(relativeFilename("ElementWhitespaceTrimmingStage-2-out"));
+        final DomElementItem item = makeItem("2-in.xml");
+        final Element expected = readXmlData(classRelativeResource("2-out.xml"));
         
         final List<DomElementItem> items = new ArrayList<>();
         items.add(item);

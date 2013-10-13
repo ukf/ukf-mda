@@ -26,8 +26,8 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
@@ -44,7 +44,7 @@ import com.google.common.base.Strings;
  * the metadata item.
  */
 @ThreadSafe
-public class EntityDescriptorUKIdPopulationStage extends BaseStage<DomElementItem> {
+public class EntityDescriptorUKIdPopulationStage extends BaseStage<DOMElementItem> {
 
     /**
      * Compiled regular expression.
@@ -52,17 +52,17 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<DomElementIte
     private Pattern pattern;
 
     /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DOMElementItem> items)
             throws StageProcessingException {
 
         // ID values that we have already seen (they must be unique)
         final Set<String> ids = new HashSet<>(items.size());
         
-        for (DomElementItem item : items) {
+        for (DOMElementItem item : items) {
            final Element element = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            
-           if (!SamlMetadataSupport.isEntityDescriptor(element)) {
+           if (!SAMLMetadataSupport.isEntityDescriptor(element)) {
                // all items must be EntityDescriptor elements
                metadata.put(new ErrorStatus(getId(), "item was not an EntityDescriptor"));
            } else {

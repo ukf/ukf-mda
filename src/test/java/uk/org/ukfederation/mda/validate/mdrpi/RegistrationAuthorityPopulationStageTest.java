@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
@@ -32,16 +32,16 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
         return stage; 
     }
     
-    private DomElementItem makeItem(final String which) throws XMLParserException {
+    private DOMElementItem makeItem(final String which) throws XMLParserException {
         final Element doc = readXmlData(classRelativeResource(which + ".xml"));
-        return new DomElementItem(doc);
+        return new DOMElementItem(doc);
     }
     
     @Test
     public void populatePresent() throws Exception {
-        final DomElementItem item = makeItem("present");
+        final DOMElementItem item = makeItem("present");
         
-        final List<DomElementItem> items = new ArrayList<>();
+        final List<DOMElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();
@@ -60,9 +60,9 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
     
     @Test
     public void populateAbsent() throws Exception  {
-        final DomElementItem item = makeItem("absent");
+        final DOMElementItem item = makeItem("absent");
         
-        final List<DomElementItem> items = new ArrayList<>();
+        final List<DOMElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();
@@ -79,9 +79,9 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
     
     @Test
     public void populateNoExtensions() throws Exception  {
-        final DomElementItem item = makeItem("noext");
+        final DOMElementItem item = makeItem("noext");
         
-        final List<DomElementItem> items = new ArrayList<>();
+        final List<DOMElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();

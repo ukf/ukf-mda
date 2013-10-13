@@ -19,7 +19,7 @@ package uk.org.ukfederation.mda.statistics;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -49,7 +49,7 @@ public class StatisticsVelocityStageTest extends BaseDomTest {
         stage.setParserPool(parserPool);
         stage.initialize();
 
-        final Collection<DomElementItem> items = new ArrayList<>();
+        final Collection<DOMElementItem> items = new ArrayList<>();
         stage.execute(items);
         Assert.assertEquals(items.size(), 1);
         final Element e = items.iterator().next().unwrap();

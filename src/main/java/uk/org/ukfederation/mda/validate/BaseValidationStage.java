@@ -26,8 +26,8 @@ import org.w3c.dom.Element;
 
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
@@ -35,7 +35,7 @@ import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 
 /** Base class for validation stages. */
 @ThreadSafe
-public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
+public abstract class BaseValidationStage extends BaseStage<DOMElementItem> {
 
     /**
      * Returns the {@link Element} representing the EntityDescriptor which is the
@@ -47,7 +47,7 @@ public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
     protected Element ancestorEntity(@Nonnull final Element element) {
         assert element != null;
         for (Element e = element; e != null; e = (Element) e.getParentNode()) {
-            if (SamlMetadataSupport.isEntityDescriptor(e)) {
+            if (SAMLMetadataSupport.isEntityDescriptor(e)) {
                 return e;
             }
         }
@@ -59,18 +59,18 @@ public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
      * If the item is an EntitiesDescriptor, interpose an identifier for the individual
      * EntityDescriptor.
      * 
-     * @param item      {@link DomElementItem} to add the error to
+     * @param item      {@link DOMElementItem} to add the error to
      * @param element   {@link Element} the error reflects
      * @param error     error text
      */
-    protected void addError(@Nonnull final DomElementItem item, @Nonnull final Element element,
+    protected void addError(@Nonnull final DOMElementItem item, @Nonnull final Element element,
             @Nonnull final String error) {
         assert item != null;
         assert element != null;
         assert error != null;
         final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         String prefix = "";
-        if (SamlMetadataSupport.isEntitiesDescriptor(element)) {
+        if (SAMLMetadataSupport.isEntitiesDescriptor(element)) {
             final Element entity = ancestorEntity(element);
             final Attr id = entity.getAttributeNode("ID");
             if (id != null) {
@@ -86,16 +86,16 @@ public abstract class BaseValidationStage extends BaseStage<DomElementItem> {
     }
     
     /**
-     * Validate an individual {@link DomElementItem}.
-     * @param item the {@link DomElementItem} to validate.
+     * Validate an individual {@link DOMElementItem}.
+     * @param item the {@link DOMElementItem} to validate.
      * @param docElement the unwrapped document {@link Element}.
      */
-    protected abstract void validateItem(DomElementItem item, Element docElement);
+    protected abstract void validateItem(DOMElementItem item, Element docElement);
     
     /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DOMElementItem> items)
             throws StageProcessingException {
-        for (DomElementItem item : items) {
+        for (DOMElementItem item : items) {
             validateItem(item, item.unwrap());
         }
     }

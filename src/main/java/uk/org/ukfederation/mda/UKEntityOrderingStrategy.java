@@ -29,9 +29,9 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
 import net.shibboleth.metadata.ItemId;
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntitiesDescriptorAssemblerStage.ItemOrderingStrategy;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 
 /**
@@ -50,7 +50,7 @@ import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElemen
 public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
     
     /**
-     * Helper class which wraps a {@link DomElementItem} but extracts any
+     * Helper class which wraps a {@link DOMElementItem} but extracts any
      * associated {@link UKId} and {@link ItemId} for simpler comparisons.
      */
     private static class OrderableItem implements Comparable<OrderableItem> {
@@ -58,8 +58,8 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         /** Number of fields we are capable of comparing. */
         private static final int NFIELDS = 4;
         
-        /** The wrapped {@link DomElementItem}. */
-        private final DomElementItem item;
+        /** The wrapped {@link DOMElementItem}. */
+        private final DOMElementItem item;
         
         /** Array of field values. */
         private final String[] fields = new String[NFIELDS];
@@ -67,13 +67,13 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         /**
          * Constructor.
          * 
-         * @param domItem the {@link DomElementItem} to wrap.
+         * @param domItem the {@link DOMElementItem} to wrap.
          */
-        public OrderableItem(@Nonnull DomElementItem domItem) {
+        public OrderableItem(@Nonnull DOMElementItem domItem) {
             item = domItem;
 
             final Element docElement = domItem.unwrap();
-            if (SamlMetadataSupport.isEntitiesDescriptor(docElement)) {
+            if (SAMLMetadataSupport.isEntitiesDescriptor(docElement)) {
                 // EntitiesDescriptors come before everything else
                 fields[0] = "yes";
                 
@@ -134,21 +134,21 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         }
         
         /**
-         * Unwrap the wrapped {@link DomElementItem}.
+         * Unwrap the wrapped {@link DOMElementItem}.
          * 
-         * @return the wrapped {@link DomElementItem}.
+         * @return the wrapped {@link DOMElementItem}.
          */
-        public DomElementItem unwrap() {
+        public DOMElementItem unwrap() {
             return item;
         }
     }
 
     /** {@inheritDoc} */
-    public List<DomElementItem> order(@Nonnull @NonnullElements final Collection<DomElementItem> items) {
+    public List<DOMElementItem> order(@Nonnull @NonnullElements final Collection<DOMElementItem> items) {
         
         // Construct an orderable list wrapping the original items.
         final List<OrderableItem> orderableList = new ArrayList<>(items.size());
-        for (DomElementItem item : items) {
+        for (DOMElementItem item : items) {
             orderableList.add(new OrderableItem(item));
         }
         
@@ -156,7 +156,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         Collections.sort(orderableList);
         
         // extract the result into a new collection
-        final List<DomElementItem> results = new ArrayList<>(items.size());
+        final List<DOMElementItem> results = new ArrayList<>(items.size());
         for (OrderableItem result : orderableList) {
             results.add(result.unwrap());
         }

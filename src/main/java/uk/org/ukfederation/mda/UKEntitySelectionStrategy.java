@@ -21,14 +21,14 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import com.google.common.base.Predicate;
 
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 
 /** An implementation of {@link Predicate} that selects entities with {@link UKId}s. */
 @ThreadSafe
-public class UKEntitySelectionStrategy implements Predicate<DomElementItem> {
+public class UKEntitySelectionStrategy implements Predicate<DOMElementItem> {
 
     /** {@inheritDoc} */
-    public boolean apply(@Nonnull final DomElementItem item) {
+    public boolean apply(@Nonnull final DOMElementItem item) {
         return item.getItemMetadata().containsKey(UKId.class);
     }
 

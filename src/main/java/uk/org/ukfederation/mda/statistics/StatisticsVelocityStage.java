@@ -26,8 +26,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
-import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
@@ -50,7 +50,7 @@ import org.w3c.dom.Document;
  * of entities.
  */
 @ThreadSafe
-public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
+public class StatisticsVelocityStage extends BaseStage<DOMElementItem> {
 
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(StatisticsVelocityStage.class);
@@ -106,7 +106,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
 
 
     /** {@inheritDoc} */
-    public void doExecute(final Collection<DomElementItem> collection) throws StageProcessingException {
+    public void doExecute(final Collection<DOMElementItem> collection) throws StageProcessingException {
         
         final VelocityEngine ve = new VelocityEngine();
         ve.setProperty("resource.loader", "class");
@@ -119,10 +119,10 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
         final VelocityContext context = new VelocityContext();
         context.put("name", new String("Velocity"));
 
-        final Set<DomElementItem> entities = new HashSet<>(collection.size());
+        final Set<DOMElementItem> entities = new HashSet<>(collection.size());
         
-        for (DomElementItem item : collection) {
-            if (SamlMetadataSupport.isEntityDescriptor(item.unwrap())) {
+        for (DOMElementItem item : collection) {
+            if (SAMLMetadataSupport.isEntityDescriptor(item.unwrap())) {
                 entities.add(item);
             }
         }
@@ -137,7 +137,7 @@ public class StatisticsVelocityStage extends BaseStage<DomElementItem> {
         try {
             final Document doc = parserPool.parse(new StringReader(w.toString()));
             collection.clear();
-            collection.add(new DomElementItem(doc));
+            collection.add(new DOMElementItem(doc));
         } catch (XMLParserException e) {
             throw new StageProcessingException("could not parse template output", e);
         }

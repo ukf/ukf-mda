@@ -12,7 +12,7 @@ import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
@@ -37,8 +37,8 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
         return strat;
     }
     
-    private void performExtractions(DomElementItem item) throws Exception {
-        final List<DomElementItem> items = new ArrayList<>();
+    private void performExtractions(DOMElementItem item) throws Exception {
+        final List<DOMElementItem> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage1 = new RegistrationAuthorityPopulationStage();
@@ -57,9 +57,9 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
         stage3.execute(items);   
     }
     
-    private DomElementItem makeItem(final String which) throws XMLParserException {
+    private DOMElementItem makeItem(final String which) throws XMLParserException {
         final Element doc = readXmlData(classRelativeResource(which + ".xml"));
-        return new DomElementItem(doc);
+        return new DOMElementItem(doc);
     }
     
     @Test
@@ -84,7 +84,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
     @Test
     public void withRegistrationAuthority() throws Exception {
         final UKItemIdentificationStrategy strat = makeStrat();
-        final DomElementItem item = makeItem("present");
+        final DOMElementItem item = makeItem("present");
 
         performExtractions(item);
         
@@ -98,7 +98,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
     @Test
     public void withoutRegistrationAuthority() throws Exception {
         final UKItemIdentificationStrategy strat = makeStrat();
-        final DomElementItem item = makeItem("absent");
+        final DOMElementItem item = makeItem("absent");
 
         performExtractions(item);
         
@@ -116,7 +116,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
         auths.add("http://ukfederation.org.uk");
         strat.setIgnoredAuthorities(auths);
         
-        final DomElementItem item = makeItem("present");
+        final DOMElementItem item = makeItem("present");
 
         performExtractions(item);
         
@@ -134,7 +134,7 @@ public class UKItemIdentificationStrategyTest extends BaseDomTest {
         nameMap.put("http://ukfederation.org.uk", "UKf");
         strat.setDisplayNames(nameMap);
         
-        final DomElementItem item = makeItem("present");
+        final DOMElementItem item = makeItem("present");
 
         performExtractions(item);
         

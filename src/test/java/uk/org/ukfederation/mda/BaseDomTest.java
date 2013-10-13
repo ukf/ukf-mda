@@ -23,7 +23,7 @@ import java.util.List;
 
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
@@ -187,27 +187,27 @@ public abstract class BaseDomTest {
                 "Actual Node does not equal expected Node");
     }
 
-    protected int countErrors(final DomElementItem item) {
+    protected int countErrors(final DOMElementItem item) {
         final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
         return errors.size();
     }
     
-    protected void populateIdentifiers(List<DomElementItem> items) throws ComponentInitializationException, StageProcessingException {
+    protected void populateIdentifiers(List<DOMElementItem> items) throws ComponentInitializationException, StageProcessingException {
         final EntityDescriptorItemIdPopulationStage stage1 = new EntityDescriptorItemIdPopulationStage();
         stage1.setId("setid");
         stage1.initialize();
         stage1.execute(items);
     }
 
-    protected void populateUKIdentifiers(List<DomElementItem> items) throws ComponentInitializationException, StageProcessingException {
+    protected void populateUKIdentifiers(List<DOMElementItem> items) throws ComponentInitializationException, StageProcessingException {
         final EntityDescriptorUKIdPopulationStage stage2 = new EntityDescriptorUKIdPopulationStage();
         stage2.setId("ukid");
         stage2.initialize();
         stage2.execute(items);
     }
 
-    protected void displayErrors(DomElementItem item) {
+    protected void displayErrors(DOMElementItem item) {
         final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
         for (ErrorStatus e: errors) {

@@ -16,23 +16,23 @@
 
 package uk.org.ukfederation.mda.dom;
 
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 
 import org.w3c.dom.Attr;
 
 /**
  * Provides a variation of the Visitor pattern for performing operations on
- * DOM attributes which are part of {@link DomElementItem} items.
+ * DOM attributes which are part of {@link DOMElementItem} items.
  */
 public interface AttrVisitor {
 
     /**
      * Called on each {@link Attr} visited as part of the processing
-     * of a {@link DomElementItem}.
+     * of a {@link DOMElementItem}.
      * 
      * @param visited the {@link Attr} being visited.
-     * @param item the {@link DomElementItem} which is the context for the visit.
+     * @param item the {@link DOMElementItem} which is the context for the visit.
      */
-    public void visitAttr(Attr visited, DomElementItem item);
+    public void visitAttr(Attr visited, DOMElementItem item);
     
 }

@@ -29,8 +29,8 @@ import javax.xml.namespace.QName;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemIdentificationStrategy;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
@@ -50,16 +50,16 @@ import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
  * any other identity provider entity.
  */
 @ThreadSafe
-public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DomElementItem> {
+public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DOMElementItem> {
 
     /** {@link QName} representing an SAML metadata <code>IDPSSODescriptor</code>. */
-    private static final QName MD_IDP_SSO_DESCRIPTOR = new QName(SamlMetadataSupport.MD_NS, "IDPSSODescriptor");
+    private static final QName MD_IDP_SSO_DESCRIPTOR = new QName(SAMLMetadataSupport.MD_NS, "IDPSSODescriptor");
     
     /** {@link QName} representing an <code>mdui:DisplayName</code>. */
     private static final QName MDUI_DISPLAY_NAME = new QName(MDUISupport.MDUI_NS, "DisplayName");
     
     /** {@link QName} representing a SAML metadata <code>OrganizationDisplayName</code>. */
-    private static final QName MD_ORG_DISPLAY_NAME = new QName(SamlMetadataSupport.MD_NS, "OrganizationDisplayName");
+    private static final QName MD_ORG_DISPLAY_NAME = new QName(SAMLMetadataSupport.MD_NS, "OrganizationDisplayName");
     
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(IdPDisplayNameDuplicateDetectingStage.class);
@@ -160,36 +160,36 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DomElementI
     }
     
     /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DOMElementItem> items)
             throws StageProcessingException {
 
         /*
          * Record of the items corresponding to the first entity seen with each display name.
          */
-        final Map<String, DomElementItem> ids = new HashMap<>(items.size());
+        final Map<String, DOMElementItem> ids = new HashMap<>(items.size());
         
         /*
          * Remember which entities we have already marked with errors.
          */
-        final Set<DomElementItem> markedItems = new HashSet<>();
+        final Set<DOMElementItem> markedItems = new HashSet<>();
         
         /*
          * How we turn items into names for display.
          */
         final ItemIdentificationStrategy idStrategy = new UKItemIdentificationStrategy();
         
-        for (DomElementItem item : items) {
+        for (DOMElementItem item : items) {
            final Element entity = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            
-           if (!SamlMetadataSupport.isEntityDescriptor(entity)) {
+           if (!SAMLMetadataSupport.isEntityDescriptor(entity)) {
                // all items must be EntityDescriptor elements
                metadata.put(new ErrorStatus(getId(), "item was not an EntityDescriptor"));
            } else if (isIdentityProvider(entity)) {
                final Set<String> displayNames = extractDisplayNames(entity);
                for (String name: displayNames) {
                    final String key = name.toLowerCase();
-                   final DomElementItem that = ids.get(key);
+                   final DOMElementItem that = ids.get(key);
                    if (that == null) {
                        // all is well
                        ids.put(key, item);

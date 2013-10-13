@@ -23,8 +23,8 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
@@ -40,22 +40,22 @@ import com.google.common.base.Strings;
  * the entity's registration authority, to the item metadata.
  */
 @ThreadSafe
-public class RegistrationAuthorityPopulationStage extends BaseStage<DomElementItem> {
+public class RegistrationAuthorityPopulationStage extends BaseStage<DOMElementItem> {
 
     /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<DomElementItem> items)
+    protected void doExecute(@Nonnull @NonnullElements final Collection<DOMElementItem> items)
             throws StageProcessingException {
 
-        for (DomElementItem item : items) {
+        for (DOMElementItem item : items) {
            final Element entity = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            
-           if (!SamlMetadataSupport.isEntityDescriptor(entity)) {
+           if (!SAMLMetadataSupport.isEntityDescriptor(entity)) {
                // all items must be EntityDescriptor elements
                metadata.put(new ErrorStatus(getId(), "item was not an EntityDescriptor"));
            } else {
                // Extract mdrpi:RegistrationInfo if present.
-               final Element regInfo = SamlMetadataSupport.getDescriptorExtensions(entity,
+               final Element regInfo = SAMLMetadataSupport.getDescriptorExtensions(entity,
                        MDRPISupport.MDRPI_REGISTRATION_INFO);
                if (regInfo != null) {
                    // Extract registrationAuthority

@@ -3,8 +3,8 @@ package uk.org.ukfederation.mda.dom;
 
 import javax.xml.parsers.DocumentBuilder;
 
-import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.utilities.java.support.xml.ElementSupport;
 import net.shibboleth.utilities.java.support.xml.ParserPool;
 
@@ -18,19 +18,19 @@ import uk.org.ukfederation.mda.BaseDomTest;
 
 public class WhitespaceTrimmingVisitorTest extends BaseDomTest {
     
-    private DomElementItem makeItem() throws Exception {
+    private DOMElementItem makeItem() throws Exception {
         final ParserPool parserPool = getParserPool();
         final DocumentBuilder builder = parserPool.getBuilder();
         final Document document = builder.newDocument();
         final Element element = ElementSupport.constructElement(document,
-                SamlMetadataSupport.ENTITY_DESCRIPTOR_NAME);
+                SAMLMetadataSupport.ENTITY_DESCRIPTOR_NAME);
         ElementSupport.setDocumentElement(document, element);
-        return new DomElementItem(element);
+        return new DOMElementItem(element);
     }
     
     @Test
     public void visitAttr() throws Exception {
-        final DomElementItem item = makeItem();
+        final DOMElementItem item = makeItem();
         final Document doc = item.unwrap().getOwnerDocument();
         final Attr attr = doc.createAttribute("foo");
         attr.setTextContent("   trimmed   \n\n   \t   ");
@@ -41,7 +41,7 @@ public class WhitespaceTrimmingVisitorTest extends BaseDomTest {
 
     @Test
     public void visitElement() throws Exception {
-        final DomElementItem item = makeItem();
+        final DOMElementItem item = makeItem();
         final Document doc = item.unwrap().getOwnerDocument();
         final Element e = doc.createElement("foo");
         e.setTextContent("   trimmed   \n\n   \t   ");
@@ -52,7 +52,7 @@ public class WhitespaceTrimmingVisitorTest extends BaseDomTest {
 
     @Test
     public void visitNode() throws Exception {
-        final DomElementItem item = makeItem();
+        final DOMElementItem item = makeItem();
         final Document doc = item.unwrap().getOwnerDocument();
         final Attr attr = doc.createAttribute("foo");
         attr.setTextContent("   trimmed   \n\n   \t   ");

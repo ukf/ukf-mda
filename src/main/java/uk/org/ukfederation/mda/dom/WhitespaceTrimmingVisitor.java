@@ -18,7 +18,7 @@ package uk.org.ukfederation.mda.dom;
 
 import javax.annotation.Nonnull;
 
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
@@ -31,7 +31,7 @@ import org.w3c.dom.Node;
 class WhitespaceTrimmingVisitor implements NodeVisitor, ElementVisitor, AttrVisitor {
 
     /** {@inheritDoc} */
-    public void visitNode(@Nonnull final Node visited, @Nonnull final DomElementItem item) {
+    public void visitNode(@Nonnull final Node visited, @Nonnull final DOMElementItem item) {
         assert visited != null;
         assert item != null;
         final String originalText = visited.getTextContent();
@@ -40,12 +40,12 @@ class WhitespaceTrimmingVisitor implements NodeVisitor, ElementVisitor, AttrVisi
     }
 
     /** {@inheritDoc} */
-    public void visitElement(@Nonnull final Element visited, @Nonnull final DomElementItem item) {
+    public void visitElement(@Nonnull final Element visited, @Nonnull final DOMElementItem item) {
         visitNode(visited, item);
     }
     
     /** {@inheritDoc} */
-    public void visitAttr(@Nonnull final Attr visited, @Nonnull final DomElementItem item) {
+    public void visitAttr(@Nonnull final Attr visited, @Nonnull final DOMElementItem item) {
         visitNode(visited, item);
     }
     

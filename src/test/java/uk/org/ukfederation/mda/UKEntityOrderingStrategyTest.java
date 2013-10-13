@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.shibboleth.metadata.ItemId;
-import net.shibboleth.metadata.dom.DomElementItem;
+import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
@@ -48,31 +48,31 @@ public class UKEntityOrderingStrategyTest extends BaseDomTest {
         
         // Create some items in the order they will end up
         
-        final DomElementItem i00 = new DomElementItem(readXmlData("named.xml"));
+        final DOMElementItem i00 = new DOMElementItem(readXmlData("named.xml"));
         
-        final DomElementItem i01 = new DomElementItem(readXmlData("unnamed.xml"));
+        final DOMElementItem i01 = new DOMElementItem(readXmlData("unnamed.xml"));
         
-        final DomElementItem i0 = new DomElementItem(trivialDoc);
+        final DOMElementItem i0 = new DOMElementItem(trivialDoc);
         i0.getItemMetadata().put(new UKId("uk000000"));
         
-        final DomElementItem i1 = new DomElementItem(trivialDoc);
+        final DOMElementItem i1 = new DOMElementItem(trivialDoc);
         i1.getItemMetadata().put(new UKId("uk000005"));
         i1.getItemMetadata().put(new ItemId("this has no effect"));
         
-        final DomElementItem i2 = new DomElementItem(trivialDoc);
+        final DOMElementItem i2 = new DOMElementItem(trivialDoc);
         i2.getItemMetadata().put(new UKId("uk123456"));
         
-        final DomElementItem i3 = new DomElementItem(trivialDoc);
+        final DOMElementItem i3 = new DOMElementItem(trivialDoc);
         i3.getItemMetadata().put(new ItemId("https://example.com/path0"));
         
-        final DomElementItem i4 = new DomElementItem(trivialDoc);
+        final DOMElementItem i4 = new DOMElementItem(trivialDoc);
         i3.getItemMetadata().put(new ItemId("https://example.com/path1"));
         
-        final DomElementItem i5 = new DomElementItem(trivialDoc);
+        final DOMElementItem i5 = new DOMElementItem(trivialDoc);
         // nothing at all on i5
         
         // Make a collection containing those items in an arbitrary order
-        final List<DomElementItem> items = new ArrayList<>();
+        final List<DOMElementItem> items = new ArrayList<>();
         items.add(i4);
         items.add(i3);
         items.add(i1);
@@ -84,7 +84,7 @@ public class UKEntityOrderingStrategyTest extends BaseDomTest {
         
         // Order the collection
         final UKEntityOrderingStrategy strat = new UKEntityOrderingStrategy();
-        final List<DomElementItem>items2 = strat.order(items);
+        final List<DOMElementItem>items2 = strat.order(items);
         
         // Check that everything is in the right place afterwards
         Assert.assertEquals(items2.get(0), i00);

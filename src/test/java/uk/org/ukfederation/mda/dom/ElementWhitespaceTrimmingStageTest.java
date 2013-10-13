@@ -8,8 +8,8 @@ import java.util.Set;
 
 import javax.xml.namespace.QName;
 
-import net.shibboleth.metadata.dom.DomElementItem;
-import net.shibboleth.metadata.dom.saml.SamlMetadataSupport;
+import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
@@ -33,22 +33,22 @@ public class ElementWhitespaceTrimmingStageTest extends BaseDomTest {
         return stage; 
     }
     
-    private DomElementItem makeItem(final String which) throws XMLParserException {
+    private DOMElementItem makeItem(final String which) throws XMLParserException {
         final Element doc = readXmlData(classRelativeResource(which));
-        return new DomElementItem(doc);
+        return new DOMElementItem(doc);
     }
     
     @Test
     public void simpleTest() throws Exception {
-        final DomElementItem item = makeItem("1-in.xml");
+        final DOMElementItem item = makeItem("1-in.xml");
         final Element expected = readXmlData(classRelativeResource("1-out.xml"));
         
-        final List<DomElementItem> items = new ArrayList<>();
+        final List<DOMElementItem> items = new ArrayList<>();
         items.add(item);
         
         final Set<QName> names = new HashSet<>();
         names.add(new QName(MDUISupport.MDUI_NS, "DisplayName"));
-        names.add(new QName(SamlMetadataSupport.MD_NS, "NameIDFormat"));
+        names.add(new QName(SAMLMetadataSupport.MD_NS, "NameIDFormat"));
                 
         final ElementWhitespaceTrimmingStage stage = makeStage();
         stage.setElementNames(names);
@@ -61,14 +61,14 @@ public class ElementWhitespaceTrimmingStageTest extends BaseDomTest {
     
     @Test
     public void testSingleton() throws Exception {
-        final DomElementItem item = makeItem("2-in.xml");
+        final DOMElementItem item = makeItem("2-in.xml");
         final Element expected = readXmlData(classRelativeResource("2-out.xml"));
         
-        final List<DomElementItem> items = new ArrayList<>();
+        final List<DOMElementItem> items = new ArrayList<>();
         items.add(item);
                         
         final ElementWhitespaceTrimmingStage stage = makeStage();
-        stage.setElementName(new QName(SamlMetadataSupport.MD_NS, "NameIDFormat"));
+        stage.setElementName(new QName(SAMLMetadataSupport.MD_NS, "NameIDFormat"));
         stage.initialize();
         
         stage.execute(items);

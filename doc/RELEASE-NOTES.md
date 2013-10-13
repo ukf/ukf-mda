@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.0 ##
+
+* Rebase on Shibboleth MDA version 0.8.0.
+
 ## Version 0.7.4 ##
 
 * Move to Java 7.  Take advantage of Java 7 type inference.

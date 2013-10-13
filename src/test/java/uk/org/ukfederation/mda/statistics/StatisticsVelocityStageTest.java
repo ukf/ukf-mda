@@ -26,10 +26,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
-import uk.org.ukfederation.mda.BaseDomTest;
+import uk.org.ukfederation.mda.BaseDOMTest;
 
 /** Unit tests for the StatisticsVelocityStage class. */
-public class StatisticsVelocityStageTest extends BaseDomTest {
+public class StatisticsVelocityStageTest extends BaseDOMTest {
 
     @BeforeClass
     private void init() {

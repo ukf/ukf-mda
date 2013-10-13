@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 
 import uk.org.ukfederation.mda.validate.mdrpi.RegistrationAuthorityPopulationStage;
 
-public class UKItemIdentificationStrategyTest extends BaseDomTest {
+public class UKItemIdentificationStrategyTest extends BaseDOMTest {
 
     @BeforeClass
     private void init() {

@@ -16,9 +16,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
-import uk.org.ukfederation.mda.BaseDomTest;
+import uk.org.ukfederation.mda.BaseDOMTest;
 
-public class RegistrationAuthorityPopulationStageTest extends BaseDomTest {
+public class RegistrationAuthorityPopulationStageTest extends BaseDOMTest {
 
     @BeforeClass
     private void init() {

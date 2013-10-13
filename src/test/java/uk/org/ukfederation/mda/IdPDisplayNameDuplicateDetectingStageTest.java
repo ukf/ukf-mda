@@ -15,7 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
-public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDomTest {
+public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
 
     @BeforeClass
     private void init() {

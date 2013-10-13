@@ -17,10 +17,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
-import uk.org.ukfederation.mda.BaseDomTest;
+import uk.org.ukfederation.mda.BaseDOMTest;
 import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
 
-public class ElementWhitespaceTrimmingStageTest extends BaseDomTest {
+public class ElementWhitespaceTrimmingStageTest extends BaseDOMTest {
     
     @BeforeClass
     private void init() {

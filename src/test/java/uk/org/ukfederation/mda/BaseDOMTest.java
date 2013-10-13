@@ -41,7 +41,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /** A base class for DOM related tests. */
-public abstract class BaseDomTest {
+public abstract class BaseDOMTest {
 
     /** Initialized parser pool used to parser data. */
     protected BasicParserPool parserPool;
@@ -156,7 +156,7 @@ public abstract class BaseDomTest {
             trimmedPath = classRelativeResource(trimmedPath);
         }
 
-        final InputStream input = BaseDomTest.class.getResourceAsStream(trimmedPath);
+        final InputStream input = BaseDOMTest.class.getResourceAsStream(trimmedPath);
         if (input == null) {
             throw new XMLParserException(trimmedPath + " does not exist or is not readable");
         }

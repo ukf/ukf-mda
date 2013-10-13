@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
 /** Unit tests for the {@link UKEntityOrderingStrategy} class. */
-public class UKEntityOrderingStrategyTest extends BaseDomTest {
+public class UKEntityOrderingStrategyTest extends BaseDOMTest {
     
     @BeforeClass
     private void init() {

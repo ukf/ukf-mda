@@ -14,9 +14,9 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import uk.org.ukfederation.mda.BaseDomTest;
+import uk.org.ukfederation.mda.BaseDOMTest;
 
-public class WhitespaceTrimmingVisitorTest extends BaseDomTest {
+public class WhitespaceTrimmingVisitorTest extends BaseDOMTest {
     
     private DOMElementItem makeItem() throws Exception {
         final ParserPool parserPool = getParserPool();

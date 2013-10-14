@@ -1,11 +1,12 @@
 /*
- * Copyright 2011 University Corporation for Advanced Internet Development, Inc.
+ * Licensed to the University Corporation for Advanced Internet Development, 
+ * Inc. (UCAID) under one or more contributor license agreements.  See the 
+ * NOTICE file distributed with this work for additional information regarding
+ * copyright ownership. The UCAID licenses this file to You under the Apache 
+ * License, Version 2.0 (the "License"); you may not use this file except in 
+ * compliance with the License.  You may obtain a copy of the License at
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +19,7 @@ package uk.org.ukfederation.mda;
 
 import java.io.InputStream;
 import java.io.StringReader;
+import java.net.URL;
 import java.security.Security;
 import java.util.List;
 
@@ -30,6 +32,8 @@ import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
+import net.shibboleth.utilities.java.support.resource.ClasspathResource;
+import net.shibboleth.utilities.java.support.resource.Resource;
 import net.shibboleth.utilities.java.support.xml.BasicParserPool;
 import net.shibboleth.utilities.java.support.xml.ParserPool;
 import net.shibboleth.utilities.java.support.xml.SerializeSupport;
@@ -104,7 +108,7 @@ public abstract class BaseDOMTest {
     }
     
     /**
-     * Makes a resource reference relative to the class being tested.
+     * Makes a resource reference relative to the package of the class being tested.
      * 
      * The convention adopted is that the package-relative name is something
      * like "foo.pem", and that this is expanded to "/a/b/c/foo.pem".
@@ -115,6 +119,7 @@ public abstract class BaseDOMTest {
     protected String packageRelativeResource(final String which) {
         return basePackagePath + which;
     }
+    
     
     /**
      * Setup test class. Creates and initializes the parser pool. Set BouncyCastle as a JCE provider.
@@ -138,6 +143,42 @@ public abstract class BaseDOMTest {
         return parserPool;
     }
 
+    /**
+     * Variant of ClasspathResource that patches round the problem described
+     * in JSPT-21.
+     */
+    private class FixedClasspathResource extends ClasspathResource {
+    
+        /**
+         * Constructor.
+         *
+         * @param resourcePath classpath path to the resource
+         */
+        public FixedClasspathResource(final String resourcePath) {
+            super(resourcePath);
+            // Work around the fact that ClasspathResource doesn't handle location correctly
+            final URL resourceURL = this.getClass().getClassLoader().getResource(resourcePath);
+            setLocation(resourceURL.toExternalForm());
+        }
+        
+    }
+    
+    /**
+     * Helper method to acquire a ClasspathResource based on the given resource path.
+     * 
+     * Uses class-relative resource names if there is a known class under test.
+     * 
+     * @param resourcePath classpath path to the resource
+     * @return the data file as a resource
+     */
+    public Resource getClasspathResource(final String resourcePath) {
+        if (testingClass != null) {
+            return new FixedClasspathResource(classRelativeResource(resourcePath).substring(1));
+        } else {
+            return new FixedClasspathResource(resourcePath);
+        }
+    }
+    
     /**
      * Reads in an XML file, parses it, and returns the document element. If the given path is relative (i.e., does not
      * start with a '/') it is assumed to be relative to the class, or to /data if the class has not been set.

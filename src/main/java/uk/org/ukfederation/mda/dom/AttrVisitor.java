@@ -23,16 +23,16 @@ import org.w3c.dom.Element;
 
 /**
  * Provides a variation of the Visitor pattern for performing operations on
- * DOM attributes which are part of {@link DOMElementItem} items.
+ * DOM attributes which are part of {@link Element} items.
  */
 public interface AttrVisitor {
 
     /**
      * Called on each {@link Attr} visited as part of the processing
-     * of a {@link DOMElementItem}.
+     * of an {@link Element} item.
      * 
      * @param visited the {@link Attr} being visited.
-     * @param item the {@link DOMElementItem} which is the context for the visit.
+     * @param item the {@link Item} which is the context for the visit.
      */
     public void visitAttr(Attr visited, Item<Element> item);
     

@@ -87,7 +87,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
     
     /**
      * Collect the display names introduced by the given {@link QName} by the entity
-     * given by {@link element} into the provided collection.
+     * given by {@link Element} into the provided collection.
      * 
      * @param entity <code>EntityDescriptor</code> to look for display names inside
      * @param qname element name containing display names

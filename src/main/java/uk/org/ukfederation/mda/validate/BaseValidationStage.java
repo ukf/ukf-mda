@@ -59,7 +59,7 @@ public abstract class BaseValidationStage extends BaseStage<Element> {
      * If the item is an EntitiesDescriptor, interpose an identifier for the individual
      * EntityDescriptor.
      * 
-     * @param item      {@link DOMElementItem} to add the error to
+     * @param item      {@link Item} to add the error to
      * @param element   {@link Element} the error reflects
      * @param error     error text
      */
@@ -86,8 +86,8 @@ public abstract class BaseValidationStage extends BaseStage<Element> {
     }
     
     /**
-     * Validate an individual {@link DOMElementItem}.
-     * @param item the {@link DOMElementItem} to validate.
+     * Validate an individual {@link Item}.
+     * @param item the {@link Item} to validate.
      * @param docElement the unwrapped document {@link Element}.
      */
     protected abstract void validateItem(Item<Element> item, Element docElement);

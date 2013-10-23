@@ -23,16 +23,16 @@ import org.w3c.dom.Node;
 
 /**
  * Provides a variation of the Visitor pattern for performing operations on
- * DOM nodes which are part of {@link DOMElementItem} items.
+ * DOM nodes which are part of {@link Element} items.
  */
 public interface NodeVisitor {
 
     /**
      * Called on each {@link Node} visited as part of the processing
-     * of a {@link DOMElementItem}.
+     * of an {@link Element} item.
      * 
      * @param visited the {@link Node} being visited.
-     * @param item the {@link DOMElementItem} which is the context for the visit.
+     * @param item the {@link Item} which is the context for the visit.
      */
     public void visitNode(Node visited, Item<Element> item);
     

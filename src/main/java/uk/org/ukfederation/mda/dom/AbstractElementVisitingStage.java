@@ -117,7 +117,7 @@ abstract class AbstractElementVisitingStage extends BaseStage<Element> {
      * during processing.
      * 
      * @param e {@link Element} to start from
-     * @param item {@link DOMElementItem} context for the traversal
+     * @param item {@link Item} context for the traversal
      */
     private void traverse(@Nonnull final Element e, @Nonnull final Item<Element> item) {
         final List<Element> children = ElementSupport.getChildElements(e);

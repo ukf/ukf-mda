@@ -50,7 +50,7 @@ import org.w3c.dom.Element;
 public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
     
     /**
-     * Helper class which wraps a {@link DOMElementItem} but extracts any
+     * Helper class which wraps an {@link Element} {@link Item} but extracts any
      * associated {@link UKId} and {@link ItemId} for simpler comparisons.
      */
     private static class OrderableItem implements Comparable<OrderableItem> {
@@ -58,7 +58,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         /** Number of fields we are capable of comparing. */
         private static final int NFIELDS = 4;
         
-        /** The wrapped {@link DOMElementItem}. */
+        /** The wrapped {@link Element} {@link Item}. */
         private final Item<Element> item;
         
         /** Array of field values. */
@@ -67,7 +67,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         /**
          * Constructor.
          * 
-         * @param domItem the {@link DOMElementItem} to wrap.
+         * @param domItem the {@link Element} {@link Item} to wrap.
          */
         public OrderableItem(@Nonnull Item<Element> domItem) {
             item = domItem;
@@ -134,9 +134,9 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         }
         
         /**
-         * Unwrap the wrapped {@link DOMElementItem}.
+         * Unwrap the wrapped {@link Element} {@link Item}.
          * 
-         * @return the wrapped {@link DOMElementItem}.
+         * @return the wrapped {@link Element} {@link Item}.
          */
         public Item<Element> unwrap() {
             return item;

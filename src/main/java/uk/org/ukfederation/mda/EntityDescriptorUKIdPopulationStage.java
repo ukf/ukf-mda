@@ -25,8 +25,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
@@ -44,7 +44,7 @@ import com.google.common.base.Strings;
  * the metadata item.
  */
 @ThreadSafe
-public class EntityDescriptorUKIdPopulationStage extends BaseStage<DOMElementItem> {
+public class EntityDescriptorUKIdPopulationStage extends BaseStage<Element> {
 
     /**
      * Compiled regular expression.
@@ -52,13 +52,13 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<DOMElementIte
     private Pattern pattern;
 
     /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<DOMElementItem> items)
+    protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
             throws StageProcessingException {
 
         // ID values that we have already seen (they must be unique)
         final Set<String> ids = new HashSet<>(items.size());
         
-        for (DOMElementItem item : items) {
+        for (Item<Element> item : items) {
            final Element element = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            

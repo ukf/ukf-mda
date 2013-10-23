@@ -21,21 +21,21 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
-
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
+
 /** Base class for validation stages. */
 @ThreadSafe
-public abstract class BaseValidationStage extends BaseStage<DOMElementItem> {
+public abstract class BaseValidationStage extends BaseStage<Element> {
 
     /**
      * Returns the {@link Element} representing the EntityDescriptor which is the
@@ -63,7 +63,7 @@ public abstract class BaseValidationStage extends BaseStage<DOMElementItem> {
      * @param element   {@link Element} the error reflects
      * @param error     error text
      */
-    protected void addError(@Nonnull final DOMElementItem item, @Nonnull final Element element,
+    protected void addError(@Nonnull final Item<Element> item, @Nonnull final Element element,
             @Nonnull final String error) {
         assert item != null;
         assert element != null;
@@ -90,12 +90,12 @@ public abstract class BaseValidationStage extends BaseStage<DOMElementItem> {
      * @param item the {@link DOMElementItem} to validate.
      * @param docElement the unwrapped document {@link Element}.
      */
-    protected abstract void validateItem(DOMElementItem item, Element docElement);
+    protected abstract void validateItem(Item<Element> item, Element docElement);
     
     /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<DOMElementItem> items)
+    protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
             throws StageProcessingException {
-        for (DOMElementItem item : items) {
+        for (Item<Element> item : items) {
             validateItem(item, item.unwrap());
         }
     }

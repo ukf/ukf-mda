@@ -25,14 +25,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
-
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemId;
-import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntitiesDescriptorAssemblerStage.ItemOrderingStrategy;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
 
 /**
  * Implements an ordering strategy for UK federation aggregates.
@@ -59,7 +59,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         private static final int NFIELDS = 4;
         
         /** The wrapped {@link DOMElementItem}. */
-        private final DOMElementItem item;
+        private final Item<Element> item;
         
         /** Array of field values. */
         private final String[] fields = new String[NFIELDS];
@@ -69,7 +69,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
          * 
          * @param domItem the {@link DOMElementItem} to wrap.
          */
-        public OrderableItem(@Nonnull DOMElementItem domItem) {
+        public OrderableItem(@Nonnull Item<Element> domItem) {
             item = domItem;
 
             final Element docElement = domItem.unwrap();
@@ -138,17 +138,17 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
          * 
          * @return the wrapped {@link DOMElementItem}.
          */
-        public DOMElementItem unwrap() {
+        public Item<Element> unwrap() {
             return item;
         }
     }
 
     /** {@inheritDoc} */
-    public List<DOMElementItem> order(@Nonnull @NonnullElements final Collection<DOMElementItem> items) {
+    public List<Item<Element>> order(@Nonnull @NonnullElements final Collection<Item<Element>> items) {
         
         // Construct an orderable list wrapping the original items.
         final List<OrderableItem> orderableList = new ArrayList<>(items.size());
-        for (DOMElementItem item : items) {
+        for (Item<Element> item : items) {
             orderableList.add(new OrderableItem(item));
         }
         
@@ -156,7 +156,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         Collections.sort(orderableList);
         
         // extract the result into a new collection
-        final List<DOMElementItem> results = new ArrayList<>(items.size());
+        final List<Item<Element>> results = new ArrayList<>(items.size());
         for (OrderableItem result : orderableList) {
             results.add(result.unwrap());
         }

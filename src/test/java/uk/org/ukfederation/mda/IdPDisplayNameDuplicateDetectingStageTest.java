@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
@@ -43,7 +44,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
     public void noClashWithSelfODN1() throws Exception {
         final DOMElementItem item = makeItem("sv-and-en-1");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
@@ -65,7 +66,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
     public void noClashWithSelfODN2() throws Exception {
         final DOMElementItem item = makeItem("sv-and-en-2");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
@@ -83,7 +84,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         final DOMElementItem item2 = makeItem("sv-and-en-2");
         final DOMElementItem dup   = makeItem("sv-and-en-sp");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -104,7 +105,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         final DOMElementItem item2 = makeItem("sv-and-en-2");
         final DOMElementItem dup   = makeItem("dup-mdui");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -125,7 +126,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         final DOMElementItem item2 = makeItem("sv-and-en-2");
         final DOMElementItem dup   = makeItem("dup-odn");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -151,7 +152,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         final DOMElementItem item2 = makeItem("sv-and-en-2");
         final DOMElementItem dup   = makeItem("dup-whitespace");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -177,7 +178,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         final DOMElementItem item2 = makeItem("sv-and-en-2");
         final DOMElementItem dup   = makeItem("dup-case");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -204,7 +205,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         final DOMElementItem item2 = makeItem("sv-and-en-2");
         final DOMElementItem dup   = makeItem("dup-both");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dup);
@@ -233,7 +234,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         final DOMElementItem dupB  = makeItem("dup-odn");
         final DOMElementItem dupC  = makeItem("dup-both");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(dupA);

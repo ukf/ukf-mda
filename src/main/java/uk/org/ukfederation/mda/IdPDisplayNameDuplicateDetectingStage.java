@@ -27,9 +27,9 @@ import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemIdentificationStrategy;
 import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
@@ -50,7 +50,7 @@ import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
  * any other identity provider entity.
  */
 @ThreadSafe
-public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DOMElementItem> {
+public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
 
     /** {@link QName} representing an SAML metadata <code>IDPSSODescriptor</code>. */
     private static final QName MD_IDP_SSO_DESCRIPTOR = new QName(SAMLMetadataSupport.MD_NS, "IDPSSODescriptor");
@@ -160,25 +160,25 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DOMElementI
     }
     
     /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<DOMElementItem> items)
+    protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
             throws StageProcessingException {
 
         /*
          * Record of the items corresponding to the first entity seen with each display name.
          */
-        final Map<String, DOMElementItem> ids = new HashMap<>(items.size());
+        final Map<String, Item<Element>> ids = new HashMap<>(items.size());
         
         /*
          * Remember which entities we have already marked with errors.
          */
-        final Set<DOMElementItem> markedItems = new HashSet<>();
+        final Set<Item<Element>> markedItems = new HashSet<>();
         
         /*
          * How we turn items into names for display.
          */
         final ItemIdentificationStrategy idStrategy = new UKItemIdentificationStrategy();
         
-        for (DOMElementItem item : items) {
+        for (Item<Element> item : items) {
            final Element entity = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            
@@ -189,7 +189,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<DOMElementI
                final Set<String> displayNames = extractDisplayNames(entity);
                for (String name: displayNames) {
                    final String key = name.toLowerCase();
-                   final DOMElementItem that = ids.get(key);
+                   final Item<Element> that = ids.get(key);
                    if (that == null) {
                        // all is well
                        ids.put(key, item);

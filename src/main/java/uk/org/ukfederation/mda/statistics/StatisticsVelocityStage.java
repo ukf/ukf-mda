@@ -26,6 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
@@ -44,13 +45,14 @@ import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * A stage implementation which generates statistics for a collection
  * of entities.
  */
 @ThreadSafe
-public class StatisticsVelocityStage extends BaseStage<DOMElementItem> {
+public class StatisticsVelocityStage extends BaseStage<Element> {
 
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(StatisticsVelocityStage.class);
@@ -106,7 +108,7 @@ public class StatisticsVelocityStage extends BaseStage<DOMElementItem> {
 
 
     /** {@inheritDoc} */
-    public void doExecute(final Collection<DOMElementItem> collection) throws StageProcessingException {
+    public void doExecute(final Collection<Item<Element>> collection) throws StageProcessingException {
         
         final VelocityEngine ve = new VelocityEngine();
         ve.setProperty("resource.loader", "class");
@@ -119,9 +121,9 @@ public class StatisticsVelocityStage extends BaseStage<DOMElementItem> {
         final VelocityContext context = new VelocityContext();
         context.put("name", new String("Velocity"));
 
-        final Set<DOMElementItem> entities = new HashSet<>(collection.size());
+        final Set<Item<Element>> entities = new HashSet<>(collection.size());
         
-        for (DOMElementItem item : collection) {
+        for (Item<Element> item : collection) {
             if (SAMLMetadataSupport.isEntityDescriptor(item.unwrap())) {
                 entities.add(item);
             }

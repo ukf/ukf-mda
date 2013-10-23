@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
@@ -27,7 +28,7 @@ public class IPHintValidationStageTest extends BaseDOMTest {
     public void missingComponent() throws Exception {
         final Element doc = readXmlData("1.xml");
         final DOMElementItem item = new DOMElementItem(doc);
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final IPHintValidationStage stage = new IPHintValidationStage();
@@ -48,7 +49,7 @@ public class IPHintValidationStageTest extends BaseDOMTest {
     public void hostAddress() throws Exception {
         final Element doc = readXmlData("2.xml");
         final DOMElementItem item = new DOMElementItem(doc);
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final IPHintValidationStage stage = new IPHintValidationStage();
@@ -70,7 +71,7 @@ public class IPHintValidationStageTest extends BaseDOMTest {
     public void ignoreHostAddress() throws Exception {
         final Element doc = readXmlData("2.xml");
         final DOMElementItem item = new DOMElementItem(doc);
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final IPHintValidationStage stage = new IPHintValidationStage();

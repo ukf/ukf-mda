@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
@@ -41,7 +42,7 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDOMTest {
     public void populatePresent() throws Exception {
         final DOMElementItem item = makeItem("present");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();
@@ -62,7 +63,7 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDOMTest {
     public void populateAbsent() throws Exception  {
         final DOMElementItem item = makeItem("absent");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();
@@ -81,7 +82,7 @@ public class RegistrationAuthorityPopulationStageTest extends BaseDOMTest {
     public void populateNoExtensions() throws Exception  {
         final DOMElementItem item = makeItem("noext");
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage = makeStage();

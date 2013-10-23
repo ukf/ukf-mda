@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.xml.namespace.QName;
 
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
@@ -43,7 +44,7 @@ public class ElementWhitespaceTrimmingStageTest extends BaseDOMTest {
         final DOMElementItem item = makeItem("1-in.xml");
         final Element expected = readXmlData(classRelativeResource("1-out.xml"));
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final Set<QName> names = new HashSet<>();
@@ -64,7 +65,7 @@ public class ElementWhitespaceTrimmingStageTest extends BaseDOMTest {
         final DOMElementItem item = makeItem("2-in.xml");
         final Element expected = readXmlData(classRelativeResource("2-out.xml"));
         
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
                         
         final ElementWhitespaceTrimmingStage stage = makeStage();

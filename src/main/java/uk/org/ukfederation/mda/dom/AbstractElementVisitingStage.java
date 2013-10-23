@@ -25,7 +25,7 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.xml.namespace.QName;
 
-import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
@@ -38,7 +38,7 @@ import org.w3c.dom.Element;
  * Abstract parent class for stages which visit {@link Element}s named by a
  * collection of {@link QName}s.
  */
-abstract class AbstractElementVisitingStage extends BaseStage<DOMElementItem> {
+abstract class AbstractElementVisitingStage extends BaseStage<Element> {
 
     /** Visitor to apply to each visited element. */
     @Nonnull private final ElementVisitor visitor;
@@ -119,7 +119,7 @@ abstract class AbstractElementVisitingStage extends BaseStage<DOMElementItem> {
      * @param e {@link Element} to start from
      * @param item {@link DOMElementItem} context for the traversal
      */
-    private void traverse(@Nonnull final Element e, @Nonnull final DOMElementItem item) {
+    private void traverse(@Nonnull final Element e, @Nonnull final Item<Element> item) {
         final List<Element> children = ElementSupport.getChildElements(e);
         for (Element child : children) {
             traverse(child, item);
@@ -130,8 +130,8 @@ abstract class AbstractElementVisitingStage extends BaseStage<DOMElementItem> {
     }
     
     /** {@inheritDoc} */
-    protected void doExecute(Collection<DOMElementItem> itemCollection) throws StageProcessingException {
-        for (DOMElementItem item : itemCollection) {
+    protected void doExecute(Collection<Item<Element>> itemCollection) throws StageProcessingException {
+        for (Item<Element> item : itemCollection) {
             final Element docElement = item.unwrap();
             traverse(docElement, item);
         }

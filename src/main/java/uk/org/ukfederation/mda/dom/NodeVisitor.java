@@ -16,8 +16,9 @@
 
 package uk.org.ukfederation.mda.dom;
 
-import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.Item;
 
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
@@ -33,6 +34,6 @@ public interface NodeVisitor {
      * @param visited the {@link Node} being visited.
      * @param item the {@link DOMElementItem} which is the context for the visit.
      */
-    public void visitNode(Node visited, DOMElementItem item);
+    public void visitNode(Node visited, Item<Element> item);
     
 }

@@ -19,6 +19,7 @@ package uk.org.ukfederation.mda;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
@@ -72,7 +73,7 @@ public class UKEntityOrderingStrategyTest extends BaseDOMTest {
         // nothing at all on i5
         
         // Make a collection containing those items in an arbitrary order
-        final List<DOMElementItem> items = new ArrayList<>();
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(i4);
         items.add(i3);
         items.add(i1);
@@ -84,7 +85,7 @@ public class UKEntityOrderingStrategyTest extends BaseDOMTest {
         
         // Order the collection
         final UKEntityOrderingStrategy strat = new UKEntityOrderingStrategy();
-        final List<DOMElementItem>items2 = strat.order(items);
+        final List<Item<Element>>items2 = strat.order(items);
         
         // Check that everything is in the right place afterwards
         Assert.assertEquals(items2.get(0), i00);

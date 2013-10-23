@@ -16,9 +16,10 @@
 
 package uk.org.ukfederation.mda.dom;
 
-import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.Item;
 
 import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
 
 /**
  * Provides a variation of the Visitor pattern for performing operations on
@@ -33,6 +34,6 @@ public interface AttrVisitor {
      * @param visited the {@link Attr} being visited.
      * @param item the {@link DOMElementItem} which is the context for the visit.
      */
-    public void visitAttr(Attr visited, DOMElementItem item);
+    public void visitAttr(Attr visited, Item<Element> item);
     
 }

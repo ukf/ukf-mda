@@ -19,7 +19,7 @@ package uk.org.ukfederation.mda.validate.mdui;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
-import net.shibboleth.metadata.dom.DOMElementItem;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.net.IPRange;
 
@@ -59,7 +59,7 @@ public class IPHintValidationStage extends BaseValidationStage {
     }
 
     /** {@inheritDoc} */
-    protected void validateItem(@Nonnull final DOMElementItem item, @Nonnull final Element docElement) {
+    protected void validateItem(@Nonnull final Item<Element> item, @Nonnull final Element docElement) {
         assert item != null;
         assert docElement != null;
         final NodeList ipHints = docElement.getElementsByTagNameNS(MDUISupport.MDUI_NS, "IPHint");

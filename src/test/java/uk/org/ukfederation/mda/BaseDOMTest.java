@@ -24,6 +24,7 @@ import java.security.Security;
 import java.util.List;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
@@ -234,21 +235,21 @@ public abstract class BaseDOMTest {
         return errors.size();
     }
     
-    protected void populateIdentifiers(List<DOMElementItem> items) throws ComponentInitializationException, StageProcessingException {
+    protected void populateIdentifiers(List<Item<Element>> items) throws ComponentInitializationException, StageProcessingException {
         final EntityDescriptorItemIdPopulationStage stage1 = new EntityDescriptorItemIdPopulationStage();
         stage1.setId("setid");
         stage1.initialize();
         stage1.execute(items);
     }
 
-    protected void populateUKIdentifiers(List<DOMElementItem> items) throws ComponentInitializationException, StageProcessingException {
+    protected void populateUKIdentifiers(List<Item<Element>> items) throws ComponentInitializationException, StageProcessingException {
         final EntityDescriptorUKIdPopulationStage stage2 = new EntityDescriptorUKIdPopulationStage();
         stage2.setId("ukid");
         stage2.initialize();
         stage2.execute(items);
     }
 
-    protected void displayErrors(DOMElementItem item) {
+    protected void displayErrors(Item<Element> item) {
         final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
         for (ErrorStatus e: errors) {

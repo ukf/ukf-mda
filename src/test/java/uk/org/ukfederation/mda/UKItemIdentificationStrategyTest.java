@@ -37,8 +37,8 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
         return strat;
     }
     
-    private void performExtractions(DOMElementItem item) throws Exception {
-        final List<DOMElementItem> items = new ArrayList<>();
+    private void performExtractions(Item<Element> item) throws Exception {
+        final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
         final RegistrationAuthorityPopulationStage stage1 = new RegistrationAuthorityPopulationStage();
@@ -57,7 +57,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
         stage3.execute(items);   
     }
     
-    private DOMElementItem makeItem(final String which) throws XMLParserException {
+    private Item<Element> makeItem(final String which) throws XMLParserException {
         final Element doc = readXmlData(classRelativeResource(which + ".xml"));
         return new DOMElementItem(doc);
     }
@@ -84,7 +84,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     @Test
     public void withRegistrationAuthority() throws Exception {
         final UKItemIdentificationStrategy strat = makeStrat();
-        final DOMElementItem item = makeItem("present");
+        final Item<Element> item = makeItem("present");
 
         performExtractions(item);
         
@@ -98,7 +98,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     @Test
     public void withoutRegistrationAuthority() throws Exception {
         final UKItemIdentificationStrategy strat = makeStrat();
-        final DOMElementItem item = makeItem("absent");
+        final Item<Element> item = makeItem("absent");
 
         performExtractions(item);
         
@@ -116,7 +116,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
         auths.add("http://ukfederation.org.uk");
         strat.setIgnoredAuthorities(auths);
         
-        final DOMElementItem item = makeItem("present");
+        final Item<Element> item = makeItem("present");
 
         performExtractions(item);
         
@@ -134,7 +134,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
         nameMap.put("http://ukfederation.org.uk", "UKf");
         strat.setDisplayNames(nameMap);
         
-        final DOMElementItem item = makeItem("present");
+        final Item<Element> item = makeItem("present");
 
         performExtractions(item);
         

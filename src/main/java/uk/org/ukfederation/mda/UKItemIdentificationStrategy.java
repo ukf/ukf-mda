@@ -28,7 +28,7 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.FirstItemIdItemIdentificationStrategy;
 import net.shibboleth.metadata.Item;
-import uk.org.ukfederation.mda.validate.mdrpi.RegistrationAuthority;
+import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthority;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;

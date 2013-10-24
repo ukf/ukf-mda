@@ -14,6 +14,7 @@ import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
+import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthorityPopulationStage;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
@@ -21,8 +22,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
-
-import uk.org.ukfederation.mda.validate.mdrpi.RegistrationAuthorityPopulationStage;
 
 public class UKItemIdentificationStrategyTest extends BaseDOMTest {
 

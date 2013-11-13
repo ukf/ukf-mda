@@ -18,7 +18,7 @@ package uk.org.ukfederation.mda.validate.mdui;
 
 import javax.annotation.concurrent.ThreadSafe;
 
-/** Helper class for dealing with MDUI metadata. */
+/** Support class for dealing with MDUI metadata. */
 @ThreadSafe
 public final class MDUISupport {
 

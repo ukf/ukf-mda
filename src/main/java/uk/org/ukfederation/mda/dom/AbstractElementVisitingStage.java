@@ -19,18 +19,14 @@ package uk.org.ukfederation.mda.dom;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.xml.namespace.QName;
 
 import net.shibboleth.metadata.Item;
-import net.shibboleth.metadata.pipeline.BaseStage;
-import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.logic.Constraint;
-import net.shibboleth.utilities.java.support.xml.ElementSupport;
 
 import org.w3c.dom.Element;
 
@@ -38,7 +34,7 @@ import org.w3c.dom.Element;
  * Abstract parent class for stages which visit {@link Element}s named by a
  * collection of {@link QName}s.
  */
-abstract class AbstractElementVisitingStage extends BaseStage<Element> {
+abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
 
     /** Visitor to apply to each visited element. */
     @Nonnull private final ElementVisitor visitor;
@@ -98,43 +94,15 @@ abstract class AbstractElementVisitingStage extends BaseStage<Element> {
         elementNames = Collections.singleton(name);
     }
     
-    /**
-     * Indicates whether the visitor should be applied to a particular {@link Element}.
-     * 
-     * @param e {@link Element} to which we may wish to apply the visitor
-     * 
-     * @return <code>true</code> if the visitor should be applied to this {@link Element}.
-     */
-    private boolean applicable(@Nonnull final Element e) {
+    /** {@inheritDoc} */
+    protected boolean applicable(@Nonnull final Element e) {
         final QName q = new QName(e.getNamespaceURI(), e.getLocalName());
         return elementNames.contains(q);
     }
 
-    /**
-     * Depth-first traversal of the DOM tree rooted in an element, applying the
-     * visitor when appropriate.  The traversal snapshots the child elements at
-     * each level, so that the visitor could in principle reorder or delete them
-     * during processing.
-     * 
-     * @param e {@link Element} to start from
-     * @param item {@link Item} context for the traversal
-     */
-    private void traverse(@Nonnull final Element e, @Nonnull final Item<Element> item) {
-        final List<Element> children = ElementSupport.getChildElements(e);
-        for (Element child : children) {
-            traverse(child, item);
-        }
-        if (applicable(e)) {
-            visitor.visitElement(e, item);
-        }
+    /** {@inheritDoc} */
+    protected void visit(@Nonnull final Element e, @Nonnull final Item<Element> item) {
+        visitor.visitElement(e, item);
     }
     
-    /** {@inheritDoc} */
-    protected void doExecute(Collection<Item<Element>> itemCollection) throws StageProcessingException {
-        for (Item<Element> item : itemCollection) {
-            final Element docElement = item.unwrap();
-            traverse(docElement, item);
-        }
-    }
-
 }

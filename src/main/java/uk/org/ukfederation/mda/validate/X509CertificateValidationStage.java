@@ -55,7 +55,7 @@ public class X509CertificateValidationStage extends AbstractValidationStage<X509
             // only process each certificate once per item
             if (!context.getStash().containsValue(cert)) {
                 context.getStash().put(cert);
-                applyValidators(cert, context.getItem());
+                applyValidators(cert, context);
             }
         } catch (CertificateException e) {
             context.getItem().getItemMetadata().put(new ErrorStatus(getId(), "could not convert X509Certificate data"));

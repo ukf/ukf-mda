@@ -21,16 +21,15 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
-import net.shibboleth.metadata.Item;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 /**
- * Base stage to apply a collection of validators to each objects from each item.
+ * Base stage to apply a collection of validators to each object from each item.
  * 
  * @param <T> type of the object to be validated
  */ 
@@ -66,11 +65,11 @@ public abstract class AbstractValidationStage<T> extends AbstractDOMTraversalSta
      * Apply each of the configured validators in turn to the provided object.
      * 
      * @param obj object to be validated
-     * @param item {@link Item} context for the validation
+     * @param context context for the validation
      */
-    protected void applyValidators(@Nonnull final T obj, @Nonnull final Item<?> item) {
+    protected void applyValidators(@Nonnull final T obj, @Nonnull final TraversalContext context) {
         for (Validator<T> validator: validators) {
-            validator.validate(obj, item, getId());
+            validator.validate(obj, context.getItem(), getId());
         }
     }
     

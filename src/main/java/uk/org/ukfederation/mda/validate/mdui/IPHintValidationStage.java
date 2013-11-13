@@ -19,12 +19,10 @@ package uk.org.ukfederation.mda.validate.mdui;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
-import net.shibboleth.metadata.Item;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.net.IPRange;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * A stage which validates mdui:IPHint elements.
@@ -57,24 +55,26 @@ public class IPHintValidationStage extends BaseValidationStage {
     }
 
     /** {@inheritDoc} */
-    protected void validateItem(@Nonnull final Item<Element> item, @Nonnull final Element docElement) {
-        assert item != null;
-        assert docElement != null;
-        final NodeList ipHints = docElement.getElementsByTagNameNS(MDUISupport.MDUI_NS, "IPHint");
-        for (int index = 0; index < ipHints.getLength(); index++) {
-            final Element ipHint = (Element)ipHints.item(index);
-            final String hint = ipHint.getTextContent();
-            try {
-                final IPRange range = IPRange.parseCIDRBlock(hint);
-                if (checkingNetworks) {
-                    if (range.getHostAddress() != null) {
-                        addError(item, ipHint, "invalid IPHint '" + hint +
-                                "': CIDR notation represents a host, not a network");
-                    }
+    protected boolean applicable(Element element) {
+        return MDUISupport.MDUI_NS.equals(element.getNamespaceURI()) &&
+                "IPHint".equals(element.getLocalName());
+    }
+
+    /** {@inheritDoc} */
+    protected void visit(@Nonnull final Element ipHint, @Nonnull final TraversalContext context) {
+        assert ipHint != null;
+        assert context != null;
+        final String hint = ipHint.getTextContent();
+        try {
+            final IPRange range = IPRange.parseCIDRBlock(hint);
+            if (checkingNetworks) {
+                if (range.getHostAddress() != null) {
+                    addError(context.getItem(), ipHint, "invalid IPHint '" + hint +
+                            "': CIDR notation represents a host, not a network");
                 }
-            } catch (IllegalArgumentException e) {
-                addError(item, ipHint, "invalid IPHint '" + hint + "': " + e.getMessage());
             }
+        } catch (IllegalArgumentException e) {
+            addError(context.getItem(), ipHint, "invalid IPHint '" + hint + "': " + e.getMessage());
         }
     }
 

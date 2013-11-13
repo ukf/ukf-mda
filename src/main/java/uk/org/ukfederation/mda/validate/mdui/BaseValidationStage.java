@@ -16,8 +16,6 @@
 
 package uk.org.ukfederation.mda.validate.mdui;
 
-import java.util.Collection;
-
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -25,17 +23,16 @@ import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
-import net.shibboleth.metadata.pipeline.BaseStage;
-import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
+import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
+
 /** Base class for validation stages. */
 @ThreadSafe
-public abstract class BaseValidationStage extends BaseStage<Element> {
+public abstract class BaseValidationStage extends AbstractDOMTraversalStage {
 
     /**
      * Returns the {@link Element} representing the EntityDescriptor which is the
@@ -85,19 +82,4 @@ public abstract class BaseValidationStage extends BaseStage<Element> {
         metadata.put(new ErrorStatus(getId(), prefix + error));
     }
     
-    /**
-     * Validate an individual {@link Item}.
-     * @param item the {@link Item} to validate.
-     * @param docElement the unwrapped document {@link Element}.
-     */
-    protected abstract void validateItem(Item<Element> item, Element docElement);
-    
-    /** {@inheritDoc} */
-    protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
-            throws StageProcessingException {
-        for (Item<Element> item : items) {
-            validateItem(item, item.unwrap());
-        }
-    }
-
 }

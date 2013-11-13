@@ -2,6 +2,12 @@
 
 ## Version 0.8.1
 
+* Refactored the DOM visitor framework so that the basic traversal case is separated from the more specific case where we want to visit one of a set of `QName`s.
+* Refactored the `IPHint` validator, which had its own private first cut on such a framework so that it uses this new system instead.
+* Introduced a new system of validators to be attached to traversals.
+* Added `X509CertificateValidationStage` which makes use of the new  traversal and validator frameworks. This allows a list of validators to be applied to each X.509 certificate in each item.
+* Added the `X509CertificateRSAKeyLengthValidator`, which validates the RSA public key in an X.509 certificate. Length boundaries can be set for warning and error conditions. This allows us to resolve Bugzillas 758 and 831.
+
 ## Version 0.8.0 ##
 
 * Rebase on Shibboleth MDA version 0.8.0.

@@ -28,11 +28,11 @@ import net.shibboleth.metadata.Item;
 public interface Validator<T> {
     
     /**
-     * Apply the validator to the object {@link T} in the given {@link Item} context.
+     * Apply the validator to the object in the given {@link Item} context.
      * 
      * The validator influences future processing by adding item metadata to the {@link Item}.
      * 
-     * @param e the {@link T} to be validated
+     * @param e the object to be validated
      * @param item the {@link Item} context for the validation
      * @param stageId the identifier for the stage that is requesting the validation, for
      *      inclusion in status metadata

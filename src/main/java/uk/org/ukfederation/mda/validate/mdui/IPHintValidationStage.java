@@ -26,8 +26,6 @@ import net.shibboleth.utilities.java.support.net.IPRange;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import uk.org.ukfederation.mda.validate.BaseValidationStage;
-
 /**
  * A stage which validates mdui:IPHint elements.
  */

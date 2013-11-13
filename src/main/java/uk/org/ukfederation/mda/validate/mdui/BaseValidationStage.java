@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.org.ukfederation.mda.validate;
+package uk.org.ukfederation.mda.validate.mdui;
 
 import java.util.Collection;
 

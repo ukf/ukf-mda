@@ -88,7 +88,7 @@ public class X509CertificateValidationStageTest extends BaseDOMTest {
         
         stage.execute(items);
 
-        errorsAndWarnings(item, 2, 0); // two identical certs, two errors
+        errorsAndWarnings(item, 1, 0);
     }
     
     @Test
@@ -112,7 +112,7 @@ public class X509CertificateValidationStageTest extends BaseDOMTest {
         
         stage.execute(items);
         
-        errorsAndWarnings(item, 0, 2); // two identical certs, two warnings
+        errorsAndWarnings(item, 0, 1);
     }
     
 }

@@ -24,14 +24,15 @@ import java.security.cert.X509Certificate;
 import javax.annotation.Nonnull;
 
 import net.shibboleth.metadata.ErrorStatus;
-import net.shibboleth.metadata.Item;
 import net.shibboleth.utilities.java.support.codec.Base64Support;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 
 import org.w3c.dom.Element;
 
 /**
- * Stage to apply a collection of validators to each X.509 certificate in metadata.
+ * Stage to apply a collection of validators to each X.509 certificate in items.
+ * 
+ * Each X.509 certificate is processed only once per item, so that duplicate status messages are suppressed.
  */ 
 public class X509CertificateValidationStage extends AbstractValidationStage<X509Certificate> {
 
@@ -45,15 +46,19 @@ public class X509CertificateValidationStage extends AbstractValidationStage<X509
     }
 
     /** {@inheritDoc} */
-    protected void visit(@Nonnull final Element element, @Nonnull final Item<Element> item) {
+    protected void visit(@Nonnull final Element element, @Nonnull final TraversalContext context) {
         final String text = element.getTextContent();
         final byte[] data = Base64Support.decode(text);
         try {
             final X509Certificate cert =
                     (X509Certificate) factory.generateCertificate(new ByteArrayInputStream(data));
-            applyValidators(cert, item);
+            // only process each certificate once per item
+            if (!context.getStash().containsValue(cert)) {
+                context.getStash().put(cert);
+                applyValidators(cert, context.getItem());
+            }
         } catch (CertificateException e) {
-            item.getItemMetadata().put(new ErrorStatus(getId(), "could not convert X509Certificate data"));
+            context.getItem().getItemMetadata().put(new ErrorStatus(getId(), "could not convert X509Certificate data"));
         }
     }
 

@@ -24,7 +24,6 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.xml.namespace.QName;
 
-import net.shibboleth.metadata.Item;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.logic.Constraint;
 
@@ -101,8 +100,8 @@ abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
     }
 
     /** {@inheritDoc} */
-    protected void visit(@Nonnull final Element e, @Nonnull final Item<Element> item) {
-        visitor.visitElement(e, item);
+    protected void visit(@Nonnull final Element e, @Nonnull final TraversalContext context) {
+        visitor.visitElement(e, context.getItem());
     }
     
 }

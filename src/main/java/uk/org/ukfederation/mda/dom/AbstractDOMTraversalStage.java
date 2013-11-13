@@ -25,6 +25,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.xml.ElementSupport;
 
 import org.w3c.dom.Element;
@@ -34,23 +35,61 @@ import org.w3c.dom.Element;
  */
 @ThreadSafe
 public abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
+    
+    /** Context for a particular traversal. */
+    protected class TraversalContext {
+        
+        /** The {@link Item} this traversal is being performed on. */
+        private final Item<Element> item;
+        
+        /** Map of data for this traversal. */
+        private final ClassToInstanceMultiMap<Object> stash = new ClassToInstanceMultiMap<>();
+        
+        /**
+         * Constructor.
+         * 
+         * @param contextItem the {@link Item} this traversal is being performed on.
+         */
+        public TraversalContext(@Nonnull Item<Element> contextItem) {
+            item = contextItem;
+        }
+        
+        /**
+         * Get the {@link Item} this traversal is being performed on.
+         * 
+         * @return the context {@link Item}
+         */
+        public Item<Element> getItem() {
+            return item;
+        }
+        
+        /**
+         * Get the stashed information for this traversal.
+         * 
+         * @return the stashed information
+         */
+        public ClassToInstanceMultiMap<Object> getStash() {
+            return stash;
+        }
+        
+    }
 
     /**
      * Indicates whether the visitor should be applied to a particular {@link Element}.
      * 
-     * @param e {@link Element} to which we may wish to apply the visitor
+     * @param element {@link Element} to which we may wish to apply the visitor
      * 
      * @return <code>true</code> if the visitor should be applied to this {@link Element}.
      */
-    protected abstract boolean applicable(@Nonnull final Element e);
+    protected abstract boolean applicable(@Nonnull final Element element);
 
     /**
      * Visit a particular {@link Element}.
      * 
-     * @param e the {@link Element} to visit.
-     * @param item the context {@link Item}.
+     * @param element the {@link Element} to visit
+     * @param context the traversal context
      */
-    protected abstract void visit(@Nonnull final Element e, @Nonnull final Item<Element> item);
+    protected abstract void visit(@Nonnull final Element element, @Nonnull final TraversalContext context);
     
     /**
      * Depth-first traversal of the DOM tree rooted in an element, applying the
@@ -58,16 +97,16 @@ public abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
      * each level, so that the visitor could in principle reorder or delete them
      * during processing.
      * 
-     * @param e {@link Element} to start from
-     * @param item {@link Item} context for the traversal
+     * @param element {@link Element} to start from
+     * @param context context for the traversal
      */
-    private void traverse(@Nonnull final Element e, @Nonnull final Item<Element> item) {
-        final List<Element> children = ElementSupport.getChildElements(e);
+    private void traverse(@Nonnull final Element element, @Nonnull final TraversalContext context) {
+        final List<Element> children = ElementSupport.getChildElements(element);
         for (Element child : children) {
-            traverse(child, item);
+            traverse(child, context);
         }
-        if (applicable(e)) {
-            visit(e, item);
+        if (applicable(element)) {
+            visit(element, context);
         }
     }
     
@@ -75,7 +114,8 @@ public abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
     protected void doExecute(Collection<Item<Element>> itemCollection) throws StageProcessingException {
         for (Item<Element> item : itemCollection) {
             final Element docElement = item.unwrap();
-            traverse(docElement, item);
+            final TraversalContext context = new TraversalContext(item);
+            traverse(docElement, context);
         }
     }
 

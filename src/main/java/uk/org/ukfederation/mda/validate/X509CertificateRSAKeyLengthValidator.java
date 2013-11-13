@@ -38,10 +38,10 @@ import net.shibboleth.metadata.Item;
 @ThreadSafe
 public class X509CertificateRSAKeyLengthValidator extends AbstractX509CertificateValidator {
 
-    /** The RSA key length below which an error should result. Default: {@value}. */
+    /** The RSA key length below which an error should result. Default: 2048. */
     private int errorBoundary = 2048;
     
-    /** The RSA key length below which a warning should result. Default: {@value}. */
+    /** The RSA key length below which a warning should result. Default: 0 (disabled). */
     private int warningBoundary;
     
     /**

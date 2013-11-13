@@ -34,7 +34,7 @@ import org.w3c.dom.Element;
  * Abstract parent class for stages which visit {@link Element}s named by a
  * collection of {@link QName}s.
  */
-abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
+abstract class BaseElementVisitingStage extends BaseDOMTraversalStage {
 
     /** Visitor to apply to each visited element. */
     @Nonnull private final ElementVisitor visitor;
@@ -47,7 +47,7 @@ abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
      * 
      * @param what {@link NodeVisitor} to apply to each {@link Element} visited.
      */
-    AbstractElementVisitingStage(final ElementVisitor what) {
+    BaseElementVisitingStage(final ElementVisitor what) {
         visitor = what;
     }
 

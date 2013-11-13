@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
  * A DOM traversal class using the template method pattern.
  */
 @ThreadSafe
-abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
+abstract class BaseDOMTraversalStage extends BaseStage<Element> {
 
     /**
      * Indicates whether the visitor should be applied to a particular {@link Element}.

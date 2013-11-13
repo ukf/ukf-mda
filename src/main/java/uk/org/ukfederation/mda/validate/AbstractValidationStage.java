@@ -1,0 +1,83 @@
+/*
+ * Copyright (C) 2013 University of Edinburgh.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.org.ukfederation.mda.validate;
+
+import java.util.Collections;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
+import net.shibboleth.metadata.Item;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
+
+import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+
+/**
+ * Base stage to apply a collection of validators to each objects from each item.
+ * 
+ * @param <T> type of the object to be validated
+ */ 
+public abstract class AbstractValidationStage<T> extends AbstractDOMTraversalStage {
+
+    /** The collection of validators to apply. */
+    @Nonnull
+    private List<Validator<T>> validators = Collections.emptyList();
+    
+    /**
+     * Set the list of validators to apply to each item.
+     * 
+     * @param newValidators the list of validators to set
+     */
+    public void setValidators(@Nonnull final List<Validator<T>> newValidators) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
+        validators = ImmutableList.copyOf(Iterables.filter(newValidators, Predicates.notNull()));
+    }
+    
+    /**
+     * Gets the list of validators being applied to each item.
+     * 
+     * @return list of validators
+     */
+    @Nonnull
+    public List<Validator<T>> getValidators() {
+        return Collections.unmodifiableList(validators);
+    }
+
+    /**
+     * Apply each of the configured validators in turn to the provided object.
+     * 
+     * @param obj object to be validated
+     * @param item {@link Item} context for the validation
+     */
+    protected void applyValidators(@Nonnull final T obj, @Nonnull final Item<?> item) {
+        for (Validator<T> validator: validators) {
+            validator.validate(obj, item, getId());
+        }
+    }
+    
+    /** {@inheritDoc} */
+    protected void doDestroy() {
+        validators = null;
+        super.doDestroy();
+    }
+
+}

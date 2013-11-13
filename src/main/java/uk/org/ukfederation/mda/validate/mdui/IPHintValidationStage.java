@@ -24,11 +24,13 @@ import net.shibboleth.utilities.java.support.net.IPRange;
 
 import org.w3c.dom.Element;
 
+import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
+
 /**
  * A stage which validates mdui:IPHint elements.
  */
 @ThreadSafe
-public class IPHintValidationStage extends BaseValidationStage {
+public class IPHintValidationStage extends AbstractDOMTraversalStage {
 
     /** Whether to check that the CIDR notation describes a network. Defaults to true. */
     private boolean checkingNetworks = true;

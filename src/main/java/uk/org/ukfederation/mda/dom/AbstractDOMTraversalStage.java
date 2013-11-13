@@ -22,12 +22,16 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
+import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.xml.ElementSupport;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
 /**
@@ -117,6 +121,54 @@ public abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
             final TraversalContext context = new TraversalContext(item);
             traverse(docElement, context);
         }
+    }
+
+    /**
+     * Returns the {@link Element} representing the EntityDescriptor which is the
+     * closest-containing ancestor of the given element.
+     * 
+     * @param element {@link Element} to locate the ancestor Entity of.
+     * @return ancestor EntityDescriptor {@link Element}, or null.
+     */
+    protected Element ancestorEntity(@Nonnull final Element element) {
+        assert element != null;
+        for (Element e = element; e != null; e = (Element) e.getParentNode()) {
+            if (SAMLMetadataSupport.isEntityDescriptor(e)) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Add an {@link ErrorStatus} to the given item, in respect of the given {@link Element}.
+     * If the item is an EntitiesDescriptor, interpose an identifier for the individual
+     * EntityDescriptor.
+     * 
+     * @param item      {@link Item} to add the error to
+     * @param element   {@link Element} the error reflects
+     * @param error     error text
+     */
+    protected void addError(@Nonnull final Item<Element> item, @Nonnull final Element element,
+            @Nonnull final String error) {
+        assert item != null;
+        assert element != null;
+        assert error != null;
+        final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+        String prefix = "";
+        if (SAMLMetadataSupport.isEntitiesDescriptor(element)) {
+            final Element entity = ancestorEntity(element);
+            final Attr id = entity.getAttributeNode("ID");
+            if (id != null) {
+                prefix = id.getTextContent() + ": ";
+            } else {
+                Attr entityID = entity.getAttributeNode("entityID");
+                if (entityID != null) {
+                    prefix = entityID.getTextContent() + ": ";
+                }
+            }
+        }
+        metadata.put(new ErrorStatus(getId(), prefix + error));
     }
 
 }

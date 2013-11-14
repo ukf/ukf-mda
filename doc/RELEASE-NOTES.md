@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.2
+
+
+
 ## Version 0.8.1
 
 * Refactored the DOM visitor framework so that the basic traversal case is separated from the more specific case where we want to visit one of a set of `QName`s.

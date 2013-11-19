@@ -88,4 +88,21 @@ public abstract class BaseValidator {
         item.getItemMetadata().put(new WarningStatus(makeComponentId(stageId), message));
     }
     
+    /**
+     * Add a {@link WarningStatus} or {@link ErrorStatus} to the given {@link Item}.
+     * 
+     * @param error <code>true</code> if an {@link ErrorStatus} should be added
+     * @param message message to include in the status metadata
+     * @param item {@link Item} to add the status metadata to
+     * @param stageId component identifier for the calling stage
+     */
+    protected void addStatus(final boolean error, @Nonnull final String message, @Nonnull final Item<?> item,
+            @Nonnull final String stageId) {
+        if (error) {
+            addError(message, item, stageId);
+        } else {
+            addWarning(message, item, stageId);
+        }
+    }
+    
 }

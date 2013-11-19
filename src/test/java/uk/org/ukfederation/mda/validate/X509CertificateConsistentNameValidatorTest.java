@@ -53,6 +53,7 @@ public class X509CertificateConsistentNameValidatorTest extends BaseTest {
     public void testOK() throws Exception {
         final Item<String> item = new MockItem("foo");
         final X509CertificateConsistentNameValidator val = new X509CertificateConsistentNameValidator();
+        Assert.assertTrue(val.isError());
         final X509Certificate cert = getCertificate("ligo-new.pem");
         val.validate(cert, item, "stage");
         errorsAndWarnings(item, 0, 0);
@@ -74,6 +75,17 @@ public class X509CertificateConsistentNameValidatorTest extends BaseTest {
         final X509Certificate cert = getCertificate("uk002204.pem");
         val.validate(cert, item, "stage");
         errorsAndWarnings(item, 1, 0);
+    }
+    
+    @Test
+    public void testWarning() throws Exception {
+        final Item<String> item = new MockItem("foo");
+        final X509CertificateConsistentNameValidator val = new X509CertificateConsistentNameValidator();
+        val.setError(false);
+        Assert.assertFalse(val.isError());
+        final X509Certificate cert = getCertificate("uk002204.pem");
+        val.validate(cert, item, "stage");
+        errorsAndWarnings(item, 0, 1);
     }
 
 }

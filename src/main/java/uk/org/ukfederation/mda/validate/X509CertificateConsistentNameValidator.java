@@ -49,6 +49,9 @@ import edu.vt.middleware.crypt.util.HexConverter;
 /**
  * Validator class to check that X.509 certificate CNs are consistent with any
  * DNS subjectAltNames.
+ * 
+ * A bean property controls whether a failure results in an error or warning status.
+ * The default is to add an {@link net.shibboleth.metadata.ErrorStatus}.
  */
 @ThreadSafe
 public class X509CertificateConsistentNameValidator extends AbstractX509CertificateValidator {
@@ -245,12 +248,37 @@ public class X509CertificateConsistentNameValidator extends AbstractX509Certific
     // Checkstyle: CyclomaticComplexity ON
     
     /**
+     * Whether an {@link net.shibboleth.metadata.ErrorStatus} should be added on failure.
+     * 
+     * Default: <code>true</code>.
+     */
+    private boolean error = true;
+    
+    /**
      * Constructor.
      */
     public X509CertificateConsistentNameValidator() {
         super("ConsistentName");
     }
 
+    /**
+     * Set whether an {@link net.shibboleth.metadata.ErrorStatus} should be added on failure.
+     * 
+     * @param newValue whether an {@link net.shibboleth.metadata.ErrorStatus} should be added on failure
+     */
+    public void setError(final boolean newValue) {
+        error = newValue;
+    }
+    
+    /**
+     * Returns whether an {@link net.shibboleth.metadata.ErrorStatus} is being added on failure.
+     * 
+     * @return <code>true</code> if an {@link net.shibboleth.metadata.ErrorStatus} is being added on failure.
+     */
+    public boolean isError() {
+        return error;
+    }
+    
     /** {@inheritDoc} */
     public void validate(@Nonnull final X509Certificate cert, @Nonnull final Item<?> item,
             @Nonnull final String stageId) {
@@ -286,7 +314,7 @@ public class X509CertificateConsistentNameValidator extends AbstractX509Certific
                     b.append('"');
                 }
                 b.append('}');
-                addError(b.toString(), item, stageId);
+                addStatus(error, b.toString(), item, stageId);
             }
         }
     }

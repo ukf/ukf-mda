@@ -2,7 +2,7 @@
 
 ## Version 0.8.2
 
-
+* Added `X509CertificateConsistentNameValidator` to check for consistency between an embedded certificate's subject `CN` and any DNS Subject Alternative Names.
 
 ## Version 0.8.1
 

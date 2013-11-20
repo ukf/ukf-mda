@@ -3,6 +3,7 @@
 ## Version 0.8.2
 
 * Added `X509CertificateConsistentNameValidator` to check for consistency between an embedded certificate's subject `CN` and any DNS Subject Alternative Names. A bean property controls whether an `ErrorStatus` or `WarningStatus` is applied in the case of failure.
+* Added the `X509CertificateRSAExponentValidator`, which validates the (public) exponent in an RSA public key. Value boundaries can be set for warning and error conditions.
 
 ## Version 0.8.1
 

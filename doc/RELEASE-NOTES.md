@@ -5,6 +5,7 @@
 * `Validator` beans are now identifiable, initializable, destructable components, in the same way that `Stage`s are.
 * Added `X509CertificateConsistentNameValidator` to check for consistency between an embedded certificate's subject `CN` and any DNS Subject Alternative Names. A bean property controls whether an `ErrorStatus` or `WarningStatus` is applied in the case of failure.
 * Added the `X509CertificateRSAExponentValidator`, which validates the (public) exponent in an RSA public key. Value boundaries can be set for warning and error conditions.
+* Added the `X509CertificateRSAOpenSSLBlacklistValidator`, which validates the modulus in an RSA public key against OpenSSL format blacklists to detect Debian weak keys.
 
 ## Version 0.8.1
 

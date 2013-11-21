@@ -19,13 +19,17 @@ package uk.org.ukfederation.mda.validate;
 import javax.annotation.Nonnull;
 
 import net.shibboleth.metadata.Item;
+import net.shibboleth.utilities.java.support.component.DestructableComponent;
+import net.shibboleth.utilities.java.support.component.IdentifiableComponent;
+import net.shibboleth.utilities.java.support.component.InitializableComponent;
 
 /**
  * Interface for a validator to be applied to an object in the context of a given {@link Item}.
  * 
  * @param <T> type of the object to be validated
  */
-public interface Validator<T> {
+public interface Validator<T> extends DestructableComponent, IdentifiableComponent,
+    InitializableComponent {
     
     /**
      * Apply the validator to the object in the given {@link Item} context.

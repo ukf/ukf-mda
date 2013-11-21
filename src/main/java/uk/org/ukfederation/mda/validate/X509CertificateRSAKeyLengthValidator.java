@@ -48,7 +48,8 @@ public class X509CertificateRSAKeyLengthValidator extends AbstractX509Certificat
      * Constructor.
      */
     public X509CertificateRSAKeyLengthValidator() {
-        super("RSAKeyLength");
+        super();
+        setId("RSAKeyLength");
     }
 
     /**

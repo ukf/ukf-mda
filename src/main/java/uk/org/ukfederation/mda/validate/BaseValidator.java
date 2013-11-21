@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.WarningStatus;
+import net.shibboleth.utilities.java.support.component.AbstractDestructableIdentifiableInitializableComponent;
 
 /**
  * Base class for validators.
@@ -28,30 +29,8 @@ import net.shibboleth.metadata.WarningStatus;
  * Encapsulates the notion of an identifier for each validator class, and helper
  * methods for constructing status metadata.
  */
-public abstract class BaseValidator {
+public abstract class BaseValidator extends AbstractDestructableIdentifiableInitializableComponent {
 
-    /** Identifier for this validator. Normally set per validation class. */
-    private final String validatorId;
-    
-    /**
-     * Constructor.
-     * 
-     * @param id an identifier for this validator
-     */
-    public BaseValidator(@Nonnull final String id) {
-        validatorId = id;
-    }
-
-    /**
-     * Return this validator's identifier.
-     * 
-     * @return this validator's identifier
-     */
-    @Nonnull
-    public final String getValidatorId() {
-        return validatorId;
-    }
-    
     /**
      * Construct a modified component identifier from the stage identifier and the
      * validator identifier.
@@ -61,7 +40,12 @@ public abstract class BaseValidator {
      * @return composite component identifier
      */
     private String makeComponentId(@Nonnull final String stageId) {
-        return stageId + "/" + getValidatorId();
+        final String id = getId();
+        if (id == null) {
+            return stageId;
+        } else {
+            return stageId + "/" + getId();
+        }
     }
 
     /**

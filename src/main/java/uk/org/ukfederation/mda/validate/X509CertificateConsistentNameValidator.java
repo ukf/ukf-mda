@@ -258,7 +258,8 @@ public class X509CertificateConsistentNameValidator extends AbstractX509Certific
      * Constructor.
      */
     public X509CertificateConsistentNameValidator() {
-        super("ConsistentName");
+        super();
+        setId("ConsistentName");
     }
 
     /**

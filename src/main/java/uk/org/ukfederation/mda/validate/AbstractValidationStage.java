@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
 
@@ -77,6 +78,17 @@ public abstract class AbstractValidationStage<T> extends AbstractDOMTraversalSta
     protected void doDestroy() {
         validators = null;
         super.doDestroy();
+    }
+
+    /** {@inheritDoc} */
+    protected void doInitialize() throws ComponentInitializationException {
+        super.doInitialize();
+
+        for (Validator<T> validator : validators) {
+            if (!validator.isInitialized()) {
+                validator.initialize();
+            }
+        }
     }
 
 }

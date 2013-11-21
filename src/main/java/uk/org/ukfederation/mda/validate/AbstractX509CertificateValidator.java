@@ -18,20 +18,9 @@ package uk.org.ukfederation.mda.validate;
 
 import java.security.cert.X509Certificate;
 
-import javax.annotation.Nonnull;
-
 /**
  * Abstract class implementing validation on {@link X509Certificate} objects.
  */
 public abstract class AbstractX509CertificateValidator extends BaseValidator implements Validator<X509Certificate> {
-
-    /**
-     * Constructor.
-     * 
-     * @param id identifier for this validator
-     */
-    public AbstractX509CertificateValidator(@Nonnull final String id) {
-        super(id);
-    }
 
 }

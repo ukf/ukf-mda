@@ -50,7 +50,8 @@ public class X509CertificateRSAExponentValidator extends AbstractX509Certificate
      * Constructor.
      */
     public X509CertificateRSAExponentValidator() {
-        super("RSAExponent");
+        super();
+        setId("RSAExponent");
     }
 
     /**

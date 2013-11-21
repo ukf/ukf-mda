@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.WarningStatus;
+import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
 import net.shibboleth.utilities.java.support.component.AbstractDestructableIdentifiableInitializableComponent;
 
 /**
@@ -30,6 +31,11 @@ import net.shibboleth.utilities.java.support.component.AbstractDestructableIdent
  * methods for constructing status metadata.
  */
 public abstract class BaseValidator extends AbstractDestructableIdentifiableInitializableComponent {
+
+    /** {@inheritDoc} */
+    public synchronized void setId(@Nonnull @NotEmpty final String componentId) {
+        super.setId(componentId);
+    }
 
     /**
      * Construct a modified component identifier from the stage identifier and the

@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
@@ -67,8 +68,10 @@ public abstract class AbstractValidationStage<T> extends AbstractDOMTraversalSta
      * 
      * @param obj object to be validated
      * @param context context for the validation
+     * @throws StageProcessingException if errors occur during processing
      */
-    protected void applyValidators(@Nonnull final T obj, @Nonnull final TraversalContext context) {
+    protected void applyValidators(@Nonnull final T obj, @Nonnull final TraversalContext context)
+            throws StageProcessingException {
         for (Validator<T> validator: validators) {
             validator.validate(obj, context.getItem(), getId());
         }

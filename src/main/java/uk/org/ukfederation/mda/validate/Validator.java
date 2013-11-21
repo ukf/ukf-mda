@@ -19,6 +19,7 @@ package uk.org.ukfederation.mda.validate;
 import javax.annotation.Nonnull;
 
 import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.component.DestructableComponent;
 import net.shibboleth.utilities.java.support.component.IdentifiableComponent;
 import net.shibboleth.utilities.java.support.component.InitializableComponent;
@@ -40,7 +41,9 @@ public interface Validator<T> extends DestructableComponent, IdentifiableCompone
      * @param item the {@link Item} context for the validation
      * @param stageId the identifier for the stage that is requesting the validation, for
      *      inclusion in status metadata
+     * @throws StageProcessingException if an error occurs during validation
      */
-    public void validate(@Nonnull T e, @Nonnull Item<?> item, @Nonnull String stageId);
+    public void validate(@Nonnull T e, @Nonnull Item<?> item, @Nonnull String stageId)
+        throws StageProcessingException;
     
 }

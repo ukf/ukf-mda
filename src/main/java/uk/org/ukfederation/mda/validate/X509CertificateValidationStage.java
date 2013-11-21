@@ -24,6 +24,7 @@ import java.security.cert.X509Certificate;
 import javax.annotation.Nonnull;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.codec.Base64Support;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 
@@ -46,7 +47,8 @@ public class X509CertificateValidationStage extends AbstractValidationStage<X509
     }
 
     /** {@inheritDoc} */
-    protected void visit(@Nonnull final Element element, @Nonnull final TraversalContext context) {
+    protected void visit(@Nonnull final Element element, @Nonnull final TraversalContext context) 
+        throws StageProcessingException {
         final String text = element.getTextContent();
         final byte[] data = Base64Support.decode(text);
         try {

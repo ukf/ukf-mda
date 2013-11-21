@@ -92,8 +92,10 @@ public abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
      * 
      * @param element the {@link Element} to visit
      * @param context the traversal context
+     * @throws StageProcessingException if errors occur during processing
      */
-    protected abstract void visit(@Nonnull final Element element, @Nonnull final TraversalContext context);
+    protected abstract void visit(@Nonnull final Element element, @Nonnull final TraversalContext context)
+        throws StageProcessingException;
     
     /**
      * Depth-first traversal of the DOM tree rooted in an element, applying the
@@ -103,8 +105,10 @@ public abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
      * 
      * @param element {@link Element} to start from
      * @param context context for the traversal
+     * @throws StageProcessingException if errors occur during processing
      */
-    private void traverse(@Nonnull final Element element, @Nonnull final TraversalContext context) {
+    private void traverse(@Nonnull final Element element, @Nonnull final TraversalContext context) 
+        throws StageProcessingException {
         final List<Element> children = ElementSupport.getChildElements(element);
         for (Element child : children) {
             traverse(child, context);

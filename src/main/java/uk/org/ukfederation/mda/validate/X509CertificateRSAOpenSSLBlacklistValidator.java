@@ -45,8 +45,9 @@ import net.shibboleth.utilities.java.support.resource.ResourceException;
 import org.apache.commons.codec.binary.Hex;
 
 /**
- * Validator class to check RSA moduli in X.509 certificates against a Debian-format
- * blacklist.
+ * Validator class to check RSA moduli in X.509 certificates against a OpenSSL-format
+ * blacklist. Appropriate blacklists are available as part of the Debian 7.x
+ * openssl-blacklist and openssl-blacklist-extra packages.
  */
 @ThreadSafe
 public class X509CertificateRSAOpenSSLBlacklistValidator extends AbstractX509CertificateValidator {

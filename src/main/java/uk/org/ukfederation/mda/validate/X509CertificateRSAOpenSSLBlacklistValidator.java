@@ -174,7 +174,8 @@ public class X509CertificateRSAOpenSSLBlacklistValidator extends AbstractX509Cer
             if (keySize == 0 || keySize == modulus.bitLength()) {
                 final String value = openSSLDigest(modulus);
                 if (blacklistedValues.contains(value)) {
-                    addError("RSA modulus included in key blacklist", item, stageId);
+                    addError("RSA modulus included in key blacklist (" + value + ")",
+                            item, stageId);
                 }
             }
         }

@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.3 ##
+
+* Improved error status messages from `X509CertificateRSAOpenSSLBlacklistValidator`.
+
 ## Version 0.8.2
 
 * `Validator` beans are now identifiable, initializable, destructable components, in the same way that `Stage`s are.

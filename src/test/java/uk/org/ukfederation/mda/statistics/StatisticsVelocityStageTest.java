@@ -22,7 +22,6 @@ import java.util.Collection;
 import net.shibboleth.metadata.Item;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -31,9 +30,9 @@ import uk.org.ukfederation.mda.BaseDOMTest;
 /** Unit tests for the StatisticsVelocityStage class. */
 public class StatisticsVelocityStageTest extends BaseDOMTest {
 
-    @BeforeClass
-    private void init() {
-        setTestingClass(StatisticsVelocityStage.class);
+    /** Constructor sets class under test. */
+    public StatisticsVelocityStageTest() {
+        super(StatisticsVelocityStage.class);
     }
 
     /**

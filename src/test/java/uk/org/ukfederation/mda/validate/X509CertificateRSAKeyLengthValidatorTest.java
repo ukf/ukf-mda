@@ -5,16 +5,15 @@ import java.security.cert.X509Certificate;
 
 import net.shibboleth.metadata.Item;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
 
 public class X509CertificateRSAKeyLengthValidatorTest extends BaseCertificateValidatorTest {
     
-    @BeforeClass
-    public void beforeClass() throws Exception {
-        setTestingClass(X509CertificateRSAKeyLengthValidator.class);
+    /** Constructor sets class under test. */
+    public X509CertificateRSAKeyLengthValidatorTest() throws Exception {
+        super(X509CertificateRSAKeyLengthValidator.class);
     }
 
     @Test

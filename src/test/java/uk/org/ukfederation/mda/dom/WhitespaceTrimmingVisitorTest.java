@@ -18,6 +18,11 @@ import uk.org.ukfederation.mda.BaseDOMTest;
 
 public class WhitespaceTrimmingVisitorTest extends BaseDOMTest {
     
+    /** Constructor sets class under test. */
+    public WhitespaceTrimmingVisitorTest() {
+        super(WhitespaceTrimmingVisitor.class);
+    }
+    
     private DOMElementItem makeItem() throws Exception {
         final ParserPool parserPool = getParserPool();
         final DocumentBuilder builder = parserPool.getBuilder();

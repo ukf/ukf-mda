@@ -12,15 +12,14 @@ import net.shibboleth.utilities.java.support.component.ComponentInitializationEx
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
 public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
 
-    @BeforeClass
-    private void init() {
-        setTestingClass(IdPDisplayNameDuplicateDetectingStage.class);
+    /** Constructor sets class under test. */
+    public IdPDisplayNameDuplicateDetectingStageTest() {
+        super(IdPDisplayNameDuplicateDetectingStage.class);
     }
 
     private IdPDisplayNameDuplicateDetectingStage makeStage() throws ComponentInitializationException {

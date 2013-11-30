@@ -6,16 +6,15 @@ import java.security.cert.X509Certificate;
 import junit.framework.Assert;
 import net.shibboleth.metadata.Item;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
 
 public class X509CertificateConsistentNameValidatorTest extends BaseCertificateValidatorTest {
     
-    @BeforeClass
-    public void beforeClass() throws Exception {
-        setTestingClass(X509CertificateConsistentNameValidator.class);
+    /** Constructor sets class under test. */
+    public X509CertificateConsistentNameValidatorTest() throws Exception {
+        super(X509CertificateConsistentNameValidator.class);
     }
 
     @Test

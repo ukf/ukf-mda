@@ -25,16 +25,15 @@ import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
 /** Unit tests for the {@link UKEntityOrderingStrategy} class. */
 public class UKEntityOrderingStrategyTest extends BaseDOMTest {
     
-    @BeforeClass
-    private void init() {
-        setTestingClass(UKEntityOrderingStrategy.class);
+    /** Constructor sets class under test. */
+    public UKEntityOrderingStrategyTest() {
+        super(UKEntityOrderingStrategy.class);
     }
 
     /**

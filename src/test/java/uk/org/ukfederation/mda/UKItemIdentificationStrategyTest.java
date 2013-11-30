@@ -19,15 +19,14 @@ import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
 public class UKItemIdentificationStrategyTest extends BaseDOMTest {
 
-    @BeforeClass
-    private void init() {
-        setTestingClass(UKItemIdentificationStrategy.class);
+    /** Constructor sets class under test. */
+    public UKItemIdentificationStrategyTest() {
+        super(UKItemIdentificationStrategy.class);
     }
     
     private UKItemIdentificationStrategy makeStrat() {

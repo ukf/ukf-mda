@@ -14,7 +14,6 @@ import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -22,9 +21,9 @@ import uk.org.ukfederation.mda.BaseDOMTest;
 
 public class X509CertificateValidationStageTest extends BaseDOMTest {
 
-    @BeforeClass
-    public void beforeClass() throws Exception {
-        setTestingClass(X509CertificateValidationStage.class);
+    /** Constructor sets class under test. */
+    public X509CertificateValidationStageTest() throws Exception {
+        super(X509CertificateValidationStage.class);
     }
     
     private X509CertificateValidationStage makeStage() throws ComponentInitializationException {

@@ -14,7 +14,6 @@ import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -23,9 +22,9 @@ import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
 
 public class ElementWhitespaceTrimmingStageTest extends BaseDOMTest {
     
-    @BeforeClass
-    private void init() {
-        setTestingClass(ElementWhitespaceTrimmingStage.class);
+    /** Constructor sets class under test. */
+    public ElementWhitespaceTrimmingStageTest() {
+        super(ElementWhitespaceTrimmingStage.class);
     }
     
     private ElementWhitespaceTrimmingStage makeStage() throws ComponentInitializationException {

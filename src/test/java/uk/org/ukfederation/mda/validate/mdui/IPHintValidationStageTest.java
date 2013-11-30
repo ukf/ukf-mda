@@ -11,7 +11,6 @@ import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -19,9 +18,9 @@ import uk.org.ukfederation.mda.BaseDOMTest;
 
 public class IPHintValidationStageTest extends BaseDOMTest {
 
-    @BeforeClass
-    private void init() {
-        setTestingClass(IPHintValidationStage.class);
+    /** Constructor sets class under test. */
+    public IPHintValidationStageTest() throws Exception {
+        super(IPHintValidationStage.class);
     }
     
     @Test

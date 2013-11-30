@@ -48,6 +48,11 @@ public abstract class BaseDOMTest extends BaseTest {
     /** Initialized parser pool used to parser data. */
     protected BasicParserPool parserPool;
     
+    /** Constructor */
+    protected BaseDOMTest(final Class<?> clazz) {
+        super(clazz);
+    }
+    
     /**
      * Setup test class. Creates and initializes the parser pool. Set BouncyCastle as a JCE provider.
      * 

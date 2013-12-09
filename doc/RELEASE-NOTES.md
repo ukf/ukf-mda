@@ -3,6 +3,7 @@
 ## Version 0.8.3 ##
 
 * Improved error status messages from `X509CertificateRSAOpenSSLBlacklistValidator`.
+* Issue #7: duplicate ODN detector can be fooled by inconsistent case
 
 ## Version 0.8.2
 

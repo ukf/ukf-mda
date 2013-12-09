@@ -252,5 +252,23 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         Assert.assertEquals(countErrors(dupC), 2, "deliberate duplicate 3");
     }
 
+    /**
+     * In this test, we check that an entity with display name variants differing only
+     * in case conventions ("Test" vs. "test" vs. "TEST") does not clash with itself.
+     */
+    @Test
+    public void nonDuplicateCaseVariants() throws Exception {
+        final DOMElementItem item1 = makeItem("self-case");
+        
+        final List<Item<Element>> items = new ArrayList<>();
+        items.add(item1);
+        
+        final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
+
+        populateIdentifiers(items);
+        stage.execute(items);
+        
+        Assert.assertEquals(countErrors(item1), 0, "first item");
+    }
 
 }

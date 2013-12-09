@@ -193,7 +193,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
                    if (that == null) {
                        // all is well
                        ids.put(key, item);
-                   } else {
+                   } else if (that != item) {
                        final String thisId = idStrategy.getItemIdentifier(item);
                        final String thatId = idStrategy.getItemIdentifier(that);
                        

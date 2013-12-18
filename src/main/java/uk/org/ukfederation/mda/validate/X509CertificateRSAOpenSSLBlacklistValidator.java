@@ -164,6 +164,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidator extends AbstractX509Cer
     }
     
     /** {@inheritDoc} */
+    @Override
     public void validate(@Nonnull final X509Certificate cert, @Nonnull final Item<?> item,
             @Nonnull final String stageId) throws StageProcessingException {
         ComponentSupport.ifNotInitializedThrowUninitializedComponentException(this);
@@ -182,6 +183,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidator extends AbstractX509Cer
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void doDestroy() {
         blacklistResource.destroy();
         blacklistResource = null;
@@ -191,6 +193,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidator extends AbstractX509Cer
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();
 

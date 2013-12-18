@@ -119,6 +119,7 @@ public abstract class AbstractDOMTraversalStage extends BaseStage<Element> {
     }
     
     /** {@inheritDoc} */
+    @Override
     protected void doExecute(Collection<Item<Element>> itemCollection) throws StageProcessingException {
         for (Item<Element> item : itemCollection) {
             final Element docElement = item.unwrap();

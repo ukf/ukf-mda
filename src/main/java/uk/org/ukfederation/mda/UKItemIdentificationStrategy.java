@@ -150,6 +150,7 @@ public class UKItemIdentificationStrategy extends FirstItemIdItemIdentificationS
     }
     
     /** {@inheritDoc} */
+    @Override
     public String getItemIdentifier(@Nonnull final Item<?> item) {
         assert item != null;
         

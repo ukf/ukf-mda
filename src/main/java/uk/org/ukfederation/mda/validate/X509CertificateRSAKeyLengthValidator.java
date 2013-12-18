@@ -89,6 +89,7 @@ public class X509CertificateRSAKeyLengthValidator extends AbstractX509Certificat
     }
     
     /** {@inheritDoc} */
+    @Override
     public void validate(@Nonnull final X509Certificate cert, @Nonnull final Item<?> item,
             @Nonnull final String stageId) {
         final PublicKey key = cert.getPublicKey();

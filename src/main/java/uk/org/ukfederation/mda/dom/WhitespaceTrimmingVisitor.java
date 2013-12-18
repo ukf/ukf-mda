@@ -31,6 +31,7 @@ import org.w3c.dom.Node;
 class WhitespaceTrimmingVisitor implements NodeVisitor, ElementVisitor, AttrVisitor {
 
     /** {@inheritDoc} */
+    @Override
     public void visitNode(@Nonnull final Node visited, @Nonnull final Item<Element> item) {
         assert visited != null;
         assert item != null;
@@ -40,11 +41,13 @@ class WhitespaceTrimmingVisitor implements NodeVisitor, ElementVisitor, AttrVisi
     }
 
     /** {@inheritDoc} */
+    @Override
     public void visitElement(@Nonnull final Element visited, @Nonnull final Item<Element> item) {
         visitNode(visited, item);
     }
     
     /** {@inheritDoc} */
+    @Override
     public void visitAttr(@Nonnull final Attr visited, @Nonnull final Item<Element> item) {
         visitNode(visited, item);
     }

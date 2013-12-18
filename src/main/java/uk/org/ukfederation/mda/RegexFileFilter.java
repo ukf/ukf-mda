@@ -61,6 +61,7 @@ public class RegexFileFilter implements FileFilter {
      * 
      * @return <code>true</code> iff <code>pathname</code> matches the regular expression.
      */
+    @Override
     public boolean accept(@Nonnull final File pathname) {
         assert pathname != null;
         return pattern.matcher(pathname.getName()).matches();

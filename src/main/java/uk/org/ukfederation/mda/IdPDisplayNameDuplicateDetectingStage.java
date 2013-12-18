@@ -160,6 +160,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
     }
     
     /** {@inheritDoc} */
+    @Override
     protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
             throws StageProcessingException {
 

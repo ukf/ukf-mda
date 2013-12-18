@@ -33,6 +33,7 @@ import net.shibboleth.utilities.java.support.component.AbstractDestructableIdent
 public abstract class BaseValidator extends AbstractDestructableIdentifiableInitializableComponent {
 
     /** {@inheritDoc} */
+    @Override
     public synchronized void setId(@Nonnull @NotEmpty final String componentId) {
         super.setId(componentId);
     }

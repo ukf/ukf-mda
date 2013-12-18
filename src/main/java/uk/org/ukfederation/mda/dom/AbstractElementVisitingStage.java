@@ -51,6 +51,7 @@ abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void doDestroy() {
         elementNames = null;
 
@@ -94,12 +95,14 @@ abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
     }
     
     /** {@inheritDoc} */
+    @Override
     protected boolean applicable(@Nonnull final Element e) {
         final QName q = new QName(e.getNamespaceURI(), e.getLocalName());
         return elementNames.contains(q);
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void visit(@Nonnull final Element e, @Nonnull final TraversalContext context) {
         visitor.visitElement(e, context.getItem());
     }

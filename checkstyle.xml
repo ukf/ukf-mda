@@ -97,6 +97,7 @@
     <module name="TrailingComment"/>
     <module name="EqualsAvoidNull"/>
     <module name="ModifiedControlVariable"/>
+    <module name="MissingOverride"/>
   </module>
   <module name="SuppressionCommentFilter">
     <property name="offCommentFormat" value="\bCheck[Ss]tyle:\s*([\w|]+)\s+OFF\b"/>

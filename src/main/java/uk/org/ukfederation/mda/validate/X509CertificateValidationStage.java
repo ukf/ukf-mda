@@ -41,12 +41,14 @@ public class X509CertificateValidationStage extends AbstractValidationStage<X509
     private CertificateFactory factory;
     
     /** {@inheritDoc} */
+    @Override
     protected boolean applicable(@Nonnull final Element e) {
         return XMLDSIGSupport.XML_DSIG_NS.equals(e.getNamespaceURI()) &&
                 "X509Certificate".equals(e.getLocalName());
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void visit(@Nonnull final Element element, @Nonnull final TraversalContext context) 
         throws StageProcessingException {
         final String text = element.getTextContent();
@@ -65,6 +67,7 @@ public class X509CertificateValidationStage extends AbstractValidationStage<X509
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();
         try {
@@ -75,6 +78,7 @@ public class X509CertificateValidationStage extends AbstractValidationStage<X509
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void doDestroy() {
         factory = null;
         super.doDestroy();

@@ -121,6 +121,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         }
         
         /** {@inheritDoc} */
+        @Override
         public int compareTo(@Nonnull OrderableItem o) {
             for (int fno = 0; fno < NFIELDS; fno++) {
                 int compared = compareField(fields[fno], o.fields[fno]);
@@ -144,6 +145,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
     }
 
     /** {@inheritDoc} */
+    @Override
     public List<Item<Element>> order(@Nonnull @NonnullElements final Collection<Item<Element>> items) {
         
         // Construct an orderable list wrapping the original items.

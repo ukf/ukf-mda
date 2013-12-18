@@ -108,6 +108,7 @@ public class StatisticsVelocityStage extends BaseStage<Element> {
 
 
     /** {@inheritDoc} */
+    @Override
     public void doExecute(final Collection<Item<Element>> collection) throws StageProcessingException {
         
         final VelocityEngine ve = new VelocityEngine();
@@ -147,6 +148,7 @@ public class StatisticsVelocityStage extends BaseStage<Element> {
 
 
     /** {@inheritDoc} */
+    @Override
     protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();
         

@@ -78,12 +78,14 @@ public abstract class AbstractValidationStage<T> extends AbstractDOMTraversalSta
     }
     
     /** {@inheritDoc} */
+    @Override
     protected void doDestroy() {
         validators = null;
         super.doDestroy();
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();
 

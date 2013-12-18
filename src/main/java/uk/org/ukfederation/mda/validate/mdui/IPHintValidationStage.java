@@ -57,12 +57,14 @@ public class IPHintValidationStage extends AbstractDOMTraversalStage {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected boolean applicable(Element element) {
         return MDUISupport.MDUI_NS.equals(element.getNamespaceURI()) &&
                 "IPHint".equals(element.getLocalName());
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void visit(@Nonnull final Element ipHint, @Nonnull final TraversalContext context) {
         assert ipHint != null;
         assert context != null;

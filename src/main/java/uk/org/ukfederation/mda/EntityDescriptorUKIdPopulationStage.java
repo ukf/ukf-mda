@@ -52,6 +52,7 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<Element> {
     private Pattern pattern;
 
     /** {@inheritDoc} */
+    @Override
     protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
             throws StageProcessingException {
 
@@ -85,6 +86,7 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<Element> {
     }
     
     /** {@inheritDoc} */
+    @Override
     protected void doDestroy() {
         pattern = null;
 
@@ -92,6 +94,7 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<Element> {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();
         pattern = Pattern.compile("^uk[0-9]{6}$");

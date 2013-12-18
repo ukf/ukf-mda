@@ -55,11 +55,13 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public int hashCode() {
         return id.hashCode();
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
@@ -76,6 +78,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public int compareTo(final UKId other) {
         return getId().compareTo(other.getId());
     }

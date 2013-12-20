@@ -6,7 +6,7 @@ This project contains a collection of beans supporting metadata aggregation for 
 
 As much as makes sense of the software developed here will be contributed to the main line Shibboleth MDA codebase once mature.
 
-Some insight into the ways we're using these components in our production deployment can be found in [this blog entry](http://iay.org.uk/blog/2012/08/uk-federation-metadata-aggregation).
+Some insight into the ways we're using these components in our [production deployment](https://github.com/ukf/ukf-meta) can be found in [this blog entry](http://iay.org.uk/blog/2012/08/uk-federation-metadata-aggregation).
 
 ## Copyright and License
 

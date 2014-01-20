@@ -101,7 +101,7 @@ public class X509CertificateRSAExponentValidator extends AbstractX509Certificate
             final RSAPublicKey rsaKey = (RSAPublicKey) key;
             final BigInteger exponent = rsaKey.getPublicExponent();
             if (!exponent.testBit(0)) {
-                addError("RSA publica exponent of " + exponent + " must be odd", item, stageId);
+                addError("RSA public exponent of " + exponent + " must be odd", item, stageId);
             } else if (exponent.compareTo(errorBoundary) < 0) {
                 addError("RSA public exponent of " + exponent + " is less than required " + errorBoundary,
                         item, stageId);

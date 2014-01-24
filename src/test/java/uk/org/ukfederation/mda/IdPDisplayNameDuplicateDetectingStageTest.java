@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.ItemIdentificationStrategy;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
@@ -271,4 +272,15 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         Assert.assertEquals(countErrors(item1), 0, "first item");
     }
 
+    @Test
+    public void idStrategy() throws Exception {
+        final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
+        Assert.assertNotNull(stage.getIdentificationStrategy());
+        final ItemIdentificationStrategy strategy = new UKItemIdentificationStrategy();
+        stage.setIdentificationStrategy(strategy);
+        Assert.assertEquals(stage.getIdentificationStrategy(), strategy);
+        stage.initialize();
+        stage.destroy();
+    }
+    
 }

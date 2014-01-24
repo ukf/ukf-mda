@@ -27,6 +27,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
 import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.FirstItemIdItemIdentificationStrategy;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemIdentificationStrategy;
 import net.shibboleth.metadata.ItemMetadata;
@@ -35,6 +36,7 @@ import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +63,34 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(IdPDisplayNameDuplicateDetectingStage.class);
 
+    /**
+     * Item identification strategy to use for duplicated entities.
+     * 
+     * Default: {@link FirstItemIdItemIdentificationStrategy}.
+     */
+    @Nonnull
+    private ItemIdentificationStrategy identificationStrategy = new FirstItemIdItemIdentificationStrategy();
+    
+    /**
+     * Gets the item identification strategy to be used.
+     * 
+     * @return the {@link ItemIdentificationStrategy} value
+     */
+    @Nonnull
+    public ItemIdentificationStrategy getIdentificationStrategy() {
+        return identificationStrategy;
+    }
+    
+    /**
+     * Sets the item identification strategy to be used.
+     * 
+     * @param strategy the {@link ItemIdentificationStrategy} to use
+     */
+    public void setIdentificationStrategy(@Nonnull final ItemIdentificationStrategy strategy) {
+        Constraint.isNotNull(strategy, "identification strategy may not be null");
+        identificationStrategy = strategy;
+    }
+    
     /**
      * Determines whether the given <code>element</code> has at least one child named by <code>qname</code>.
      * 
@@ -171,11 +201,6 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
          */
         final Set<Item<Element>> markedItems = new HashSet<>();
         
-        /*
-         * How we turn items into names for display.
-         */
-        final ItemIdentificationStrategy idStrategy = new UKItemIdentificationStrategy();
-        
         for (Item<Element> item : items) {
            final Element entity = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
@@ -192,8 +217,8 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
                        // all is well
                        ids.put(key, item);
                    } else if (that != item) {
-                       final String thisId = idStrategy.getItemIdentifier(item);
-                       final String thatId = idStrategy.getItemIdentifier(that);
+                       final String thisId = identificationStrategy.getItemIdentifier(item);
+                       final String thatId = identificationStrategy.getItemIdentifier(that);
                        
                        metadata.put(makeError(getId(), name, thisId, thatId));
                        markedItems.add(item);
@@ -210,4 +235,10 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
         }
     }
     
+    /** {@inheritDoc} */
+    @Override
+    protected void doDestroy() {
+        super.doDestroy();
+        identificationStrategy = null;
+    }
 }

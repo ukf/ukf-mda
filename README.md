@@ -10,7 +10,7 @@ Some insight into the ways we're using these components in our [production deplo
 
 ## Copyright and License
 
-The entire package is Copyright (C) 2013, University of Edinburgh.
+The entire package is Copyright (C) 2011&mdash;2014, University of Edinburgh.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

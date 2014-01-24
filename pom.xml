@@ -19,6 +19,7 @@
         based on the Shibboleth metadata aggregator framework.
     </description>
     <url>https://github.com/ukf/ukf-mda</url>
+    <inceptionYear>2011</inceptionYear>
 
     <properties>
         <checkstyle.configLocation>checkstyle.xml</checkstyle.configLocation>

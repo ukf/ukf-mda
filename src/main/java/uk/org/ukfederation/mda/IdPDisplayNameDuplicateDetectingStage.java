@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 University of Edinburgh.
+ * Copyright (C) 2013-2014 University of Edinburgh.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,9 +54,6 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
 
     /** {@link QName} representing an SAML metadata <code>IDPSSODescriptor</code>. */
     private static final QName MD_IDP_SSO_DESCRIPTOR = new QName(SAMLMetadataSupport.MD_NS, "IDPSSODescriptor");
-    
-    /** {@link QName} representing an <code>mdui:DisplayName</code>. */
-    private static final QName MDUI_DISPLAY_NAME = new QName(MDUISupport.MDUI_NS, "DisplayName");
     
     /** {@link QName} representing a SAML metadata <code>OrganizationDisplayName</code>. */
     private static final QName MD_ORG_DISPLAY_NAME = new QName(SAMLMetadataSupport.MD_NS, "OrganizationDisplayName");
@@ -124,7 +121,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
     @Nonnull private Set<String> extractDisplayNames(@Nonnull final Element element) {
         assert element != null;
         final Set<String> displayNames = new HashSet<>();
-        collectNames(element, MDUI_DISPLAY_NAME, displayNames);
+        collectNames(element, MDUISupport.MDUI_DISPLAY_NAME, displayNames);
         collectNames(element, MD_ORG_DISPLAY_NAME, displayNames);
         return displayNames;
     }

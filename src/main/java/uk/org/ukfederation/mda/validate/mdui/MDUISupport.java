@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 University of Edinburgh.
+ * Copyright (C) 2011-2014 University of Edinburgh.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package uk.org.ukfederation.mda.validate.mdui;
 
 import javax.annotation.concurrent.ThreadSafe;
+import javax.xml.namespace.QName;
 
 /** Support class for dealing with MDUI metadata. */
 @ThreadSafe
@@ -25,6 +26,9 @@ public final class MDUISupport {
     /** MDUI namespace. */
     public static final String MDUI_NS = "urn:oasis:names:tc:SAML:metadata:ui";
 
+    /** {@link QName} representing an <code>mdui:DisplayName</code>. */
+    public static final QName MDUI_DISPLAY_NAME = new QName(MDUISupport.MDUI_NS, "DisplayName");
+    
     /** Constructor. */
     private MDUISupport() {
     }

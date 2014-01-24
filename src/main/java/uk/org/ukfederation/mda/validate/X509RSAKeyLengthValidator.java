@@ -36,7 +36,7 @@ import net.shibboleth.metadata.Item;
  * boundary to 2048 bits and the error boundary to 1024 bits.
  */
 @ThreadSafe
-public class X509CertificateRSAKeyLengthValidator extends AbstractX509CertificateValidator {
+public class X509RSAKeyLengthValidator extends AbstractX509Validator {
 
     /** The RSA key length below which an error should result. Default: 2048. */
     private int errorBoundary = 2048;
@@ -47,7 +47,7 @@ public class X509CertificateRSAKeyLengthValidator extends AbstractX509Certificat
     /**
      * Constructor.
      */
-    public X509CertificateRSAKeyLengthValidator() {
+    public X509RSAKeyLengthValidator() {
         super();
         setId("RSAKeyLength");
     }

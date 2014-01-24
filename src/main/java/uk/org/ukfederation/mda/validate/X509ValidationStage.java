@@ -35,7 +35,7 @@ import org.w3c.dom.Element;
  * 
  * Each X.509 certificate is processed only once per item, so that duplicate status messages are suppressed.
  */ 
-public class X509CertificateValidationStage extends AbstractValidationStage<X509Certificate> {
+public class X509ValidationStage extends AbstractValidationStage<X509Certificate> {
 
     /** Certificate factory to use to convert to X.509 certificates. */
     private CertificateFactory factory;

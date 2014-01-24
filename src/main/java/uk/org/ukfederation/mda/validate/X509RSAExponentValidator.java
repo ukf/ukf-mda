@@ -38,7 +38,7 @@ import net.shibboleth.utilities.java.support.logic.Constraint;
  * this came from so doesn't seem worth insisting on by default.
  */
 @ThreadSafe
-public class X509CertificateRSAExponentValidator extends AbstractX509CertificateValidator {
+public class X509RSAExponentValidator extends AbstractX509Validator {
 
     /** The RSA public exponent value below which an error should result. Default: 5. */
     private BigInteger errorBoundary = BigInteger.valueOf(5);
@@ -49,7 +49,7 @@ public class X509CertificateRSAExponentValidator extends AbstractX509Certificate
     /**
      * Constructor.
      */
-    public X509CertificateRSAExponentValidator() {
+    public X509RSAExponentValidator() {
         super();
         setId("RSAExponent");
     }

@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
 
-public class X509CertificateRSAExponentValidatorTest extends BaseCertificateValidatorTest {
+public class X509RSAExponentValidatorTest extends BaseX509ValidatorTest {
     
     /** Constructor sets class under test. */
-    public X509CertificateRSAExponentValidatorTest() throws Exception {
-        super(X509CertificateRSAExponentValidator.class);
+    public X509RSAExponentValidatorTest() throws Exception {
+        super(X509RSAExponentValidator.class);
     }
 
     private void testCert(final String certName,
@@ -36,27 +36,27 @@ public class X509CertificateRSAExponentValidatorTest extends BaseCertificateVali
     
     @Test
     public void testDefaults() throws Exception {
-        final X509CertificateRSAExponentValidator val = new X509CertificateRSAExponentValidator();
+        final X509RSAExponentValidator val = new X509RSAExponentValidator();
         testThreeCerts(val, 1, 0, 0, 0, 0, 0);
     }
 
     @Test
     public void testNISTWarning() throws Exception {
-        final X509CertificateRSAExponentValidator val = new X509CertificateRSAExponentValidator();
+        final X509RSAExponentValidator val = new X509RSAExponentValidator();
         val.setWarningBoundary(65537);
         testThreeCerts(val, 1, 0, 0, 1, 0, 0);
     }
 
     @Test
     public void testNISTError() throws Exception {
-        final X509CertificateRSAExponentValidator val = new X509CertificateRSAExponentValidator();
+        final X509RSAExponentValidator val = new X509RSAExponentValidator();
         val.setErrorBoundary(65537);
         testThreeCerts(val, 1, 0, 1, 0, 0, 0);
     }
 
     @Test
     public void testWarningOnly() throws Exception {
-        final X509CertificateRSAExponentValidator val = new X509CertificateRSAExponentValidator();
+        final X509RSAExponentValidator val = new X509RSAExponentValidator();
         val.setErrorBoundary(0);
         val.setWarningBoundary(65537);
         testThreeCerts(val, 0, 1, 0, 1, 0, 0);

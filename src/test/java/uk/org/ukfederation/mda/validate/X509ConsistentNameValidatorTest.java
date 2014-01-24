@@ -10,17 +10,17 @@ import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
 
-public class X509CertificateConsistentNameValidatorTest extends BaseCertificateValidatorTest {
+public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
     
     /** Constructor sets class under test. */
-    public X509CertificateConsistentNameValidatorTest() throws Exception {
-        super(X509CertificateConsistentNameValidator.class);
+    public X509ConsistentNameValidatorTest() throws Exception {
+        super(X509ConsistentNameValidator.class);
     }
 
     @Test
     public void testOK() throws Exception {
         final Item<String> item = new MockItem("foo");
-        final X509CertificateConsistentNameValidator val = new X509CertificateConsistentNameValidator();
+        final X509ConsistentNameValidator val = new X509ConsistentNameValidator();
         Assert.assertTrue(val.isError());
         final X509Certificate cert = getCertificate("ligo-new.pem");
         val.validate(cert, item, "stage");
@@ -30,7 +30,7 @@ public class X509CertificateConsistentNameValidatorTest extends BaseCertificateV
     @Test
     public void testFail1() throws Exception {
         final Item<String> item = new MockItem("foo");
-        final X509CertificateConsistentNameValidator val = new X509CertificateConsistentNameValidator();
+        final X509ConsistentNameValidator val = new X509ConsistentNameValidator();
         final X509Certificate cert = getCertificate("ligo-old.pem");
         val.validate(cert, item, "stage");
         errorsAndWarnings(item, 1, 0);
@@ -39,7 +39,7 @@ public class X509CertificateConsistentNameValidatorTest extends BaseCertificateV
     @Test
     public void testFail2() throws Exception {
         final Item<String> item = new MockItem("foo");
-        final X509CertificateConsistentNameValidator val = new X509CertificateConsistentNameValidator();
+        final X509ConsistentNameValidator val = new X509ConsistentNameValidator();
         final X509Certificate cert = getCertificate("uk002204.pem");
         val.validate(cert, item, "stage");
         errorsAndWarnings(item, 1, 0);
@@ -48,7 +48,7 @@ public class X509CertificateConsistentNameValidatorTest extends BaseCertificateV
     @Test
     public void testWarning() throws Exception {
         final Item<String> item = new MockItem("foo");
-        final X509CertificateConsistentNameValidator val = new X509CertificateConsistentNameValidator();
+        final X509ConsistentNameValidator val = new X509ConsistentNameValidator();
         val.setError(false);
         Assert.assertFalse(val.isError());
         final X509Certificate cert = getCertificate("uk002204.pem");

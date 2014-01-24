@@ -21,6 +21,6 @@ import java.security.cert.X509Certificate;
 /**
  * Abstract class implementing validation on {@link X509Certificate} objects.
  */
-public abstract class AbstractX509CertificateValidator extends BaseValidator implements Validator<X509Certificate> {
+public abstract class AbstractX509Validator extends BaseValidator implements Validator<X509Certificate> {
 
 }

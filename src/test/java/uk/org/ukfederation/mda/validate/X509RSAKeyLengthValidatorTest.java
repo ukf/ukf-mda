@@ -9,17 +9,17 @@ import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
 
-public class X509CertificateRSAKeyLengthValidatorTest extends BaseCertificateValidatorTest {
+public class X509RSAKeyLengthValidatorTest extends BaseX509ValidatorTest {
     
     /** Constructor sets class under test. */
-    public X509CertificateRSAKeyLengthValidatorTest() throws Exception {
-        super(X509CertificateRSAKeyLengthValidator.class);
+    public X509RSAKeyLengthValidatorTest() throws Exception {
+        super(X509RSAKeyLengthValidator.class);
     }
 
     @Test
     public void testDefaults2048() throws Exception {
         final Item<String> item = new MockItem("foo");
-        final Validator<X509Certificate> val = new X509CertificateRSAKeyLengthValidator();
+        final Validator<X509Certificate> val = new X509RSAKeyLengthValidator();
         final X509Certificate cert = getCertificate("2048.pem");
         val.validate(cert, item, "stage");
         errorsAndWarnings(item, 0, 0);
@@ -28,7 +28,7 @@ public class X509CertificateRSAKeyLengthValidatorTest extends BaseCertificateVal
     @Test
     public void testDefaults1024() throws Exception {
         final Item<String> item = new MockItem("foo");
-        final Validator<X509Certificate> val = new X509CertificateRSAKeyLengthValidator();
+        final Validator<X509Certificate> val = new X509RSAKeyLengthValidator();
         final X509Certificate cert = getCertificate("1024.pem");
         val.validate(cert, item, "stage");
         errorsAndWarnings(item, 1, 0);
@@ -37,7 +37,7 @@ public class X509CertificateRSAKeyLengthValidatorTest extends BaseCertificateVal
     @Test
     public void testWarningOn1024() throws Exception {
         final Item<String> item = new MockItem("foo");
-        final X509CertificateRSAKeyLengthValidator val = new X509CertificateRSAKeyLengthValidator();
+        final X509RSAKeyLengthValidator val = new X509RSAKeyLengthValidator();
         val.setErrorBoundary(1024);
         val.setWarningBoundary(2048);
         final X509Certificate cert = getCertificate("1024.pem");

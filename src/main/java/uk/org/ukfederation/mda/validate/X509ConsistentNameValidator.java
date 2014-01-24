@@ -54,7 +54,7 @@ import edu.vt.middleware.crypt.util.HexConverter;
  * The default is to add an {@link net.shibboleth.metadata.ErrorStatus}.
  */
 @ThreadSafe
-public class X509CertificateConsistentNameValidator extends AbstractX509CertificateValidator {
+public class X509ConsistentNameValidator extends AbstractX509Validator {
 
     /**
      * Support class for X.509 certificate handling.
@@ -257,7 +257,7 @@ public class X509CertificateConsistentNameValidator extends AbstractX509Certific
     /**
      * Constructor.
      */
-    public X509CertificateConsistentNameValidator() {
+    public X509ConsistentNameValidator() {
         super();
         setId("ConsistentName");
     }

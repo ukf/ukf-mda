@@ -50,7 +50,7 @@ import org.apache.commons.codec.binary.Hex;
  * openssl-blacklist and openssl-blacklist-extra packages.
  */
 @ThreadSafe
-public class X509CertificateRSAOpenSSLBlacklistValidator extends AbstractX509CertificateValidator {
+public class X509RSAOpenSSLBlacklistValidator extends AbstractX509Validator {
     
     /** Sequence of bytes put on the front of the string to be hashed. */
     private final byte[] openSSLprefix = {
@@ -69,7 +69,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidator extends AbstractX509Cer
     /**
      * Constructor.
      */
-    public X509CertificateRSAOpenSSLBlacklistValidator() {
+    public X509RSAOpenSSLBlacklistValidator() {
         super();
         setId("OpenSSLBlacklist");
     }

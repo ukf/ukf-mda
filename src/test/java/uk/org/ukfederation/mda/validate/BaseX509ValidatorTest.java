@@ -12,11 +12,11 @@ import net.shibboleth.metadata.WarningStatus;
 import net.shibboleth.utilities.java.support.resource.Resource;
 import uk.org.ukfederation.mda.BaseTest;
 
-public abstract class BaseCertificateValidatorTest extends BaseTest {
+public abstract class BaseX509ValidatorTest extends BaseTest {
     
     private CertificateFactory factory;
 
-    public BaseCertificateValidatorTest(final Class<?> clazz) throws Exception {
+    public BaseX509ValidatorTest(final Class<?> clazz) throws Exception {
         super(clazz);
         factory = CertificateFactory.getInstance("X.509");
     }

@@ -2,8 +2,9 @@
 
 ## Version 0.8.3 ##
 
-* Improved error status messages from `X509CertificateRSAOpenSSLBlacklistValidator`.
 * Issue #7: duplicate ODN detector can be fooled by inconsistent case
+* Issue #10: shorten class names on X.509 validators
+* Improved error status messages from `X509RSAOpenSSLBlacklistValidator`.
 
 ## Version 0.8.2
 

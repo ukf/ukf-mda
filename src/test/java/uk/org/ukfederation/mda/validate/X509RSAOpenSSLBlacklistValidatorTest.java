@@ -10,16 +10,16 @@ import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
 
-public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertificateValidatorTest {
+public class X509RSAOpenSSLBlacklistValidatorTest extends BaseX509ValidatorTest {
     
     /** Constructor sets class under test. */
-    public X509CertificateRSAOpenSSLBlacklistValidatorTest() throws Exception {
-        super(X509CertificateRSAOpenSSLBlacklistValidator.class);
+    public X509RSAOpenSSLBlacklistValidatorTest() throws Exception {
+        super(X509RSAOpenSSLBlacklistValidator.class);
     }
 
     @Test
     public void testNotBlacklisted() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.initialize();
         Assert.assertEquals(0, val.getKeySize()); // no key size restriction
@@ -32,7 +32,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertifi
 
     @Test
     public void test1024on1024noRestriction() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.initialize();
         Assert.assertEquals(0, val.getKeySize()); // no key size restriction
@@ -45,7 +45,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertifi
 
     @Test
     public void test1024on1024Restricted() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.setKeySize(1024);
         val.initialize();
@@ -58,7 +58,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertifi
 
     @Test
     public void test1024on1024Restricted2() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.setKeySize(2048); // untrue, but should prevent any matches
         val.initialize();
@@ -71,7 +71,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertifi
 
     @Test
     public void test2048on1024noRestriction() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.initialize();
         Assert.assertEquals(0, val.getKeySize()); // no key size restriction
@@ -84,7 +84,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertifi
 
     @Test
     public void test2048on2048noRestriction() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("2048.txt"));
         val.initialize();
         Assert.assertEquals(0, val.getKeySize()); // no key size restriction
@@ -97,7 +97,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertifi
 
     @Test
     public void test2048on2048Restricted() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("2048.txt"));
         val.setKeySize(2048);
         val.initialize();
@@ -110,7 +110,7 @@ public class X509CertificateRSAOpenSSLBlacklistValidatorTest extends BaseCertifi
 
     @Test
     public void test2048on2048Restricted2() throws Exception {
-        final X509CertificateRSAOpenSSLBlacklistValidator val = new X509CertificateRSAOpenSSLBlacklistValidator();
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("2048.txt"));
         val.setKeySize(1024); // untrue, but should prevent any matches
         val.initialize();

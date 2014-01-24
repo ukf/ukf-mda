@@ -19,15 +19,15 @@ import org.w3c.dom.Element;
 
 import uk.org.ukfederation.mda.BaseDOMTest;
 
-public class X509CertificateValidationStageTest extends BaseDOMTest {
+public class X509ValidationStageTest extends BaseDOMTest {
 
     /** Constructor sets class under test. */
-    public X509CertificateValidationStageTest() throws Exception {
-        super(X509CertificateValidationStage.class);
+    public X509ValidationStageTest() throws Exception {
+        super(X509ValidationStage.class);
     }
     
-    private X509CertificateValidationStage makeStage() throws ComponentInitializationException {
-        final X509CertificateValidationStage stage = new X509CertificateValidationStage();
+    private X509ValidationStage makeStage() throws ComponentInitializationException {
+        final X509ValidationStage stage = new X509ValidationStage();
         stage.setId("test");
         return stage; 
     }
@@ -58,7 +58,7 @@ public class X509CertificateValidationStageTest extends BaseDOMTest {
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
-        final X509CertificateValidationStage stage = makeStage();
+        final X509ValidationStage stage = makeStage();
         // not setting any validators to run
         stage.initialize();
         
@@ -74,14 +74,14 @@ public class X509CertificateValidationStageTest extends BaseDOMTest {
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
-        final X509CertificateRSAKeyLengthValidator val =
-                new X509CertificateRSAKeyLengthValidator();
+        final X509RSAKeyLengthValidator val =
+                new X509RSAKeyLengthValidator();
         val.setErrorBoundary(2049);
         
         final List<Validator<X509Certificate>> vals = new ArrayList<>();
         vals.add(val);
         
-        final X509CertificateValidationStage stage = makeStage();
+        final X509ValidationStage stage = makeStage();
         stage.setValidators(vals);
         stage.initialize();
         
@@ -97,15 +97,15 @@ public class X509CertificateValidationStageTest extends BaseDOMTest {
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
-        final X509CertificateRSAKeyLengthValidator val =
-                new X509CertificateRSAKeyLengthValidator();
+        final X509RSAKeyLengthValidator val =
+                new X509RSAKeyLengthValidator();
         val.setWarningBoundary(2049);
         val.setErrorBoundary(2048);
         
         final List<Validator<X509Certificate>> vals = new ArrayList<>();
         vals.add(val);
         
-        final X509CertificateValidationStage stage = makeStage();
+        final X509ValidationStage stage = makeStage();
         stage.setValidators(vals);
         stage.initialize();
         

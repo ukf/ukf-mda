@@ -121,4 +121,11 @@ public class X509RSAOpenSSLBlacklistValidatorTest extends BaseX509ValidatorTest 
         errorsAndWarnings(item, 0, 0);
     }
 
+    @Test
+    public void testBlankLineIssue9() throws Exception {
+        final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
+        val.setBlacklistResource(getClasspathResource("issue9.txt"));
+        val.initialize();
+    }
+    
 }

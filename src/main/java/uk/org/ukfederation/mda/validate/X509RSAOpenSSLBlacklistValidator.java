@@ -219,6 +219,13 @@ public class X509RSAOpenSSLBlacklistValidator extends AbstractX509Validator {
                     if (line == null) {
                         break;
                     }
+                    
+                    // Ignore lines consisting only of whitespace, including blank lines.
+                    if (line.trim().length() == 0) {
+                        continue;
+                    }
+                    
+                    // Ignore comments.
                     if (line.charAt(0) != '#') {
                         blacklistedValues.add(line);
                     }

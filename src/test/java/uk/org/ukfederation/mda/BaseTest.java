@@ -1,9 +1,7 @@
 package uk.org.ukfederation.mda;
 
-import java.net.URL;
-
-import net.shibboleth.utilities.java.support.resource.ClasspathResource;
-import net.shibboleth.utilities.java.support.resource.Resource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 public abstract class BaseTest {
 
@@ -75,27 +73,7 @@ public abstract class BaseTest {
     protected String packageRelativeResource(final String which) {
         return basePackagePath + which;
     }
-    
-    /**
-     * Variant of ClasspathResource that patches round the problem described
-     * in JSPT-21.
-     */
-    private class FixedClasspathResource extends ClasspathResource {
-    
-        /**
-         * Constructor.
-         *
-         * @param resourcePath classpath path to the resource
-         */
-        public FixedClasspathResource(final String resourcePath) {
-            super(resourcePath);
-            // Work around the fact that ClasspathResource doesn't handle location correctly
-            final URL resourceURL = this.getClass().getClassLoader().getResource(resourcePath);
-            setLocation(resourceURL.toExternalForm());
-        }
         
-    }
-    
     /**
      * Helper method to acquire a ClasspathResource based on the given resource path.
      * 
@@ -105,7 +83,7 @@ public abstract class BaseTest {
      * @return the data file as a resource
      */
     public Resource getClasspathResource(final String resourcePath) {
-        return new FixedClasspathResource(classRelativeResource(resourcePath).substring(1));
+        return new ClassPathResource(classRelativeResource(resourcePath).substring(1));
     }
 
 }

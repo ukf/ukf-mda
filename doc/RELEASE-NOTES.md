@@ -1,5 +1,11 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.0 ##
+
+* Rebased on Shibboleth MDA 0.9.0 and related components.
+* Shibboleth `Resource` replaced by Spring `Resource` throughout.
+* No longer requires endorsed JAXP libraries.
+
 ## Version 0.8.3 ##
 
 * Issue #2: duplicate ODN detector should allow setting naming strategy for clashing entity

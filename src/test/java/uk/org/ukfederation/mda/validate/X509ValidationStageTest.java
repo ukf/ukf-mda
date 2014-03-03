@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import junit.framework.Assert;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.WarningStatus;
@@ -14,6 +13,7 @@ import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -40,9 +40,9 @@ public class X509ValidationStageTest extends BaseDOMTest {
     private void errorsAndWarnings(final Item<Element> item,
             final int expectedErrors, final int expectedWarnings) {
         final Collection<ErrorStatus> errors = item.getItemMetadata().get(ErrorStatus.class);
-        Assert.assertEquals(expectedErrors, errors.size());
+        Assert.assertEquals(errors.size(), expectedErrors);
         final Collection<WarningStatus> warnings = item.getItemMetadata().get(WarningStatus.class);
-        Assert.assertEquals(expectedWarnings, warnings.size());
+        Assert.assertEquals(warnings.size(), expectedWarnings);
         //for (ErrorStatus err: errors) {
         //    System.out.println("Error: " + err.getComponentId() + ": " + err.getStatusMessage());
         //}

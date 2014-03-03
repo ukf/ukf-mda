@@ -3,9 +3,9 @@ package uk.org.ukfederation.mda.validate;
 
 import java.security.cert.X509Certificate;
 
-import junit.framework.Assert;
 import net.shibboleth.metadata.Item;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
@@ -22,7 +22,7 @@ public class X509RSAOpenSSLBlacklistValidatorTest extends BaseX509ValidatorTest 
         final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.initialize();
-        Assert.assertEquals(0, val.getKeySize()); // no key size restriction
+        Assert.assertEquals(val.getKeySize(), 0); // no key size restriction
         
         final Item<String> item = new MockItem("foo");
         final X509Certificate cert = getCertificate("ok.pem");
@@ -35,7 +35,7 @@ public class X509RSAOpenSSLBlacklistValidatorTest extends BaseX509ValidatorTest 
         final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.initialize();
-        Assert.assertEquals(0, val.getKeySize()); // no key size restriction
+        Assert.assertEquals(val.getKeySize(), 0); // no key size restriction
         
         final Item<String> item = new MockItem("foo");
         final X509Certificate cert = getCertificate("1024.pem");
@@ -74,7 +74,7 @@ public class X509RSAOpenSSLBlacklistValidatorTest extends BaseX509ValidatorTest 
         final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("1024.txt"));
         val.initialize();
-        Assert.assertEquals(0, val.getKeySize()); // no key size restriction
+        Assert.assertEquals(val.getKeySize(), 0); // no key size restriction
         
         final Item<String> item = new MockItem("foo");
         final X509Certificate cert = getCertificate("2048.pem");
@@ -87,7 +87,7 @@ public class X509RSAOpenSSLBlacklistValidatorTest extends BaseX509ValidatorTest 
         final X509RSAOpenSSLBlacklistValidator val = new X509RSAOpenSSLBlacklistValidator();
         val.setBlacklistResource(getClasspathResource("2048.txt"));
         val.initialize();
-        Assert.assertEquals(0, val.getKeySize()); // no key size restriction
+        Assert.assertEquals(val.getKeySize(), 0); // no key size restriction
         
         final Item<String> item = new MockItem("foo");
         final X509Certificate cert = getCertificate("2048.pem");

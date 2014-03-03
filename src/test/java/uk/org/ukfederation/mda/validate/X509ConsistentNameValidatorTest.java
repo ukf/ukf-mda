@@ -3,9 +3,9 @@ package uk.org.ukfederation.mda.validate;
 
 import java.security.cert.X509Certificate;
 
-import junit.framework.Assert;
 import net.shibboleth.metadata.Item;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;

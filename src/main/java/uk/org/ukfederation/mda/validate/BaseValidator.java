@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.WarningStatus;
-import net.shibboleth.utilities.java.support.component.AbstractIdentifiableInitializeableComponent;
+import net.shibboleth.utilities.java.support.component.AbstractIdentifiableInitializableComponent;
 
 /**
  * Base class for validators.
@@ -29,7 +29,7 @@ import net.shibboleth.utilities.java.support.component.AbstractIdentifiableIniti
  * Encapsulates the notion of an identifier for each validator class, and helper
  * methods for constructing status metadata.
  */
-public abstract class BaseValidator extends AbstractIdentifiableInitializeableComponent {
+public abstract class BaseValidator extends AbstractIdentifiableInitializableComponent {
 
     /**
      * Construct a modified component identifier from the stage identifier and the

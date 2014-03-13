@@ -32,15 +32,16 @@ public abstract class BaseX509ValidatorTest extends BaseTest {
     protected void errorsAndWarnings(final Item<?> item,
             final int expectedErrors, final int expectedWarnings) {
         final Collection<ErrorStatus> errors = item.getItemMetadata().get(ErrorStatus.class);
-        Assert.assertEquals(errors.size(), expectedErrors);
         final Collection<WarningStatus> warnings = item.getItemMetadata().get(WarningStatus.class);
-        Assert.assertEquals(warnings.size(), expectedWarnings);
+        //System.out.println("Errors and warnings:");
         //for (ErrorStatus err: errors) {
         //    System.out.println("Error: " + err.getComponentId() + ": " + err.getStatusMessage());
         //}
         //for (WarningStatus warn: warnings) {
         //    System.out.println("Warning: " + warn.getComponentId() + ": " + warn.getStatusMessage());
         //}
+        Assert.assertEquals(errors.size(), expectedErrors, "wrong number of errors");
+        Assert.assertEquals(warnings.size(), expectedWarnings, "wrong number of warnings");
     }
 
 }

@@ -152,4 +152,25 @@ public class EntityAttributeFilteringStageTest extends BaseDOMTest {
         final Element expected = readXmlData("input.xml");
         assertXmlEqual(expected, result);
     }
+
+    @Test
+    public void testBlacklist() throws Exception {
+        final List<Item<Element>> items = makeInputItems();
+        final List<Predicate<EntityAttributeContext>> rules = new ArrayList<>();
+        rules.add(new EntityCategoryMatcher("http://www.geant.net/uri/dataprotection-code-of-conduct/v1",
+                "http://ukfederation.org.uk"));
+        
+        final EntityAttributeFilteringStage stage = new EntityAttributeFilteringStage();
+        stage.setId("id");
+        stage.setWhitelisting(false);
+        stage.setRules(rules);
+        stage.initialize();
+        stage.execute(items);
+        stage.destroy();
+        
+        final Element result = items.get(0).unwrap();
+        final Element expected = readXmlData("blacklist.xml");
+        assertXmlEqual(expected, result);
+    }
+
 }

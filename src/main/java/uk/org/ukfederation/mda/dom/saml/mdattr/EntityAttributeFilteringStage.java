@@ -50,6 +50,9 @@ import com.google.common.base.Predicate;
  * 
  * Note that the <code>registrationAuthority</code> to be used is assumed to have been
  * extracted out into a {@link RegistrationAuthority} object in the entity's item metadata.
+ * 
+ * The stage can be operated in a whitelisting mode (the default) or in a blacklisting mode
+ * by setting the <code>whitelisting</code> property to <code>false</code>.
  */
 public class EntityAttributeFilteringStage extends BaseStage<Element> {
 
@@ -67,6 +70,9 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
      */
     private List<Predicate<EntityAttributeContext>> rules = Collections.emptyList();
 
+    /** Mode of operation: whitelisting or blacklisting. Default: whitelisting. */
+    private boolean whitelisting = true;
+    
     /**
      * Sets the {@link List} of rules to be used to match attribute values.
      * 
@@ -87,6 +93,29 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
     @Nonnull
     public List<Predicate<EntityAttributeContext>> getRules() {
         return Collections.unmodifiableList(rules);
+    }
+    
+    /**
+     * Sets the mode of operation.
+     * 
+     * @param newValue <code>true</code> to whitelist (default),
+     *                 <code>false</code> to blacklist
+     */
+    public void setWhitelisting(final boolean newValue) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+        
+        whitelisting = newValue;
+    }
+    
+    /**
+     * Indicates whether the stage is set to whitelisting or blacklisting mode.
+     * 
+     * @return <code>true</code> if whitelisting (default),
+     *         <code>false</code> if blacklisting
+     */
+    public boolean isWhitelisting() {
+        return whitelisting;
     }
     
     /**
@@ -162,8 +191,8 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
             final EntityAttributeContext ctx =
                     new SimpleEntityAttributeContext(attributeValue, attributeName,
                             attributeNameFormat, registrationAuthority);            
-            final boolean retain = applyRules(ctx);
-            if (!retain) {
+            final boolean matched = applyRules(ctx);
+            if (matched ^ whitelisting) {
                 log.debug("removing {}", ctx);
                 attribute.removeChild(value);
             }

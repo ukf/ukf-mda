@@ -17,6 +17,7 @@
 package uk.org.ukfederation.mda.dom.saml.mdattr;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -27,6 +28,8 @@ import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthority;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.xml.ElementSupport;
 
 import org.slf4j.Logger;
@@ -62,7 +65,29 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
      * This amounts to an implicit ORing of the individual rules, with early
      * termination.
      */
-    private List<Predicate<EntityAttributeContext>> rules;
+    private List<Predicate<EntityAttributeContext>> rules = Collections.emptyList();
+
+    /**
+     * Sets the {@link List} of rules to be used to match attribute values.
+     * 
+     * @param newRules new {@link List} of rules
+     */
+    public void setRules(@Nonnull final List<Predicate<EntityAttributeContext>> newRules) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
+        rules = Constraint.isNotNull(newRules, "rules property may not be null");
+    }
+    
+    /**
+     * Returns the {@link List} of rules being used to match entity attributes.
+     * 
+     * @return the {@link List} of rules
+     */
+    @Nonnull
+    public List<Predicate<EntityAttributeContext>> getRules() {
+        return Collections.unmodifiableList(rules);
+    }
     
     /**
      * Apply the rules to a context.
@@ -193,5 +218,11 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
         }
     }
 
+    @Override
+    protected void doDestroy() {
+        rules = null;
+
+        super.doDestroy();
+    }
 
 }

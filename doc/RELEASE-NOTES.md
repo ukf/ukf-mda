@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.4 ##
+
+* Added `EntityAttributeFilteringStage` and associated matcher classes `EntityCategoryMatcher` and `EntityCategorySupportMatcher`.
+
 ## Version 0.8.3 ##
 
 * Issue #2: duplicate ODN detector should allow setting naming strategy for clashing entity

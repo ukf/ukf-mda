@@ -3,8 +3,9 @@
 ## Version 0.8.4 ##
 
 * Added `EntityAttributeFilteringStage` and associated matcher classes:
-	*  `EntityCategoryMatcher`
+	* `EntityCategoryMatcher`
 	* `EntityCategorySupportMatcher`
+	* `MultiPredicateMatcher`
 	* `RegistrationAuthorityMatcher`
 
 ## Version 0.8.3 ##

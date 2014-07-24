@@ -20,6 +20,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
+import net.shibboleth.utilities.java.support.logic.Constraint;
+
 /**
  * An abstract entity attribute matcher implementation that matches an exact
  * combination of value, name and name format. Optionally, a registration
@@ -53,9 +55,9 @@ public abstract class AbstractExactValueMatcher extends AbstractEntityAttributeM
             @Nonnull final String matchName, @Nonnull final String matchNameFormat,
             @Nullable final String matchRegAuth) {
         super();
-        value = matchValue;
-        name = matchName;
-        nameFormat = matchNameFormat;
+        value = Constraint.isNotNull(matchValue, "value may not be null");
+        name = Constraint.isNotNull(matchName, "name may not be null");
+        nameFormat = Constraint.isNotNull(matchNameFormat, "name format may not be null");
         registrationAuthority = matchRegAuth;
     }
 
@@ -65,7 +67,7 @@ public abstract class AbstractExactValueMatcher extends AbstractEntityAttributeM
     }
 
     @Override
-    protected boolean matchAttributeName(EntityAttributeContext input) {
+    protected boolean matchAttributeName(@Nonnull final EntityAttributeContext input) {
          return name.equals(input.getName());
     }
 
@@ -75,7 +77,7 @@ public abstract class AbstractExactValueMatcher extends AbstractEntityAttributeM
     }
 
     @Override
-    protected boolean matchRegistrationAuthority(EntityAttributeContext input) {
+    protected boolean matchRegistrationAuthority(@Nonnull final EntityAttributeContext input) {
         if (registrationAuthority == null) {
             // ignore the context's registration authority value
             return true;

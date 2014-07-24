@@ -16,6 +16,7 @@
 
 package uk.org.ukfederation.mda.dom.saml.mdattr;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -44,7 +45,7 @@ public class RegistrationAuthorityMatcher implements Predicate<EntityAttributeCo
     }
 
     @Override
-    public boolean apply(EntityAttributeContext input) {
+    public boolean apply(@Nonnull final EntityAttributeContext input) {
         if (registrationAuthority == null) {
             // match entities *without* a registration authority
             return null == input.getRegistrationAuthority();

@@ -19,6 +19,8 @@ package uk.org.ukfederation.mda.dom.saml.mdattr;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.shibboleth.utilities.java.support.logic.Constraint;
+
 /**
  * A simple immutable implementation of {@link EntityAttributeContext}.
  */
@@ -52,9 +54,9 @@ public class SimpleEntityAttributeContext implements EntityAttributeContext {
             @Nonnull final String attributeName,
             @Nonnull final String attributeNameFormat,
             @Nonnull final String registrar) {
-        value = attributeValue;
-        name = attributeName;
-        nameFormat = attributeNameFormat;
+        value = Constraint.isNotNull(attributeValue, "value may not be null");
+        name = Constraint.isNotNull(attributeName, "name may not be null");
+        nameFormat = Constraint.isNotNull(attributeNameFormat, "name format may not be null");
         registrationAuthority = registrar;
     }
     

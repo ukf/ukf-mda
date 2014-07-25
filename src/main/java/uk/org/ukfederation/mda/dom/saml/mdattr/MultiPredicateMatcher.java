@@ -17,6 +17,7 @@
 package uk.org.ukfederation.mda.dom.saml.mdattr;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.utilities.java.support.logic.Constraint;
@@ -131,23 +132,23 @@ public class MultiPredicateMatcher extends AbstractEntityAttributeMatcher {
     }
     
     @Override
-    protected boolean matchAttributeValue(@Nonnull final EntityAttributeContext input) {
-        return valuePredicate.apply(input.getValue());
+    protected boolean matchAttributeValue(@Nonnull final String inputValue) {
+        return valuePredicate.apply(inputValue);
     }
 
     @Override
-    protected boolean matchAttributeName(@Nonnull final EntityAttributeContext input) {
-         return namePredicate.apply(input.getName());
+    protected boolean matchAttributeName(@Nonnull final String inputName) {
+         return namePredicate.apply(inputName);
     }
 
     @Override
-    protected boolean matchAttributeNameFormat(@Nonnull final EntityAttributeContext input) {
-        return nameFormatPredicate.apply(input.getNameFormat());
+    protected boolean matchAttributeNameFormat(@Nonnull final String inputNameFormat) {
+        return nameFormatPredicate.apply(inputNameFormat);
     }
 
     @Override
-    protected boolean matchRegistrationAuthority(@Nonnull final EntityAttributeContext input) {
-        return registrationAuthorityPredicate.apply(input.getRegistrationAuthority());
+    protected boolean matchRegistrationAuthority(@Nullable final String inputRegistrationAuthority) {
+        return registrationAuthorityPredicate.apply(inputRegistrationAuthority);
     }
 
 }

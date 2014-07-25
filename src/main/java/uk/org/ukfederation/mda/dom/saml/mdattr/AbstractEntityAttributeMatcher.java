@@ -17,6 +17,7 @@
 package uk.org.ukfederation.mda.dom.saml.mdattr;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
 import com.google.common.base.Predicate;
@@ -37,39 +38,41 @@ public abstract class AbstractEntityAttributeMatcher implements Predicate<Entity
     /**
      * Match the attribute value component of the {@link EntityAttributeContext}.
      * 
-     * @param input context to match against
+     * @param inputValue value component of the input context
      * @return <code>true</code> if and only if the value component matches
      */
-    protected abstract boolean matchAttributeValue(@Nonnull final EntityAttributeContext input);
+    protected abstract boolean matchAttributeValue(@Nonnull final String inputValue);
 
     /**
      * Match the name component of the {@link EntityAttributeContext}.
      * 
-     * @param input context to match against
+     * @param inputName name component of the input context
      * @return <code>true</code> if and only if the name component matches
      */
-    protected abstract boolean matchAttributeName(@Nonnull final EntityAttributeContext input);
+    protected abstract boolean matchAttributeName(@Nonnull final String inputName);
 
     /**
      * Match the name format component of the {@link EntityAttributeContext}.
      * 
-     * @param input context to match against
+     * @param inputNameFormat name format component of the input context
      * @return <code>true</code> if and only if the name format component matches
      */
-    protected abstract boolean matchAttributeNameFormat(@Nonnull final EntityAttributeContext input);
+    protected abstract boolean matchAttributeNameFormat(@Nonnull final String inputNameFormat);
 
     /**
      * Match the registration authority component of the {@link EntityAttributeContext}.
      * 
-     * @param input context to match against
+     * @param inputRegistrationAuthority registration authority component of the input context
      * @return <code>true</code> if and only if the registration authority component matches
      */
-    protected abstract boolean matchRegistrationAuthority(@Nonnull final EntityAttributeContext input);
+    protected abstract boolean matchRegistrationAuthority(@Nullable final String inputRegistrationAuthority);
 
     @Override
     public boolean apply(@Nonnull final EntityAttributeContext input) {
-        return matchRegistrationAuthority(input) && matchAttributeNameFormat(input) &&
-                matchAttributeName(input) && matchAttributeValue(input);
+        return matchRegistrationAuthority(input.getRegistrationAuthority()) &&
+                matchAttributeNameFormat(input.getNameFormat()) &&
+                matchAttributeName(input.getName()) &&
+                matchAttributeValue(input.getValue());
     }
 
 }

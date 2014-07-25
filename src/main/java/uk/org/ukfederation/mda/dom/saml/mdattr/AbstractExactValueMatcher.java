@@ -62,27 +62,27 @@ public abstract class AbstractExactValueMatcher extends AbstractEntityAttributeM
     }
 
     @Override
-    protected boolean matchAttributeValue(@Nonnull final EntityAttributeContext input) {
-        return value.equals(input.getValue());
+    protected boolean matchAttributeValue(@Nonnull final String inputValue) {
+        return value.equals(inputValue);
     }
 
     @Override
-    protected boolean matchAttributeName(@Nonnull final EntityAttributeContext input) {
-         return name.equals(input.getName());
+    protected boolean matchAttributeName(@Nonnull final String inputName) {
+         return name.equals(inputName);
     }
 
     @Override
-    protected boolean matchAttributeNameFormat(@Nonnull final EntityAttributeContext input) {
-        return nameFormat.equals(input.getNameFormat());
+    protected boolean matchAttributeNameFormat(@Nonnull final String inputNameFormat) {
+        return nameFormat.equals(inputNameFormat);
     }
 
     @Override
-    protected boolean matchRegistrationAuthority(@Nonnull final EntityAttributeContext input) {
+    protected boolean matchRegistrationAuthority(@Nullable final String inputRegistrationAuthority) {
         if (registrationAuthority == null) {
             // ignore the context's registration authority value
             return true;
         } else {
-            return registrationAuthority.equals(input.getRegistrationAuthority());
+            return registrationAuthority.equals(inputRegistrationAuthority);
         }
     }
 

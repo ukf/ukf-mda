@@ -19,7 +19,7 @@ public class EntityCategoryMatcherSpringTest extends AbstractTestNGSpringContext
 
     private void test(final boolean expected, final Predicate<EntityAttributeContext> matcher,
             final EntityAttributeContext context) {
-        Assert.assertEquals(expected, matcher.apply(context), context.toString());
+        Assert.assertEquals(matcher.apply(context), expected, context.toString());
     }
     
     @Test

@@ -5,6 +5,11 @@
 * Rebased on Shibboleth MDA 0.9.0 and related components.
 * Shibboleth `Resource` replaced by Spring `Resource` throughout.
 * No longer requires endorsed JAXP libraries.
+* Added `EntityAttributeFilteringStage` and associated matcher classes:
+	* `EntityCategoryMatcher`
+	* `EntityCategorySupportMatcher`
+	* `MultiPredicateMatcher`
+	* `RegistrationAuthorityMatcher`
 
 ## Version 0.8.3 ##
 

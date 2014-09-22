@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.shibboleth</groupId>
         <artifactId>parent-v3</artifactId>
-        <version>4</version>
+        <version>TRUNK-SNAPSHOT</version>
     </parent>
 
     <groupId>uk.org.ukfederation</groupId>
@@ -22,6 +22,8 @@
     <inceptionYear>2011</inceptionYear>
 
     <properties>
+        <mda.version>0.9-SNAPSHOT</mda.version>
+        <java-support.version>5.0-SNAPSHOT</java-support.version>
         <checkstyle.configLocation>checkstyle.xml</checkstyle.configLocation>
     </properties>
 
@@ -61,12 +63,12 @@
         <dependency>
             <groupId>net.shibboleth.metadata</groupId>
             <artifactId>aggregator-pipeline</artifactId>
-            <version>0.9-SNAPSHOT</version>
+            <version>${mda.version}</version>
         </dependency>
         <dependency>
             <groupId>net.shibboleth.utilities</groupId>
             <artifactId>java-support</artifactId>
-            <version>4.0.0</version>
+            <version>${java-support.version}</version>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>

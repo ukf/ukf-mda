@@ -79,6 +79,9 @@ public class IPHintValidationStage extends AbstractDOMTraversalStage {
             }
         } catch (IllegalArgumentException e) {
             addError(context.getItem(), ipHint, "invalid IPHint '" + hint + "': " + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // temporary work-round for JSPT-49
+            addError(context.getItem(), ipHint, "invalid IPHint '" + hint + "': missing '/'");
         }
     }
 

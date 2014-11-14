@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.5 ##
+
+* Issue #16: array bounds exception thrown by `IPHintValidationStage`.
+
 ## Version 0.8.4 ##
 
 * Added `EntityAttributeFilteringStage` and associated matcher classes:

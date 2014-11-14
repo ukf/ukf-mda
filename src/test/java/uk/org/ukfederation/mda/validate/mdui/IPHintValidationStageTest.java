@@ -84,4 +84,27 @@ public class IPHintValidationStageTest extends BaseDOMTest {
         final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
         Assert.assertEquals(errors.size(), 0);
     }
+    
+    @Test
+    public void missingSlash() throws Exception {
+        final Element doc = readXmlData("3.xml");
+        final DOMElementItem item = new DOMElementItem(doc);
+        final List<Item<Element>> items = new ArrayList<>();
+        items.add(item);
+        
+        final IPHintValidationStage stage = new IPHintValidationStage();
+        stage.setId("test");
+        stage.setCheckingNetworks(true);
+        stage.initialize();
+        
+        stage.execute(items);
+        
+        final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
+        final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
+        Assert.assertEquals(errors.size(), 1);
+        
+        final ErrorStatus error = errors.get(0);
+        Assert.assertTrue(error.getStatusMessage().contains("11.12.13.14"));
+    }
+
 }

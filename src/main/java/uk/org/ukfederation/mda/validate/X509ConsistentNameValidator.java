@@ -19,6 +19,7 @@ package uk.org.ukfederation.mda.validate;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.cert.X509Certificate;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,12 +36,13 @@ import org.bouncycastle.asn1.x509.GeneralNames;
 import org.cryptacular.util.CertUtil;
 import org.cryptacular.util.CodecUtil;
 import org.cryptacular.x509.GeneralNameType;
-import org.cryptacular.x509.dn.AttributeType;
-import org.cryptacular.x509.dn.Attributes;
 import org.cryptacular.x509.dn.NameReader;
+import org.cryptacular.x509.dn.RDNSequence;
+import org.cryptacular.x509.dn.StandardAttributeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.Lists;
 import com.google.common.net.InetAddresses;
 
 /**
@@ -90,12 +92,17 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
         public static final Integer REGISTERED_ID_ALT_NAME = new Integer(8);
 
         /**
-         * Gets the commons names that appear within the given distinguished name. The returned list
-         * provides the names in the order they appeared in the DN.
+         * Gets the commons names that appear within the given distinguished name. 
+         * 
+         * <p>
+         * The returned list provides the names in the order they appeared in the DN, according to 
+         * RFC 1779/2253 encoding. In this encoding the "most specific" name would typically appear
+         * in the left-most position, and would appear first in the returned list.
+         * </p>
          * 
          * @param dn the DN to extract the common names from
          * 
-         * @return the common names that appear in the DN in the order they appear or null if the given DN is null
+         * @return the common names that appear in the DN in the order they appear, or null if the given DN is null
          */
         @Nullable public static List<String> getCommonNames(@Nullable final X500Principal dn) {
             if (dn == null) {
@@ -104,8 +111,15 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
 
             Logger log = getLogger();
             log.debug("Extracting CNs from the following DN: {}", dn.toString());
-            final Attributes attrs = NameReader.readX500Principal(dn);
-            return attrs.getValues(AttributeType.CommonName);
+            final RDNSequence attrs = NameReader.readX500Principal(dn);
+            // Have to copy because list returned from Attributes is unmodifiable, so can't reverse it.
+            final List<String> values = Lists.newArrayList(attrs.getValues(StandardAttributeType.CommonName));
+            
+            // Reverse the order so that the most-specific CN is first in the list, 
+            // consistent with RFC 1779/2253 RDN ordering.
+            Collections.reverse(values);
+            
+            return values;
         }
 
         /**

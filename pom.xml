@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.shibboleth</groupId>
         <artifactId>parent-v3</artifactId>
-        <version>TRUNK-SNAPSHOT</version>
+        <version>7</version>
     </parent>
 
     <groupId>uk.org.ukfederation</groupId>
@@ -23,7 +23,7 @@
 
     <properties>
         <mda.version>0.9-SNAPSHOT</mda.version>
-        <java-support.version>7.0-SNAPSHOT</java-support.version>
+        <java-support.version>7.0.0</java-support.version>
         <checkstyle.configLocation>checkstyle.xml</checkstyle.configLocation>
     </properties>
 

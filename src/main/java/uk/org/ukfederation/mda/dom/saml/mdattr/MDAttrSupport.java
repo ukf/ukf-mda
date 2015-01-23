@@ -25,10 +25,13 @@ public final class MDAttrSupport {
 
     /** MDAttr namespace. */
     public static final String MDATTR_NS = "urn:oasis:names:tc:SAML:metadata:attribute";
-
-    /** mdattr:AntityAttributes element. */
-    public static final QName MDATTR_ENTITY_ATTRIBUTES = new QName(MDATTR_NS, "EntityAttributes");
     
+    /** MDAttr conventional prefix. */
+    public static final String MDATTR_PREFIX = "mdattr";
+
+    /** mdattr:EntityAttributes element. */
+    public static final QName ENTITY_ATTRIBUTES_NAME = new QName(MDATTR_NS, "EntityAttributes", MDATTR_PREFIX);
+
     /** Constructor. */
     private MDAttrSupport() {
     }

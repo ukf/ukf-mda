@@ -38,6 +38,8 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import uk.org.ukfederation.mda.dom.saml.SAMLSupport;
+
 import com.google.common.base.Predicate;
 
 /**
@@ -55,9 +57,6 @@ import com.google.common.base.Predicate;
  * by setting the <code>whitelisting</code> property to <code>false</code>.
  */
 public class EntityAttributeFilteringStage extends BaseStage<Element> {
-
-    /** Namespace URI for SAML elements. */
-    private static final String SAML_NS = "urn:oasis:names:tc:SAML:2.0:assertion";
 
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(EntityAttributeFilteringStage.class);
@@ -181,7 +180,7 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
         
         // Locate the AttributeValue elements to filter
         final List<Element> attributeValues =
-                ElementSupport.getChildElementsByTagNameNS(attribute, SAML_NS, "AttributeValue");
+                ElementSupport.getChildElements(attribute, SAMLSupport.ATTRIBUTE_VALUE_NAME);
         
         // Filter each AttributeValue in turn
         for (final Element value : attributeValues) {
@@ -209,7 +208,7 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
             @Nullable final String registrationAuthority) {
         // Locate the Attribute elements to filter
         final List<Element> attributes =
-                ElementSupport.getChildElementsByTagNameNS(entityAttributes, SAML_NS, "Attribute");
+                ElementSupport.getChildElements(entityAttributes, SAMLSupport.ATTRIBUTE_NAME);
         
         // Filter each Attribute in turn
         for (final Element attribute : attributes) {
@@ -233,7 +232,7 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
 
             // Locate mdattr:EntityAttributes element
             final Element entityAttributes = SAMLMetadataSupport.getDescriptorExtensions(entity,
-                    MDAttrSupport.MDATTR_ENTITY_ATTRIBUTES);
+                    MDAttrSupport.ENTITY_ATTRIBUTES_NAME);
             if (entityAttributes != null) {
                 filterEntityAttributes(entityAttributes, registrationAuthority);
                 

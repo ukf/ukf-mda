@@ -39,7 +39,7 @@ public class ElementMatcher implements Predicate<Element> {
     /**
      * Constructor.
      * 
-     * @param qnameToMatch qualified name ({@link QName)) to match
+     * @param qnameToMatch qualified name ({@link QName}) to match
      */
     public ElementMatcher(@Nullable final QName qnameToMatch) {
         assert qnameToMatch != null;

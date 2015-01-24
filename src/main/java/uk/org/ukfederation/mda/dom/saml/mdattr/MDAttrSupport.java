@@ -19,6 +19,15 @@ package uk.org.ukfederation.mda.dom.saml.mdattr;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
+import org.w3c.dom.Element;
+
+import uk.org.ukfederation.mda.dom.Container;
+import uk.org.ukfederation.mda.dom.ElementMaker;
+import uk.org.ukfederation.mda.dom.ElementMatcher;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+
 /** Helper class for dealing with MDAttr metadata. */
 @ThreadSafe
 public final class MDAttrSupport {
@@ -31,6 +40,14 @@ public final class MDAttrSupport {
 
     /** mdattr:EntityAttributes element. */
     public static final QName ENTITY_ATTRIBUTES_NAME = new QName(MDATTR_NS, "EntityAttributes", MDATTR_PREFIX);
+
+    /** Matcher for the <code>EntityAttributes</code> element, for use with the {@link Container} system. */
+    public static final Predicate<Element> ENTITY_ATTRIBUTES_MATCHER =
+            new ElementMatcher(ENTITY_ATTRIBUTES_NAME);
+
+    /** Maker for the <code>EntityAttributes</code> element, for use with the {@link Container} system. */
+    public static final Function<Container, Element> ENTITY_ATTRIBUTES_MAKER =
+            new ElementMaker(ENTITY_ATTRIBUTES_NAME);
 
     /** Constructor. */
     private MDAttrSupport() {

@@ -19,7 +19,7 @@ public class ContainerTest extends BaseDOMTest {
     private final Document doc;
     
     protected ContainerTest() throws Exception {
-        super(ContainerTest.class);
+        super(Container.class);
         setUp();
         doc = getParserPool().newDocument();
     }

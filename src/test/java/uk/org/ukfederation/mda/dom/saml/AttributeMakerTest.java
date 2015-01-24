@@ -5,6 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 import uk.org.ukfederation.mda.BaseDOMTest;
 import uk.org.ukfederation.mda.dom.Container;
@@ -32,5 +34,13 @@ public class AttributeMakerTest extends BaseDOMTest {
         Assert.assertEquals(newElement.getNamespaceURI(), SAMLSupport.SAML_NS);
         Assert.assertEquals(newElement.getAttribute("Name"), "name");
         Assert.assertEquals(newElement.getAttribute("NameFormat"), "nameFormat");
+        
+        // Check that the attributes have been created in a namespace-aware way
+        // to avoid problems with schema checkers.
+        final NamedNodeMap attrs = newElement.getAttributes();
+        for (int i = 0; i<attrs.getLength(); i++) {
+            final Node node = attrs.item(i);
+            Assert.assertNotNull(node.getLocalName());
+        }
     }
 }

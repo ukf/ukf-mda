@@ -56,8 +56,8 @@ public class AttributeMaker extends ElementMaker {
     @Override
     public Element apply(@Nonnull final Container container) {
         final Element newElement = super.apply(container);
-        newElement.setAttribute("Name", attributeName);
-        newElement.setAttribute("NameFormat", attributeNameFormat);
+        newElement.setAttributeNS(null, "Name", attributeName);
+        newElement.setAttributeNS(null, "NameFormat", attributeNameFormat);
         return newElement;
     }
 }

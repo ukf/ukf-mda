@@ -71,6 +71,14 @@ public class EntityAttributeAddingStage extends BaseStage<Element> {
     /** The value of the attribute to be added. */
     @Nonnull
     private String attributeValue;
+    
+    /**
+     * Whether we add <code>mdattr:EntityAttributes</code> as the first child
+     * of <code>md:Extensions</code> if not already present.
+     * 
+     * Default: <code>false</code> (add as last child).
+     */
+    private boolean addingFirstChild;
 
     /** {@link Predicate} used to match existing Attribute elements. */
     @NonnullAfterInit
@@ -152,6 +160,29 @@ public class EntityAttributeAddingStage extends BaseStage<Element> {
 
         attributeValue = Constraint.isNotNull(value, "attributeValue can not be null");
     }
+    
+    /**
+     * Get whether we are adding <code>mdattr:EntityAttributes</code> as the first child
+     * of <code>md:Extensions</code> if not already present.
+     * 
+     * @return <code>true</code> if adding as the first child, <code>false</code> if the last
+     */
+    public boolean isAddingFirstChild() {
+        return addingFirstChild;
+    }
+    
+    /**
+     * Sets whether to add <code>mdattr:EntityAttributes</code> as the first child
+     * of <code>md:Extensions</code> if not already present.
+     * 
+     * @param addFirst <code>true</code> to add as the first child, <code>false</code> as the last
+     */
+    public void setAddingFirstChild(final boolean addFirst) {
+        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
+        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+
+        addingFirstChild = addFirst;
+    }
 
     /**
      * Looks for the attribute value we want to add within the contents of a list of
@@ -185,7 +216,8 @@ public class EntityAttributeAddingStage extends BaseStage<Element> {
                 // Dig down to <EntityAttributes>
                 final Container attributesContainer =
                         extensionsContainer.locateChild(MDAttrSupport.ENTITY_ATTRIBUTES_MATCHER,
-                                MDAttrSupport.ENTITY_ATTRIBUTES_MAKER, Container.LAST_CHILD);
+                                MDAttrSupport.ENTITY_ATTRIBUTES_MAKER,
+                                addingFirstChild ? Container.FIRST_CHILD : Container.LAST_CHILD);
                 
                 // Collect all matching <Attribute> containers
                 final List<Container> attributes =

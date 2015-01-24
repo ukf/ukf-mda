@@ -103,6 +103,30 @@ public class EntityAttributeAddingStageTest extends BaseDOMTest {
     }
     
     /*
+     * Input has Extensions but no EntityAttributes; adding at the front.
+     */
+    @Test
+    public void addToExtensionsFirst() throws Exception {
+        final List<Item<Element>> itemCollection = makeItems("extensions.xml");
+        final List<Stage<Element>> stages = new ArrayList<>();
+        final EntityAttributeAddingStage stage = new EntityAttributeAddingStage();
+        stage.setId("test");
+        stage.setAttributeValue("http://www.geant.net/uri/dataprotection-code-of-conduct/v1");
+        stage.setAddingFirstChild(true);
+        stage.initialize();
+        stages.add(stage);
+        stages.add(makeStage("http://example.org/category2"));
+        stages.add(makeStage("http://example.org/category2support", "http://macedir.org/entity-category-support"));
+        stages.add(makeStage("http://www.geant.net/uri/dataprotection-code-of-conduct/v1", "http://macedir.org/entity-category-support"));
+        stages.add(makeStage("anotherValue", "anotherAttributeName", "anotherNameFormat"));
+        final Pipeline<Element> pipeline = makePipeline(stages);
+        pipeline.execute(itemCollection);
+        final Element result = itemCollection.get(0).unwrap();
+        final Element expected = readXmlData("added3.xml");
+        assertXmlEqual(expected, result);
+    }
+    
+    /*
      * Check that adding something has no effect if it's already there.
      */
     @Test

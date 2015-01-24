@@ -45,7 +45,7 @@ import org.w3c.dom.Node;
 /** A base class for DOM related tests. */
 public abstract class BaseDOMTest extends BaseTest {
 
-    /** Initialized parser pool used to parser data. */
+    /** Initialized parser pool used to parse data. */
     protected BasicParserPool parserPool;
     
     /** Constructor */
@@ -77,7 +77,7 @@ public abstract class BaseDOMTest extends BaseTest {
     
     /**
      * Reads in an XML file, parses it, and returns the document element. If the given path is relative (i.e., does not
-     * start with a '/') it is assumed to be relative to the class, or to /data if the class has not been set.
+     * start with a '/') it is assumed to be relative to the class.
      * 
      * @param path classpath path to the data file, never null
      * 
@@ -113,15 +113,20 @@ public abstract class BaseDOMTest extends BaseTest {
      */
     public void assertXmlEqual(final Node expected, final Node actual) throws XMLParserException {
         Constraint.isNotNull(actual, "Actual Node may not be null");
-        String serializedForm = SerializeSupport.nodeToString(expected);
-        Element deserializedExpected = parserPool.parse(new StringReader(serializedForm)).getDocumentElement();
+        final String serializedActual = SerializeSupport.nodeToString(expected);
+        Element deserializedExpected = parserPool.parse(new StringReader(serializedActual)).getDocumentElement();
 
         Constraint.isNotNull(expected, "Expected Node may not be null");
-        serializedForm = SerializeSupport.nodeToString(actual);
-        Element deserializedActual = parserPool.parse(new StringReader(serializedForm)).getDocumentElement();
+        final String serializedExpected = SerializeSupport.nodeToString(actual);
+        Element deserializedActual = parserPool.parse(new StringReader(serializedExpected)).getDocumentElement();
 
-        org.testng.Assert.assertTrue(deserializedExpected.isEqualNode(deserializedActual),
-                "Actual Node does not equal expected Node");
+        final boolean ok = deserializedExpected.isEqualNode(deserializedActual);
+        if (!ok) {
+            System.out.println("Expected:\n" + serializedExpected);
+            System.out.println("Actual:\n" + serializedActual);
+        }
+        
+        org.testng.Assert.assertTrue(ok, "Actual Node does not equal expected Node");
     }
 
     protected int countErrors(final DOMElementItem item) {

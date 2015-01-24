@@ -20,8 +20,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
+
+import uk.org.ukfederation.mda.dom.Container;
+import uk.org.ukfederation.mda.dom.ElementMaker;
+import uk.org.ukfederation.mda.dom.ElementMatcher;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 /** Helper class for dealing with SAML documents. */
 @ThreadSafe
@@ -41,7 +50,15 @@ public final class SAMLSupport {
     
     /** saml:AttributeValue element. */
     public static final QName ATTRIBUTE_VALUE_NAME = new QName(SAML_NS, "AttributeValue", SAML_PREFIX);
+
+    /** Matcher for the <code>Extensions</code> element, for use with the {@link Container} system. */
+    public static final Predicate<Element> EXTENSIONS_MATCHER =
+            new ElementMatcher(SAMLMetadataSupport.EXTENSIONS_NAME);
     
+    /** Maker for the <code>Extensions</code> element, for use with the {@link Container} system. */
+    public static final Function<Container, Element> EXTENSIONS_MAKER =
+            new ElementMaker(SAMLMetadataSupport.EXTENSIONS_NAME);
+
     /** Constructor. */
     private SAMLSupport() {
     }

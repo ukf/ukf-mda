@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.6 ##
+
+* Added a general `Container` framework to help with construction of properly formatted hierarchical XML.
+
 ## Version 0.8.5 ##
 
 * Issue #16: array bounds exception thrown by `IPHintValidationStage`.

@@ -113,12 +113,12 @@ public abstract class BaseDOMTest extends BaseTest {
      */
     public void assertXmlEqual(final Node expected, final Node actual) throws XMLParserException {
         Constraint.isNotNull(actual, "Actual Node may not be null");
-        final String serializedActual = SerializeSupport.nodeToString(expected);
-        Element deserializedExpected = parserPool.parse(new StringReader(serializedActual)).getDocumentElement();
+        final String serializedActual = SerializeSupport.nodeToString(actual);
+        Element deserializedActual = parserPool.parse(new StringReader(serializedActual)).getDocumentElement();
 
         Constraint.isNotNull(expected, "Expected Node may not be null");
-        final String serializedExpected = SerializeSupport.nodeToString(actual);
-        Element deserializedActual = parserPool.parse(new StringReader(serializedExpected)).getDocumentElement();
+        final String serializedExpected = SerializeSupport.nodeToString(expected);
+        Element deserializedExpected = parserPool.parse(new StringReader(serializedExpected)).getDocumentElement();
 
         final boolean ok = deserializedExpected.isEqualNode(deserializedActual);
         if (!ok) {

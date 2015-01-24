@@ -34,7 +34,6 @@ import net.shibboleth.utilities.java.support.xml.ElementSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -149,23 +148,6 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
     }
     
     /**
-     * Extract an <code>Attribute</code> element's <code>NameFormat</code>, applying the
-     * SAML standard's specified default if the XML attribute is not present.
-     *  
-     * @param attribute <code>Attribute</code> {@link Element}
-     * @return <code>NameFormat</code> value, or the "unspecified" default
-     */
-    @Nonnull
-    private String extractAttributeNameFormat(@Nonnull final Element attribute) {
-        final Attr attr = attribute.getAttributeNode("NameFormat");
-        if (attr == null) {
-            return "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified";
-        } else {
-            return attr.getValue();
-        }
-    }
-    
-    /**
      * Filter an <code>Attribute</code> element.
      * 
      * @param attribute an <code>Attribute</code> element to filter
@@ -176,7 +158,7 @@ public class EntityAttributeFilteringStage extends BaseStage<Element> {
         final String attributeName = attribute.getAttribute("Name");
         
         // Determine the attribute's NameFormat
-        final String attributeNameFormat = extractAttributeNameFormat(attribute);
+        final String attributeNameFormat = SAMLSupport.extractAttributeNameFormat(attribute);
         
         // Locate the AttributeValue elements to filter
         final List<Element> attributeValues =

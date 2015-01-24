@@ -16,8 +16,12 @@
 
 package uk.org.ukfederation.mda.dom.saml;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
 
 /** Helper class for dealing with SAML documents. */
 @ThreadSafe
@@ -32,11 +36,31 @@ public final class SAMLSupport {
     /** saml:Attribute element. */
     public static final QName ATTRIBUTE_NAME = new QName(SAML_NS, "Attribute", SAML_PREFIX);
     
+    /** Unspecified default <code>NameFormat</code> value for <code>Attribute</code> elements. */
+    public static final String ATTRNAME_FORMAT_UNSPECIFIED = "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified";
+    
     /** saml:AttributeValue element. */
     public static final QName ATTRIBUTE_VALUE_NAME = new QName(SAML_NS, "AttributeValue", SAML_PREFIX);
     
     /** Constructor. */
     private SAMLSupport() {
+    }
+
+    /**
+     * Extract an <code>Attribute</code> element's <code>NameFormat</code>, applying the
+     * SAML standard's specified default if the XML attribute is not present.
+     *  
+     * @param attribute <code>Attribute</code> {@link Element}
+     * @return <code>NameFormat</code> value, or the "unspecified" default
+     */
+    @Nonnull
+    public static String extractAttributeNameFormat(@Nonnull final Element attribute) {
+        final Attr attr = attribute.getAttributeNode("NameFormat");
+        if (attr == null) {
+            return ATTRNAME_FORMAT_UNSPECIFIED;
+        } else {
+            return attr.getValue();
+        }
     }
 
 }

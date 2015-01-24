@@ -17,7 +17,7 @@ public class ElementMatcherTest extends BaseDOMTest {
     private final Document doc;
     
     protected ElementMatcherTest() throws Exception {
-        super(ElementMatcherTest.class);
+        super(ElementMatcher.class);
         setUp();
         doc = getParserPool().newDocument();
     }

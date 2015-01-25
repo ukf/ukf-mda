@@ -42,5 +42,8 @@ public class AttributeMakerTest extends BaseDOMTest {
             final Node node = attrs.item(i);
             Assert.assertNotNull(node.getLocalName());
         }
+        
+        // check that the prefix is declared properly
+        Assert.assertEquals(newElement.lookupNamespaceURI(SAMLSupport.SAML_PREFIX), SAMLSupport.SAML_NS);
     }
 }

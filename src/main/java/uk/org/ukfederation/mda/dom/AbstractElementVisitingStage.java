@@ -35,20 +35,8 @@ import org.w3c.dom.Element;
  */
 abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
 
-    /** Visitor to apply to each visited element. */
-    @Nonnull private final ElementVisitor visitor;
-    
     /** Collection of element names for those elements we will be visiting. */
     @Nonnull private Set<QName> elementNames = Collections.emptySet();
-
-    /**
-     * Constructor.
-     * 
-     * @param what {@link NodeVisitor} to apply to each {@link Element} visited.
-     */
-    AbstractElementVisitingStage(final ElementVisitor what) {
-        visitor = what;
-    }
 
     /** {@inheritDoc} */
     @Override
@@ -101,10 +89,4 @@ abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
         return elementNames.contains(q);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected void visit(@Nonnull final Element e, @Nonnull final TraversalContext context) {
-        visitor.visitElement(e, context.getItem());
-    }
-    
 }

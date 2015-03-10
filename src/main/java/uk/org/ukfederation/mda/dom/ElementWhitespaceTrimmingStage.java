@@ -16,15 +16,23 @@
 
 package uk.org.ukfederation.mda.dom;
 
+import javax.annotation.Nonnull;
+
+import org.w3c.dom.Element;
+
 /**
  * Stage to trim leading and trailing whitespace from the text content of named elements
  * within a {@link net.shibboleth.metadata.dom.DOMElementItem}.
  */
 public class ElementWhitespaceTrimmingStage extends AbstractElementVisitingStage {
 
-    /** Constructor. */
-    public ElementWhitespaceTrimmingStage() {
-        super(new WhitespaceTrimmingVisitor());
+    /** Visitor to apply to each visited element. */
+    @Nonnull private final ElementVisitor visitor = new WhitespaceTrimmingVisitor();
+
+    /** {@inheritDoc} */
+    @Override
+    protected void visit(@Nonnull final Element e, @Nonnull final TraversalContext context) {
+        visitor.visitElement(e, context.getItem());
     }
 
 }

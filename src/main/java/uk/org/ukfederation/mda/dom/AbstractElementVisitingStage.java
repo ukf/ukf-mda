@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
  * Abstract parent class for stages which visit {@link Element}s named by a
  * collection of {@link QName}s.
  */
-abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
+public abstract class AbstractElementVisitingStage extends AbstractDOMTraversalStage {
 
     /** Collection of element names for those elements we will be visiting. */
     @Nonnull private Set<QName> elementNames = Collections.emptySet();

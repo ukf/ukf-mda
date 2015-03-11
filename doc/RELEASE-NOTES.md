@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.7 ##
+
+* Added `SAMLStringElementCheckingStage`.
+
 ## Version 0.8.6 ##
 
 * Added a general `Container` framework to help with construction of properly formatted hierarchical XML.

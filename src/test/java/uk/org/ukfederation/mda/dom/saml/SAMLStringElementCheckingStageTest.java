@@ -8,11 +8,11 @@ import java.util.Set;
 
 import javax.xml.namespace.QName;
 
-import junit.framework.Assert;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.dom.DOMElementItem;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
@@ -42,9 +42,9 @@ public class SAMLStringElementCheckingStageTest extends BaseDOMTest {
         stage.execute(items);
         
         final Item<Element> outItem = items.get(0);
-        Assert.assertSame(item, outItem);
+        Assert.assertSame(outItem, item);
         final List<ErrorStatus> errors = item.getItemMetadata().get(ErrorStatus.class);
-        Assert.assertEquals(0, errors.size());
+        Assert.assertEquals(errors.size(), 0);
     }
     
     @Test
@@ -65,11 +65,11 @@ public class SAMLStringElementCheckingStageTest extends BaseDOMTest {
         stage.execute(items);
         
         final Item<Element> outItem = items.get(0);
-        Assert.assertSame(item, outItem);
+        Assert.assertSame(outItem, item);
         final List<ErrorStatus> errors = item.getItemMetadata().get(ErrorStatus.class);
         //  for (final ErrorStatus error : errors) {
         //      System.out.println(error.getComponentId() + ": " + error.getStatusMessage());
         //  }
-        Assert.assertEquals(3, errors.size());
+        Assert.assertEquals(errors.size(), 3);
     }
 }

@@ -5,7 +5,8 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
 
-import junit.framework.Assert;
+import org.testng.Assert;
+
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.WarningStatus;
@@ -32,9 +33,9 @@ public abstract class BaseX509ValidatorTest extends BaseTest {
     protected void errorsAndWarnings(final Item<?> item,
             final int expectedErrors, final int expectedWarnings) {
         final Collection<ErrorStatus> errors = item.getItemMetadata().get(ErrorStatus.class);
-        Assert.assertEquals(expectedErrors, errors.size());
+        Assert.assertEquals(errors.size(), expectedErrors);
         final Collection<WarningStatus> warnings = item.getItemMetadata().get(WarningStatus.class);
-        Assert.assertEquals(expectedWarnings, warnings.size());
+        Assert.assertEquals(warnings.size(), expectedWarnings);
         //for (ErrorStatus err: errors) {
         //    System.out.println("Error: " + err.getComponentId() + ": " + err.getStatusMessage());
         //}

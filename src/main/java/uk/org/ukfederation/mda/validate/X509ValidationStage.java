@@ -27,6 +27,7 @@ import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.codec.Base64Support;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import uk.org.ukfederation.mda.dom.AbstractDOMValidationStage;
 
 import org.w3c.dom.Element;
 
@@ -35,7 +36,7 @@ import org.w3c.dom.Element;
  * 
  * Each X.509 certificate is processed only once per item, so that duplicate status messages are suppressed.
  */ 
-public class X509ValidationStage extends AbstractValidationStage<X509Certificate> {
+public class X509ValidationStage extends AbstractDOMValidationStage<X509Certificate> {
 
     /** Certificate factory to use to convert to X.509 certificates. */
     private CertificateFactory factory;

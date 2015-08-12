@@ -1,5 +1,5 @@
 
-package uk.org.ukfederation.mda.validate;
+package uk.org.ukfederation.mda.dom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +12,18 @@ import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import uk.org.ukfederation.mda.BaseDOMTest;
+import uk.org.ukfederation.mda.dom.AbstractDOMValidationStage;
+import uk.org.ukfederation.mda.validate.BaseValidator;
+import uk.org.ukfederation.mda.validate.Validator;
+import uk.org.ukfederation.mda.validate.Validator.Action;
 
-public class AbstractValidationStageTest extends BaseDOMTest {
+public class AbstractDOMValidationStageTest extends BaseDOMTest {
 
-    protected AbstractValidationStageTest() {
-        super(AbstractValidationStage.class);
+    protected AbstractDOMValidationStageTest() {
+        super(AbstractDOMValidationStage.class);
     }
 
-    private static class StringValidationStage extends AbstractValidationStage<String> {
+    private static class StringValidationStage extends AbstractDOMValidationStage<String> {
 
         @Override
         protected boolean applicable(Element element) {

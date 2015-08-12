@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-package uk.org.ukfederation.mda.validate;
+package uk.org.ukfederation.mda.dom;
 
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
-import net.shibboleth.utilities.java.support.component.ComponentSupport;
-import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+
+import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import uk.org.ukfederation.mda.validate.Validator;
 
 /**
  * Base stage to apply a collection of validators to each object from each item.
  * 
  * @param <T> type of the object to be validated
  */ 
-public abstract class AbstractValidationStage<T> extends AbstractDOMTraversalStage {
+public abstract class AbstractDOMValidationStage<T> extends AbstractDOMTraversalStage {
 
     /** The collection of validators to apply. */
     @Nonnull

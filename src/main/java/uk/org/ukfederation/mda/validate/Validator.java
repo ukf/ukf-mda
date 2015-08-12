@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 University of Edinburgh.
+ * Copyright (C) 2013-2015 University of Edinburgh.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,23 @@ public interface Validator<T> extends DestructableComponent, IdentifiableCompone
     InitializableComponent {
     
     /**
+     * {@link Validator} instances are normally applied in sequence in a
+     * chain of responsibility pattern orchestrated by the caller.
+     * 
+     * The sequence is regarded as completed when all validators have been called,
+     * or when the first returns a {@link #DONE} value. This can be used to
+     * short-circuit evaluation in the case where the problem detected would
+     * invalidate subsequent tests.
+     */
+    public enum Action {
+        /** Evaluation of other {@link Validator}s may proceed. */
+        CONTINUE,
+        
+        /** Evaluation of other {@link Validator}s should not proceed. */
+        DONE
+    }
+
+    /**
      * Apply the validator to the object in the given {@link Item} context.
      * 
      * The validator influences future processing by adding item metadata to the {@link Item}.
@@ -41,9 +58,10 @@ public interface Validator<T> extends DestructableComponent, IdentifiableCompone
      * @param item the {@link Item} context for the validation
      * @param stageId the identifier for the stage that is requesting the validation, for
      *      inclusion in status metadata
+     * @return an indication of whether to process additional validators
      * @throws StageProcessingException if an error occurs during validation
      */
-    public void validate(@Nonnull T e, @Nonnull Item<?> item, @Nonnull String stageId)
+    public Action validate(@Nonnull T e, @Nonnull Item<?> item, @Nonnull String stageId)
         throws StageProcessingException;
     
 }

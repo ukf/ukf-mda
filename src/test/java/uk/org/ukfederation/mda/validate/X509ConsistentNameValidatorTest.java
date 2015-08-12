@@ -23,7 +23,7 @@ public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
         final X509ConsistentNameValidator val = new X509ConsistentNameValidator();
         Assert.assertTrue(val.isError());
         final X509Certificate cert = getCertificate("ligo-new.pem");
-        val.validate(cert, item, "stage");
+        Assert.assertEquals(val.validate(cert, item, "stage"), Validator.Action.CONTINUE);
         errorsAndWarnings(item, 0, 0);
     }
 
@@ -32,7 +32,7 @@ public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
         final Item<String> item = new MockItem("foo");
         final X509ConsistentNameValidator val = new X509ConsistentNameValidator();
         final X509Certificate cert = getCertificate("ligo-old.pem");
-        val.validate(cert, item, "stage");
+        Assert.assertEquals(val.validate(cert, item, "stage"), Validator.Action.CONTINUE);
         errorsAndWarnings(item, 1, 0);
     }
 
@@ -41,7 +41,7 @@ public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
         final Item<String> item = new MockItem("foo");
         final X509ConsistentNameValidator val = new X509ConsistentNameValidator();
         final X509Certificate cert = getCertificate("uk002204.pem");
-        val.validate(cert, item, "stage");
+        Assert.assertEquals(val.validate(cert, item, "stage"), Validator.Action.CONTINUE);
         errorsAndWarnings(item, 1, 0);
     }
     
@@ -52,7 +52,7 @@ public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
         val.setError(false);
         Assert.assertFalse(val.isError());
         final X509Certificate cert = getCertificate("uk002204.pem");
-        val.validate(cert, item, "stage");
+        Assert.assertEquals(val.validate(cert, item, "stage"), Validator.Action.CONTINUE);
         errorsAndWarnings(item, 0, 1);
     }
 

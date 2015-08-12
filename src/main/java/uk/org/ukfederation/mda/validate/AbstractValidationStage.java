@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 University of Edinburgh.
+ * Copyright (C) 2013-2015 University of Edinburgh.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,8 +72,11 @@ public abstract class AbstractValidationStage<T> extends AbstractDOMTraversalSta
      */
     protected void applyValidators(@Nonnull final T obj, @Nonnull final TraversalContext context)
             throws StageProcessingException {
-        for (Validator<T> validator: validators) {
-            validator.validate(obj, context.getItem(), getId());
+        for (final Validator<T> validator: validators) {
+            final Validator.Action action = validator.validate(obj, context.getItem(), getId());
+            if (action == Validator.Action.DONE) {
+                return;
+            }
         }
     }
     

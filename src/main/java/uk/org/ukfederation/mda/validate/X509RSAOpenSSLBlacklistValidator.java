@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 University of Edinburgh.
+ * Copyright (C) 2013-2015 University of Edinburgh.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -163,9 +163,8 @@ public class X509RSAOpenSSLBlacklistValidator extends AbstractX509Validator {
         }
     }
     
-    /** {@inheritDoc} */
     @Override
-    public void validate(@Nonnull final X509Certificate cert, @Nonnull final Item<?> item,
+    public void doValidate(@Nonnull final X509Certificate cert, @Nonnull final Item<?> item,
             @Nonnull final String stageId) throws StageProcessingException {
         ComponentSupport.ifNotInitializedThrowUninitializedComponentException(this);
         final PublicKey key = cert.getPublicKey();

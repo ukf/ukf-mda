@@ -83,7 +83,7 @@ public abstract class BaseDOMTest extends BaseTest {
      * 
      * @return the document root of the data file, never null
      * 
-     * @throws XMLParserException thrown if the file does not exists or there is a problem parsing it
+     * @throws XMLParserException thrown if the file does not exist or there is a problem parsing it
      */
     public Element readXmlData(final String path) throws XMLParserException {
         String trimmedPath = StringSupport.trimOrNull(path);
@@ -99,6 +99,20 @@ public abstract class BaseDOMTest extends BaseTest {
         }
 
         return parserPool.parse(input).getDocumentElement();
+    }
+
+    /**
+     * Reads in an XML file and returns it as a new {@link DOMElementItem}.
+     * 
+     * @param path classpath path to the data file, never null
+     * 
+     * @return an {@link Item} wrapping the document representing the data file, never null
+     * 
+     * @throws XMLParserExceptionthrown if the file does not exist or there is a problem parsing it
+     */
+    public Item<Element> readDOMItem(final String path) throws XMLParserException {
+        final Element e = readXmlData(path);
+        return new DOMElementItem(e);
     }
 
     /**
@@ -129,7 +143,7 @@ public abstract class BaseDOMTest extends BaseTest {
         org.testng.Assert.assertTrue(ok, "Actual Node does not equal expected Node");
     }
 
-    protected int countErrors(final DOMElementItem item) {
+    protected int countErrors(final Item<Element> item) {
         final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
         return errors.size();

@@ -5,6 +5,7 @@ import java.security.cert.X509Certificate;
 
 import net.shibboleth.metadata.Item;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
@@ -21,7 +22,7 @@ public class X509RSAExponentValidatorTest extends BaseX509ValidatorTest {
             final int expectedErrors, final int expectedWarnings) throws Exception {
         final Item<String> item = new MockItem("foo");
         final X509Certificate cert = getCertificate(certName);
-        val.validate(cert, item, "stage");
+        Assert.assertEquals(val.validate(cert, item, "stage"), Validator.Action.CONTINUE);
         errorsAndWarnings(item, expectedErrors, expectedWarnings);
     }
 

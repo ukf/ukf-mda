@@ -39,10 +39,10 @@ public class UKEntityOrderingStrategyTest extends BaseDOMTest {
     /**
      * Test the ordering strategy.
      * 
-     * @throws XMLParserException 
+     * @throws Exception if something goes wrong
      */
     @Test
-    public void testOrder() throws XMLParserException {
+    public void testOrder() throws Exception {
         // Create a trivial DOM Document as a placeholder
         final Element trivialDoc = readXmlData("trivial.xml");
         

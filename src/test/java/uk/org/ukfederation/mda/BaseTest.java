@@ -13,7 +13,7 @@ public abstract class BaseTest {
     /**
      * Base path for class-relative test resource references.
      * 
-     * Will <em>not<em> end in a '/'.
+     * Will <em>not</em> end in a '/'.
      */
     private final String baseClassPath;
     
@@ -27,7 +27,11 @@ public abstract class BaseTest {
      */
     private final String basePackagePath;
     
-    /** Constructor */
+    /**
+     * Constructor.
+     * 
+     * @param clazz class under test
+     */
     protected BaseTest(final Class<?> clazz) {
         testingClass = clazz;
         baseClassPath = nameToPath(testingClass.getName());

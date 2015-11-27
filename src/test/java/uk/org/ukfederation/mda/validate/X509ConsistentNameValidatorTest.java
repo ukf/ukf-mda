@@ -12,7 +12,11 @@ import uk.org.ukfederation.mda.MockItem;
 
 public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
     
-    /** Constructor sets class under test. */
+    /**
+     * Constructor sets class under test.
+     * 
+     * @throws Exception if something goes wrong
+     */
     public X509ConsistentNameValidatorTest() throws Exception {
         super(X509ConsistentNameValidator.class);
     }

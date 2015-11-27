@@ -18,7 +18,11 @@ import uk.org.ukfederation.mda.BaseDOMTest;
 
 public class IPHintValidationStageTest extends BaseDOMTest {
 
-    /** Constructor sets class under test. */
+    /**
+     * Constructor sets class under test.
+     * 
+     * @throws Exception if something goes wrong
+     */
     public IPHintValidationStageTest() throws Exception {
         super(IPHintValidationStage.class);
     }

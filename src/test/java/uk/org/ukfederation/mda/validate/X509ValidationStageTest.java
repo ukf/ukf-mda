@@ -21,7 +21,11 @@ import uk.org.ukfederation.mda.BaseDOMTest;
 
 public class X509ValidationStageTest extends BaseDOMTest {
 
-    /** Constructor sets class under test. */
+    /**
+     * Constructor sets class under test.
+     * 
+     * @throws Exception if something goes wrong
+     */
     public X509ValidationStageTest() throws Exception {
         super(X509ValidationStage.class);
     }

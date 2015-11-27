@@ -38,7 +38,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
     /**
      * Test that an entity with multi-language ODN does not clash with itself.
      * 
-     * @throws Exception
+     * @throws Exception if something goes wrong
      */
     @Test
     public void noClashWithSelfODN1() throws Exception {
@@ -60,7 +60,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
      * Test that an entity with multi-language ODN *and* multi-language
      * mdui:DisplayName does not clash with itself.
      * 
-     * @throws Exception
+     * @throws Exception if something goes wrong
      */
     @Test
     public void noClashWithSelfODN2() throws Exception {
@@ -144,7 +144,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
     /**
      * A duplicated OrganizationDisplayName, if you allow for white space at start and end of names.
      * 
-     * @throws Exception
+     * @throws Exception if something goes wrong
      */
     @Test
     public void duplicateODNWhitespace() throws Exception {
@@ -170,7 +170,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
     /**
      * A duplicated OrganizationDisplayName, if you allow for case variation.
      * 
-     * @throws Exception
+     * @throws Exception if something goes wrong
      */
     @Test
     public void duplicateODNCase() throws Exception {
@@ -197,7 +197,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
      * In this test, the duplicate clashes against both of the previous examples so should
      * be reported one for each independent clash.
      * 
-     * @throws Exception
+     * @throws Exception if something goes wrong
      */
     @Test
     public void duplicateBoth() throws Exception {
@@ -224,7 +224,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
      * In this test, several duplicates clash against multiple originals, each entity should only
      * have independent clashes.
      * 
-     * @throws Exception
+     * @throws Exception if something goes wrong
      */
     @Test
     public void duplicateAll() throws Exception {
@@ -256,6 +256,8 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
     /**
      * In this test, we check that an entity with display name variants differing only
      * in case conventions ("Test" vs. "test" vs. "TEST") does not clash with itself.
+     * 
+     * @throws Exception if something goes wrong
      */
     @Test
     public void nonDuplicateCaseVariants() throws Exception {

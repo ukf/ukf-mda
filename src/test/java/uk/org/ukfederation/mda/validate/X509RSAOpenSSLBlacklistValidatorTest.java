@@ -12,7 +12,11 @@ import uk.org.ukfederation.mda.MockItem;
 
 public class X509RSAOpenSSLBlacklistValidatorTest extends BaseX509ValidatorTest {
     
-    /** Constructor sets class under test. */
+    /**
+     * Constructor sets class under test.
+     * 
+     * @throws Exception if something goes wrong
+     */
     public X509RSAOpenSSLBlacklistValidatorTest() throws Exception {
         super(X509RSAOpenSSLBlacklistValidator.class);
     }

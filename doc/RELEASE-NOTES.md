@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.8.8 ##
+
+* Added `NamespacesStrippingStage`.
+
 ## Version 0.8.7 ##
 
 * Added `SAMLStringElementCheckingStage`.

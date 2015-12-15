@@ -28,13 +28,8 @@ import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthorityItemIdentific
  * Item identification strategy for UK federation deployment.
  * 
  * The basic identifier strategy is to use a {@link UKId} if one is present, or
- * fall back to the {@link  FirstItemIdItemIdentificationStrategy} (which in turn
+ * fall back to the super class implementation (which in turn
  * falls back to a configurable static value such as "unknown").
- * 
- * To this we add a component based on a {@link RegistrationAuthority} if one of
- * those is present.  This second component can be omitted if present but is a
- * member of a specified blacklist, and it can be mapped to a simpler value if
- * desired.
  */
 @ThreadSafe
 public class UKItemIdentificationStrategy extends RegistrationAuthorityItemIdentificationStrategy {

@@ -4,6 +4,7 @@ package uk.org.ukfederation.mda.validate;
 import java.security.cert.X509Certificate;
 
 import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.validate.Validator;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

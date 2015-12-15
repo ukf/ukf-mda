@@ -29,6 +29,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import javax.security.auth.x500.X500Principal;
 
 import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.validate.x509.AbstractX509Validator;
 
 import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.x509.GeneralName;

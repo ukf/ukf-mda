@@ -112,7 +112,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
         final UKItemIdentificationStrategy strat = makeStrat();
         final Set<String> auths = new HashSet<>();
         auths.add("http://ukfederation.org.uk");
-        strat.setIgnoredAuthorities(auths);
+        strat.setIgnoredRegistrationAuthorities(auths);
         
         final Item<Element> item = makeItem("present");
 
@@ -130,7 +130,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
         final UKItemIdentificationStrategy strat = makeStrat();
         final Map<String, String> nameMap = new HashMap<>();
         nameMap.put("http://ukfederation.org.uk", "UKf");
-        strat.setDisplayNames(nameMap);
+        strat.setRegistrationAuthorityDisplayNames(nameMap);
         
         final Item<Element> item = makeItem("present");
 

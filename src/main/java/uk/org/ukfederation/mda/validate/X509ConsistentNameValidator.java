@@ -16,12 +16,10 @@
 
 package uk.org.ukfederation.mda.validate;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,19 +30,20 @@ import javax.security.auth.x500.X500Principal;
 
 import net.shibboleth.metadata.Item;
 
-import org.bouncycastle.asn1.ASN1InputStream;
-import org.bouncycastle.asn1.DERObject;
-import org.bouncycastle.asn1.DERObjectIdentifier;
-import org.bouncycastle.asn1.DERSequence;
-import org.bouncycastle.asn1.DERSet;
-import org.bouncycastle.asn1.DERString;
-import org.bouncycastle.x509.extension.X509ExtensionUtil;
+import org.bouncycastle.asn1.DEROctetString;
+import org.bouncycastle.asn1.x509.GeneralName;
+import org.bouncycastle.asn1.x509.GeneralNames;
+import org.cryptacular.util.CertUtil;
+import org.cryptacular.util.CodecUtil;
+import org.cryptacular.x509.GeneralNameType;
+import org.cryptacular.x509.dn.NameReader;
+import org.cryptacular.x509.dn.RDNSequence;
+import org.cryptacular.x509.dn.StandardAttributeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.Lists;
 import com.google.common.net.InetAddresses;
-
-import edu.vt.middleware.crypt.util.HexConverter;
 
 /**
  * Validator class to check that X.509 certificate CNs are consistent with any
@@ -65,9 +64,6 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
     // Checkstyle: CyclomaticComplexity OFF -- fix in upstream code
     private static class X509Support {
 
-        /** Common Name (CN) OID. */
-        public static final String CN_OID = "2.5.4.3";
-        
         /** RFC 2459 Other Subject Alt Name type. */
         public static final Integer OTHER_ALT_NAME = new Integer(0);
 
@@ -96,12 +92,17 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
         public static final Integer REGISTERED_ID_ALT_NAME = new Integer(8);
 
         /**
-         * Gets the commons names that appear within the given distinguished name. The returned list
-         * provides the names in the order they appeared in the DN.
+         * Gets the commons names that appear within the given distinguished name. 
+         * 
+         * <p>
+         * The returned list provides the names in the order they appeared in the DN, according to 
+         * RFC 1779/2253 encoding. In this encoding the "most specific" name would typically appear
+         * in the left-most position, and would appear first in the returned list.
+         * </p>
          * 
          * @param dn the DN to extract the common names from
          * 
-         * @return the common names that appear in the DN in the order they appear or null if the given DN is null
+         * @return the common names that appear in the DN in the order they appear, or null if the given DN is null
          */
         @Nullable public static List<String> getCommonNames(@Nullable final X500Principal dn) {
             if (dn == null) {
@@ -110,50 +111,15 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
 
             Logger log = getLogger();
             log.debug("Extracting CNs from the following DN: {}", dn.toString());
-            List<String> commonNames = new LinkedList<String>();
-            try {
-                ASN1InputStream asn1Stream = new ASN1InputStream(dn.getEncoded());
-                DERObject parent = asn1Stream.readObject();
-
-                String cn = null;
-                DERObject dnComponent;
-                DERSequence grandChild;
-                DERObjectIdentifier componentId;
-                for (int i = 0; i < ((DERSequence) parent).size(); i++) {
-                    dnComponent = ((DERSequence) parent).getObjectAt(i).getDERObject();
-                    if (!(dnComponent instanceof DERSet)) {
-                        log.debug("No DN components.");
-                        continue;
-                    }
-
-                    // Each DN component is a set
-                    for (int j = 0; j < ((DERSet) dnComponent).size(); j++) {
-                        grandChild = (DERSequence) ((DERSet) dnComponent).getObjectAt(j).getDERObject();
-
-                        if (grandChild.getObjectAt(0) != null
-                                && grandChild.getObjectAt(0).getDERObject() instanceof DERObjectIdentifier) {
-                            componentId = (DERObjectIdentifier) grandChild.getObjectAt(0).getDERObject();
-
-                            if (CN_OID.equals(componentId.getId())) {
-                                // OK, this dn component is actually a cn attribute
-                                if (grandChild.getObjectAt(1) != null
-                                        && grandChild.getObjectAt(1).getDERObject() instanceof DERString) {
-                                    cn = ((DERString) grandChild.getObjectAt(1).getDERObject()).getString();
-                                    commonNames.add(cn);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                asn1Stream.close();
-
-                return commonNames;
-
-            } catch (IOException e) {
-                log.error("Unable to extract common names from DN: ASN.1 parsing failed: " + e);
-                return null;
-            }
+            final RDNSequence attrs = NameReader.readX500Principal(dn);
+            // Have to copy because list returned from Attributes is unmodifiable, so can't reverse it.
+            final List<String> values = Lists.newArrayList(attrs.getValues(StandardAttributeType.CommonName));
+            
+            // Reverse the order so that the most-specific CN is first in the list, 
+            // consistent with RFC 1779/2253 RDN ordering.
+            Collections.reverse(values);
+            
+            return values;
         }
 
         /**
@@ -170,30 +136,18 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
                 return null;
             }
 
-            List<Object> names = new LinkedList<Object>();
-            Collection<List<?>> altNames = null;
-            try {
-                altNames = X509ExtensionUtil.getSubjectAlternativeNames(certificate);
-            } catch (CertificateParsingException e) {
-                getLogger().error("Encountered an problem trying to extract Subject Alternate "
-                        + "Name from supplied certificate: " + e);
-                return names;
+            final List<Object> altNames = new LinkedList<Object>();
+            final GeneralNameType[] types = new GeneralNameType[nameTypes.length];
+            for (int i = 0; i < nameTypes.length; i++) {
+                types[i] = GeneralNameType.fromTagNumber(nameTypes[i]);
             }
-
-            if (altNames != null) {
-                // 0th position represents the alt name type
-                // 1st position contains the alt name data
-                for (List<?> altName : altNames) {
-                    for (Integer nameType : nameTypes) {
-                        if (altName.get(0).equals(nameType)) {
-                            names.add(convertAltNameType(nameType, altName.get(1)));
-                            break;
-                        }
-                    }
+            final GeneralNames names = CertUtil.subjectAltNames(certificate, types);
+            if (names != null) {
+                for (GeneralName name : names.getNames()) {
+                    altNames.add(convertAltNameType(name.getTagNo(), name.getName().toASN1Primitive()));
                 }
             }
-
-            return names;
+            return altNames;
         }
 
         /**
@@ -212,23 +166,22 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
                     || URI_ALT_NAME.equals(nameType) || REGISTERED_ID_ALT_NAME.equals(nameType)) {
 
                 // these are just strings in the appropriate format already, return as-is
-                return nameValue;
+                return nameValue.toString();
             } else if (IP_ADDRESS_ALT_NAME.equals(nameType)) {
                 // this is a byte[], IP addr in network byte order
-                byte [] nameValueBytes = (byte[]) nameValue;
+                byte [] nameValueBytes = ((DEROctetString) nameValue).getOctets();
                 try {
                     return InetAddresses.toAddrString(InetAddress.getByAddress(nameValueBytes));
                 } catch (UnknownHostException e) {
-                    HexConverter hexConverter = new HexConverter(true);
                     log.warn("Was unable to convert IP address alt name byte[] to string: " +
-                            hexConverter.fromBytes(nameValueBytes), e);
+                            CodecUtil.hex(nameValueBytes, true), e);
                     return null;
                 }
             } else if (EDI_PARTY_ALT_NAME.equals(nameType) || X400ADDRESS_ALT_NAME.equals(nameType)
                     || OTHER_ALT_NAME.equals(nameType)) {
 
                 // these have no defined representation, just return a DER-encoded byte[]
-                return ((DERObject) nameValue).getDEREncoded();
+                return nameValue;
             } else {
                 log.warn("Encountered unknown alt name type '{}', adding as-is", nameType);
                 return nameValue;

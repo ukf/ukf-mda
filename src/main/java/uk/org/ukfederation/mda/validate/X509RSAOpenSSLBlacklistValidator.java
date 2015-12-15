@@ -39,10 +39,9 @@ import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.logic.Constraint;
-import net.shibboleth.utilities.java.support.resource.Resource;
-import net.shibboleth.utilities.java.support.resource.ResourceException;
 
 import org.apache.commons.codec.binary.Hex;
+import org.springframework.core.io.Resource;
 
 /**
  * Validator class to check RSA moduli in X.509 certificates against a OpenSSL-format
@@ -184,7 +183,6 @@ public class X509RSAOpenSSLBlacklistValidator extends AbstractX509Validator {
     /** {@inheritDoc} */
     @Override
     protected void doDestroy() {
-        blacklistResource.destroy();
         blacklistResource = null;
         blacklistedValues.clear();
 
@@ -201,43 +199,34 @@ public class X509RSAOpenSSLBlacklistValidator extends AbstractX509Validator {
                     + ", blacklistResource must not be null");
         }
 
-        if (!blacklistResource.isInitialized()) {
-            blacklistResource.initialize();
+        if (!blacklistResource.exists()) {
+            throw new ComponentInitializationException("Unable to initialize " + getId() + ", blacklistResource "
+                    + blacklistResource.getDescription() + " does not exist");
         }
-
-        try {
-            if (!blacklistResource.exists()) {
-                throw new ComponentInitializationException("Unable to initialize " + getId() + ", blacklistResource "
-                        + blacklistResource.getLocation() + " does not exist");
-            }
-            
-            try (BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(blacklistResource.getInputStream()))) {
-                while (true) {
-                    final String line = reader.readLine();
-                    if (line == null) {
-                        break;
-                    }
-                    
-                    // Ignore lines consisting only of whitespace, including blank lines.
-                    if (line.trim().length() == 0) {
-                        continue;
-                    }
-                    
-                    // Ignore comments.
-                    if (line.charAt(0) != '#') {
-                        blacklistedValues.add(line);
-                    }
+        
+        try (BufferedReader reader =
+                new BufferedReader(new InputStreamReader(blacklistResource.getInputStream()))) {
+            while (true) {
+                final String line = reader.readLine();
+                if (line == null) {
+                    break;
                 }
-            } catch (IOException e) {
-                throw new ComponentInitializationException("Unable to initialize " + getId()
-                        + ", error reading blacklistResource " + blacklistResource.getLocation() + " information", e);
+                
+                // Ignore lines consisting only of whitespace, including blank lines.
+                if (line.trim().length() == 0) {
+                    continue;
+                }
+                
+                // Ignore comments.
+                if (line.charAt(0) != '#') {
+                    blacklistedValues.add(line);
+                }
             }
-
-        } catch (ResourceException e) {
+        } catch (IOException e) {
             throw new ComponentInitializationException("Unable to initialize " + getId()
-                    + ", error reading blacklistResource " + blacklistResource.getLocation() + " information", e);
+                    + ", error reading blacklistResource " + blacklistResource.getDescription() + " information", e);
         }
+
     }
 
 }

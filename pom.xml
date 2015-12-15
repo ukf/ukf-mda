@@ -6,12 +6,12 @@
     <parent>
         <groupId>net.shibboleth</groupId>
         <artifactId>parent-v3</artifactId>
-        <version>2</version>
+        <version>TRUNK-SNAPSHOT</version>
     </parent>
 
     <groupId>uk.org.ukfederation</groupId>
     <artifactId>ukf-mda</artifactId>
-    <version>0.8.8</version>
+    <version>0.9.0-SNAPSHOT</version>
     
     <name>UK federation aggregator beans</name>
     <description>
@@ -22,6 +22,8 @@
     <inceptionYear>2011</inceptionYear>
 
     <properties>
+        <mda.version>0.9.0-SNAPSHOT</mda.version>
+        <java-support.version>7.1-SNAPSHOT</java-support.version>
         <checkstyle.configLocation>checkstyle.xml</checkstyle.configLocation>
     </properties>
 
@@ -47,27 +49,42 @@
         <!-- Compile dependencies -->
 
         <dependency>
-            <groupId>net.shibboleth.metadata</groupId>
-            <artifactId>aggregator-pipeline</artifactId>
-            <version>0.8.0</version>
-            <scope>compile</scope>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.shibboleth.utilities</groupId>
-            <artifactId>java-support</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <scope>compile</scope>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.shibboleth.metadata</groupId>
+            <artifactId>aggregator-pipeline</artifactId>
+            <version>${mda.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.shibboleth.utilities</groupId>
+            <artifactId>java-support</artifactId>
+            <version>${java-support.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.cryptacular</groupId>
+            <artifactId>cryptacular</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
         </dependency>
 
         <!-- Provided Dependencies -->
@@ -89,94 +106,11 @@
 
         <!-- Managed Dependencies -->
 
-        <dependency>
-            <groupId>${xerces.groupId}</groupId>
-            <artifactId>xml-apis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${xerces.groupId}</groupId>
-            <artifactId>xercesImpl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${xerces.groupId}</groupId>
-            <artifactId>serializer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${xmlresolver.groupId}</groupId>
-            <artifactId>xml-resolver</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${xalan.groupId}</groupId>
-            <artifactId>xalan</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
 
         <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <compilerArgument>-Djava.endorsed.dirs="target/endorsed"</compilerArgument>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <argLine>-Djava.endorsed.dirs="target/endorsed"</argLine>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>target/endorsed</outputDirectory>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${xerces.groupId}</groupId>
-                                    <artifactId>xml-apis</artifactId>
-                                    <version>${xerces.version}</version>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${xerces.groupId}</groupId>
-                                    <artifactId>xercesImpl</artifactId>
-                                    <version>${xerces.version}</version>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${xerces.groupId}</groupId>
-                                    <artifactId>serializer</artifactId>
-                                    <version>${xerces.version}</version>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${xmlresolver.groupId}</groupId>
-                                    <artifactId>xml-resolver</artifactId>
-                                    <version>${xmlresolver.version}</version>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${xalan.groupId}</groupId>
-                                    <artifactId>xalan</artifactId>
-                                    <version>${xalan.version}</version>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-
-                </executions>
-            </plugin>
 
             <!--
                 Checkstyle configuration for checkstyle:* goals called directly

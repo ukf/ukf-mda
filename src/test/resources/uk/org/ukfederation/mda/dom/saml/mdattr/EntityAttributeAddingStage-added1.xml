@@ -5,14 +5,14 @@
     xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi"
     xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
     entityID="http://example.org/entity">
-    <Extensions>
+    <md:Extensions xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
         <mdattr:EntityAttributes>
             <saml:Attribute Name="http://macedir.org/entity-category" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
                 <saml:AttributeValue>http://www.geant.net/uri/dataprotection-code-of-conduct/v1</saml:AttributeValue>
                 <saml:AttributeValue>another</saml:AttributeValue>
             </saml:Attribute>
         </mdattr:EntityAttributes>
-    </Extensions>
+    </md:Extensions>
     <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
         <KeyDescriptor>
             <ds:KeyInfo>

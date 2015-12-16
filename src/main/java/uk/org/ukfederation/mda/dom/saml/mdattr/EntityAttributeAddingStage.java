@@ -23,6 +23,7 @@ import javax.annotation.Nonnull;
 
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
+import net.shibboleth.metadata.dom.saml.mdattr.EntityCategorySupport;
 import net.shibboleth.metadata.pipeline.BaseStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterInit;

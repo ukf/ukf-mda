@@ -19,12 +19,11 @@ package uk.org.ukfederation.mda.validate.mdui;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
+import net.shibboleth.metadata.dom.AbstractDOMTraversalStage;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.net.IPRange;
 
 import org.w3c.dom.Element;
-
-import uk.org.ukfederation.mda.dom.AbstractDOMTraversalStage;
 
 /**
  * A stage which validates mdui:IPHint elements.

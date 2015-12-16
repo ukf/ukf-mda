@@ -21,12 +21,11 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 
+import net.shibboleth.metadata.dom.AbstractElementVisitingStage;
 import net.shibboleth.utilities.java.support.xml.QNameSupport;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-
-import uk.org.ukfederation.mda.dom.AbstractElementVisitingStage;
 
 /**
  * A Stage which checks the text content of the named elements to verify that
@@ -53,7 +52,6 @@ public class SAMLStringElementCheckingStage extends AbstractElementVisitingStage
         return matcher.matches();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void visit(@Nonnull final Element e, @Nonnull final TraversalContext context) {
         if (match(e)) {

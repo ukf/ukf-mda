@@ -19,14 +19,13 @@ package uk.org.ukfederation.mda;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.shibboleth.metadata.Item;
-import net.shibboleth.metadata.ItemId;
-import net.shibboleth.metadata.dom.DOMElementItem;
-import net.shibboleth.utilities.java.support.xml.XMLParserException;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
+
+import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.ItemId;
+import net.shibboleth.metadata.dom.DOMElementItem;
 
 /** Unit tests for the {@link UKEntityOrderingStrategy} class. */
 public class UKEntityOrderingStrategyTest extends BaseDOMTest {

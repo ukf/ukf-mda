@@ -27,12 +27,12 @@ import net.shibboleth.metadata.pipeline.StageProcessingException;
 /**
  * A stage to examine all the text in {@link Element}-based {@link Item}s (text nodes and attributes) and
  * mark them as being in error if a CR character appears. This can only be the case if the XML
- * document contained an explicit character reference such as <code>&#13;</code>.
+ * document contained an explicit character reference such as <code>&amp;#13;</code>.
  * 
  * This stage is specifically intended to detect metadata which would trigger the SSPCPP-684
  * issue in the Shibboleth SP.
  * 
- * @see https://issues.shibboleth.net/jira/browse/SSPCPP-684
+ * @see <a href="https://issues.shibboleth.net/jira/browse/SSPCPP-684">SSPCPP-684</a>
  */
 public class CRDetectionStage extends AbstractDOMTraversalStage {
 

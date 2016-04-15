@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.1 ##
+
+* Added `CRDetectionStage`.
+
 ## Version 0.9.0 ##
 
 * Rebased on Shibboleth MDA 0.9.0 and related components.

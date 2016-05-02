@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.2 ##
+
+* Removed `CRDetectionStage` now that it has been added upstream.
+
 ## Version 0.9.1 ##
 
 * Added `CRDetectionStage`.

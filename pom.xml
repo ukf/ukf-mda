@@ -24,6 +24,10 @@
     <properties>
         <mda.version>0.9.1</mda.version>
         <java-support.version>7.2.0</java-support.version>
+        <xalan.groupId>xalan</xalan.groupId>
+        <xerces.groupId>org.apache.xerces</xerces.groupId>
+        <xmlresolver.groupId>xml-resolver</xmlresolver.groupId>
+        <ukf-members.version>1.2.0-SNAPSHOT</ukf-members.version>
     </properties>
 
     <repositories>
@@ -61,6 +65,33 @@
 
         <!-- Compile dependencies -->
 
+        <dependency>
+            <groupId>uk.org.ukfederation</groupId>
+            <artifactId>ukf-members</artifactId>
+            <version>${ukf-members.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>${xerces.groupId}</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>${xerces.groupId}</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>${xerces.groupId}</groupId>
+                    <artifactId>serializer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>${xmlresolver.groupId}</groupId>
+                    <artifactId>xml-resolver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>${xalan.groupId}</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>

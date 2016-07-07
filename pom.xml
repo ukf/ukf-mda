@@ -41,6 +41,20 @@
                 <enabled>false</enabled>
             </releases>
         </repository>
+        <repository>
+            <id>ukf-release</id>
+            <url>https://apps.iay.org.uk/nexus/content/repositories/ukf</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>ukf-snapshot</id>
+            <url>https://apps.iay.org.uk/nexus/content/repositories/ukf-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
     </repositories>
 
     <dependencies>

@@ -167,11 +167,11 @@ public abstract class BaseDOMTest extends BaseTest {
         stage2.execute(items);
     }
 
-    protected void displayErrors(Item<Element> item) {
+    protected void displayErrors(final Item<Element> item) {
         final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
         final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
         for (ErrorStatus e: errors) {
-            System.out.println("Error seen " + e.getComponentId() + " " + e.getStatusMessage());
+            System.out.println("Error seen " + e.getComponentId() + ": " + e.getStatusMessage());
         }
     }
     

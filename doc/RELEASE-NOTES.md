@@ -3,6 +3,7 @@
 ## Version 0.9.2 ##
 
 * Removed `CRDetectionStage` now that it has been added upstream.
+* Added `EntityOwnerCheckingStage`.
 
 ## Version 0.9.1 ##
 

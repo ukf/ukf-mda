@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Members xmlns="http://ukfederation.org.uk/2007/01/members">
+    <Member ID="ukforg123">
+        <Name>Example Organization</Name>
+    </Member>
+</Members>

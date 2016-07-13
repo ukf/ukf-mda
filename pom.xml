@@ -12,6 +12,7 @@
     <groupId>uk.org.ukfederation</groupId>
     <artifactId>ukf-mda</artifactId>
     <version>0.9.3-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>UK federation aggregator beans</name>
     <description>
@@ -185,8 +186,7 @@
         <developer>
             <id>iay</id>
             <name>Ian Young</name>
-            <organization>EDINA, University of Edinburgh</organization>
-            <organizationUrl>http://edina.ac.uk</organizationUrl>
+            <organizationUrl>http://iay.org.uk/</organizationUrl>
             <timezone>0</timezone>
         </developer>
     </developers>

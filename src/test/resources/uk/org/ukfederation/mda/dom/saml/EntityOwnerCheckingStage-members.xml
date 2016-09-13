@@ -2,5 +2,6 @@
 <Members xmlns="http://ukfederation.org.uk/2007/01/members">
     <Member ID="ukforg123">
         <Name>Example Organization</Name>
+        <JoinDate>2011-01-01</JoinDate>
     </Member>
 </Members>

@@ -3,14 +3,15 @@
     xmlns="http://ukfederation.org.uk/2007/01/members"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://ukfederation.org.uk/2007/01/members ukfederation-members.xsd">
-    <Member>
+    <Member ID="ukforg123">
         <Name>member1</Name>
+        <JoinDate>2012-02-02</JoinDate>
         <Scopes>
             <Entity>https://idp2.iay.org.uk/idp/shibboleth</Entity>
             <Scope>iay.org.uk</Scope>
         </Scopes>
     </Member>
-    <Member>
+    <Member ID="ukforg1234">
         <Name>member2</Name>
         <JoinDate>2011-01-01</JoinDate>
         <Scopes>

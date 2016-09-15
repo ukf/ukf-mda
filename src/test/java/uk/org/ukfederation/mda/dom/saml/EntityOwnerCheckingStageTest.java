@@ -23,7 +23,7 @@ public class EntityOwnerCheckingStageTest extends BaseDOMTest {
 
     private Members getMembers() throws Exception {
         final Element membersElement = readXmlData("members.xml");
-        return new Members(membersElement);
+        return new Members(membersElement.getOwnerDocument());
     }
     
     private void runSingle(@Nonnull final Item<Element> item) throws Exception {

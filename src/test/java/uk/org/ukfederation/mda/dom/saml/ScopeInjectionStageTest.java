@@ -21,7 +21,7 @@ public class ScopeInjectionStageTest extends BaseDOMTest {
         final Element membersElement = readXmlData(membersPath);
         final ScopeInjectionStage stage = new ScopeInjectionStage();
         stage.setId("test");
-        stage.setMembers(new Members(membersElement));
+        stage.setMembers(new Members(membersElement.getOwnerDocument()));
         stage.initialize();
         return stage;
     }

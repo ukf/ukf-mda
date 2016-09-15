@@ -3,7 +3,11 @@
     xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
     xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi"
     xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+    xmlns:ukfedlabel="http://ukfederation.org.uk/2006/11/label"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <md:Extensions>
+        <ukfedlabel:UKFederationMember orgID="ukforg123"/>
+    </md:Extensions>
     <IDPSSODescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
         protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
         <Extensions>

@@ -42,7 +42,7 @@ public class EntityOwnerCheckingStageTest extends BaseDOMTest {
         final List<ErrorStatus> errors = item.getItemMetadata().get(ErrorStatus.class);
         Assert.assertEquals("should have had exactly one error", 1, errors.size());
         final ErrorStatus error = errors.get(0);
-        Assert.assertTrue("error '" + error.getStatusMessage() + "' should have contained " + content,
+        Assert.assertTrue("error '" + error.getStatusMessage() + "' should have contained '" + content + "'",
                 error.getStatusMessage().contains(content));
     }
 
@@ -95,4 +95,19 @@ public class EntityOwnerCheckingStageTest extends BaseDOMTest {
         checkError(item, "unknown owner name:");
         checkError(item, "Unknown Organization");
     }
+    
+    @Test
+    public void noLabel() throws Exception {
+        final Item<Element> item = readDOMItem("noLabel.xml");
+        runSingle(item);
+        checkError(item, "has no UKFederationMember element");
+    }
+
+    @Test
+    public void noAttr() throws Exception {
+        final Item<Element> item = readDOMItem("noAttr.xml");
+        runSingle(item);
+        checkError(item, "has no orgID attribute");
+    }
+
 }

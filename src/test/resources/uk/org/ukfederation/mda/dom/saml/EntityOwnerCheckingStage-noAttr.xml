@@ -6,7 +6,7 @@
     xmlns:ukfedlabel="http://ukfederation.org.uk/2006/11/label"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <md:Extensions>
-        <ukfedlabel:UKFederationMember orgID="ukforg123"/>
+        <ukfedlabel:UKFederationMember/>
     </md:Extensions>
     <IDPSSODescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
         protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
@@ -43,7 +43,7 @@
     </AttributeAuthorityDescriptor>
     <Organization xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
         <OrganizationName xml:lang="sv">Ignored Organization Name</OrganizationName>
-        <OrganizationName xml:lang="en-GB">Example Organization</OrganizationName>
+        <OrganizationName xml:lang="en">Example Organization</OrganizationName>
         <OrganizationDisplayName xml:lang="sv">Second Organization</OrganizationDisplayName>
         <OrganizationDisplayName xml:lang="en">Second Organization</OrganizationDisplayName>
         <OrganizationURL xml:lang="en">http://www.bth.se</OrganizationURL>

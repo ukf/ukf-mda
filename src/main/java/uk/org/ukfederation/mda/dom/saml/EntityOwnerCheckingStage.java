@@ -34,7 +34,9 @@ import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.AttributeSupport;
 import net.shibboleth.utilities.java.support.xml.ElementSupport;
+import uk.org.ukfederation.mda.UKFedLabelSupport;
 import uk.org.ukfederation.members.Members;
+import uk.org.ukfederation.members.jaxb.MemberElement;
 
 /**
  * Stage to check that each entity in a collection is owned by a UK federation member.
@@ -83,6 +85,24 @@ public class EntityOwnerCheckingStage extends BaseIteratingStage<Element> {
             return;
         }
         
+        // Acquire its UK federation organization ID
+        final Element ukfMemberLabel =
+                SAMLMetadataSupport.getDescriptorExtensions(entity, UKFedLabelSupport.UK_FEDERATION_MEMBER_NAME);
+        if (ukfMemberLabel == null) {
+            addError(metadata, "entity has no " +
+                    UKFedLabelSupport.UK_FEDERATION_MEMBER_NAME.getLocalPart() + " element");
+            return;
+        }
+        final String orgID = AttributeSupport.getAttributeValue(ukfMemberLabel,
+                UKFedLabelSupport.UK_FEDERATION_MEMBER_ORGID);
+        if (orgID == null) {
+            addError(metadata, "entity's " +
+                    UKFedLabelSupport.UK_FEDERATION_MEMBER_NAME.getLocalPart() +
+                    " element has no " +
+                    UKFedLabelSupport.UK_FEDERATION_MEMBER_ORGID + " attribute");
+            return;
+        }
+
         // Acquire the Organization element.
         final Element orgElement = ElementSupport.getFirstChildElement(entity,
                 new QName(SAMLMetadataSupport.MD_NS, "Organization"));
@@ -99,8 +119,15 @@ public class EntityOwnerCheckingStage extends BaseIteratingStage<Element> {
         }
         
         // Check that this is a valid organization name
-        if (!members.isOwnerName(orgName)) {
+        final MemberElement member = members.getMemberByName(orgName);
+        if (member == null) {
             addError(metadata, "unknown owner name: " + orgName);
+            return;
+        }
+
+        // Cross-check the entity's orgID against the value from members.xml.
+        if (!orgID.equals(member.getID())) {
+            addError(metadata, "mismatched orgID: " + orgID + " should be " + member.getID());
             return;
         }
     }

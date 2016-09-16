@@ -1,5 +1,11 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.4 ##
+
+* Track changes in `ukf-members` V1.3.0.
+* `EntityOwnerCheckingStage` now checks the `UKFederationMember` extension,
+including that the `orgID` attribute is consistent with the `OrganizationName`.
+
 ## Version 0.9.3 ##
 
 * Added `ScopeInjectionStage`.

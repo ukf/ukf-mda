@@ -17,7 +17,9 @@
       <property name="allowThrowsTagsForSubclasses" value="true"/>
       <property name="allowUndeclaredRTE" value="true"/>
     </module>
-    <module name="JavadocType"/>
+    <module name="JavadocType">
+        <property name="allowUnknownTags" value="true"/>
+    </module>
     <module name="JavadocVariable"/>
     <module name="JavadocStyle">
       <property name="checkEmptyJavadoc" value="true"/>
@@ -48,7 +50,6 @@
     <module name="MethodParamPad"/>
     <module name="ModifierOrder"/>
     <module name="AvoidNestedBlocks"/>
-    <module name="EmptyBlock"/>
     <module name="LeftCurly"/>
     <module name="NeedBraces"/>
     <module name="RightCurly"/>
@@ -62,13 +63,9 @@
     <module name="SimplifyBooleanReturn"/>
     <module name="FinalClass"/>
     <module name="HideUtilityClassConstructor"/>
-    <module name="InterfaceIsType"/>
     <module name="VisibilityModifier"/>
     <module name="ArrayTypeStyle"/>
     <module name="UpperEll"/>
-    <module name="AbstractClassName">
-      <property name="format" value="^Abstract.*$|^Base.*$"/>
-    </module>
     <module name="AnonInnerLength"/>
     <module name="EmptyForInitializerPad"/>
     <module name="CovariantEquals"/>
@@ -82,6 +79,7 @@
     <module name="ParameterAssignment"/>
     <module name="ReturnCount">
       <property name="max" value="8"/>
+      <property name="maxForVoid" value="8"/>
     </module>
     <module name="StringLiteralEquality"/>
     <module name="SuperFinalize"/>
@@ -95,7 +93,6 @@
     <module name="TrailingComment"/>
     <module name="EqualsAvoidNull"/>
     <module name="ModifiedControlVariable"/>
-    <module name="MissingOverride"/>
   </module>
   <module name="SuppressionCommentFilter">
     <property name="offCommentFormat" value="\bCheck[Ss]tyle:\s*([\w|]+)\s+OFF\b"/>

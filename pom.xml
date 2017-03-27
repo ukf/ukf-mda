@@ -149,7 +149,7 @@
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
                         <artifactId>doxia-module-markdown</artifactId>
-                        <version>1.6</version>
+                        <version>1.7</version>
                     </dependency>
                     <!-- support DAV protocol for site deploy -->
                     <dependency>
@@ -169,7 +169,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
+                <version>${checkstyle-plugin.version}</version>
                 <configuration>
                     <configLocation>${checkstyle.configLocation}</configLocation>
                 </configuration>

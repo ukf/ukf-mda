@@ -10,7 +10,11 @@ Some insight into the ways we're using these components in our [production deplo
 
 ## Copyright and License
 
-The entire package is Copyright (C) 2011&mdash;2015, University of Edinburgh.
+The contents of this repository are Copyright (C) the named contributors or their
+employers, as appropriate.
+
+In particular, all content authored prior to the 1st of August 2016 is
+Copyright (C) 2011&mdash;2016, University of Edinburgh.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

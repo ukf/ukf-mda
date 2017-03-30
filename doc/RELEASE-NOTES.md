@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.5 ##
+
+* Add `FixedStringIdentifierGenerationStrategy`.
+
 ## Version 0.9.4 ##
 
 * Track changes in `ukf-members` V1.3.0.

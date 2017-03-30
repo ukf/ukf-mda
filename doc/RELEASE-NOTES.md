@@ -3,6 +3,7 @@
 ## Version 0.9.5 ##
 
 * Add `FixedStringIdentifierGenerationStrategy`.
+* Add a `beans.xml` with abstract parent beans for these components.
 
 ## Version 0.9.4 ##
 

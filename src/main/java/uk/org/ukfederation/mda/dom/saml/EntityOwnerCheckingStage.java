@@ -85,7 +85,7 @@ public class EntityOwnerCheckingStage extends BaseIteratingStage<Element> {
         
         // Acquire its UK federation organization ID
         final Element ukfMemberLabel =
-                SAMLMetadataSupport.getDescriptorExtensions(entity, UKFedLabelSupport.UK_FEDERATION_MEMBER_NAME);
+                SAMLMetadataSupport.getDescriptorExtension(entity, UKFedLabelSupport.UK_FEDERATION_MEMBER_NAME);
         if (ukfMemberLabel == null) {
             addError(metadata, "entity has no " +
                     UKFedLabelSupport.UK_FEDERATION_MEMBER_NAME.getLocalPart() + " element");

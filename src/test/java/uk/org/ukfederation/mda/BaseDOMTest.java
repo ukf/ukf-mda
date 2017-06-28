@@ -22,6 +22,8 @@ import java.io.StringReader;
 import java.security.Security;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
@@ -38,6 +40,7 @@ import net.shibboleth.utilities.java.support.xml.SerializeSupport;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -47,7 +50,7 @@ public abstract class BaseDOMTest extends BaseTest {
 
     /** Initialized parser pool used to parse data. */
     protected BasicParserPool parserPool;
-    
+
     /**
      * Constructor.
      * 
@@ -56,7 +59,7 @@ public abstract class BaseDOMTest extends BaseTest {
     protected BaseDOMTest(final Class<?> clazz) {
         super(clazz);
     }
-    
+
     /**
      * Setup test class. Creates and initializes the parser pool. Set BouncyCastle as a JCE provider.
      * 
@@ -78,7 +81,7 @@ public abstract class BaseDOMTest extends BaseTest {
     public ParserPool getParserPool() {
         return parserPool;
     }
-    
+
     /**
      * Reads in an XML file, parses it, and returns the document element. If the given path is relative (i.e., does not
      * start with a '/') it is assumed to be relative to the class.
@@ -129,7 +132,7 @@ public abstract class BaseDOMTest extends BaseTest {
      * 
      * @throws XMLParserException thrown if there is a problem serializing and re-parsing the nodes
      */
-    public void assertXMLEqual(final Node expected, final Node actual) throws XMLParserException {
+    public void assertXMLEqual(@Nonnull final Node expected, @Nonnull final Node actual) throws XMLParserException {
         Constraint.isNotNull(actual, "Actual Node may not be null");
         final String serializedActual = SerializeSupport.nodeToString(actual);
         Element deserializedActual = parserPool.parse(new StringReader(serializedActual)).getDocumentElement();
@@ -143,8 +146,8 @@ public abstract class BaseDOMTest extends BaseTest {
             System.out.println("Expected:\n" + serializedExpected);
             System.out.println("Actual:\n" + serializedActual);
         }
-        
-        org.testng.Assert.assertTrue(ok, "Actual Node does not equal expected Node");
+
+        Assert.assertTrue(ok, "Actual Node does not equal expected Node");
     }
 
     protected int countErrors(final Item<Element> item) {
@@ -152,7 +155,7 @@ public abstract class BaseDOMTest extends BaseTest {
         final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
         return errors.size();
     }
-    
+
     protected void populateIdentifiers(List<Item<Element>> items) throws ComponentInitializationException, StageProcessingException {
         final EntityDescriptorItemIdPopulationStage stage1 = new EntityDescriptorItemIdPopulationStage();
         stage1.setId("setid");
@@ -174,5 +177,5 @@ public abstract class BaseDOMTest extends BaseTest {
             System.out.println("Error seen " + e.getComponentId() + ": " + e.getStatusMessage());
         }
     }
-    
+
 }

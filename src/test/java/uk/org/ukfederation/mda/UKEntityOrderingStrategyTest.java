@@ -27,13 +27,13 @@ public class UKEntityOrderingStrategyTest extends BaseDOMTest {
     @Test
     public void testOrder() throws Exception {
         // Create a trivial DOM Document as a placeholder
-        final Element trivialDoc = readXmlData("trivial.xml");
+        final Element trivialDoc = readXMLData("trivial.xml");
         
         // Create some items in the order they will end up
         
-        final DOMElementItem i00 = new DOMElementItem(readXmlData("named.xml"));
+        final DOMElementItem i00 = new DOMElementItem(readXMLData("named.xml"));
         
-        final DOMElementItem i01 = new DOMElementItem(readXmlData("unnamed.xml"));
+        final DOMElementItem i01 = new DOMElementItem(readXMLData("unnamed.xml"));
         
         final DOMElementItem i0 = new DOMElementItem(trivialDoc);
         i0.getItemMetadata().put(new UKId("uk000000"));

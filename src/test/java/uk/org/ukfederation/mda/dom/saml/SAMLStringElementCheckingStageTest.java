@@ -30,7 +30,7 @@ public class SAMLStringElementCheckingStageTest extends BaseDOMTest {
         final Set<QName> qnames = new HashSet<>();
         qnames.add(new QName("urn:oasis:names:tc:SAML:2.0:metadata", "OrganizationName", "md"));
         
-        final Item<Element> item = new DOMElementItem(readXmlData("ok.xml"));
+        final Item<Element> item = new DOMElementItem(readXMLData("ok.xml"));
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         
@@ -53,7 +53,7 @@ public class SAMLStringElementCheckingStageTest extends BaseDOMTest {
         qnames.add(new QName("urn:oasis:names:tc:SAML:2.0:metadata", "OrganizationName", "md"));
         qnames.add(new QName("urn:oasis:names:tc:SAML:2.0:metadata", "OrganizationDisplayName", "md"));
         
-        final Item<Element> item = new DOMElementItem(readXmlData("fail.xml"));
+        final Item<Element> item = new DOMElementItem(readXMLData("fail.xml"));
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
         

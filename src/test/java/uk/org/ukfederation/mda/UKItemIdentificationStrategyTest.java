@@ -56,7 +56,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     }
     
     private Item<Element> makeItem(final String which) throws XMLParserException {
-        final Element doc = readXmlData(classRelativeResource(which + ".xml"));
+        final Element doc = readXMLData(classRelativeResource(which + ".xml"));
         return new DOMElementItem(doc);
     }
     

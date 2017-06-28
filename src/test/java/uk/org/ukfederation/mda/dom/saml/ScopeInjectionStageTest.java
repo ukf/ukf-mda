@@ -18,7 +18,7 @@ public class ScopeInjectionStageTest extends BaseDOMTest {
     }
 
     private ScopeInjectionStage makeStage(final String membersPath) throws Exception {
-        final Element membersElement = readXmlData(membersPath);
+        final Element membersElement = readXMLData(membersPath);
         final ScopeInjectionStage stage = new ScopeInjectionStage();
         stage.setId("test");
         stage.setMembers(new Members(membersElement.getOwnerDocument()));
@@ -38,8 +38,8 @@ public class ScopeInjectionStageTest extends BaseDOMTest {
         items.add(item);
         stage.execute(items);
         
-        final Element out = readXmlData("out1.xml");
-        assertXmlEqual(out, item.unwrap());
+        final Element out = readXMLData("out1.xml");
+        assertXMLEqual(out, item.unwrap());
     }
 
 }

@@ -29,7 +29,7 @@ public class IPHintValidationStageTest extends BaseDOMTest {
     
     @Test
     public void missingComponent() throws Exception {
-        final Element doc = readXmlData("1.xml");
+        final Element doc = readXMLData("1.xml");
         final DOMElementItem item = new DOMElementItem(doc);
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
@@ -50,7 +50,7 @@ public class IPHintValidationStageTest extends BaseDOMTest {
 
     @Test
     public void hostAddress() throws Exception {
-        final Element doc = readXmlData("2.xml");
+        final Element doc = readXMLData("2.xml");
         final DOMElementItem item = new DOMElementItem(doc);
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
@@ -72,7 +72,7 @@ public class IPHintValidationStageTest extends BaseDOMTest {
 
     @Test
     public void ignoreHostAddress() throws Exception {
-        final Element doc = readXmlData("2.xml");
+        final Element doc = readXMLData("2.xml");
         final DOMElementItem item = new DOMElementItem(doc);
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);
@@ -91,7 +91,7 @@ public class IPHintValidationStageTest extends BaseDOMTest {
     
     @Test
     public void missingSlash() throws Exception {
-        final Element doc = readXmlData("3.xml");
+        final Element doc = readXMLData("3.xml");
         final DOMElementItem item = new DOMElementItem(doc);
         final List<Item<Element>> items = new ArrayList<>();
         items.add(item);

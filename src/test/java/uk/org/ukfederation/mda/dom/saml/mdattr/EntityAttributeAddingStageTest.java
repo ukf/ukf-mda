@@ -23,7 +23,7 @@ public class EntityAttributeAddingStageTest extends BaseDOMTest {
     }
     
     private List<Item<Element>> makeItems(final String inputFile) throws Exception {
-        final Element startElement = readXmlData(inputFile);
+        final Element startElement = readXMLData(inputFile);
         final List<Item<Element>> items = new ArrayList<>();
         items.add(new DOMElementItem(startElement));
         return items;
@@ -79,8 +79,8 @@ public class EntityAttributeAddingStageTest extends BaseDOMTest {
         final Pipeline<Element> pipeline = makePipeline(stages);
         pipeline.execute(itemCollection);
         final Element result = itemCollection.get(0).unwrap();
-        final Element expected = readXmlData("added1.xml");
-        assertXmlEqual(expected, result);
+        final Element expected = readXMLData("added1.xml");
+        assertXMLEqual(expected, result);
     }
     
     /*
@@ -98,8 +98,8 @@ public class EntityAttributeAddingStageTest extends BaseDOMTest {
         final Pipeline<Element> pipeline = makePipeline(stages);
         pipeline.execute(itemCollection);
         final Element result = itemCollection.get(0).unwrap();
-        final Element expected = readXmlData("added2.xml");
-        assertXmlEqual(expected, result);
+        final Element expected = readXMLData("added2.xml");
+        assertXMLEqual(expected, result);
     }
     
     /*
@@ -122,8 +122,8 @@ public class EntityAttributeAddingStageTest extends BaseDOMTest {
         final Pipeline<Element> pipeline = makePipeline(stages);
         pipeline.execute(itemCollection);
         final Element result = itemCollection.get(0).unwrap();
-        final Element expected = readXmlData("added3.xml");
-        assertXmlEqual(expected, result);
+        final Element expected = readXMLData("added3.xml");
+        assertXMLEqual(expected, result);
     }
     
     /*
@@ -141,8 +141,8 @@ public class EntityAttributeAddingStageTest extends BaseDOMTest {
         final Pipeline<Element> pipeline = makePipeline(stages);
         pipeline.execute(itemCollection);
         final Element result = itemCollection.get(0).unwrap();
-        final Element expected = readXmlData("added2.xml");
-        assertXmlEqual(expected, result);
+        final Element expected = readXMLData("added2.xml");
+        assertXMLEqual(expected, result);
     }
     
     /*
@@ -160,7 +160,7 @@ public class EntityAttributeAddingStageTest extends BaseDOMTest {
         final Pipeline<Element> pipeline = makePipeline(stages);
         pipeline.execute(itemCollection);
         final Element result = itemCollection.get(0).unwrap();
-        final Element expected = readXmlData("added2.xml");
-        assertXmlEqual(expected, result);
+        final Element expected = readXMLData("added2.xml");
+        assertXMLEqual(expected, result);
     }
 }

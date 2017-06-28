@@ -89,7 +89,7 @@ public abstract class BaseDOMTest extends BaseTest {
      * 
      * @throws XMLParserException thrown if the file does not exist or there is a problem parsing it
      */
-    public Element readXmlData(final String path) throws XMLParserException {
+    public Element readXMLData(final String path) throws XMLParserException {
         String trimmedPath = StringSupport.trimOrNull(path);
         Constraint.isNotNull(trimmedPath, "Path may not be null or empty");
 
@@ -115,7 +115,7 @@ public abstract class BaseDOMTest extends BaseTest {
      * @throws XMLParserException if the file does not exist or there is a problem parsing it
      */
     public Item<Element> readDOMItem(final String path) throws XMLParserException {
-        final Element e = readXmlData(path);
+        final Element e = readXMLData(path);
         return new DOMElementItem(e);
     }
 
@@ -129,7 +129,7 @@ public abstract class BaseDOMTest extends BaseTest {
      * 
      * @throws XMLParserException thrown if there is a problem serializing and re-parsing the nodes
      */
-    public void assertXmlEqual(final Node expected, final Node actual) throws XMLParserException {
+    public void assertXMLEqual(final Node expected, final Node actual) throws XMLParserException {
         Constraint.isNotNull(actual, "Actual Node may not be null");
         final String serializedActual = SerializeSupport.nodeToString(actual);
         Element deserializedActual = parserPool.parse(new StringReader(serializedActual)).getDocumentElement();

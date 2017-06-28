@@ -57,14 +57,14 @@ public class ContainerTest extends BaseDOMTest {
         final Container c1 = new Container(e1);
         c1.addChild(e2, Container.FIRST_CHILD);
         
-        final Element ok = readXmlData("add1.xml");
-        assertXmlEqual(ok, e1);
+        final Element ok = readXMLData("add1.xml");
+        assertXMLEqual(ok, e1);
         
         final Element e3 = doc.createElementNS("ns", "child2");
         e3.setTextContent("child 2 value");
         c1.addChild(e3, Container.FIRST_CHILD);
-        final Element ok2 = readXmlData("addFirst.xml");
-        assertXmlEqual(ok2, e1);
+        final Element ok2 = readXMLData("addFirst.xml");
+        assertXMLEqual(ok2, e1);
     }
 
     @Test
@@ -75,14 +75,14 @@ public class ContainerTest extends BaseDOMTest {
         final Container c1 = new Container(e1);
         c1.addChild(e2, Container.LAST_CHILD);
         
-        final Element ok = readXmlData("add1.xml");
-        assertXmlEqual(ok, e1);
+        final Element ok = readXMLData("add1.xml");
+        assertXMLEqual(ok, e1);
         
         final Element e3 = doc.createElementNS("ns", "child2");
         e3.setTextContent("child 2 value");
         c1.addChild(e3, Container.LAST_CHILD);
-        final Element ok2 = readXmlData("addLast.xml");
-        assertXmlEqual(ok2, e1);
+        final Element ok2 = readXMLData("addLast.xml");
+        assertXMLEqual(ok2, e1);
     }
     
     @Test
@@ -98,8 +98,8 @@ public class ContainerTest extends BaseDOMTest {
         midContainer.addChild(leaf1, Container.LAST_CHILD);
         midContainer.addChild(leaf2, Container.LAST_CHILD);
         
-        final Element ok = readXmlData("nested.xml");
-        assertXmlEqual(ok, root);
+        final Element ok = readXMLData("nested.xml");
+        assertXMLEqual(ok, root);
     }
     
     @Test
@@ -118,8 +118,8 @@ public class ContainerTest extends BaseDOMTest {
             
         }, Container.FIRST_CHILD);
         
-        final Element ok = readXmlData("add1.xml");
-        assertXmlEqual(ok, e1);
+        final Element ok = readXMLData("add1.xml");
+        assertXMLEqual(ok, e1);
 
         c1.addChild(new Function<Container, Element>(){
 
@@ -132,8 +132,8 @@ public class ContainerTest extends BaseDOMTest {
             
         }, Container.FIRST_CHILD);
 
-        final Element ok2 = readXmlData("addFirst.xml");
-        assertXmlEqual(ok2, e1);
+        final Element ok2 = readXMLData("addFirst.xml");
+        assertXMLEqual(ok2, e1);
     }
 
     @Test
@@ -152,8 +152,8 @@ public class ContainerTest extends BaseDOMTest {
             
         }, Container.LAST_CHILD);
         
-        final Element ok = readXmlData("add1.xml");
-        assertXmlEqual(ok, e1);
+        final Element ok = readXMLData("add1.xml");
+        assertXMLEqual(ok, e1);
 
         c1.addChild(new Function<Container, Element>(){
 
@@ -166,8 +166,8 @@ public class ContainerTest extends BaseDOMTest {
             
         }, Container.LAST_CHILD);
 
-        final Element ok2 = readXmlData("addLast.xml");
-        assertXmlEqual(ok2, e1);
+        final Element ok2 = readXMLData("addLast.xml");
+        assertXMLEqual(ok2, e1);
     }
 
     @Test
@@ -188,7 +188,7 @@ public class ContainerTest extends BaseDOMTest {
     
     @Test
     public void findChild() throws Exception {
-        final Container root = new Container(readXmlData("find.xml"));
+        final Container root = new Container(readXMLData("find.xml"));
         final Container child = root.findChild(new Predicate<Element>(){
 
             @Override
@@ -203,7 +203,7 @@ public class ContainerTest extends BaseDOMTest {
     
     @Test
     public void findChildren() throws Exception {
-        final Container root = new Container(readXmlData("find.xml"));
+        final Container root = new Container(readXMLData("find.xml"));
         final List<Container> children = root.findChildren(new Predicate<Element>(){
 
             @Override
@@ -243,8 +243,8 @@ public class ContainerTest extends BaseDOMTest {
             
         }, Container.LAST_CHILD);
         
-        final Element ok = readXmlData("add1.xml");
-        assertXmlEqual(ok, e1);
+        final Element ok = readXMLData("add1.xml");
+        assertXMLEqual(ok, e1);
 
         // same again should NOT change the result for locate
 
@@ -267,8 +267,8 @@ public class ContainerTest extends BaseDOMTest {
             
         }, Container.LAST_CHILD);
         
-        final Element ok2 = readXmlData("add1.xml");
-        assertXmlEqual(ok2, e1);
+        final Element ok2 = readXMLData("add1.xml");
+        assertXMLEqual(ok2, e1);
         
     }
 }

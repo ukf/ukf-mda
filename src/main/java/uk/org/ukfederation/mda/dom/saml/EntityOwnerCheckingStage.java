@@ -25,7 +25,7 @@ import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
-import net.shibboleth.metadata.pipeline.BaseIteratingStage;
+import net.shibboleth.metadata.pipeline.AbstractIteratingStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterInit;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
@@ -39,7 +39,7 @@ import uk.org.ukfederation.members.jaxb.MemberElement;
 /**
  * Stage to check that each entity in a collection is owned by a UK federation member.
  */
-public class EntityOwnerCheckingStage extends BaseIteratingStage<Element> {
+public class EntityOwnerCheckingStage extends AbstractIteratingStage<Element> {
 
     /** Information about members of the UK federation. */
     @NonnullAfterInit private Members members;
@@ -64,9 +64,8 @@ public class EntityOwnerCheckingStage extends BaseIteratingStage<Element> {
     }
     
     @Override
-    protected boolean doExecute(@Nonnull final Item<Element> item) throws StageProcessingException {
+    protected void doExecute(@Nonnull final Item<Element> item) throws StageProcessingException {
         doExecute(item.unwrap(), item.getItemMetadata());
-        return true;
     }
     
     /**

@@ -24,24 +24,23 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
-import net.shibboleth.metadata.ErrorStatus;
-import net.shibboleth.metadata.FirstItemIdItemIdentificationStrategy;
-import net.shibboleth.metadata.Item;
-import net.shibboleth.metadata.ItemIdentificationStrategy;
-import net.shibboleth.metadata.ItemMetadata;
-import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
-import net.shibboleth.metadata.pipeline.BaseStage;
-import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
-import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
-import net.shibboleth.utilities.java.support.logic.Constraint;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import net.shibboleth.metadata.ErrorStatus;
+import net.shibboleth.metadata.FirstItemIdItemIdentificationStrategy;
+import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.ItemIdentificationStrategy;
+import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
+import net.shibboleth.metadata.pipeline.AbstractStage;
+import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
 
 /**
@@ -50,7 +49,7 @@ import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
  * any other identity provider entity.
  */
 @ThreadSafe
-public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
+public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element> {
 
     /** {@link QName} representing an SAML metadata <code>IDPSSODescriptor</code>. */
     private static final QName MD_IDP_SSO_DESCRIPTOR = new QName(SAMLMetadataSupport.MD_NS, "IDPSSODescriptor");

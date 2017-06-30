@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Element;
 
-import junit.framework.Assert;
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import uk.org.ukfederation.mda.BaseDOMTest;
@@ -40,24 +40,24 @@ public class EntityOwnerCheckingStageTest extends BaseDOMTest {
     
     private void checkError(@Nonnull final Item<Element> item, @Nonnull final String content) throws Exception {
         final List<ErrorStatus> errors = item.getItemMetadata().get(ErrorStatus.class);
-        Assert.assertEquals("should have had exactly one error", 1, errors.size());
+        Assert.assertEquals(errors.size(), 1, "should have had exactly one error");
         final ErrorStatus error = errors.get(0);
-        Assert.assertTrue("error '" + error.getStatusMessage() + "' should have contained '" + content + "'",
-                error.getStatusMessage().contains(content));
+        Assert.assertTrue(error.getStatusMessage().contains(content),
+                "error '" + error.getStatusMessage() + "' should have contained '" + content + "'");
     }
 
     @Test
     public void ok() throws Exception {
         final Item<Element> item = readDOMItem("ok.xml");
         runSingle(item);
-        Assert.assertEquals(0, countErrors(item));
+        Assert.assertEquals(countErrors(item), 0);
     }
     
     @Test
     public void enGB() throws Exception {
         final Item<Element> item = readDOMItem("en-GB.xml");
         runSingle(item);
-        Assert.assertEquals(0, countErrors(item));
+        Assert.assertEquals(countErrors(item), 0);
     }
     
     @Test

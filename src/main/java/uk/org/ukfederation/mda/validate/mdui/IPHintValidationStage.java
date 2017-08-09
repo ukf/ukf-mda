@@ -17,17 +17,20 @@ package uk.org.ukfederation.mda.validate.mdui;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.w3c.dom.Element;
+
+import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.dom.AbstractDOMTraversalStage;
+import net.shibboleth.metadata.dom.DOMTraversalContext;
+import net.shibboleth.metadata.dom.SimpleDOMTraversalContext;
 import net.shibboleth.utilities.java.support.component.ComponentSupport;
 import net.shibboleth.utilities.java.support.net.IPRange;
-
-import org.w3c.dom.Element;
 
 /**
  * A stage which validates mdui:IPHint elements.
  */
 @ThreadSafe
-public class IPHintValidationStage extends AbstractDOMTraversalStage {
+public class IPHintValidationStage extends AbstractDOMTraversalStage<DOMTraversalContext> {
 
     /** Whether to check that the CIDR notation describes a network. Defaults to true. */
     private boolean checkingNetworks = true;
@@ -62,7 +65,7 @@ public class IPHintValidationStage extends AbstractDOMTraversalStage {
 
     /** {@inheritDoc} */
     @Override
-    protected void visit(@Nonnull final Element ipHint, @Nonnull final TraversalContext context) {
+    protected void visit(@Nonnull final Element ipHint, @Nonnull final DOMTraversalContext context) {
         assert ipHint != null;
         assert context != null;
         final String hint = ipHint.getTextContent();
@@ -80,6 +83,11 @@ public class IPHintValidationStage extends AbstractDOMTraversalStage {
             // temporary work-round for JSPT-49
             addError(context.getItem(), ipHint, "invalid IPHint '" + hint + "': missing '/'");
         }
+    }
+
+    @Override
+    protected DOMTraversalContext buildContext(Item<Element> item) {
+        return new SimpleDOMTraversalContext(item);
     }
 
 }

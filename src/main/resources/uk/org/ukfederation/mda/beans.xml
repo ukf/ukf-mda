@@ -96,6 +96,9 @@
     <bean id="ukf.X509ConsistentNameValidator" abstract="true" parent="ukf.component_parent"
         class="uk.org.ukfederation.mda.validate.X509ConsistentNameValidator"/>
 
+    <bean id="ukf.X509ROCAValidator" abstract="true" parent="ukf.component_parent"
+        class="uk.org.ukfederation.mda.validate.X509ROCAValidator"/>
+
     <!--
         uk.org.ukfederation.mda.validate.mdui
     -->

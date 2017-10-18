@@ -109,7 +109,14 @@
         <!-- Runtime dependencies -->
 
         <!-- Test dependencies -->
-        
+
+        <dependency>
+            <groupId>net.shibboleth.metadata</groupId>
+            <artifactId>aggregator-pipeline</artifactId>
+            <version>${mda.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>${spring.groupId}</groupId>
             <artifactId>spring-context</artifactId>

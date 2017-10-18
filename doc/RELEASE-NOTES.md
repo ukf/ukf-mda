@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.6 ##
+
+* Add `X509ROCAValidator`.
+
 ## Version 0.9.5 ##
 
 * Add `FixedStringIdentifierGenerationStrategy`.

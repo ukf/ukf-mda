@@ -108,7 +108,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
                 return null;
             }
 
-            Logger log = getLogger();
+            final Logger log = getLogger();
             log.debug("Extracting CNs from the following DN: {}", dn.toString());
             final RDNSequence attrs = NameReader.readX500Principal(dn);
             // Have to copy because list returned from Attributes is unmodifiable, so can't reverse it.
@@ -142,7 +142,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
             }
             final GeneralNames names = CertUtil.subjectAltNames(certificate, types);
             if (names != null) {
-                for (GeneralName name : names.getNames()) {
+                for (final GeneralName name : names.getNames()) {
                     altNames.add(convertAltNameType(name.getTagNo(), name.getName().toASN1Primitive()));
                 }
             }
@@ -159,7 +159,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
          */
         @Nullable private static Object convertAltNameType(@Nonnull final Integer nameType,
                 @Nonnull final Object nameValue) {
-            Logger log = getLogger();
+            final Logger log = getLogger();
             
             if (DIRECTORY_ALT_NAME.equals(nameType) || DNS_ALT_NAME.equals(nameType) || RFC822_ALT_NAME.equals(nameType)
                     || URI_ALT_NAME.equals(nameType) || REGISTERED_ID_ALT_NAME.equals(nameType)) {
@@ -168,10 +168,10 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
                 return nameValue.toString();
             } else if (IP_ADDRESS_ALT_NAME.equals(nameType)) {
                 // this is a byte[], IP addr in network byte order
-                byte [] nameValueBytes = ((DEROctetString) nameValue).getOctets();
+                final byte [] nameValueBytes = ((DEROctetString) nameValue).getOctets();
                 try {
                     return InetAddresses.toAddrString(InetAddress.getByAddress(nameValueBytes));
-                } catch (UnknownHostException e) {
+                } catch (final UnknownHostException e) {
                     log.warn("Was unable to convert IP address alt name byte[] to string: " +
                             CodecUtil.hex(nameValueBytes, true), e);
                     return null;
@@ -249,14 +249,14 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
         }
         
         // There is a problem if any of the CNs do not also appear in the DNS subjectAltNames.
-        for (String cn: commonNames) {
+        for (final String cn: commonNames) {
             if (!altNames.contains(cn)) {
                 final StringBuilder b = new StringBuilder();
                 boolean first = true;
                 b.append("CN=");
                 b.append(cn);
                 b.append(" not present in DNS subjectAltNames {");
-                for (Object dnsName: altNames) {
+                for (final Object dnsName: altNames) {
                     if (first) {
                         first = false;
                     } else {

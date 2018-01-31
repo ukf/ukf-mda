@@ -122,7 +122,7 @@ public class StatisticsVelocityStage extends AbstractStage<Element> {
 
         final Set<Item<Element>> entities = new HashSet<>(collection.size());
         
-        for (Item<Element> item : collection) {
+        for (final Item<Element> item : collection) {
             if (SAMLMetadataSupport.isEntityDescriptor(item.unwrap())) {
                 entities.add(item);
             }
@@ -139,7 +139,7 @@ public class StatisticsVelocityStage extends AbstractStage<Element> {
             final Document doc = parserPool.parse(new StringReader(w.toString()));
             collection.clear();
             collection.add(new DOMElementItem(doc));
-        } catch (XMLParserException e) {
+        } catch (final XMLParserException e) {
             throw new StageProcessingException("could not parse template output", e);
         }
     }

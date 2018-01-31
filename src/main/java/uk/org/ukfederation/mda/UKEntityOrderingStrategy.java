@@ -67,7 +67,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
          * 
          * @param domItem the {@link Element} {@link Item} to wrap.
          */
-        public OrderableItem(@Nonnull Item<Element> domItem) {
+        public OrderableItem(@Nonnull final Item<Element> domItem) {
             item = domItem;
 
             final Element docElement = domItem.unwrap();
@@ -120,9 +120,9 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         
         /** {@inheritDoc} */
         @Override
-        public int compareTo(@Nonnull OrderableItem o) {
+        public int compareTo(@Nonnull final OrderableItem o) {
             for (int fno = 0; fno < NFIELDS; fno++) {
-                int compared = compareField(fields[fno], o.fields[fno]);
+                final int compared = compareField(fields[fno], o.fields[fno]);
                 if (compared != 0) {
                     return compared;
                 }
@@ -148,7 +148,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         
         // Construct an orderable list wrapping the original items.
         final List<OrderableItem> orderableList = new ArrayList<>(items.size());
-        for (Item<Element> item : items) {
+        for (final Item<Element> item : items) {
             orderableList.add(new OrderableItem(item));
         }
         
@@ -157,7 +157,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         
         // extract the result into a new collection
         final List<Item<Element>> results = new ArrayList<>(items.size());
-        for (OrderableItem result : orderableList) {
+        for (final OrderableItem result : orderableList) {
             results.add(result.unwrap());
         }
 

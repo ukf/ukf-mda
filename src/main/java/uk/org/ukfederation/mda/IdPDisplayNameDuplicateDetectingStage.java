@@ -198,7 +198,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
          */
         final Set<Item<Element>> markedItems = new HashSet<>();
         
-        for (Item<Element> item : items) {
+        for (final Item<Element> item : items) {
            final Element entity = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            
@@ -207,7 +207,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
                metadata.put(new ErrorStatus(getId(), "item was not an EntityDescriptor"));
            } else if (isIdentityProvider(entity)) {
                final Set<String> displayNames = extractDisplayNames(entity);
-               for (String name: displayNames) {
+               for (final String name: displayNames) {
                    final String key = name.toLowerCase();
                    final Item<Element> that = ids.get(key);
                    if (that == null) {

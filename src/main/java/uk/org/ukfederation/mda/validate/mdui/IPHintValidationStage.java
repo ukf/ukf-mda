@@ -55,7 +55,7 @@ public class IPHintValidationStage extends AbstractDOMTraversalStage {
 
     /** {@inheritDoc} */
     @Override
-    protected boolean applicable(Element element) {
+    protected boolean applicable(final Element element) {
         return MDUISupport.MDUI_NS.equals(element.getNamespaceURI()) &&
                 "IPHint".equals(element.getLocalName());
     }
@@ -74,9 +74,9 @@ public class IPHintValidationStage extends AbstractDOMTraversalStage {
                             "': CIDR notation represents a host, not a network");
                 }
             }
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             addError(context.getItem(), ipHint, "invalid IPHint '" + hint + "': " + e.getMessage());
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (final ArrayIndexOutOfBoundsException e) {
             // temporary work-round for JSPT-49
             addError(context.getItem(), ipHint, "invalid IPHint '" + hint + "': missing '/'");
         }

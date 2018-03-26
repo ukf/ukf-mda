@@ -45,7 +45,7 @@ public class FixedStringIdentifierGenerationStrategy implements IdentifierGenera
     }
 
     @Override
-    public String generateIdentifier(boolean xmlSafe) {
+    public String generateIdentifier(final boolean xmlSafe) {
         return identifier;
     }
 

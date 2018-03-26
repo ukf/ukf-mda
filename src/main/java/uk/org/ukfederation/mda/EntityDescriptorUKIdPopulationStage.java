@@ -57,7 +57,7 @@ public class EntityDescriptorUKIdPopulationStage extends BaseStage<Element> {
         // ID values that we have already seen (they must be unique)
         final Set<String> ids = new HashSet<>(items.size());
         
-        for (Item<Element> item : items) {
+        for (final Item<Element> item : items) {
            final Element element = item.unwrap();
            final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
            

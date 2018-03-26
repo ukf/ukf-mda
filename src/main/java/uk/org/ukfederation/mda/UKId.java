@@ -71,7 +71,7 @@ public class UKId implements ItemMetadata, Comparable<UKId> {
             return false;
         }
 
-        UKId other = (UKId) obj;
+        final UKId other = (UKId) obj;
         return Objects.equal(id, other.id);
     }
 

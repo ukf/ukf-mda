@@ -1,5 +1,10 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.7 ##
+
+* Relax the check performed by `IdPDisplayNameDuplicateDetectingStage` to ignore `md:OrganizationDisplayName` elements
+if there are any `mdui:DisplayName` elements.
+
 ## Version 0.9.6 ##
 
 * Add `X509ROCAValidator`.

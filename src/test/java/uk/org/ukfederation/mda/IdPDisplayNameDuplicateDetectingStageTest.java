@@ -284,5 +284,24 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
         stage.initialize();
         stage.destroy();
     }
-    
+
+    // Verify that mdui:DisplayName completely hides md:OrganizationDisplayName
+    @Test
+    public void mduiHides() throws Exception {
+        final DOMElementItem item1 = makeItem("hide-1");
+        final DOMElementItem item2 = makeItem("hide-2");
+
+        final List<Item<Element>> items = new ArrayList<>();
+        items.add(item1);
+        items.add(item2);
+
+        final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
+
+        populateIdentifiers(items);
+        stage.execute(items);
+
+        Assert.assertEquals(countErrors(item1), 0, "first item");
+        Assert.assertEquals(countErrors(item2), 0, "second item");
+    }
+
 }

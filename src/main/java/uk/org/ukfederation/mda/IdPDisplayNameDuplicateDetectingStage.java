@@ -149,8 +149,16 @@ public class IdPDisplayNameDuplicateDetectingStage extends BaseStage<Element> {
     @Nonnull private Set<String> extractDisplayNames(@Nonnull final Element element) {
         assert element != null;
         final Set<String> displayNames = new HashSet<>();
+
+        // Collect display names from any mdui:DisplayName elements present.
         collectNames(element, MDUISupport.MDUI_DISPLAY_NAME, displayNames);
-        collectNames(element, MD_ORG_DISPLAY_NAME, displayNames);
+
+        // Collect display names from md:OrganizationDisplayName elements only
+        // if there were no mdui:DisplayName elements.
+        if (displayNames.isEmpty()) {
+            collectNames(element, MD_ORG_DISPLAY_NAME, displayNames);
+        }
+
         return displayNames;
     }
     

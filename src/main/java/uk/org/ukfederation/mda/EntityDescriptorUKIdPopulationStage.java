@@ -22,27 +22,27 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.w3c.dom.Element;
+
+import com.google.common.base.Strings;
+
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
-import net.shibboleth.metadata.pipeline.BaseStage;
+import net.shibboleth.metadata.pipeline.AbstractStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.AttributeSupport;
 
-import org.w3c.dom.Element;
-
-import com.google.common.base.Strings;
-
 /**
  * A stage which, for each EntityDescriptor collection element, adds a {@link UKId}, with the entity's ID, to
  * the metadata item.
  */
 @ThreadSafe
-public class EntityDescriptorUKIdPopulationStage extends BaseStage<Element> {
+public class EntityDescriptorUKIdPopulationStage extends AbstractStage<Element> {
 
     /**
      * Compiled regular expression.

@@ -19,16 +19,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import net.shibboleth.metadata.Item;
-import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
-import net.shibboleth.metadata.dom.saml.mdattr.EntityCategorySupport;
-import net.shibboleth.metadata.pipeline.BaseStage;
-import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterInit;
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
-import net.shibboleth.utilities.java.support.component.ComponentSupport;
-import net.shibboleth.utilities.java.support.logic.Constraint;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
@@ -36,6 +26,15 @@ import org.w3c.dom.Element;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
+import net.shibboleth.metadata.Item;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
+import net.shibboleth.metadata.dom.saml.mdattr.EntityCategorySupport;
+import net.shibboleth.metadata.pipeline.AbstractStage;
+import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterInit;
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import net.shibboleth.utilities.java.support.logic.Constraint;
 import uk.org.ukfederation.mda.dom.Container;
 import uk.org.ukfederation.mda.dom.saml.AttributeMaker;
 import uk.org.ukfederation.mda.dom.saml.AttributeMatcher;
@@ -46,7 +45,7 @@ import uk.org.ukfederation.mda.dom.saml.SAMLSupport;
 /**
  * A stage which adds entity attribute values to entity definitions.
  */
-public class EntityAttributeAddingStage extends BaseStage<Element> {
+public class EntityAttributeAddingStage extends AbstractStage<Element> {
 
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(EntityAttributeAddingStage.class);

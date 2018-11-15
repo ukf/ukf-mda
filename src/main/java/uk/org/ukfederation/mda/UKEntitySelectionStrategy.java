@@ -14,10 +14,10 @@
 
 package uk.org.ukfederation.mda;
 
+import java.util.function.Predicate;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
-
-import com.google.common.base.Predicate;
 
 import net.shibboleth.metadata.dom.DOMElementItem;
 
@@ -25,9 +25,8 @@ import net.shibboleth.metadata.dom.DOMElementItem;
 @ThreadSafe
 public class UKEntitySelectionStrategy implements Predicate<DOMElementItem> {
 
-    /** {@inheritDoc} */
     @Override
-    public boolean apply(@Nonnull final DOMElementItem item) {
+    public boolean test(@Nonnull final DOMElementItem item) {
         return item.getItemMetadata().containsKey(UKId.class);
     }
 

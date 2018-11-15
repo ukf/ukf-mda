@@ -20,6 +20,8 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 
 import net.shibboleth.metadata.dom.AbstractElementVisitingStage;
+import net.shibboleth.metadata.dom.DOMTraversalContext;
+import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.utilities.java.support.xml.QNameSupport;
 
 import org.w3c.dom.Element;
@@ -33,6 +35,23 @@ public class SAMLStringElementCheckingStage extends AbstractElementVisitingStage
 
     /** Regular expression matching a string which contains no non-whitespace characters. */
     private static final Pattern ALL_WHITE_SPACE_PATTERN = Pattern.compile("^[ \\t\\r\\n\\x85\\u2028]*$");
+
+    /**
+     * Returns the {@link Element} representing the EntityDescriptor which is the
+     * closest-containing ancestor of the given element.
+     * 
+     * @param element {@link Element} to locate the ancestor Entity of.
+     * @return ancestor EntityDescriptor {@link Element}, or null.
+     */
+    private Element ancestorEntity(@Nonnull final Element element) {
+        assert element != null;
+        for (Element e = element; e != null; e = (Element) e.getParentNode()) {
+            if (SAMLMetadataSupport.isEntityDescriptor(e)) {
+                return e;
+            }
+        }
+        return null;
+    }
 
     /**
      * Check that the string value is appropriate.
@@ -51,7 +70,7 @@ public class SAMLStringElementCheckingStage extends AbstractElementVisitingStage
     }
 
     @Override
-    protected void visit(@Nonnull final Element e, @Nonnull final TraversalContext context) {
+    protected void visit(@Nonnull final Element e, @Nonnull final DOMTraversalContext context) {
         if (match(e)) {
             final StringBuilder b = new StringBuilder("element ");
             b.append(QNameSupport.getNodeQName(e));

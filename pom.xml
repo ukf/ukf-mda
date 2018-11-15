@@ -135,7 +135,7 @@
         <dependency>
             <groupId>${slf4j.groupId}</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <scope>provided,test</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Managed Dependencies -->

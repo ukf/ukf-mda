@@ -90,20 +90,20 @@
         class="uk.org.ukfederation.mda.support.security.FixedStringIdentifierGenerationStrategy"/>
 
     <!--
-        uk.org.ukfederation.mda.validate
-    -->
-
-    <bean id="ukf.X509ConsistentNameValidator" abstract="true" parent="ukf.component_parent"
-        class="uk.org.ukfederation.mda.validate.X509ConsistentNameValidator"/>
-
-    <bean id="ukf.X509ROCAValidator" abstract="true" parent="ukf.component_parent"
-        class="uk.org.ukfederation.mda.validate.X509ROCAValidator"/>
-
-    <!--
         uk.org.ukfederation.mda.validate.mdui
     -->
 
     <bean id="ukf.IPHintValidationStage" abstract="true" parent="ukf.stage_parent"
         class="uk.org.ukfederation.mda.validate.mdui.IPHintValidationStage"/>
+
+    <!--
+        uk.org.ukfederation.mda.validate.x509
+    -->
+
+    <bean id="ukf.X509ConsistentNameValidator" abstract="true" parent="ukf.component_parent"
+        class="uk.org.ukfederation.mda.validate.x509.X509ConsistentNameValidator"/>
+
+    <bean id="ukf.X509ROCAValidator" abstract="true" parent="ukf.component_parent"
+        class="uk.org.ukfederation.mda.validate.x509.X509ROCAValidator"/>
 
 </beans>

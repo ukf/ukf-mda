@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package uk.org.ukfederation.mda.validate;
+package uk.org.ukfederation.mda.validate.x509;
 
 import java.math.BigInteger;
 import java.security.PublicKey;

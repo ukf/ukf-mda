@@ -1,5 +1,5 @@
 
-package uk.org.ukfederation.mda.validate;
+package uk.org.ukfederation.mda.validate.x509;
 
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;

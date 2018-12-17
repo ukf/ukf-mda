@@ -1,5 +1,5 @@
 
-package uk.org.ukfederation.mda.validate;
+package uk.org.ukfederation.mda.validate.x509;
 
 import java.security.cert.X509Certificate;
 
@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import uk.org.ukfederation.mda.MockItem;
+import uk.org.ukfederation.mda.validate.x509.X509ConsistentNameValidator;
 
 public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
     

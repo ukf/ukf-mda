@@ -103,4 +103,7 @@
     <bean id="ukf.X509ConsistentNameValidator" abstract="true" parent="ukf.component_parent"
         class="uk.org.ukfederation.mda.validate.x509.X509ConsistentNameValidator"/>
 
+    <bean id="ukf.X509DSADetector" abstract="true" parent="ukf.component_parent"
+        class="uk.org.ukfederation.mda.validate.x509.X509DSADetector"/>
+
 </beans>

@@ -1,5 +1,11 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.10.0 ##
+
+* Move to Shibboleth Java 8 platform.
+* Reflect upstream package structure for X.509 validation.
+* Removed `X509ROCAValidator` now that it is supplied in the upstream framework.
+
 ## Version 0.9.7 ##
 
 * Relax the check performed by `IdPDisplayNameDuplicateDetectingStage` to ignore `md:OrganizationDisplayName` elements

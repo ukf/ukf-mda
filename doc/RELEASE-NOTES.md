@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.8 ##
+
++* Reflect upstream package structure for X.509 validation.
+
 ## Version 0.9.7 ##
 
 * Relax the check performed by `IdPDisplayNameDuplicateDetectingStage` to ignore `md:OrganizationDisplayName` elements

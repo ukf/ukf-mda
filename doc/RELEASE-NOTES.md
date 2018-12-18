@@ -2,7 +2,8 @@
 
 ## Version 0.9.8 ##
 
-+* Reflect upstream package structure for X.509 validation.
+* Reflect upstream package structure for X.509 validation.
+* Added `X509DSADetector` validator for X.509 certificates.
 
 ## Version 0.9.7 ##
 

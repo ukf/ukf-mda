@@ -64,31 +64,31 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
     private static class X509Support {
 
         /** RFC 2459 Other Subject Alt Name type. */
-        public static final Integer OTHER_ALT_NAME = new Integer(0);
+        public static final Integer OTHER_ALT_NAME = Integer.valueOf(0);
 
         /** RFC 2459 RFC 822 (email address) Subject Alt Name type. */
-        public static final Integer RFC822_ALT_NAME = new Integer(1);
+        public static final Integer RFC822_ALT_NAME = Integer.valueOf(1);
 
         /** RFC 2459 DNS Subject Alt Name type. */
-        public static final Integer DNS_ALT_NAME = new Integer(2);
+        public static final Integer DNS_ALT_NAME = Integer.valueOf(2);
 
         /** RFC 2459 X.400 Address Subject Alt Name type. */
-        public static final Integer X400ADDRESS_ALT_NAME = new Integer(3);
+        public static final Integer X400ADDRESS_ALT_NAME = Integer.valueOf(3);
 
         /** RFC 2459 Directory Name Subject Alt Name type. */
-        public static final Integer DIRECTORY_ALT_NAME = new Integer(4);
+        public static final Integer DIRECTORY_ALT_NAME = Integer.valueOf(4);
 
         /** RFC 2459 EDI Party Name Subject Alt Name type. */
-        public static final Integer EDI_PARTY_ALT_NAME = new Integer(5);
+        public static final Integer EDI_PARTY_ALT_NAME = Integer.valueOf(5);
 
         /** RFC 2459 URI Subject Alt Name type. */
-        public static final Integer URI_ALT_NAME = new Integer(6);
+        public static final Integer URI_ALT_NAME = Integer.valueOf(6);
 
         /** RFC 2459 IP Address Subject Alt Name type. */
-        public static final Integer IP_ADDRESS_ALT_NAME = new Integer(7);
+        public static final Integer IP_ADDRESS_ALT_NAME = Integer.valueOf(7);
 
         /** RFC 2459 Registered ID Subject Alt Name type. */
-        public static final Integer REGISTERED_ID_ALT_NAME = new Integer(8);
+        public static final Integer REGISTERED_ID_ALT_NAME = Integer.valueOf(8);
 
         /**
          * Gets the commons names that appear within the given distinguished name. 

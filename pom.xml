@@ -100,17 +100,22 @@
             <artifactId>spring-core</artifactId>
         </dependency>
 
+        <!--
+            One of our dependencies (probably ukf-members) references
+            javax.xml.bind.annotation.XmlAccessType.FIELD. It's not really
+            a compile-time dependency of ours (we do need it for tests anyway).
+        -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+
         <!-- Provided Dependencies -->
 
         <!-- Runtime dependencies -->
 
         <!-- Test dependencies -->
 
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>

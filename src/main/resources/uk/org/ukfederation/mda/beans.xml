@@ -55,6 +55,9 @@
         uk.org.ukfederation.mda.dom
     -->
 
+    <bean id="ukf.ElementBase64WrappingStage" abstract="true" parent="ukf.stage_parent"
+        class="uk.org.ukfederation.mda.dom.ElementBase64WrappingStage"/>
+
     <!--
         uk.org.ukfederation.mda.dom.saml
     -->

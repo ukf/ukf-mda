@@ -6,6 +6,7 @@
 * Reflect upstream package structure for X.509 validation.
 * Removed `X509ROCAValidator` now that it is supplied in the upstream framework.
 * Added `X509DSADetector` validator for X.509 certificates.
+* Added `ElementBase64WrappingStage`.
 
 ## Version 0.9.7 ##
 

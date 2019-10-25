@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+    xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport"
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol"
+    xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init"
+    xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute"
+    xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi"
+    xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+    xmlns:remd="http://refeds.org/metadata"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+    xmlns:ukfedlabel="http://ukfederation.org.uk/2006/11/label"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    entityID="https://idp2.iay.org.uk/idp/shibboleth">
+    <IDPSSODescriptor
+        protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
+        <KeyDescriptor>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDSTCCAjGgAwIBAgIhAMSPOSGN+3UUTXSKV+2EBOuF3x/pwPX/TD9GfyEkzLp+MA0GCSqGSIb3DQEBBQUAMFgxGDAWBgNVBAMMD2lkcDIuaWF5Lm9yZy51azETMBEGCgmSJomT8ixkARkWA2lheTETMBEGCgmSJomT8ixkARkWA29yZzESMBAGCgmSJomT8ixkARkWAnVrMB4XDTA4MDIyNTEwMzAxNFoXDTI4MDIyNTEwMzAxNFowWDEYMBYGA1UEAwwPaWRwMi5pYXkub3JnLnVrMRMwEQYKCZImiZPyLGQBGRYDaWF5MRMwEQYKCZImiZPyLGQBGRYDb3JnMRIwEAYKCZImiZPyLGQBGRYCdWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCb6ts48g10XHTnpy+23huzR184aahkrG0AoeUlFVlomPjoFDk6czq0S3Qyd+ceF7tMRu3XzS7cMmtVH53O9d+wCs8aPQcPXxHQ5gLkL7Gu6eJ+3N3jXhpt7/DDPhnzFPNW3EVMueHJ/0IzyspTvq2LPbNWXJ86NKJ+gesZQftskwXScOjpoJEIP0EA890QYd4WdYtQPqVV+LPKtnYBoGOnuRhSAM1D/EhCbeb0lCmRGcdGbDFBchiPO4VLGl85sLa0EhjxMIPAOKXcj8bBlO9Ww9kkG06kQp6eLHwmJmt7VNKveCGhyF2QH/CvmdUaPv3gcp1UjrlqFN9LBVSaTIL/AgMBAAEwDQYJKoZIhvcNAQEFBQADggEBAG+jDBAtlKoHaEBB+l6PpW5zuiDjyHG4zZZYqX77mZ9xP/xeKn0yJ18ZLjS3b9WztGLYyC4SJHSF2okq1K02bqsCv9YeP+UWpw2uRR8jt96lLWxZjTjoko2v8jBtzDk8LZsqw58m4vZ0AGNZjKeGIywKhxnepwREguyj3bjBpZAGgl0MHQuXoO/BDC9yKyZslE5CpWp5xP4XzY2/LrorrkwOJLnFuk1sox4/gvkDQukUx/jrYRbrWfOjcNBx3LE/HI6RNLINicK7yUwerDE86nix5Zc3hskVcCykW+r6HbY6bx7PYmNKYMZhQAgDtXIjFHOy+WbyVTidmJvxM9UeYCY=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+    </IDPSSODescriptor>
+    <AttributeAuthorityDescriptor
+        protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+        <KeyDescriptor>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDSTCCAjGgAwIBAgIhAMSPOSGN+3UUTXSKV+2EBOuF3x/pwPX/TD9GfyEkzLp+MA0GCSqGSIb3DQEBBQUAMFgxGDAWBgNVBAMMD2lkcDIuaWF5Lm9yZy51azETMBEGCgmSJomT8ixkARkWA2lheTETMBEGCgmSJomT8ixkARkWA29yZzESMBAGCgmSJomT8ixkARkWAnVrMB4XDTA4MDIyNTEwMzAxNFoXDTI4MDIyNTEwMzAxNFowWDEYMBYGA1UEAwwPaWRwMi5pYXkub3JnLnVrMRMwEQYKCZImiZPyLGQBGRYDaWF5MRMwEQYKCZImiZPyLGQBGRYDb3JnMRIwEAYKCZImiZPyLGQBGRYCdWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCb6ts48g10XHTnpy+23huzR184aahkrG0AoeUlFVlomPjoFDk6czq0S3Qyd+ceF7tMRu3XzS7cMmtVH53O9d+wCs8aPQcPXxHQ5gLkL7Gu6eJ+3N3jXhpt7/DDPhnzFPNW3EVMueHJ/0IzyspTvq2LPbNWXJ86NKJ+gesZQftskwXScOjpoJEIP0EA890QYd4WdYtQPqVV+LPKtnYBoGOnuRhSAM1D/EhCbeb0lCmRGcdGbDFBchiPO4VLGl85sLa0EhjxMIPAOKXcj8bBlO9Ww9kkG06kQp6eLHwmJmt7VNKveCGhyF2QH/CvmdUaPv3gcp1UjrlqFN9LBVSaTIL/AgMBAAEwDQYJKoZIhvcNAQEFBQADggEBAG+jDBAtlKoHaEBB+l6PpW5zuiDjyHG4zZZYqX77mZ9xP/xeKn0yJ18ZLjS3b9WztGLYyC4SJHSF2okq1K02bqsCv9YeP+UWpw2uRR8jt96lLWxZjTjoko2v8jBtzDk8LZsqw58m4vZ0AGNZjKeGIywKhxnepwREguyj3bjBpZAGgl0MHQuXoO/BDC9yKyZslE5CpWp5xP4XzY2/LrorrkwOJLnFuk1sox4/gvkDQukUx/jrYRbrWfOjcNBx3LE/HI6RNLINicK7yUwerDE86nix5Zc3hskVcCykW+r6HbY6bx7PYmNKYMZhQAgDtXIjFHOy+WbyVTidmJvxM9UeYCY=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+    </AttributeAuthorityDescriptor>
+</EntityDescriptor>

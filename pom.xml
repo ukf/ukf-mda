@@ -132,6 +132,12 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+       	<dependency>
+       	    <groupId>uk.ac.sdss</groupId>
+    		<artifactId>sdss-xalan-md</artifactId>
+		    <version>1.1.5</version>
+       		<scope>test</scope>
+       	</dependency>
         <dependency>
             <groupId>${slf4j.groupId}</groupId>
             <artifactId>jcl-over-slf4j</artifactId>

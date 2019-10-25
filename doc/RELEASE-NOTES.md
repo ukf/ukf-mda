@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.9 ##
+
+* Added `ElementBase64WrappingStage`.
+
 ## Version 0.9.8 ##
 
 * Reflect upstream package structure for X.509 validation.

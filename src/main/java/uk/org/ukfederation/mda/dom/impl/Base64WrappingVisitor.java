@@ -43,13 +43,15 @@ public class Base64WrappingVisitor implements ElementVisitor {
      */
     @Nonnull
     public static String wrapBase64(@Nonnull final String s) {
-
-        /* remove all white space */
-        final String clean = s.replaceAll("\\s*", "");
-
         final StringBuilder result = new StringBuilder();
         final StringBuilder line = new StringBuilder();
-        for (final char c : clean.toCharArray()) {
+        for (final char c : s.toCharArray()) {
+
+            // Skip over any white space in the input string
+            if (Character.isWhitespace(c)) {
+                continue;
+            }
+
             if (line.length() == 64) {
                 if (result.length() != 0) {
                     result.append('\n');

@@ -19,6 +19,7 @@ import javax.annotation.Nonnull;
 import org.w3c.dom.Element;
 
 import net.shibboleth.metadata.dom.AbstractElementVisitingStage;
+import net.shibboleth.metadata.dom.DOMTraversalContext;
 import net.shibboleth.metadata.dom.ElementVisitor;
 import uk.org.ukfederation.mda.dom.impl.Base64WrappingVisitor;
 
@@ -32,7 +33,7 @@ public class ElementBase64WrappingStage extends AbstractElementVisitingStage {
     @Nonnull private final ElementVisitor visitor = new Base64WrappingVisitor();
 
     @Override
-    protected void visit(@Nonnull final Element e, @Nonnull final TraversalContext context) {
+    protected void visit(@Nonnull final Element e, @Nonnull final DOMTraversalContext context) {
         visitor.visitElement(e, context.getItem());
     }
 

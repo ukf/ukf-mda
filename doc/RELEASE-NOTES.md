@@ -2,7 +2,7 @@
 
 ## Version 0.10.0 ##
 
-* Move to Shibboleth Java 8 platform.
+* Move to Shibboleth Java 11 platform.
 * Reflect upstream package structure for X.509 validation.
 * Removed `X509ROCAValidator` now that it is supplied in the upstream framework.
 * Added `X509DSADetector` validator for X.509 certificates.

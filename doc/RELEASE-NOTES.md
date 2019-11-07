@@ -3,6 +3,8 @@
 ## Version 0.9.9 ##
 
 * Added `ElementBase64WrappingStage`.
+* Added `EmailAddressStringValidator`.
+* Added `StringElementValidationStage` and `AbstractElementValidationStage`.
 
 ## Version 0.9.8 ##
 

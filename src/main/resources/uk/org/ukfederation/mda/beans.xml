@@ -58,6 +58,9 @@
     <bean id="ukf.ElementBase64WrappingStage" abstract="true" parent="ukf.stage_parent"
         class="uk.org.ukfederation.mda.dom.ElementBase64WrappingStage"/>
 
+    <bean id="ukf.StringElementValidationStage" abstract="true" parent="ukf.stage_parent"
+        class="uk.org.ukfederation.mda.dom.StringElementValidationStage"/>
+    
     <!--
         uk.org.ukfederation.mda.dom.saml
     -->

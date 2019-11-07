@@ -12,6 +12,7 @@ import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.metadata.MockItem;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
 import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthorityPopulationStage;

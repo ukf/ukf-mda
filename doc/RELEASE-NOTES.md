@@ -7,6 +7,7 @@
 * Removed `X509ROCAValidator` now that it is supplied in the upstream framework.
 * Added `X509DSADetector` validator for X.509 certificates.
 * Added `ElementBase64WrappingStage`.
+* Added `EmailAddressStringValidator`.
 
 ## Version 0.9.7 ##
 
@@ -119,4 +120,3 @@ including that the `orgID` attribute is consistent with the `OrganizationName`.
 	* Bugzilla 803: consider `mdui:DisplayName` when looking for duplicate IdP display names
 	* Bugzilla 933: `check_aggregate` should have a case insensitive check for duplicate `OrganizationDisplayName`
 	* (unlisted) ignore leading and trailing whitespace for IdP display name comparisons
-

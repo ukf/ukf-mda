@@ -1,17 +1,16 @@
 
 package uk.org.ukfederation.mda.dom.saml;
 
-import net.shibboleth.utilities.java.support.xml.ElementSupport;
-
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import uk.org.ukfederation.mda.BaseDOMTest;
-
 import com.google.common.base.Predicate;
+
+import net.shibboleth.utilities.java.support.xml.ElementSupport;
+import uk.org.ukfederation.mda.BaseDOMTest;
 
 public class AttributeMatcherTest extends BaseDOMTest {
     
@@ -24,8 +23,8 @@ public class AttributeMatcherTest extends BaseDOMTest {
         doc = getParserPool().newDocument();
     }
     
-    @BeforeTest
-    private void beforeTest() throws Exception {
+    @BeforeMethod
+    private void beforeMethod() throws Exception {
         attr = ElementSupport.constructElement(doc, SAMLSupport.ATTRIBUTE_NAME);
     }
     

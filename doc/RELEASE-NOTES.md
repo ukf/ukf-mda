@@ -5,6 +5,7 @@
 * Added `ElementBase64WrappingStage`.
 * Added `EmailAddressStringValidator`.
 * Added `StringElementValidationStage` and `AbstractElementValidationStage`.
+* Added `StringXPathValidationStage` and `AbstractXPathValidationStage`.
 
 ## Version 0.9.8 ##
 

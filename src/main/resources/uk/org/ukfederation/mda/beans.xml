@@ -61,6 +61,9 @@
     <bean id="ukf.StringElementValidationStage" abstract="true" parent="ukf.stage_parent"
         class="uk.org.ukfederation.mda.dom.StringElementValidationStage"/>
     
+    <bean id="ukf.StringXPathValidationStage" abstract="true" parent="ukf.stage_parent"
+        class="uk.org.ukfederation.mda.dom.StringXPathValidationStage"/>
+    
     <!--
         uk.org.ukfederation.mda.dom.saml
     -->

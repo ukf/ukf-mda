@@ -26,8 +26,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -56,9 +54,6 @@ import net.shibboleth.utilities.java.support.xml.SimpleNamespaceContext;
  * @param <V> type to convert each selected node to for validation
  */
 public abstract class AbstractXPathValidationStage<V> extends BaseStage<Element> {
-
-    /** Class logger. */
-    private final Logger log = LoggerFactory.getLogger(AbstractXPathValidationStage.class);
 
     /** The list of validators to apply. */
     @Nonnull

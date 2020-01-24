@@ -117,8 +117,8 @@
         <!-- Test dependencies -->
 
         <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>jakarta.activation</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -160,8 +160,6 @@
             <artifactId>jcl-over-slf4j</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Managed Dependencies -->
 
     </dependencies>
 

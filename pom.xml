@@ -106,8 +106,8 @@
             a compile-time dependency of ours (we do need it for tests anyway).
         -->
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
 
         <!-- Provided Dependencies -->

@@ -119,9 +119,12 @@
         uk.org.ukfederation.mda.validate.string
     -->
     
+    <bean id="ukf.AsURLStringValidator" abstract="true" parent="ukf.component_parent"
+        class="uk.org.ukfederation.mda.validate.string.AsURLStringValidator"/>
+
     <bean id="ukf.EmailAddressStringValidator" abstract="true" parent="ukf.component_parent"
         class="uk.org.ukfederation.mda.validate.string.EmailAddressStringValidator"/>
-    
+
     <!--
         uk.org.ukfederation.mda.validate.x509
     -->

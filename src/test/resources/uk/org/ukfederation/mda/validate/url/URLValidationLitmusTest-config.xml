@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="classpath:uk/org/iay/incommon/mda/beans.xml"/>
+    <import resource="classpath:uk/org/ukfederation/mda/beans.xml"/>
+
+    <bean class="net.shibboleth.ext.spring.config.IdentifiableBeanPostProcessor"/>
+
+	<util:list id="validators">
+		<bean id="url" parent="ukf.AsURLStringValidator"/>
+	</util:list>
+	
+	<!--
+    <bean id="litmusTest" parent="inc.stage_parent"
+        class="uk.org.iay.incommon.mda.dom.saml.shib.ScopeValidationStage">
+        <property name="validators">
+            <list>
+                <bean parent="inc.RejectStringRegexValidator"
+                    p:regex="" p:message="scope element must not be empty"/>
+                <bean parent="inc.RejectStringRegexValidator"
+                    p:regex=".*\s.*" p:message="scope '%s' includes white space"/>
+                <bean parent="inc.AsDomainNameStringValidator"
+                    p:message="scope is not a valid domain name: %s">
+                    <property name="validators">
+                        <list>
+                            <bean parent="inc.RejectDomainNamePublicSuffixValidator"
+                                p:message="scope is a public suffix: '%s'"/>
+                            <bean parent="inc.RejectDomainNameNotUnderPublicSuffixValidator"
+                                p:message="scope is not under a public suffix: '%s'"/>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+        <property name="regexpValidators">
+            <list>
+                <bean parent="inc.RejectStringRegexValidator"
+                    p:regex="" p:message="scope element must not be empty"/>
+                <bean parent="inc.RejectStringRegexValidator"
+                    p:regex=".*\s.*" p:message="scope '%s' includes white space"/>
+                <bean parent="inc.RejectStringRegexValidator"
+                    p:regex="[^^].*" p:message="regex scope '%s' does not start with an anchor ('^')"/>
+                <bean parent="inc.RejectStringRegexValidator"
+                    p:regex=".*[^$]" p:message="regex scope '%s' does not end with an anchor ('$')"/>
+                <bean parent="inc.AsLiteralTailStringValidator"
+                    p:message="regular expression '%s' does not end with a literal tail">
+                    <property name="validators">
+                        <list>
+                            <bean parent="inc.AsDomainNameStringValidator"
+                                p:message="literal tail is not a valid domain name: %s">
+                                <property name="validators">
+                                    <list>
+                                        <bean parent="inc.RejectDomainNamePublicSuffixValidator"
+                                            p:message="literal tail is a public suffix: '%s'"/>
+                                        <bean parent="inc.RejectDomainNameNotUnderPublicSuffixValidator"
+                                            p:message="literal tail is not under a public suffix: '%s'"/>
+                                    </list>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+	-->
+
+
+</beans>

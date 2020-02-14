@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package uk.org.ukfederation.mda;
+package uk.org.ukfederation.mda.dom.saml.ukfedlabel;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;

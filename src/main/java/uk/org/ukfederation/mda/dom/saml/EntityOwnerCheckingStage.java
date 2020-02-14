@@ -32,7 +32,7 @@ import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.AttributeSupport;
 import net.shibboleth.utilities.java.support.xml.ElementSupport;
-import uk.org.ukfederation.mda.UKFedLabelSupport;
+import uk.org.ukfederation.mda.dom.saml.ukfedlabel.UKFedLabelSupport;
 import uk.org.ukfederation.members.Members;
 import uk.org.ukfederation.members.jaxb.MemberElement;
 

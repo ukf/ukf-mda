@@ -79,6 +79,12 @@
         class="uk.org.ukfederation.mda.dom.saml.mdattr.EntityAttributeAddingStage"/>
 
     <!--
+        uk.org.ukfederation.mda.dom.saml.ukfedlabel
+    -->
+    <bean id="ukf.EntityDescriptorFlowConstraintPopulationStage" abstract="true" parent="ukf.stage_parent"
+        class="uk.org.ukfederation.mda.dom.saml.ukfedlabel.EntityDescriptorFlowConstraintPopulationStage"/>
+
+    <!--
         uk.org.ukfederation.mda.statistics
     -->
 

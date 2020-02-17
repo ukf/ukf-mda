@@ -27,6 +27,14 @@ public final class UKFedLabelSupport {
     /** UKFedLabel conventional prefix. */
     public static final String UKFEDLABEL_PREFIX = "ukfedlabel";
 
+    /** ukfedlabel:DisableFlow element. */
+    public static final QName UK_FEDERATION_DISABLE_FLOW_NAME =
+            new QName(UKFEDLABEL_NS, "DisableFlow", UKFEDLABEL_PREFIX);
+
+    /** ukfedlabel:EnableFlow element. */
+    public static final QName UK_FEDERATION_ENABLE_FLOW_NAME =
+            new QName(UKFEDLABEL_NS, "EnableFlow", UKFEDLABEL_PREFIX);
+
     /** ukfedlabel:UKFederationMember element. */
     public static final QName UK_FEDERATION_MEMBER_NAME =
             new QName(UKFEDLABEL_NS, "UKFederationMember", UKFEDLABEL_PREFIX);

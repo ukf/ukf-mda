@@ -6,7 +6,8 @@
 * Added `EmailAddressStringValidator`.
 * Added `StringElementValidationStage` and `AbstractElementValidationStage`.
 * Added `StringXPathValidationStage` and `AbstractXPathValidationStage`.
-* Added `FlowConstraint`, `EnableFlow`, `DisableFlow` and `EntityDescriptorFlowConstraintPopulationStage`.
+* Added `FlowConstraint`, `EnableFlow`, `DisableFlow`, `EntityDescriptorFlowConstraintPopulationStage`
+  and `FlowConstraintApplyingStage`.
 
 ## Version 0.9.8 ##
 

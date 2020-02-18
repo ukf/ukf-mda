@@ -8,7 +8,8 @@
 * Added `X509DSADetector` validator for X.509 certificates.
 * Added `ElementBase64WrappingStage`.
 * Added `EmailAddressStringValidator`.
-* Added `FlowConstraint`, `EnableFlow`, `DisableFlow` and `EntityDescriptorFlowConstraintPopulationStage`.
+* Added `FlowConstraint`, `EnableFlow`, `DisableFlow`, `EntityDescriptorFlowConstraintPopulationStage`
+  and `FlowConstraintApplyingStage`.
 
 ## Version 0.9.7 ##
 

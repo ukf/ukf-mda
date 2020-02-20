@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemIdentificationStrategy;
-import net.shibboleth.metadata.pipeline.BaseIteratingStage;
+import net.shibboleth.metadata.pipeline.AbstractFilteringStage;
 import net.shibboleth.metadata.pipeline.Stage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterInit;
@@ -33,7 +33,7 @@ import uk.org.ukfederation.mda.UKItemIdentificationStrategy;
  *
  * @param <T> type of item being processed
  */
-public class FlowConstraintApplyingStage<T> extends BaseIteratingStage<T> {
+public class FlowConstraintApplyingStage<T> extends AbstractFilteringStage<T> {
     
     /** Item identification strategy to use if we need to throw errors. */
     private final ItemIdentificationStrategy idStrategy = new UKItemIdentificationStrategy();

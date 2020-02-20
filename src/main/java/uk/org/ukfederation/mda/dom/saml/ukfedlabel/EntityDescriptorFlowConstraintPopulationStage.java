@@ -23,7 +23,7 @@ import org.w3c.dom.Element;
 
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
-import net.shibboleth.metadata.pipeline.BaseIteratingStage;
+import net.shibboleth.metadata.pipeline.AbstractIteratingStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 
 /**
@@ -31,10 +31,10 @@ import net.shibboleth.metadata.pipeline.StageProcessingException;
  * then adds {@link EnableFlow} and {@link DisableFlow} instances to the item metadata.
  */
 @ThreadSafe
-public class EntityDescriptorFlowConstraintPopulationStage extends BaseIteratingStage<Element> {
+public class EntityDescriptorFlowConstraintPopulationStage extends AbstractIteratingStage<Element> {
 
     @Override
-    protected boolean doExecute(@Nonnull final Item<Element> item) throws StageProcessingException {
+    protected void doExecute(@Nonnull final Item<Element> item) throws StageProcessingException {
         final Element entity = item.unwrap();
 
         // Process EnableFlow extensions
@@ -52,8 +52,6 @@ public class EntityDescriptorFlowConstraintPopulationStage extends BaseIterating
             final String flowName = disable.getAttribute("flow");
             item.getItemMetadata().put(new DisableFlow(flowName));
         }
-
-        return true;
     }
 
 }

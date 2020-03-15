@@ -25,8 +25,8 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemId;
-import net.shibboleth.metadata.dom.saml.EntitiesDescriptorAssemblerStage.ItemOrderingStrategy;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
+import net.shibboleth.metadata.pipeline.ItemOrderingStrategy;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 
 import org.w3c.dom.Attr;
@@ -45,7 +45,7 @@ import org.w3c.dom.Element;
  * last in the ordering.
  */
 @ThreadSafe
-public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
+public class UKEntityOrderingStrategy implements ItemOrderingStrategy<Element> {
     
     /**
      * Helper class which wraps an {@link Element} {@link Item} but extracts any
@@ -118,7 +118,6 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
             }
         }
         
-        /** {@inheritDoc} */
         @Override
         public int compareTo(@Nonnull final OrderableItem o) {
             for (int fno = 0; fno < NFIELDS; fno++) {
@@ -142,7 +141,6 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<Item<Element>> order(@Nonnull @NonnullElements final Collection<Item<Element>> items) {
         

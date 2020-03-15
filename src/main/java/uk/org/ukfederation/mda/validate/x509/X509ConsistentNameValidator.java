@@ -135,7 +135,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
                 return null;
             }
 
-            final List<Object> altNames = new LinkedList<Object>();
+            final List<Object> altNames = new LinkedList<>();
             final GeneralNameType[] types = new GeneralNameType[nameTypes.length];
             for (int i = 0; i < nameTypes.length; i++) {
                 types[i] = GeneralNameType.fromTagNumber(nameTypes[i]);

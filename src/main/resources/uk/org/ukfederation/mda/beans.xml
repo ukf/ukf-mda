@@ -39,9 +39,6 @@
     <bean id="ukf.IdPDisplayNameDuplicateDetectingStage" abstract="true" parent="ukf.stage_parent"
         class="uk.org.ukfederation.mda.IdPDisplayNameDuplicateDetectingStage"/>
 
-    <bean id="ukf.RegexFileFilter" abstract="true"
-        class="uk.org.ukfederation.mda.RegexFileFilter"/>
-
     <bean id="ukf.UKEntityOrderingStrategy" abstract="true"
         class="uk.org.ukfederation.mda.UKEntityOrderingStrategy"/>
 

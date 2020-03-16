@@ -18,7 +18,7 @@ import net.shibboleth.utilities.java.support.component.ComponentInitializationEx
 public class FlowConstraintApplyingStageTest {
 
     private Stage<String> makeStage(@Nonnull final String flowName) throws ComponentInitializationException {
-        final FlowConstraintApplyingStage<String> stage = new FlowConstraintApplyingStage<String>();
+        final var stage = new FlowConstraintApplyingStage<String>();
         stage.setId("test");
         stage.setFlowName(flowName);
         stage.initialize();
@@ -57,7 +57,7 @@ public class FlowConstraintApplyingStageTest {
 
     @Test(expectedExceptions = {ComponentInitializationException.class})
     public void testNoFlowName() throws Exception {
-        final FlowConstraintApplyingStage<String> stage = new FlowConstraintApplyingStage<String>();
+        final var stage = new FlowConstraintApplyingStage<String>();
         stage.setId("test");
         stage.initialize();
     }

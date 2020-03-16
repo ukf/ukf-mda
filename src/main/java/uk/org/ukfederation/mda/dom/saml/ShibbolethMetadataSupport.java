@@ -14,15 +14,15 @@
 
 package uk.org.ukfederation.mda.dom.saml;
 
+import java.util.function.Function;
+
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
 
-import com.google.common.base.Function;
-
-import uk.org.ukfederation.mda.dom.Container;
-import uk.org.ukfederation.mda.dom.ElementMaker;
+import net.shibboleth.metadata.dom.Container;
+import net.shibboleth.metadata.dom.ElementMaker;
 
 /** Helper class for dealing with Shibboleth metadata. */
 @ThreadSafe

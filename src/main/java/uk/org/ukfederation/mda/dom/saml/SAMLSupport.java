@@ -14,21 +14,20 @@
 
 package uk.org.ukfederation.mda.dom.saml;
 
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
+import net.shibboleth.metadata.dom.Container;
+import net.shibboleth.metadata.dom.ElementMaker;
+import net.shibboleth.metadata.dom.ElementMatcher;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
-
-import uk.org.ukfederation.mda.dom.Container;
-import uk.org.ukfederation.mda.dom.ElementMaker;
-import uk.org.ukfederation.mda.dom.ElementMatcher;
-
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 /** Helper class for dealing with SAML documents. */
 @ThreadSafe

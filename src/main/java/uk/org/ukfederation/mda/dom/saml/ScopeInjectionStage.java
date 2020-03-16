@@ -15,6 +15,8 @@
 package uk.org.ukfederation.mda.dom.saml;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
 import javax.xml.namespace.QName;
@@ -23,11 +25,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
+import net.shibboleth.metadata.dom.Container;
+import net.shibboleth.metadata.dom.ElementMaker;
+import net.shibboleth.metadata.dom.ElementMatcher;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.AbstractIteratingStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
@@ -35,9 +37,6 @@ import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterI
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.AttributeSupport;
-import uk.org.ukfederation.mda.dom.Container;
-import uk.org.ukfederation.mda.dom.ElementMaker;
-import uk.org.ukfederation.mda.dom.ElementMatcher;
 import uk.org.ukfederation.members.Members;
 
 /**

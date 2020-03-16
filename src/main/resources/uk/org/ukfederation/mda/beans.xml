@@ -69,13 +69,6 @@
         class="uk.org.ukfederation.mda.dom.saml.ScopeInjectionStage"/>
 
     <!--
-        uk.org.ukfederation.mda.dom.saml.mdattr
-    -->
-
-    <bean id="ukf.EntityAttributeAddingStage" abstract="true" parent="ukf.stage_parent"
-        class="uk.org.ukfederation.mda.dom.saml.mdattr.EntityAttributeAddingStage"/>
-
-    <!--
         uk.org.ukfederation.mda.dom.saml.ukfedlabel
     -->
 

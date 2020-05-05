@@ -10,8 +10,6 @@ import net.shibboleth.metadata.validate.Validator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import uk.org.ukfederation.mda.validate.x509.X509ConsistentNameValidator;
-
 public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
     
     /**

@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.10 ##
+
+* Added `DiscoFeedCollectionSerializer`.
+
 ## Version 0.9.9 ##
 
 * Added `ElementBase64WrappingStage`.

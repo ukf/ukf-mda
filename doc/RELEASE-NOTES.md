@@ -4,7 +4,7 @@
 
 * Move to Shibboleth Java 11 platform.
 * Reflect upstream package structure for X.509 validation.
-* Removed `X509ROCAValidator` now that it is supplied in the upstream framework.
+* Removed `X509ROCAValidator` and `IPHintValidationStage` now that they are supplied in the upstream framework.
 * Added `X509DSADetector` validator for X.509 certificates.
 * Added `ElementBase64WrappingStage`.
 * Added `EmailAddressStringValidator`.

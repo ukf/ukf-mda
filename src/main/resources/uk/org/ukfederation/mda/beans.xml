@@ -62,9 +62,6 @@
     <bean id="ukf.EntityOwnerCheckingStage" abstract="true" parent="ukf.stage_parent"
         class="uk.org.ukfederation.mda.dom.saml.EntityOwnerCheckingStage"/>
 
-    <bean id="ukf.SAMLStringElementCheckingStage" abstract="true" parent="ukf.stage_parent"
-        class="uk.org.ukfederation.mda.dom.saml.SAMLStringElementCheckingStage"/>
-
     <bean id="ukf.ScopeInjectionStage" abstract="true" parent="ukf.stage_parent"
         class="uk.org.ukfederation.mda.dom.saml.ScopeInjectionStage"/>
 

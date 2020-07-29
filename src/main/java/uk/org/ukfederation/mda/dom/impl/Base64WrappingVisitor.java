@@ -15,6 +15,7 @@
 package uk.org.ukfederation.mda.dom.impl;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import org.w3c.dom.Element;
 
@@ -24,6 +25,7 @@ import net.shibboleth.metadata.dom.ElementVisitor;
 /**
  * {@link Element} visitor which wraps the visited element's text content.
  */
+@Immutable
 public class Base64WrappingVisitor implements ElementVisitor {
 
     @Override

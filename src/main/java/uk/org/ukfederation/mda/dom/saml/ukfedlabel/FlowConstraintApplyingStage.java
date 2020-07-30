@@ -36,7 +36,7 @@ import uk.org.ukfederation.mda.UKItemIdentificationStrategy;
 public class FlowConstraintApplyingStage<T> extends AbstractFilteringStage<T> {
     
     /** Item identification strategy to use if we need to throw errors. */
-    private final ItemIdentificationStrategy idStrategy = new UKItemIdentificationStrategy();
+    private final ItemIdentificationStrategy<T> idStrategy = new UKItemIdentificationStrategy<>();
     
     /**
      * The name of the flow this stage is controlling.

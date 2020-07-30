@@ -66,7 +66,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
      * Default: {@link FirstItemIdItemIdentificationStrategy}.
      */
     @Nonnull
-    private ItemIdentificationStrategy identificationStrategy = new FirstItemIdItemIdentificationStrategy();
+    private ItemIdentificationStrategy<Element> identificationStrategy = new FirstItemIdItemIdentificationStrategy<>();
     
     /**
      * Gets the item identification strategy to be used.
@@ -74,7 +74,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
      * @return the {@link ItemIdentificationStrategy} value
      */
     @Nonnull
-    public ItemIdentificationStrategy getIdentificationStrategy() {
+    public ItemIdentificationStrategy<Element> getIdentificationStrategy() {
         return identificationStrategy;
     }
     
@@ -83,7 +83,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
      * 
      * @param strategy the {@link ItemIdentificationStrategy} to use
      */
-    public void setIdentificationStrategy(@Nonnull final ItemIdentificationStrategy strategy) {
+    public void setIdentificationStrategy(@Nonnull final ItemIdentificationStrategy<Element> strategy) {
         Constraint.isNotNull(strategy, "identification strategy may not be null");
         identificationStrategy = strategy;
     }

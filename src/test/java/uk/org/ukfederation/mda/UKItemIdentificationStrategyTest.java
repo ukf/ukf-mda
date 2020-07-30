@@ -30,8 +30,8 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
         super(UKItemIdentificationStrategy.class);
     }
     
-    private UKItemIdentificationStrategy makeStrat() {
-        final UKItemIdentificationStrategy strat = new UKItemIdentificationStrategy();
+    private UKItemIdentificationStrategy<Element> makeStrat() {
+        final var strat = new UKItemIdentificationStrategy<Element>();
         strat.setNoItemIdIdentifier("mu");
         return strat;
     }
@@ -63,16 +63,17 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     
     @Test
     public void getItemIdentifier() {
-        final UKItemIdentificationStrategy strat = makeStrat();
+        final var strat = new UKItemIdentificationStrategy<String>();
+        strat.setNoItemIdIdentifier("mu");
         
-        final Item<?> item1 = new MockItem("item 1");
+        final var item1 = new MockItem("item 1");
         Assert.assertEquals(strat.getItemIdentifier(item1), "mu");
         item1.getItemMetadata().put(new UKId("uk-id"));
         Assert.assertEquals(strat.getItemIdentifier(item1), "uk-id");
         item1.getItemMetadata().put(new ItemId("item-id"));
         Assert.assertEquals(strat.getItemIdentifier(item1), "uk-id");
 
-        final Item<?> item2 = new MockItem("item 2");
+        final var item2 = new MockItem("item 2");
         Assert.assertEquals(strat.getItemIdentifier(item2), "mu");
         item2.getItemMetadata().put(new ItemId("item-id"));
         Assert.assertEquals(strat.getItemIdentifier(item2), "item-id");
@@ -82,7 +83,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     
     @Test
     public void withRegistrationAuthority() throws Exception {
-        final UKItemIdentificationStrategy strat = makeStrat();
+        final var strat = makeStrat();
         final Item<Element> item = makeItem("present");
 
         performExtractions(item);
@@ -96,7 +97,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     
     @Test
     public void withoutRegistrationAuthority() throws Exception {
-        final UKItemIdentificationStrategy strat = makeStrat();
+        final var strat = makeStrat();
         final Item<Element> item = makeItem("absent");
 
         performExtractions(item);
@@ -110,7 +111,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     
     @Test
     public void ignoredAuthority() throws Exception {
-        final UKItemIdentificationStrategy strat = makeStrat();
+        final var strat = makeStrat();
         final Set<String> auths = new HashSet<>();
         auths.add("http://ukfederation.org.uk");
         strat.setIgnoredRegistrationAuthorities(auths);
@@ -128,7 +129,7 @@ public class UKItemIdentificationStrategyTest extends BaseDOMTest {
     
     @Test
     public void mappedAuthority() throws Exception {
-        final UKItemIdentificationStrategy strat = makeStrat();
+        final var strat = makeStrat();
         final Map<String, String> nameMap = new HashMap<>();
         nameMap.put("http://ukfederation.org.uk", "UKf");
         strat.setRegistrationAuthorityDisplayNames(nameMap);

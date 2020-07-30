@@ -28,12 +28,14 @@ import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthorityItemIdentific
  * The basic identifier strategy is to use a {@link UKId} if one is present, or
  * fall back to the super class implementation (which in turn
  * falls back to a configurable static value such as "unknown").
+ *
+ * @param <T> type of {@link Item} to be identified
  */
 @ThreadSafe
-public class UKItemIdentificationStrategy extends RegistrationAuthorityItemIdentificationStrategy {
+public class UKItemIdentificationStrategy<T> extends RegistrationAuthorityItemIdentificationStrategy<T> {
 
     @Override
-    @Nonnull protected String getBasicIdentifier(@Nonnull final Item<?> item) {
+    @Nonnull protected String getBasicIdentifier(@Nonnull final Item<T> item) {
         final List<UKId> itemIds = item.getItemMetadata().get(UKId.class);
         if (itemIds != null && !itemIds.isEmpty()) {
             return itemIds.get(0).getId();

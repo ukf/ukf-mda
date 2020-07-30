@@ -3,18 +3,17 @@ package uk.org.ukfederation.mda;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.w3c.dom.Element;
+
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
-import net.shibboleth.metadata.ItemIdentificationStrategy;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.xml.XMLParserException;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import org.w3c.dom.Element;
 
 public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
 
@@ -278,7 +277,7 @@ public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
     public void idStrategy() throws Exception {
         final IdPDisplayNameDuplicateDetectingStage stage = makeStage();
         Assert.assertNotNull(stage.getIdentificationStrategy());
-        final ItemIdentificationStrategy strategy = new UKItemIdentificationStrategy();
+        final var strategy = new UKItemIdentificationStrategy<Element>();
         stage.setIdentificationStrategy(strategy);
         Assert.assertEquals(stage.getIdentificationStrategy(), strategy);
         stage.initialize();

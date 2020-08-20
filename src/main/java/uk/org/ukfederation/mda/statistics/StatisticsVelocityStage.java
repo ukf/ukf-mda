@@ -16,8 +16,8 @@ package uk.org.ukfederation.mda.statistics;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -107,7 +107,7 @@ public class StatisticsVelocityStage extends AbstractStage<Element> {
 
     /** {@inheritDoc} */
     @Override
-    public void doExecute(final Collection<Item<Element>> collection) throws StageProcessingException {
+    public void doExecute(final List<Item<Element>> collection) throws StageProcessingException {
         
         final VelocityEngine ve = new VelocityEngine();
         ve.setProperty("resource.loader", "class");

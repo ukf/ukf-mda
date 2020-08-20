@@ -15,7 +15,6 @@
 package uk.org.ukfederation.mda;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,14 +22,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
+
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.ItemOrderingStrategy;
 import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
 
 /**
  * Implements an ordering strategy for UK federation aggregates.
@@ -142,7 +141,7 @@ public class UKEntityOrderingStrategy implements ItemOrderingStrategy<Element> {
     }
 
     @Override
-    public List<Item<Element>> order(@Nonnull @NonnullElements final Collection<Item<Element>> items) {
+    public List<Item<Element>> order(@Nonnull @NonnullElements final List<Item<Element>> items) {
         
         // Construct an orderable list wrapping the original items.
         final List<OrderableItem> orderableList = new ArrayList<>(items.size());

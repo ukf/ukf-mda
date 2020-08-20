@@ -14,9 +14,9 @@
 
 package uk.org.ukfederation.mda;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -193,7 +193,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
     
     /** {@inheritDoc} */
     @Override
-    protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
+    protected void doExecute(@Nonnull @NonnullElements final List<Item<Element>> items)
             throws StageProcessingException {
 
         /*

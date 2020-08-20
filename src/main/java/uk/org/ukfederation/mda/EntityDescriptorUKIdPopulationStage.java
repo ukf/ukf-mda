@@ -14,8 +14,8 @@
 
 package uk.org.ukfederation.mda;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -51,7 +51,7 @@ public class EntityDescriptorUKIdPopulationStage extends AbstractStage<Element> 
 
     /** {@inheritDoc} */
     @Override
-    protected void doExecute(@Nonnull @NonnullElements final Collection<Item<Element>> items)
+    protected void doExecute(@Nonnull @NonnullElements final List<Item<Element>> items)
             throws StageProcessingException {
 
         // ID values that we have already seen (they must be unique)

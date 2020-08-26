@@ -17,12 +17,12 @@ package uk.org.ukfederation.mda;
 import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
 
 import net.shibboleth.metadata.dom.DOMElementItem;
 
 /** An implementation of {@link Predicate} that selects entities with {@link UKId}s. */
-@ThreadSafe
+@Immutable
 public class UKEntitySelectionStrategy implements Predicate<DOMElementItem> {
 
     @Override

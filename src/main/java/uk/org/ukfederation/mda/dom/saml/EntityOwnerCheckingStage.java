@@ -17,6 +17,8 @@ package uk.org.ukfederation.mda.dom.saml;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.GuardedBy;
+import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
 import org.w3c.dom.Element;
@@ -39,10 +41,11 @@ import uk.org.ukfederation.members.jaxb.MemberElement;
 /**
  * Stage to check that each entity in a collection is owned by a UK federation member.
  */
+@ThreadSafe
 public class EntityOwnerCheckingStage extends AbstractIteratingStage<Element> {
 
     /** Information about members of the UK federation. */
-    @NonnullAfterInit private Members members;
+    @GuardedBy("this") @NonnullAfterInit private Members members;
     
     /**
      * Get the members API object.
@@ -50,7 +53,7 @@ public class EntityOwnerCheckingStage extends AbstractIteratingStage<Element> {
      * @return the members API object
      */
     @NonnullAfterInit
-    public final Members getMembers() {
+    public final synchronized Members getMembers() {
         return members;
     }
     
@@ -59,7 +62,7 @@ public class EntityOwnerCheckingStage extends AbstractIteratingStage<Element> {
      * 
      * @param m the members API object to use
      */
-    public void setMembers(@Nonnull final Members m) {
+    public final synchronized void setMembers(@Nonnull final Members m) {
         members = m;
     }
     
@@ -116,7 +119,7 @@ public class EntityOwnerCheckingStage extends AbstractIteratingStage<Element> {
         }
         
         // Check that this is a valid organization name
-        final MemberElement member = members.getMemberByName(orgName);
+        final MemberElement member = getMembers().getMemberByName(orgName);
         if (member == null) {
             addError(metadata, "unknown owner name: " + orgName);
             return;
@@ -183,8 +186,8 @@ public class EntityOwnerCheckingStage extends AbstractIteratingStage<Element> {
         super.doDestroy();
     }
 
-    /** {@inheritDoc} */
-    @Override protected void doInitialize() throws ComponentInitializationException {
+    @Override
+    protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();
 
         if (members == null) {

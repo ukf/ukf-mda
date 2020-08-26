@@ -15,6 +15,7 @@
 package uk.org.ukfederation.mda.dom;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
 
 import org.w3c.dom.Element;
 
@@ -27,6 +28,7 @@ import uk.org.ukfederation.mda.dom.impl.Base64WrappingVisitor;
  * Stage to wrap the assumed Base64 text text content of named elements
  * within a {@link net.shibboleth.metadata.dom.DOMElementItem}.
  */
+@ThreadSafe
 public class ElementBase64WrappingStage extends AbstractElementVisitingStage {
 
     /** Visitor to apply to each visited element. */

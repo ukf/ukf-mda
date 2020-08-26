@@ -19,6 +19,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.GuardedBy;
+import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
 import org.slf4j.Logger;
@@ -42,6 +44,7 @@ import uk.org.ukfederation.members.Members;
 /**
  * Stage to inject scope lists into IdP entities from the members.xml file.
  */
+@ThreadSafe
 public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
 
     /** Element matcher for the <code>Extensions</code> element. */
@@ -76,7 +79,7 @@ public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
     private final Logger log = LoggerFactory.getLogger(ScopeInjectionStage.class);
     
     /** Information about members of the UK federation. */
-    @NonnullAfterInit private Members members;
+    @GuardedBy("this") @NonnullAfterInit private Members members;
 
     /**
      * Get the members API object.
@@ -84,7 +87,7 @@ public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
      * @return the members API object
      */
     @NonnullAfterInit
-    public final Members getMembers() {
+    public final synchronized Members getMembers() {
         return members;
     }
     
@@ -93,7 +96,7 @@ public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
      * 
      * @param m the members API object to use
      */
-    public void setMembers(@Nonnull final Members m) {
+    public final synchronized void setMembers(@Nonnull final Members m) {
         members = m;
     }
     
@@ -124,7 +127,7 @@ public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
         }
         
         // Get the pushed scope list. If there are none, we're done.
-        final List<String> pushedScopes = members.scopesForEntity(entityID);
+        final List<String> pushedScopes = getMembers().scopesForEntity(entityID);
         if (pushedScopes == null) {
             return;
         }

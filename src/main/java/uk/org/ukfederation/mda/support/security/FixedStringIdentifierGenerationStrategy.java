@@ -15,6 +15,7 @@
 package uk.org.ukfederation.mda.support.security;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.security.IdentifierGenerationStrategy;
@@ -25,10 +26,11 @@ import net.shibboleth.utilities.java.support.security.IdentifierGenerationStrate
  * This can be used in circumstances where there is no requirement that identifiers be
  * different from each other.
  */
+@Immutable
 public class FixedStringIdentifierGenerationStrategy implements IdentifierGenerationStrategy {
 
     /** Fixed identifier to use for all invocations. */
-    private final String identifier;
+    @Nonnull private final String identifier;
 
     /**
      * Constructor.
@@ -40,11 +42,13 @@ public class FixedStringIdentifierGenerationStrategy implements IdentifierGenera
     }
 
     @Override
+    @Nonnull
     public String generateIdentifier() {
         return identifier;
     }
 
     @Override
+    @Nonnull
     public String generateIdentifier(final boolean xmlSafe) {
         return identifier;
     }

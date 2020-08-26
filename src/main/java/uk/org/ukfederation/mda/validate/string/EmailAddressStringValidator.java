@@ -17,6 +17,8 @@ package uk.org.ukfederation.mda.validate.string;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.metadata.validate.BaseValidator;
@@ -28,6 +30,7 @@ import net.shibboleth.metadata.validate.Validator;
  * This is a direct replacement for the <code>dodgyAddress</code> Xalan extension method
  * from the sdss-xalan-md project, and uses the same underlying implementation.
  */
+@ThreadSafe
 public class EmailAddressStringValidator extends BaseValidator implements Validator<String> {
 
     /**
@@ -63,7 +66,7 @@ public class EmailAddressStringValidator extends BaseValidator implements Valida
      * Note that the UK federation metadata convention includes an
      * explicit "mailto:" scheme.
      */
-    private static Pattern eMailPattern = Pattern.compile(
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
         "^mailto:[a-z0-9&'+\\-_]+(\\.[a-z0-9&+'\\-_]+)*\\@([0-9a-z\\-_]+\\.)+[a-z]+$",
         Pattern.CASE_INSENSITIVE
     );
@@ -75,7 +78,7 @@ public class EmailAddressStringValidator extends BaseValidator implements Valida
      * @return <code>true</code> if the e-mail address does not match the pattern
      */
     public static boolean dodgyAddress(final String eMail) {
-        final Matcher m = eMailPattern.matcher(eMail);
+        final Matcher m = EMAIL_PATTERN.matcher(eMail);
         return !m.matches();
     }
 

@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.security.auth.x500.X500Principal;
 
@@ -61,6 +62,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
      * should be refactored to use that once it is released.
      */
     // Checkstyle: CyclomaticComplexity OFF -- fix in upstream code
+    @ThreadSafe
     private static class X509Support {
 
         /** RFC 2459 Other Subject Alt Name type. */
@@ -204,7 +206,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
      * 
      * Default: <code>true</code>.
      */
-    private boolean error = true;
+    @GuardedBy("this") private boolean error = true;
     
     /**
      * Constructor.
@@ -219,7 +221,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
      * 
      * @param newValue whether an {@link net.shibboleth.metadata.ErrorStatus} should be added on failure
      */
-    public void setError(final boolean newValue) {
+    public final synchronized void setError(final boolean newValue) {
         error = newValue;
     }
     
@@ -228,7 +230,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
      * 
      * @return <code>true</code> if an {@link net.shibboleth.metadata.ErrorStatus} is being added on failure.
      */
-    public boolean isError() {
+    public final synchronized boolean isError() {
         return error;
     }
     
@@ -267,7 +269,7 @@ public class X509ConsistentNameValidator extends AbstractX509Validator {
                     b.append('"');
                 }
                 b.append('}');
-                addStatus(error, b.toString(), item, stageId);
+                addStatus(isError(), b.toString(), item, stageId);
             }
         }
     }

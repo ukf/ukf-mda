@@ -17,6 +17,8 @@ package uk.org.ukfederation.mda.dom.saml.ukfedlabel;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.GuardedBy;
+import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemIdentificationStrategy;
@@ -33,16 +35,33 @@ import uk.org.ukfederation.mda.UKItemIdentificationStrategy;
  *
  * @param <T> type of item being processed
  */
+@ThreadSafe
 public class FlowConstraintApplyingStage<T> extends AbstractFilteringStage<T> {
     
-    /** Item identification strategy to use if we need to throw errors. */
-    private final ItemIdentificationStrategy<T> idStrategy = new UKItemIdentificationStrategy<>();
+    /**
+     * Item identification strategy to use if we need to throw errors.
+     *
+     * <p>
+     * In the current implementation, always a {@link UKItemIdentificationStrategy}, but
+     * in principle we might extend this if we upstream this component.
+     * </p>
+     */
+    @GuardedBy("this") private final ItemIdentificationStrategy<T> idStrategy = new UKItemIdentificationStrategy<>();
     
     /**
      * The name of the flow this stage is controlling.
      */
-    @NonnullAfterInit
+    @GuardedBy("this") @NonnullAfterInit
     private String flowName;
+
+    /**
+     * Returns the designated item identification strategy.
+     *
+     * @return the item identification strategy
+     */
+    @Nonnull private final synchronized ItemIdentificationStrategy<T> getIdStrategy() {
+        return idStrategy;
+    }
 
     /**
      * Get the name of the flow this stage is controlling.
@@ -50,7 +69,7 @@ public class FlowConstraintApplyingStage<T> extends AbstractFilteringStage<T> {
      * @return name of the flow
      */
     @NonnullAfterInit
-    public String getFlowName() {
+    public final synchronized String getFlowName() {
         return flowName;
     }
 
@@ -59,7 +78,7 @@ public class FlowConstraintApplyingStage<T> extends AbstractFilteringStage<T> {
      *
      * @param newFlowName name of the flow to control
      */
-    public void setFlowName(@Nonnull final String newFlowName) {
+    public final synchronized void setFlowName(@Nonnull final String newFlowName) {
         flowName = newFlowName;
     }
 
@@ -70,14 +89,14 @@ public class FlowConstraintApplyingStage<T> extends AbstractFilteringStage<T> {
         
         // Can't have both enables and disables
         if (!enables.isEmpty() && !disables.isEmpty()) {
-            throw new StageProcessingException("item " + idStrategy.getItemIdentifier(item)
+            throw new StageProcessingException("item " + getIdStrategy().getItemIdentifier(item)
                 + " has both enables and disables");
         }
         
         // Process enables, if present
         if (!enables.isEmpty()) {
             for (final EnableFlow enable : enables) {
-                if (flowName.equals(enable.getFlowName())) {
+                if (getFlowName().equals(enable.getFlowName())) {
                     return true;
                 }
             }
@@ -88,7 +107,7 @@ public class FlowConstraintApplyingStage<T> extends AbstractFilteringStage<T> {
         // Process disables, if present
         if (!disables.isEmpty()) {
             for (final DisableFlow disable : disables) {
-                if (flowName.equals(disable.getFlowName())) {
+                if (getFlowName().equals(disable.getFlowName())) {
                     return false;
                 }
             }

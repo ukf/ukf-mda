@@ -74,7 +74,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
      * @return the {@link ItemIdentificationStrategy} value
      */
     @Nonnull
-    public ItemIdentificationStrategy<Element> getIdentificationStrategy() {
+    public final synchronized ItemIdentificationStrategy<Element> getIdentificationStrategy() {
         return identificationStrategy;
     }
     
@@ -83,7 +83,8 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
      * 
      * @param strategy the {@link ItemIdentificationStrategy} to use
      */
-    public void setIdentificationStrategy(@Nonnull final ItemIdentificationStrategy<Element> strategy) {
+    public final synchronized void setIdentificationStrategy(
+            @Nonnull final ItemIdentificationStrategy<Element> strategy) {
         Constraint.isNotNull(strategy, "identification strategy may not be null");
         identificationStrategy = strategy;
     }
@@ -222,8 +223,9 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
                        // all is well
                        ids.put(key, item);
                    } else if (that != item) {
-                       final String thisId = identificationStrategy.getItemIdentifier(item);
-                       final String thatId = identificationStrategy.getItemIdentifier(that);
+                       final var strategy = getIdentificationStrategy();
+                       final String thisId = strategy.getItemIdentifier(item);
+                       final String thatId = strategy.getItemIdentifier(that);
                        
                        metadata.put(makeError(getId(), name, thisId, thatId));
                        markedItems.add(item);
@@ -240,10 +242,9 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
         }
     }
     
-    /** {@inheritDoc} */
     @Override
     protected void doDestroy() {
-        super.doDestroy();
         identificationStrategy = null;
+        super.doDestroy();
     }
 }

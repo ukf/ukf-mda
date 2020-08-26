@@ -15,22 +15,19 @@
 package uk.org.ukfederation.mda;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
+
+import com.google.common.base.Objects;
 
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.utilities.java.support.annotation.constraint.NotEmpty;
 import net.shibboleth.utilities.java.support.logic.Constraint;
 import net.shibboleth.utilities.java.support.primitive.StringSupport;
 
-import com.google.common.base.Objects;
-
 /** Carries the fragment ID for an item of UK federation registered metadata. */
-@ThreadSafe
+@Immutable
 public class UKId implements ItemMetadata, Comparable<UKId> {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = 1755199108111044022L;
-    
     /** UK federation fragment ID for the Item. */
     private String id;
 

@@ -1,8 +1,0 @@
-<hello>
-   <line>hello, $name world ${entities.size()}</line>
-#if ($entities.size() == 10)
-   <line>conditional true</line>
-#else
-   <line>conditional else</line>
-#end
-</hello>

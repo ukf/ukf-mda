@@ -15,17 +15,16 @@
 package uk.org.ukfederation.mda.dom.saml.ukfedlabel;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import net.shibboleth.metadata.ItemMetadata;
 
 /**
  * Abstract parent class for all flow constraints.
  */
+@Immutable
 public abstract class FlowConstraint implements ItemMetadata {
     
-    /** serialVersionUID for this class. */
-    private static final long serialVersionUID = -5689614749346407786L;
-
     /** Name of the flow this constraint applies to. */
     @Nonnull private final String flowName;
     

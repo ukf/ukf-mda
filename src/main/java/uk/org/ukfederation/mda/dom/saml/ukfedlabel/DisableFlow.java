@@ -15,15 +15,14 @@
 package uk.org.ukfederation.mda.dom.saml.ukfedlabel;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * A flow constraint indicating that the item to which this is attached
  * should be discarded by the named flow.
  */
+@Immutable
 public class DisableFlow extends FlowConstraint {
-
-    /** serialVersionUID for this class. */
-    private static final long serialVersionUID = 1123133805908649897L;
 
     /**
      * Constructor.

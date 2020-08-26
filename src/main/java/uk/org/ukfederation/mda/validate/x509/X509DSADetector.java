@@ -18,6 +18,7 @@ import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 
 import net.shibboleth.metadata.Item;
@@ -50,21 +51,21 @@ public class X509DSADetector extends BaseValidator implements Validator<X509Cert
      * {@link net.shibboleth.metadata.validate.Validator.Action} to return when a DSA key is detected. Default:
      * {@link net.shibboleth.metadata.validate.Validator.Action#DONE}.
      */
-    private Action action = Action.DONE;
+    @GuardedBy("this") @Nonnull private Action action = Action.DONE;
 
     /**
      * Whether an {@link net.shibboleth.metadata.ErrorStatus} should be added on failure.
      * 
      * Default: <code>true</code>.
      */
-    private boolean error = true;
+    @GuardedBy("this") private boolean error = true;
 
     /**
      * Returns the {@link net.shibboleth.metadata.validate.Validator.Action} to be returned if a DSA key is detected.
      *
      * @return the {@link net.shibboleth.metadata.validate.Validator.Action} to be returned
      */
-    public Action getAction() {
+    public final synchronized Action getAction() {
         return action;
     }
 
@@ -73,7 +74,7 @@ public class X509DSADetector extends BaseValidator implements Validator<X509Cert
      *
      * @param newAction the {@link net.shibboleth.metadata.validate.Validator.Action} to be returned
      */
-    public void setAction(@Nonnull final Action newAction) {
+    public final synchronized void setAction(@Nonnull final Action newAction) {
         ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
         ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
 
@@ -85,7 +86,7 @@ public class X509DSADetector extends BaseValidator implements Validator<X509Cert
      * 
      * @param newValue whether an {@link net.shibboleth.metadata.ErrorStatus} should be added on failure
      */
-    public void setError(final boolean newValue) {
+    public final synchronized void setError(final boolean newValue) {
         ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
         ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
 
@@ -97,7 +98,7 @@ public class X509DSADetector extends BaseValidator implements Validator<X509Cert
      * 
      * @return <code>true</code> if an {@link net.shibboleth.metadata.ErrorStatus} is being added on failure.
      */
-    public boolean isError() {
+    public final synchronized boolean isError() {
         return error;
     }
 
@@ -106,8 +107,8 @@ public class X509DSADetector extends BaseValidator implements Validator<X509Cert
             @Nonnull final String stageId) {
         final PublicKey key = cert.getPublicKey();
         if ("DSA".equals(key.getAlgorithm())) {
-            addStatus(error, "certificate contains a DSA key", item, stageId);
-            return action;
+            addStatus(isError(), "certificate contains a DSA key", item, stageId);
+            return getAction();
         } else {
             return Action.CONTINUE;
         }

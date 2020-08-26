@@ -20,7 +20,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
@@ -43,7 +43,7 @@ import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElemen
  * for {@link ItemId}.  Items with neither {@link UKId} or {@link ItemId} come
  * last in the ordering.
  */
-@ThreadSafe
+@Immutable
 public class UKEntityOrderingStrategy implements ItemOrderingStrategy<Element> {
     
     /**

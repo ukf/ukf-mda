@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 
 import org.w3c.dom.Element;
@@ -47,9 +48,8 @@ public class EntityDescriptorUKIdPopulationStage extends AbstractStage<Element> 
     /**
      * Compiled regular expression.
      */
-    private Pattern pattern;
+    @GuardedBy("this") private Pattern pattern;
 
-    /** {@inheritDoc} */
     @Override
     protected void doExecute(@Nonnull @NonnullElements final List<Item<Element>> items)
             throws StageProcessingException {
@@ -83,7 +83,6 @@ public class EntityDescriptorUKIdPopulationStage extends AbstractStage<Element> 
         }
     }
     
-    /** {@inheritDoc} */
     @Override
     protected void doDestroy() {
         pattern = null;
@@ -91,7 +90,6 @@ public class EntityDescriptorUKIdPopulationStage extends AbstractStage<Element> 
         super.doDestroy();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void doInitialize() throws ComponentInitializationException {
         super.doInitialize();

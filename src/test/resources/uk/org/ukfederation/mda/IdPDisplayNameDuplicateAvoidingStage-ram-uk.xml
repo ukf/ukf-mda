@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" ID="uk000674" entityID="https://idp.ram.ac.uk/shibboleth">
+    
+    <Extensions>
+        <mdrpi:RegistrationInfo xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" registrationAuthority="http://ukfederation.org.uk"/>
+        <ukfedlabel:UKFederationMember xmlns:ukfedlabel="http://ukfederation.org.uk/2006/11/label"/>
+        <ukfedlabel:AccountableUsers xmlns:ukfedlabel="http://ukfederation.org.uk/2006/11/label"/>
+        <shibmd:Scope xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" regexp="false">ram.ac.uk</shibmd:Scope>
+    </Extensions>
+    <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0">
+        <Extensions>
+            <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+                <mdui:DisplayName xml:lang="en">Royal Academy of Music</mdui:DisplayName>
+                <mdui:Description xml:lang="en">Royal Academy of Music</mdui:Description>
+            </mdui:UIInfo>
+            <shibmd:Scope xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" regexp="false">ram.ac.uk</shibmd:Scope>
+        </Extensions>
+        <KeyDescriptor>
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>
+                        MIIDvjCCAqagAwIBAgIEVOxCIjANBgkqhkiG9w0BAQsFADCBoDEoMCYGCSqGSIb3
+                        DQEJARYZYXRoZW5zaGVscEBlZHVzZXJ2Lm9yZy51azELMAkGA1UEBhMCR0IxETAP
+                        BgNVBAgMCFNvbWVyc2V0MQ0wCwYDVQQHDARCYXRoMRAwDgYDVQQKDAdFZHVzZXJ2
+                        MRMwEQYDVQQLDApPcGVuQXRoZW5zMR4wHAYDVQQDDBVnYXRld2F5LmF0aGVuc2Ft
+                        cy5uZXQwHhcNMTUwMjI0MDkyMDA2WhcNMjUwMjI0MDkyMDA2WjCBoDEoMCYGCSqG
+                        SIb3DQEJARYZYXRoZW5zaGVscEBlZHVzZXJ2Lm9yZy51azELMAkGA1UEBhMCR0Ix
+                        ETAPBgNVBAgMCFNvbWVyc2V0MQ0wCwYDVQQHDARCYXRoMRAwDgYDVQQKDAdFZHVz
+                        ZXJ2MRMwEQYDVQQLDApPcGVuQXRoZW5zMR4wHAYDVQQDDBVnYXRld2F5LmF0aGVu
+                        c2Ftcy5uZXQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCandpa4o0N
+                        jtw1DqbrrNTfOVe1PqyXIIVmDrJ6VUR/mokXXu+m5Gm+1f+3lyN5IA2YMn9Z8Yo3
+                        7JQjIHs+xVS3q4nT1ewS7S3en1pdXKsH1WnUnVWUmpl9WJZrUwi5i8X80LNyr7Pm
+                        udhuKNEATGUXkA/xWCkk2d8jf91hy7Qu+HA8LOKtdbbNigErh2IY/YuNWUVUqgGb
+                        MH5BGr7ZEhPrz+Vwcf9lhPW+tKpKpZEzJfQiq8EoPaeMXEpKWBEErm67gkWFCA5V
+                        hfcJLqFjQEC3pWOxt5rZVS8gl/Z33VSJZVzY5jWcQzmGaLXPHXyiKPmixl6+DjGl
+                        UM0ylNF7GvtDAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAFhmhujLZueiJ6F7mQCp
+                        fB0Hj4Y8FyFUUc8NMAt5Set7H4DKSSl4shcqisZBa5yTdyenYwkmBszvCWs6Yeep
+                        +zJmCR62cb/f1M32oMzLm02OlznWMkE8/IajGmdxTnB6Z/XcdMMIiCeok4kqe5KM
+                        d5oRAyNskHYZ+8kzhs2zTveR+rqCtYxa/AYpwf7n0VQR9clBSNCIT4BCRi10aPE5
+                        31VIxl4ljY3CwNoZ4lQTU/0aj8O4j68V2neiQb8lewAii0b2xoyOGYP4okd7T2tl
+                        4gl2noVbCvYNjd6GYze/w4lgwiemkby7wu5sN1lEudgKDV+H54wU29ZIyDEFM6DD
+                        NE4=
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.openathens.net/saml/2/sso/ram.ac.uk/c/ukfed"/>
+        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://login.openathens.net/saml/1/sso/ram.ac.uk/c/ukfed"/>
+    </IDPSSODescriptor>
+    <Organization>
+        <OrganizationName xml:lang="en">Eduserv</OrganizationName>
+        <OrganizationDisplayName xml:lang="en">Royal Academy of Music</OrganizationDisplayName>
+        <OrganizationURL xml:lang="en">http://www.ram.ac.uk/</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="support">
+        <GivenName>Athens Helpdesk</GivenName>
+        <EmailAddress>mailto:athenshelp@eduserv.org.uk</EmailAddress>
+    </ContactPerson>
+    <ContactPerson contactType="technical">
+        <GivenName>Athens Helpdesk</GivenName>
+        <EmailAddress>mailto:athenshelp@eduserv.org.uk</EmailAddress>
+    </ContactPerson>
+    
+</EntityDescriptor>

@@ -10,6 +10,7 @@
 * Added `EmailAddressStringValidator`.
 * Added `FlowConstraint`, `EnableFlow`, `DisableFlow`, `EntityDescriptorFlowConstraintPopulationStage`
   and `FlowConstraintApplyingStage`.
+* Added `IdPDisplayNameDuplicateAvoidingStage`.
 
 ## Version 0.9.7 ##
 

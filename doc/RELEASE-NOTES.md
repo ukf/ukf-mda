@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.11 ##
+
+* Added `IdPDisplayNameDuplicateAvoidingStage`.
+
 ## Version 0.9.10 ##
 
 * Added `DiscoFeedCollectionSerializer`.

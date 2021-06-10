@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+    entityID="http://adfs.musikkons.dk/adfs/services/trust">
+    <Extensions>
+        <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+            <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                Name="http://macedir.org/entity-category-support"
+                NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml:AttributeValue>http://refeds.org/category/research-and-scholarship</saml:AttributeValue>
+            </saml:Attribute>
+        </mdattr:EntityAttributes>
+        <mdrpi:RegistrationInfo xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi"
+            registrationAuthority="https://www.wayf.dk" registrationInstant="2016-10-13T13:52:38Z">
+            <mdrpi:RegistrationPolicy xml:lang="en"
+                >https://wayf.dk/sites/default/files/uploads/PDF/MDRPS.pdf</mdrpi:RegistrationPolicy>
+        </mdrpi:RegistrationInfo>
+    </Extensions>
+    <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <Extensions>
+            <shibmd:Scope xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" regexp="false"
+                >musikkons.dk</shibmd:Scope>
+            <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+                <mdui:DisplayName xml:lang="da">Det Jyske Musikkonservatorium</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="en">Royal Academy of Music</mdui:DisplayName>
+            </mdui:UIInfo>
+            <mdui:DiscoHints xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+                <mdui:DomainHint>musikkons.dk</mdui:DomainHint>
+            </mdui:DiscoHints>
+        </Extensions>
+        <KeyDescriptor>
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>
+                        MIICnjCCAYYCAQcwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UEAwwKQklSSzAwMTMw
+                        MjAeFw0xNTAxMDEwMDAwMDBaFw0yNTEyMzEyMzU5NTlaMBUxEzARBgNVBAMMCkJJ
+                        UkswMDEzMDIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDngretRPjv
+                        dPY63lVFdbRR0HvZt4etdlt/Dmrln7VVa8B9AiaWAhRgDFAXAxZD4KHAPl6Qdqmn
+                        Rfv3ZxKyA201YMasnsAdEzlpjKKjJJ65JktMdAIkRyAbZMyFhWpvhMBrRRgOR8N7
+                        Ixj6A14OHBk+99bqApLbB+RC7fnhQ10gTlIMcis2X/DU10Wy5LCHT8TYGdOHuSWs
+                        BaNXJ2G01WEHJXjKjmGN6yA18QPAU5uGWAjZMSztL+2Cu/pnxeU9UOQuxV4r6ECP
+                        gNpov6hpcC7fqA/NY3WJIv7+wKV2YtLHXEaLwPR+MhQr+LU+X/z5bvGCfGl0hqSf
+                        IAEz7ZGPbpfXAgMBAAEwDQYJKoZIhvcNAQELBQADggEBACgDvx4Gitd24cK6hbAn
+                        QL4Yqxd4nh4MyXqSjGa1EuBAeEt2c6XxtFjhKw5UrExqA016EVoQOKTFWIt3Lyvg
+                        Sw9mDiU9oIveOGAStP/XwEb2ERNDdxA3r50Qc3qFPFzi9tPtKNkFBKzKKdvIKti8
+                        gH5F8OhE7Zj5CoFijHE7ETXiYtcels2YYYESb2c0SgPUEVM2LbxxrnNaWrOOpkY5
+                        xftqKegU0G1dm2/94yivxoVBtDL53ZPU6zb0M6YR3CH/9ndKZyI3/HSOV1vqN291
+                        4AwOolYLzOixYrhnUud/Z9WCfmWJ5Ca5wBk+TxHGMY0PQN6TgE4lghP3/5Zgl8pO nnQ=
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            Location="https://birk.wayf.dk/SLO/birk.php/adfs.musikkons.dk/adfs/ls/"/>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            Location="https://birk.wayf.dk/birk.php/adfs.musikkons.dk/adfs/ls/"/>
+    </IDPSSODescriptor>
+    <Organization>
+        <OrganizationName xml:lang="da">Det Jyske Musikkonservatorium</OrganizationName>
+        <OrganizationName xml:lang="en">Royal Academy of Music Aarhus/Aalborg
+            (RAMA)</OrganizationName>
+        <OrganizationDisplayName xml:lang="da">Det Jyske
+            Musikkonservatorium</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="en">Royal Academy of Music</OrganizationDisplayName>
+        <OrganizationURL xml:lang="da">http://www.musikkons.dk</OrganizationURL>
+        <OrganizationURL xml:lang="en">http://www.musikkons.dk</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="technical">
+        <GivenName>WAYF</GivenName>
+        <SurName>Operations</SurName>
+        <EmailAddress>mailto:operations@wayf.dk</EmailAddress>
+    </ContactPerson>
+</EntityDescriptor>

@@ -20,6 +20,7 @@ package uk.org.ukfederation.mda;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.security.Security;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -29,7 +30,9 @@ import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
+import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthorityPopulationStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
 import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import net.shibboleth.utilities.java.support.logic.Constraint;
@@ -123,6 +126,33 @@ public abstract class BaseDOMTest extends BaseTest {
     }
 
     /**
+     * Reads in a series of XML files and returns them as a list of new {@link DOMElementItem}s.
+     *
+     * <p>
+     * After composing the list of items, a series of stages are run on the collection
+     * to extract entity identifiers and registration authorities for later use.
+     * </p>
+     *
+     * @param paths list of file paths
+     * @return list of {@link Item}s
+     * @throws XMLParserException if one of the files does not exist or there is a problem parsing it
+     * @throws StageProcessingException if one of the post-processing steps fails
+     * @throws ComponentInitializationException if one of the post-processing stages can't be initialized
+     */
+    @Nonnull @NonnullElements
+    protected List<Item<Element>> readDOMItems(@Nonnull @NonnullElements final String[] paths)
+            throws XMLParserException, StageProcessingException, ComponentInitializationException {
+        final List<Item<Element>> items = new ArrayList<>();
+        for (final String path : paths) {
+            items.add(readDOMItem(path));
+        }
+        populateIdentifiers(items);
+        populateUKIdentifiers(items);
+        populateRegistrationAuthorities(items);
+        return items;
+    }
+
+    /**
      * Checks whether two nodes are equal based on {@link Node#isEqualNode(Node)}. Both nodes are serialized, re-parsed,
      * and then compared for equality. This forces any changes made to the document that haven't yet been represented in
      * the DOM (e.g., declaration of used namespaces) to be flushed to the DOM.
@@ -161,6 +191,7 @@ public abstract class BaseDOMTest extends BaseTest {
         stage1.setId("setid");
         stage1.initialize();
         stage1.execute(items);
+        stage1.destroy();
     }
 
     protected void populateUKIdentifiers(List<Item<Element>> items) throws ComponentInitializationException, StageProcessingException {
@@ -168,6 +199,15 @@ public abstract class BaseDOMTest extends BaseTest {
         stage2.setId("ukid");
         stage2.initialize();
         stage2.execute(items);
+        stage2.destroy();
+    }
+
+    protected void populateRegistrationAuthorities(List<Item<Element>> items) throws ComponentInitializationException, StageProcessingException {
+        final RegistrationAuthorityPopulationStage stage = new RegistrationAuthorityPopulationStage();
+        stage.setId("regauth");
+        stage.initialize();
+        stage.execute(items);
+        stage.destroy();
     }
 
     protected void displayErrors(final Item<Element> item) {

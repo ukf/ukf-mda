@@ -223,7 +223,7 @@ public class IdPDisplayNameDuplicateAvoidingStage extends BaseStage<Element> {
      * 
      * @param entity the {@link Element} representing the entity's <code>md:EntityDescriptor</code>
      * @param qname the {@link QName} being searched for
-     * @return a {@list} of {@link Element}s with the requested name
+     * @return a {@link List} of {@link Element}s with the requested name
      */
     @Nonnull @NonnullElements
     private List<Element> extractElements(@Nonnull final Element entity,

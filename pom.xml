@@ -77,7 +77,7 @@
         </dependency>
         <dependency>
             <groupId>net.shibboleth.metadata</groupId>
-            <artifactId>aggregator-pipeline</artifactId>
+            <artifactId>mda-framework</artifactId>
         </dependency>
         <dependency>
             <groupId>net.shibboleth.utilities</groupId>
@@ -129,7 +129,7 @@
 
         <dependency>
             <groupId>net.shibboleth.metadata</groupId>
-            <artifactId>aggregator-pipeline</artifactId>
+            <artifactId>mda-framework</artifactId>
             <version>${mda.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
@@ -167,7 +167,7 @@
         <dependencies>
             <dependency>
                 <groupId>net.shibboleth.metadata</groupId>
-                <artifactId>aggregator-bom</artifactId>
+                <artifactId>mda-bom</artifactId>
                 <version>${mda.version}</version>
                 <type>pom</type>
                 <scope>import</scope>

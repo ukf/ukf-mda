@@ -1,5 +1,9 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.9.12 ##
+
+* Added `AssuranceCertificationMatcher` back-ported from upstream MDA 0.10
+
 ## Version 0.9.11 ##
 
 * Added `IdPDisplayNameDuplicateAvoidingStage`.

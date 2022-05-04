@@ -86,6 +86,9 @@
 
     <bean id="ukf.EntityAttributeAddingStage" abstract="true" parent="ukf.stage_parent"
         class="uk.org.ukfederation.mda.dom.saml.mdattr.EntityAttributeAddingStage"/>
+        
+    <bean id="ukf.AssuranceCertificationMatcher" abstract="true" parent="ukf.stage_parent"
+        class="uk.org.ukfederation.mda.dom.saml.mdattr.AssuranceCertificationMatcher"/>
 
     <!--
         uk.org.ukfederation.mda.dom.saml.ukfedlabel

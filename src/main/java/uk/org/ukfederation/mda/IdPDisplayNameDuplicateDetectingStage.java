@@ -38,9 +38,9 @@ import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.AbstractStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
-import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
-import net.shibboleth.utilities.java.support.logic.Constraint;
+import net.shibboleth.shared.annotation.constraint.NonnullElements;
+import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
+import net.shibboleth.shared.logic.Constraint;
 import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
 
 /**

@@ -45,11 +45,11 @@ import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthority;
 import net.shibboleth.metadata.dom.saml.mdui.MDUISupport;
 import net.shibboleth.metadata.pipeline.AbstractStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
-import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
-import net.shibboleth.utilities.java.support.component.ComponentSupport;
-import net.shibboleth.utilities.java.support.logic.Constraint;
-import net.shibboleth.utilities.java.support.xml.ElementSupport;
+import net.shibboleth.shared.annotation.constraint.NonnullElements;
+import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
+import net.shibboleth.shared.component.ComponentSupport;
+import net.shibboleth.shared.logic.Constraint;
+import net.shibboleth.shared.xml.ElementSupport;
 
 /**
  * A stage which examines the discovery names used by each of a collection of entities, and deconflicts

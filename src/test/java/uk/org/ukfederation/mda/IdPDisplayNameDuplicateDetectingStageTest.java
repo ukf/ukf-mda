@@ -11,9 +11,9 @@ import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.DOMElementItem;
-import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
-import net.shibboleth.utilities.java.support.xml.XMLParserException;
+import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
+import net.shibboleth.shared.component.ComponentInitializationException;
+import net.shibboleth.shared.xml.XMLParserException;
 
 public class IdPDisplayNameDuplicateDetectingStageTest extends BaseDOMTest {
 

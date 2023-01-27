@@ -17,8 +17,8 @@ package uk.org.ukfederation.mda.support.security;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import net.shibboleth.utilities.java.support.logic.Constraint;
-import net.shibboleth.utilities.java.support.security.IdentifierGenerationStrategy;
+import net.shibboleth.shared.logic.Constraint;
+import net.shibboleth.shared.security.IdentifierGenerationStrategy;
 
 /**
  * Identifier generation strategy using a fixed identifier string.

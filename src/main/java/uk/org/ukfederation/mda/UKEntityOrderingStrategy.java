@@ -29,7 +29,7 @@ import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemId;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.ItemOrderingStrategy;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.shared.annotation.constraint.NonnullElements;
 
 /**
  * Implements an ordering strategy for UK federation aggregates.

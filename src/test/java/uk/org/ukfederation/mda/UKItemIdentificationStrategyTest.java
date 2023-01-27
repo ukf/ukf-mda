@@ -16,8 +16,8 @@ import net.shibboleth.metadata.MockItem;
 import net.shibboleth.metadata.dom.DOMElementItem;
 import net.shibboleth.metadata.dom.saml.EntityDescriptorItemIdPopulationStage;
 import net.shibboleth.metadata.dom.saml.mdrpi.RegistrationAuthorityPopulationStage;
-import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
-import net.shibboleth.utilities.java.support.xml.XMLParserException;
+import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
+import net.shibboleth.shared.xml.XMLParserException;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

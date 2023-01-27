@@ -24,7 +24,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.validate.BaseValidator;
 import net.shibboleth.metadata.validate.Validator;
-import net.shibboleth.utilities.java.support.component.ComponentSupport;
+import net.shibboleth.shared.component.ComponentSupport;
 
 /**
  * Validator class to check that X.509 certificates do not contain DSA public keys.

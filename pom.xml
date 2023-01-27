@@ -24,25 +24,40 @@
 
     <properties>
         <mda.version>0.10.0-SNAPSHOT</mda.version>
-        <ukf-members.version>1.5.0</ukf-members.version>
+        <ukf-members.version>2.0.0-SNAPSHOT</ukf-members.version>
+        <!--
+            Override the JAXB version we get from the parent POM,
+            so that we are still working in the javax namespace
+            rather than under jakarta.
+        -->
         <jakarta.jaxb-api.version>2.3.3</jakarta.jaxb-api.version>
-        <jakarta.jaxb-impl.version>2.3.6</jakarta.jaxb-impl.version>
+        <jakarta.jaxb-impl.version>2.3.7</jakarta.jaxb-impl.version>
     </properties>
 
     <repositories>
         <repository>
-            <id>shib-release</id>
-            <url>https://build.shibboleth.net/nexus/content/groups/public</url>
+            <id>shibboleth-releases</id>
+            <name>Shibboleth Releases Repository</name>
+            <url>https://build.shibboleth.net/maven/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
-            <id>shib-snapshot</id>
-            <url>https://build.shibboleth.net/nexus/content/repositories/snapshots</url>
+            <id>shibboleth-snapshots</id>
+            <name>Shibboleth Snapshots Repository</name>
+            <url>https://build.shibboleth.net/maven/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
         </repository>
         <repository>
             <id>ukf-release</id>
@@ -82,8 +97,12 @@
             <artifactId>mda-framework</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.shibboleth.utilities</groupId>
-            <artifactId>java-support</artifactId>
+            <groupId>net.shibboleth</groupId>
+            <artifactId>shib-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.shibboleth</groupId>
+            <artifactId>shib-support</artifactId>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -96,16 +115,6 @@
         <dependency>
             <groupId>${slf4j.groupId}</groupId>
             <artifactId>slf4j-api</artifactId>
-        </dependency>
-
-        <!--
-            One of our dependencies (probably ukf-members) references
-            javax.xml.bind.annotation.XmlAccessType.FIELD. It's not really
-            a compile-time dependency of ours (we do need it for tests anyway).
-        -->
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
 
         <!-- Provided Dependencies -->

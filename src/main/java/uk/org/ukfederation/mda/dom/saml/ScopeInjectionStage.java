@@ -35,10 +35,10 @@ import net.shibboleth.metadata.dom.ElementMatcher;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.AbstractIteratingStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterInit;
-import net.shibboleth.utilities.java.support.collection.ClassToInstanceMultiMap;
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
-import net.shibboleth.utilities.java.support.xml.AttributeSupport;
+import net.shibboleth.shared.annotation.constraint.NonnullAfterInit;
+import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
+import net.shibboleth.shared.component.ComponentInitializationException;
+import net.shibboleth.shared.xml.AttributeSupport;
 import uk.org.ukfederation.members.Members;
 
 /**

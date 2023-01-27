@@ -25,9 +25,9 @@ import net.shibboleth.metadata.ItemIdentificationStrategy;
 import net.shibboleth.metadata.pipeline.AbstractFilteringStage;
 import net.shibboleth.metadata.pipeline.Stage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullAfterInit;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import net.shibboleth.shared.annotation.constraint.NonnullAfterInit;
+import net.shibboleth.shared.annotation.constraint.NonnullElements;
+import net.shibboleth.shared.component.ComponentInitializationException;
 import uk.org.ukfederation.mda.UKItemIdentificationStrategy;
 
 /**

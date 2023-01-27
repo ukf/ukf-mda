@@ -18,7 +18,7 @@ import net.shibboleth.metadata.InfoStatus;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.dom.saml.mdui.MDUISupport;
-import net.shibboleth.utilities.java.support.annotation.constraint.NonnullElements;
+import net.shibboleth.shared.annotation.constraint.NonnullElements;
 
 public class IdPDisplayNameDuplicateAvoidingStageTest extends BaseDOMTest {
 

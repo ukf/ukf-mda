@@ -15,8 +15,6 @@
 package uk.org.ukfederation.mda.dom.saml;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.GuardedBy;
@@ -32,6 +30,8 @@ import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.Container;
 import net.shibboleth.metadata.dom.ElementMaker;
 import net.shibboleth.metadata.dom.ElementMatcher;
+import net.shibboleth.metadata.dom.SimpleElementMaker;
+import net.shibboleth.metadata.dom.SimpleElementMatcher;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
 import net.shibboleth.metadata.pipeline.AbstractIteratingStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
@@ -48,8 +48,8 @@ import uk.org.ukfederation.members.Members;
 public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
 
     /** Element matcher for the <code>Extensions</code> element. */
-    private static final Predicate<Element> EXTENSIONS_MATCHER =
-        new ElementMatcher(SAMLMetadataSupport.EXTENSIONS_NAME);
+    private static final ElementMatcher EXTENSIONS_MATCHER =
+        new SimpleElementMatcher(SAMLMetadataSupport.EXTENSIONS_NAME);
     
     /**
      * Element maker for the <code>Extensions</code> element.
@@ -57,23 +57,23 @@ public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
      * Following existing UK federation conventions, we construct a prefixless
      * <code>Extensions</code> element.
      */
-    private static final Function<Container, Element> EXTENSIONS_MAKER =
-        new ElementMaker(new QName(SAMLMetadataSupport.MD_NS, SAMLMetadataSupport.EXTENSIONS_NAME.getLocalPart()));
+    private static final ElementMaker EXTENSIONS_MAKER =
+        new SimpleElementMaker(new QName(SAMLMetadataSupport.MD_NS, SAMLMetadataSupport.EXTENSIONS_NAME.getLocalPart()));
     
     /** QName of the IDPSSODescriptor element. */
     private static final QName IDP_SSO_DESCRIPTOR_NAME = new QName(SAMLMetadataSupport.MD_NS, "IDPSSODescriptor");
 
     /** Element matcher for the IDPSSODescriptor element. */
-    private static final Predicate<Element> IDP_SSO_DESCRIPTOR_MATCHER =
-        new ElementMatcher(IDP_SSO_DESCRIPTOR_NAME);
+    private static final ElementMatcher IDP_SSO_DESCRIPTOR_MATCHER =
+        new SimpleElementMatcher(IDP_SSO_DESCRIPTOR_NAME);
     
     /** QName of the AttributeAuthorityDescriptor element. */
     private static final QName ATTRIBUTE_AUTHORITY_DESCRIPTOR_NAME = new QName(SAMLMetadataSupport.MD_NS,
             "AttributeAuthorityDescriptor");
 
     /** Element matcher for the AttributeAuthorityDescriptor element. */
-    private static final Predicate<Element> ATTRIBUTE_AUTHORITY_DESCRIPTOR_MATCHER =
-        new ElementMatcher(ATTRIBUTE_AUTHORITY_DESCRIPTOR_NAME);
+    private static final ElementMatcher ATTRIBUTE_AUTHORITY_DESCRIPTOR_MATCHER =
+        new SimpleElementMatcher(ATTRIBUTE_AUTHORITY_DESCRIPTOR_NAME);
 
     /** Class logger. */
     private final Logger log = LoggerFactory.getLogger(ScopeInjectionStage.class);
@@ -153,7 +153,7 @@ public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
      * @param roleMatcher matcher for the role descriptor element
      */
     private void addPushedScopesToRole(@Nonnull final Container entity, @Nonnull final List<String> scopes,
-            @Nonnull final Predicate<Element> roleMatcher) {
+            @Nonnull final ElementMatcher roleMatcher) {
         final Container role = entity.findChild(roleMatcher);
         if (role == null) {
             return;
@@ -173,7 +173,7 @@ public class ScopeInjectionStage extends AbstractIteratingStage<Element> {
         final Container extensions =
                 descriptor.locateChild(EXTENSIONS_MATCHER, EXTENSIONS_MAKER, Container.FIRST_CHILD);
         for (final String scope : scopes) {
-            final Element newScope = ShibbolethMetadataSupport.SCOPE_MAKER.apply(extensions);
+            final Element newScope = ShibbolethMetadataSupport.SCOPE_MAKER.make(extensions);
             newScope.setTextContent(scope);
             AttributeSupport.appendAttribute(newScope, ShibbolethMetadataSupport.REGEXP_ATTRIB_NAME, "false");
             extensions.addChild(newScope, Container.LAST_CHILD);

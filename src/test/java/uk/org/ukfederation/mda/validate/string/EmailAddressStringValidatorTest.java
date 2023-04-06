@@ -8,8 +8,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import net.shibboleth.metadata.ErrorStatus;
-import net.shibboleth.metadata.MockItem;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.metadata.testing.MockItem;
 import net.shibboleth.metadata.validate.Validator;
 import net.shibboleth.metadata.validate.Validator.Action;
 import net.shibboleth.shared.component.ComponentInitializationException;

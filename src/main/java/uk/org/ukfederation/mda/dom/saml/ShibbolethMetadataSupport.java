@@ -14,15 +14,11 @@
 
 package uk.org.ukfederation.mda.dom.saml;
 
-import java.util.function.Function;
-
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
-import org.w3c.dom.Element;
-
-import net.shibboleth.metadata.dom.Container;
 import net.shibboleth.metadata.dom.ElementMaker;
+import net.shibboleth.metadata.dom.SimpleElementMaker;
 
 /** Helper class for dealing with Shibboleth metadata. */
 @ThreadSafe
@@ -41,8 +37,8 @@ public final class ShibbolethMetadataSupport {
     public static final QName REGEXP_ATTRIB_NAME = new QName("regexp");
 
     /** Maker class for Scope elements. */
-    public static final Function<Container, Element> SCOPE_MAKER =
-        new ElementMaker(ShibbolethMetadataSupport.SCOPE_NAME);
+    public static final ElementMaker SCOPE_MAKER =
+        new SimpleElementMaker(ShibbolethMetadataSupport.SCOPE_NAME);
 
     /** Constructor. */
     private ShibbolethMetadataSupport() {

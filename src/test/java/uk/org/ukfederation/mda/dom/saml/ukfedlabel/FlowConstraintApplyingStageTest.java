@@ -10,9 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import net.shibboleth.metadata.Item;
-import net.shibboleth.metadata.MockItem;
 import net.shibboleth.metadata.pipeline.Stage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
+import net.shibboleth.metadata.testing.MockItem;
 import net.shibboleth.shared.component.ComponentInitializationException;
 
 public class FlowConstraintApplyingStageTest {

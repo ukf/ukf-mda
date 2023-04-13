@@ -47,7 +47,6 @@ import net.shibboleth.metadata.pipeline.AbstractStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.shared.annotation.constraint.NonnullElements;
 import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
-import net.shibboleth.shared.component.ComponentSupport;
 import net.shibboleth.shared.logic.Constraint;
 import net.shibboleth.shared.xml.ElementSupport;
 
@@ -148,8 +147,7 @@ public class IdPDisplayNameDuplicateAvoidingStage extends AbstractStage<Element>
      * @param newAuthority registration authority URI indicating "our" identity providers
      */
     public final synchronized void setRegistrationAuthority(@Nonnull final String newAuthority) {
-        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
-        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+        checkSetterPreconditions();
         Constraint.isNotNull(newAuthority, "registration authority can not be null");
         registrationAuthority = newAuthority;
     }
@@ -170,8 +168,7 @@ public class IdPDisplayNameDuplicateAvoidingStage extends AbstractStage<Element>
      * @param names {@link Map} of display names for registration authorities.
      */
     public final synchronized void setRegistrationAuthorityDisplayNames(@Nullable final Map<String, String> names) {
-        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
-        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+        checkSetterPreconditions();
         registrationAuthorityDisplayNames = ImmutableMap.copyOf(names);
     }
 
@@ -191,8 +188,7 @@ public class IdPDisplayNameDuplicateAvoidingStage extends AbstractStage<Element>
      */
     public final synchronized void
             setDefaultRegistrationAuthorityDisplayName(@Nonnull final String newDefault) {
-        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
-        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+        checkSetterPreconditions();
         Constraint.isNotNull(newDefault, "default registration authority display name can not be null");
         defaultRegistrationAuthorityDisplayName = newDefault;
     }
@@ -212,8 +208,7 @@ public class IdPDisplayNameDuplicateAvoidingStage extends AbstractStage<Element>
      * @param newNameFormat the new {@link MessageFormat} format string
      */
     public final synchronized void setNameFormat(@Nonnull final String newNameFormat) {
-        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
-        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
+        checkSetterPreconditions();
         Constraint.isNotNull(newNameFormat, "name format can not be null");
         nameFormat = newNameFormat;
     }

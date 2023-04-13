@@ -24,7 +24,6 @@ import javax.annotation.concurrent.ThreadSafe;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.validate.BaseValidator;
 import net.shibboleth.metadata.validate.Validator;
-import net.shibboleth.shared.component.ComponentSupport;
 
 /**
  * Validator class to check that X.509 certificates do not contain DSA public keys.
@@ -75,9 +74,7 @@ public class X509DSADetector extends BaseValidator implements Validator<X509Cert
      * @param newAction the {@link net.shibboleth.metadata.validate.Validator.Action} to be returned
      */
     public final synchronized void setAction(@Nonnull final Action newAction) {
-        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
-        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
-
+        checkSetterPreconditions();
         action = newAction;
     }
 
@@ -87,9 +84,7 @@ public class X509DSADetector extends BaseValidator implements Validator<X509Cert
      * @param newValue whether an {@link net.shibboleth.metadata.ErrorStatus} should be added on failure
      */
     public final synchronized void setError(final boolean newValue) {
-        ComponentSupport.ifDestroyedThrowDestroyedComponentException(this);
-        ComponentSupport.ifInitializedThrowUnmodifiabledComponentException(this);
-
+        checkSetterPreconditions();
         error = newValue;
     }
     

@@ -36,12 +36,12 @@ import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.ItemIdentificationStrategy;
 import net.shibboleth.metadata.ItemMetadata;
 import net.shibboleth.metadata.dom.saml.SAMLMetadataSupport;
+import net.shibboleth.metadata.dom.saml.mdui.MDUISupport;
 import net.shibboleth.metadata.pipeline.AbstractStage;
 import net.shibboleth.metadata.pipeline.StageProcessingException;
 import net.shibboleth.shared.annotation.constraint.NonnullElements;
 import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
 import net.shibboleth.shared.logic.Constraint;
-import uk.org.ukfederation.mda.validate.mdui.MDUISupport;
 
 /**
  * A stage which, for each <code>EntityDescriptor</code> collection element representing an identity provider,
@@ -151,7 +151,7 @@ public class IdPDisplayNameDuplicateDetectingStage extends AbstractStage<Element
         final Set<String> displayNames = new HashSet<>();
 
         // Collect display names from any mdui:DisplayName elements present.
-        collectNames(element, MDUISupport.MDUI_DISPLAY_NAME, displayNames);
+        collectNames(element, MDUISupport.DISPLAYNAME_NAME, displayNames);
 
         // Collect display names from md:OrganizationDisplayName elements only
         // if there were no mdui:DisplayName elements.

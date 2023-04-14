@@ -17,13 +17,15 @@
 
 package uk.org.ukfederation.mda;
 
-import java.io.InputStream;
 import java.io.StringReader;
-import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+
+import org.testng.Assert;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import net.shibboleth.metadata.ErrorStatus;
 import net.shibboleth.metadata.Item;
@@ -36,23 +38,18 @@ import net.shibboleth.shared.annotation.constraint.NonnullElements;
 import net.shibboleth.shared.collection.ClassToInstanceMultiMap;
 import net.shibboleth.shared.component.ComponentInitializationException;
 import net.shibboleth.shared.logic.Constraint;
-import net.shibboleth.shared.primitive.StringSupport;
-import net.shibboleth.shared.xml.impl.BasicParserPool;
-import net.shibboleth.shared.xml.ParserPool;
 import net.shibboleth.shared.xml.SerializeSupport;
 import net.shibboleth.shared.xml.XMLParserException;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-/** A base class for DOM related tests. */
-public abstract class BaseDOMTest extends BaseTest {
-
-    /** Initialized parser pool used to parse data. */
-    protected BasicParserPool parserPool;
+/**
+ * A base class for DOM related tests.
+ *
+ * <p>
+ * This extends the Shibboleth MDA test class of the same name to provide
+ * some small additional functionality.
+ * </p>
+ */
+public abstract class BaseDOMTest extends net.shibboleth.metadata.dom.testing.BaseDOMTest {
 
     /**
      * Constructor.
@@ -61,68 +58,6 @@ public abstract class BaseDOMTest extends BaseTest {
      */
     protected BaseDOMTest(final Class<?> clazz) {
         super(clazz);
-    }
-
-    /**
-     * Setup test class. Creates and initializes the parser pool. Set BouncyCastle as a JCE provider.
-     * 
-     * @throws ComponentInitializationException if there is a problem initializing the parser pool
-     */
-    @BeforeClass
-    public void setUp() throws ComponentInitializationException {
-        parserPool = new BasicParserPool();
-        parserPool.initialize();
-
-        Security.addProvider(new BouncyCastleProvider());
-    }
-
-    /**
-     * Gets an initialized parser pool.
-     * 
-     * @return initialized parser pool, never null
-     */
-    public ParserPool getParserPool() {
-        return parserPool;
-    }
-
-    /**
-     * Reads in an XML file, parses it, and returns the document element. If the given path is relative (i.e., does not
-     * start with a '/') it is assumed to be relative to the class.
-     * 
-     * @param path classpath path to the data file, never null
-     * 
-     * @return the document root of the data file, never null
-     * 
-     * @throws XMLParserException thrown if the file does not exist or there is a problem parsing it
-     */
-    public Element readXMLData(final String path) throws XMLParserException {
-        String trimmedPath = StringSupport.trimOrNull(path);
-        Constraint.isNotNull(trimmedPath, "Path may not be null or empty");
-
-        if (!trimmedPath.startsWith("/")) {
-            trimmedPath = classRelativeResource(trimmedPath);
-        }
-
-        final InputStream input = BaseDOMTest.class.getResourceAsStream(trimmedPath);
-        if (input == null) {
-            throw new XMLParserException(trimmedPath + " does not exist or is not readable");
-        }
-
-        return parserPool.parse(input).getDocumentElement();
-    }
-
-    /**
-     * Reads in an XML file and returns it as a new {@link DOMElementItem}.
-     * 
-     * @param path classpath path to the data file, never null
-     * 
-     * @return an {@link Item} wrapping the document representing the data file, never null
-     * 
-     * @throws XMLParserException if the file does not exist or there is a problem parsing it
-     */
-    public Item<Element> readDOMItem(final String path) throws XMLParserException {
-        final Element e = readXMLData(path);
-        return new DOMElementItem(e);
     }
 
     /**
@@ -165,11 +100,11 @@ public abstract class BaseDOMTest extends BaseTest {
     public void assertXMLEqual(@Nonnull final Node expected, @Nonnull final Node actual) throws XMLParserException {
         Constraint.isNotNull(actual, "Actual Node may not be null");
         final String serializedActual = SerializeSupport.nodeToString(actual);
-        Element deserializedActual = parserPool.parse(new StringReader(serializedActual)).getDocumentElement();
+        Element deserializedActual = getParserPool().parse(new StringReader(serializedActual)).getDocumentElement();
 
         Constraint.isNotNull(expected, "Expected Node may not be null");
         final String serializedExpected = SerializeSupport.nodeToString(expected);
-        Element deserializedExpected = parserPool.parse(new StringReader(serializedExpected)).getDocumentElement();
+        Element deserializedExpected = getParserPool().parse(new StringReader(serializedExpected)).getDocumentElement();
 
         final boolean ok = deserializedExpected.isEqualNode(deserializedActual);
         if (!ok) {
@@ -178,12 +113,6 @@ public abstract class BaseDOMTest extends BaseTest {
         }
 
         Assert.assertTrue(ok, "Actual Node does not equal expected Node");
-    }
-
-    protected int countErrors(final Item<Element> item) {
-        final ClassToInstanceMultiMap<ItemMetadata> metadata = item.getItemMetadata();
-        final List<ErrorStatus> errors = metadata.get(ErrorStatus.class);
-        return errors.size();
     }
 
     protected void populateIdentifiers(List<Item<Element>> items) throws ComponentInitializationException, StageProcessingException {

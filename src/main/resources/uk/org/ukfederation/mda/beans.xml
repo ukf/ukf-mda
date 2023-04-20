@@ -79,13 +79,6 @@
         class="uk.org.ukfederation.mda.dom.saml.ukfedlabel.FlowConstraintApplyingStage"/>
 
     <!--
-        uk.org.ukfederation.mda.support.security
-    -->
-
-    <bean id="ukf.FixedStringIdentifierGenerationStrategy" abstract="true"
-        class="uk.org.ukfederation.mda.support.security.FixedStringIdentifierGenerationStrategy"/>
-
-    <!--
         uk.org.ukfederation.mda.validate.string
     -->
     

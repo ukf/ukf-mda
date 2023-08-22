@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import net.shibboleth.metadata.Item;
 import net.shibboleth.metadata.testing.MockItem;
 import net.shibboleth.metadata.validate.Validator;
-import net.shibboleth.metadata.validate.x509.BaseX509ValidatorTest;
+import net.shibboleth.metadata.validate.x509.testing.BaseX509ValidatorTest;
 
 public class X509ConsistentNameValidatorTest extends BaseX509ValidatorTest {
     

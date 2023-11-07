@@ -33,8 +33,17 @@
 
     <repositories>
         <repository>
-            <id>shib-release</id>
-            <url>https://build.shibboleth.net/nexus/content/groups/public</url>
+            <id>ukf-packages</id>
+            <url>https://maven.pkg.github.com/ukf/packages</url>
+        </repository>
+        <repository>
+            <id>shibboleth-releases</id>
+            <name>Shibboleth Releases Repository</name>
+            <url>https://build.shibboleth.net/maven/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -42,20 +51,6 @@
         <repository>
             <id>shib-snapshot</id>
             <url>https://build.shibboleth.net/nexus/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>ukf-release</id>
-            <url>https://apps.iay.org.uk/nexus/content/repositories/ukf</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>ukf-snapshot</id>
-            <url>https://apps.iay.org.uk/nexus/content/repositories/ukf-snapshots</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -160,9 +155,9 @@
         </dependency>
        	<dependency>
        	    <groupId>uk.ac.sdss</groupId>
-    		<artifactId>sdss-xalan-md</artifactId>
-		    <version>1.1.5</version>
-       		<scope>test</scope>
+            <artifactId>sdss-xalan-md</artifactId>
+            <version>1.1.5</version>
+            <scope>test</scope>
        	</dependency>
         <dependency>
             <groupId>${slf4j.groupId}</groupId>
@@ -188,25 +183,6 @@
                 <configuration>
                     <configLocation>${checkstyle.configLocation}</configLocation>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <dependencies>
-                    <!-- add optional Markdown processor -->
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>1.7</version>
-                    </dependency>
-                    <!-- support DAV protocol for site deploy -->
-                    <dependency>
-                        <groupId>org.apache.maven.wagon</groupId>
-                        <artifactId>wagon-webdav-jackrabbit</artifactId>
-                        <version>2.10</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
         </plugins>
@@ -243,17 +219,14 @@
 
     <distributionManagement>
         <repository>
-            <id>ukf-release</id>
-            <url>https://apps.iay.org.uk/nexus/content/repositories/ukf</url>
+            <id>ukf-packages</id>
+            <url>https://maven.pkg.github.com/ukf/packages</url>
         </repository>
+        <!-- Normally redundant if not needed, but we need to override the parent POM. -->
         <snapshotRepository>
-            <id>ukf-snapshot</id>
-            <url>https://apps.iay.org.uk/nexus/content/repositories/ukf-snapshots</url>
+            <id>ukf-packages</id>
+            <url>https://maven.pkg.github.com/ukf/packages</url>
         </snapshotRepository>
-        <site>
-            <id>ukf-site</id>
-            <url>dav:https://apps.iay.org.uk/nexus/content/sites/site/${project.artifactId}/${project.version}/</url>
-        </site>
     </distributionManagement>
 
 </project>

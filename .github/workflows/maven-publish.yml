@@ -24,8 +24,20 @@ jobs:
         distribution: 'corretto'
         java-version: '17'
         cache: 'maven'
+
+    - name: Set up Maven
+      uses: s4u/maven-settings-action@v2.8.0
+      with:
+        servers: |
+          [{
+              "id": "ukf-packages",
+              "username": "${{ github.actor }}",
+              "password": "${{ secrets.GITHUB_TOKEN }}"
+          }]
+
     - name: Build with Maven
       run: mvn -B verify checkstyle:checkstyle --file pom.xml
+
     - name: Upload jar artifact
       uses: actions/upload-artifact@v2
       with:

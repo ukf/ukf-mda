@@ -24,6 +24,7 @@
 
     <properties>
         <mda.version>0.10.0-SNAPSHOT</mda.version>
+        <shib-shared.version>9.0.0</shib-shared.version>
         <ukf-members.version>2.0.0-SNAPSHOT</ukf-members.version>
         <jakarta.jaxb-api.version>3.0.1</jakarta.jaxb-api.version>
         <jakarta.jaxb-impl.version>3.0.2</jakarta.jaxb-impl.version>
@@ -80,14 +81,12 @@
         <dependency>
             <groupId>net.shibboleth.metadata</groupId>
             <artifactId>mda-framework</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.shibboleth</groupId>
-            <artifactId>shib-security</artifactId>
+            <version>${mda.version}</version>
         </dependency>
         <dependency>
             <groupId>net.shibboleth</groupId>
             <artifactId>shib-support</artifactId>
+            <version>${shib-shared.version}</version>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -161,18 +160,6 @@
         </dependency>
 
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>net.shibboleth.metadata</groupId>
-                <artifactId>mda-bom</artifactId>
-                <version>${mda.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
 

@@ -23,10 +23,10 @@
     <inceptionYear>2011</inceptionYear>
 
     <properties>
-        <mda.version>0.10.0-SNAPSHOT</mda.version>
+        <mda.version>0.10.0</mda.version>
         <shib-shared.groupId>net.shibboleth</shib-shared.groupId>
         <shib-shared.version>9.1.2</shib-shared.version>
-        <ukf-members.version>2.0.0-SNAPSHOT</ukf-members.version>
+        <ukf-members.version>2.0.0</ukf-members.version>
         <jakarta.jaxb-api.version>3.0.1</jakarta.jaxb-api.version>
         <jakarta.jaxb-impl.version>3.0.2</jakarta.jaxb-impl.version>
     </properties>

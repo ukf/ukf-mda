@@ -8,6 +8,56 @@ As much as makes sense of the software developed here will be contributed to the
 
 Some insight into the ways we're using these components in our [production deployment](https://github.com/ukf/ukf-meta) can be found in [this blog entry](http://iay.org.uk/blog/2012/08/uk-federation-metadata-aggregation).
 
+## Release Process
+
+To release a new version of `ukf-mda`, the following bash commands can be used (remembering to appropriately replace the versions):
+```
+RELEASE_VERSION="0.10.0"
+NEXT_SNAPSHOT_VERSION="0.10.1-SNAPSHOT"
+
+# Version release commit and tag
+mvn versions:set -DnewVersion="${RELEASE_VERSION}" -DgenerateBackupPoms=false
+git add .
+git commit -m "Set version for ${RELEASE_VERSION} release"
+git tag -s -m "Tag as version ${RELEASE_VERSION}" "${RELEASE_VERSION}"
+
+# Post-release version commit
+mvn versions:set -DnewVersion="${NEXT_SNAPSHOT_VERSION}" -DgenerateBackupPoms=false
+git add .
+git commit -m "Set snapshot version after release"
+
+# Perform build and release on detached HEAD
+git checkout "${RELEASE_VERSION}"
+mvn -Prelease clean verify
+
+# test results
+
+# Build it again for real
+mvn -Prelease,sign clean deploy
+
+# Commit this release to the ages
+git checkout main
+git push
+git push origin "${RELEASE_VERSION}"
+```
+In order for the `deploy` step to upload the built artefact to `ukf-packages`, ensure your Maven settings (`settings.xml`) contain the following server declaration with the correct credentials for `ukf-packages`. Credentials are based on GitHub personal access tokens with the `write:packages` authorisation scope.
+
+```
+<!--
+     GitHub ukf/packages.
+
+     UKf packages repo, scope write:packages
+
+     No expiration.
+ -->
+<server>
+       <id>ukf-packages</id>
+       <username>username</username>
+       <password>access_token</password>
+</server>
+
+```
+
 ## Copyright and License
 
 The contents of this repository are Copyright (C) the named contributors or their

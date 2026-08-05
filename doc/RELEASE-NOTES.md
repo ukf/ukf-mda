@@ -1,5 +1,10 @@
 # Release Notes for `ukf-mda`
 
+## Version 0.10.1 ##
+
+* Added `StatusMetadataCheckingStrategy`: A strategy for evaluating status metadata against a configurable type and message.
+* Added `StatusMetadataFilteringStage`: A stage that removes matching entries from an item's metadata collection based on a configurable type and message.
+
 ## Version 0.10.0 ##
 
 * Move to Shibboleth Java 11 platform.

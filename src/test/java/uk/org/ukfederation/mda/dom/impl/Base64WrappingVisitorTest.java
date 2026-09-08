@@ -5,8 +5,6 @@ import javax.annotation.Nonnull;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import uk.ac.sdss.xalan.md.TextUtils;
-
 public class Base64WrappingVisitorTest {
 
     final String ten = "1234567890";
@@ -21,7 +19,7 @@ public class Base64WrappingVisitorTest {
      */
 
     private void testCase(@Nonnull final String test, @Nonnull final String expected) {
-        Assert.assertEquals(TextUtils.wrapBase64(test), expected, "old algorithm fails");
+        //Assert.assertEquals(TextUtils.wrapBase64(test), expected, "old algorithm fails"); //xalan dependency has been removed
         Assert.assertEquals(Base64WrappingVisitor.wrapBase64(test), expected, "new algorithm fails");
     }
 

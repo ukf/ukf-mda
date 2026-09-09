@@ -19,7 +19,6 @@ public class Base64WrappingVisitorTest {
      */
 
     private void testCase(@Nonnull final String test, @Nonnull final String expected) {
-        //Assert.assertEquals(TextUtils.wrapBase64(test), expected, "old algorithm fails"); //xalan dependency has been removed
         Assert.assertEquals(Base64WrappingVisitor.wrapBase64(test), expected, "new algorithm fails");
     }
 

@@ -1,5 +1,14 @@
 # Release Notes for `ukf-mda`
 
+
+
+## Version 1.0.0 ##
+
+* Upgraded `net.shibboleth` version from 17.1.2 to 17.2.1
+* Upgraded `shib-shared` version from 9.1.2 to 9.2.1
+* Upgraded MDA version from 0.10.0 to 1.0.0
+* Removed `sdss-xalan-md` test dependency
+
 ## Version 0.10.1 ##
 
 * Added `StatusMetadataCheckingStrategy`: A strategy for evaluating status metadata against a configurable type and message.

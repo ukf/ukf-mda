@@ -10,10 +10,14 @@ Some insight into the ways we're using these components in our [production deplo
 
 ## Release Process
 
-To release a new version of `ukf-mda`, the following bash commands can be used (remembering to appropriately replace the versions):
+To release a new version of `ukf-mda`:
+
+1. Update `RELEASE-NOTES.md`
+2. The following bash commands can be used (remembering to appropriately replace the versions):
+3. Create a new release in GitHub https://github.com/ukf/ukf-mda/releases/new
 ```
-RELEASE_VERSION="0.10.0"
-NEXT_SNAPSHOT_VERSION="0.10.1-SNAPSHOT"
+RELEASE_VERSION="1.0.1"
+NEXT_SNAPSHOT_VERSION="1.0.2-SNAPSHOT"
 
 # Version release commit and tag
 mvn versions:set -DnewVersion="${RELEASE_VERSION}" -DgenerateBackupPoms=false
@@ -40,6 +44,9 @@ git checkout main
 git push
 git push origin "${RELEASE_VERSION}"
 ```
+
+
+
 In order for the `deploy` step to upload the built artefact to `ukf-packages`, ensure your Maven settings (`settings.xml`) contain the following server declaration with the correct credentials for `ukf-packages`. Credentials are based on GitHub personal access tokens with the `write:packages` authorisation scope.
 
 ```
